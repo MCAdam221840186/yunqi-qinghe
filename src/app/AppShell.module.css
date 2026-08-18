@@ -1,0 +1,45 @@
+.shell {
+  min-height: 100dvh;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+.main {
+  min-height: calc(100dvh - var(--header-height));
+}
+
+.main:focus {
+  outline: none;
+}
+
+.skipLink {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: calc(var(--z-dialog) + 1);
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius);
+  color: var(--color-bg);
+  background: var(--color-accent-strong);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(calc(-100% - 1rem));
+  transition: transform 180ms ease;
+}
+
+.skipLink:focus-visible {
+  transform: translateY(0);
+}
+
+@media (max-width: 767px) {
+  .main {
+    min-height: calc(100dvh - 4rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skipLink {
+    transition: none;
+  }
+}

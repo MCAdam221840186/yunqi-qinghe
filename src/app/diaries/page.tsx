@@ -1,59 +1,107 @@
-"use client";
-
-import { FileTextOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Card, Col, Divider, Empty, Row, Typography } from "antd";
+import Image from "next/image";
 import Link from "next/link";
-import { children, getDiaryCountForChild } from "@/lib/content";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
+import journalImage from "@/assets/journal-light.webp";
+import {
+  children,
+  getDiaryCountForChild,
+  getLatestDiaryForChild,
+} from "@/lib/content";
+import { createPageMetadata } from "@/lib/site";
+import styles from "./page.module.css";
+
+export const metadata = createPageMetadata({
+  title: "成长日志",
+  description: "按小朋友浏览云启青禾保存的匿名成长日记。",
+  path: "/diaries/",
+});
+
+const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "Asia/Shanghai",
+});
+
+function getInitial(displayName: string): string {
+  return displayName.match(/[A-Z]$/)?.[0] ?? displayName.slice(-1);
+}
 
 export default function DiariesPage() {
   return (
-    <div>
-      <Typography.Title level={2} className="page-heading">
-        记录小朋友们的每一天
-      </Typography.Title>
-      <Typography.Paragraph type="secondary" className="page-subtitle">
-        点击卡片浏览日记
-      </Typography.Paragraph>
-
-      <Divider className="section-divider" />
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <div className={styles.headerCopy}>
+          <p className={styles.kicker}>成长日志</p>
+          <h1>每一段成长，都值得被认真看见</h1>
+          <p className={styles.intro}>
+            {children.length} 本匿名成长册，记录学习、陪伴与那些闪闪发亮的普通一天。
+          </p>
+        </div>
+        <figure className={styles.visual}>
+          <Image
+            src={journalImage}
+            alt="阳光照在打开的空白笔记本、铅笔和绿叶上"
+            sizes="(max-width: 767px) calc(100vw - 2rem), 38vw"
+            preload
+          />
+        </figure>
+      </header>
 
       {children.length === 0 ? (
-        <Empty className="empty-state" description="还没有小朋友的成长记录" />
+        <section className={styles.empty} aria-labelledby="empty-title">
+          <h2 id="empty-title">成长册正在准备中</h2>
+          <p>还没有可以展示的成长记录。</p>
+        </section>
       ) : (
-        <Row gutter={[16, 16]} className="child-grid">
+        <ol className={styles.roster} aria-label="小朋友成长册">
           {children.map((child) => {
             const diaryCount = getDiaryCountForChild(child.slug);
+            const latestDiary = getLatestDiaryForChild(child.slug);
 
             return (
-              <Col key={child.slug} xs={12} sm={8} md={6} lg={4}>
+              <li key={child.slug} className={styles.rosterItem}>
                 <Link
                   href={`/children/${child.slug}`}
-                  className="child-card-link"
+                  className={styles.childLink}
                   aria-label={`浏览${child.displayName}的 ${diaryCount} 篇日记`}
                 >
-                  <Card
-                    hoverable
-                    className="static-card child-card"
-                    styles={{ body: { padding: 24, textAlign: "center" } }}
-                  >
-                    <Avatar
-                      size={64}
-                      icon={<UserOutlined />}
-                      className="child-avatar"
-                    />
-                    <Typography.Text strong className="child-name">
-                      {child.displayName}
-                    </Typography.Text>
-                    <Typography.Text type="secondary" className="diary-count">
-                      <FileTextOutlined aria-hidden="true" />
-                      <span>{diaryCount} 篇日记</span>
-                    </Typography.Text>
-                  </Card>
+                  <span className={styles.monogram} aria-hidden="true">
+                    {getInitial(child.displayName)}
+                  </span>
+
+                  <span className={styles.identity}>
+                    <strong>{child.displayName}</strong>
+                    <span>
+                      {latestDiary
+                        ? `最近记录：${latestDiary.title}`
+                        : "等待第一篇成长记录"}
+                    </span>
+                  </span>
+
+                  <span className={styles.summary}>
+                    <strong>{diaryCount}</strong>
+                    <span>篇日记</span>
+                  </span>
+
+                  <span className={styles.latestDate}>
+                    {latestDiary ? (
+                      <time dateTime={latestDiary.date}>
+                        {dateFormatter.format(new Date(latestDiary.date))}
+                      </time>
+                    ) : (
+                      "尚未更新"
+                    )}
+                  </span>
+
+                  <span className={styles.arrow} aria-hidden="true">
+                    <ArrowRightIcon size={24} weight="regular" />
+                  </span>
                 </Link>
-              </Col>
+              </li>
             );
           })}
-        </Row>
+        </ol>
       )}
     </div>
   );

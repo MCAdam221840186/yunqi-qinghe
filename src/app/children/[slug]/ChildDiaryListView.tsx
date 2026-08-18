@@ -1,118 +1,120 @@
-"use client";
-
 import Link from "next/link";
 import {
-  ArrowLeftOutlined,
-  CalendarOutlined,
-  FileTextOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
+  ArrowLeftIcon,
+  ArrowRightIcon,
+} from "@phosphor-icons/react/ssr";
 import {
-  Avatar,
-  Button,
-  Card,
-  Divider,
-  Empty,
-  Space,
-  Typography,
-} from "antd";
-import type { ChildRecord, DiaryRecord } from "@/lib/content";
+  getDiaryPreview,
+  type ChildRecord,
+  type DiaryRecord,
+} from "@/lib/content";
+import styles from "./page.module.css";
 
-const chineseDateFormatter = new Intl.DateTimeFormat("zh-CN", {
+const fullDateFormatter = new Intl.DateTimeFormat("zh-CN", {
   year: "numeric",
   month: "long",
   day: "numeric",
   timeZone: "Asia/Shanghai",
 });
 
-function getPreview(diary: DiaryRecord): string {
-  if (diary.kind === "plain") return diary.body;
-  return (
-    diary.fields.learned ||
-    diary.fields.happiest ||
-    diary.fields.message ||
-    diary.fields.comment
-  );
+const compactDateFormatter = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  timeZone: "Asia/Shanghai",
+});
+
+type DateRange =
+  | {
+      readonly earliest: string;
+      readonly latest: string;
+    }
+  | undefined;
+
+function getInitial(displayName: string): string {
+  return displayName.match(/[A-Z]$/)?.[0] ?? displayName.slice(-1);
+}
+
+function formatDateRange(dateRange: DateRange): string {
+  if (!dateRange) return "等待第一篇记录";
+  const earliest = compactDateFormatter.format(new Date(dateRange.earliest));
+  const latest = compactDateFormatter.format(new Date(dateRange.latest));
+  return earliest === latest ? earliest : `${earliest} 至 ${latest}`;
 }
 
 export default function ChildDiaryListView({
   child,
   diaries,
+  dateRange,
 }: {
   child: ChildRecord;
-  diaries: DiaryRecord[];
+  diaries: readonly DiaryRecord[];
+  dateRange: DateRange;
 }) {
   return (
-    <div>
-      <Space style={{ marginBottom: 24 }}>
-        <Link href="/diaries">
-          <Button type="text" icon={<ArrowLeftOutlined />}>
-            返回
-          </Button>
-        </Link>
-      </Space>
+    <div className={styles.page}>
+      <Link href="/diaries" className={styles.backLink}>
+        <ArrowLeftIcon size={18} weight="bold" aria-hidden="true" />
+        返回成长日志
+      </Link>
 
-      <div style={{ marginBottom: 16, textAlign: "center" }}>
-        <Avatar
-          size={96}
-          icon={<UserOutlined />}
-          style={{ backgroundColor: "#81c784" }}
-        />
+      <div className={styles.layout}>
+        <header className={styles.identity}>
+          <span className={styles.monogram} aria-hidden="true">
+            {getInitial(child.displayName)}
+          </span>
+          <p className={styles.kicker}>匿名成长册</p>
+          <h1>{child.displayName}</h1>
+          <p className={styles.identityNote}>持续记录真实而具体的成长片段。</p>
+
+          <dl className={styles.facts}>
+            <div>
+              <dt>记录数量</dt>
+              <dd>{diaries.length} 篇</dd>
+            </div>
+            <div>
+              <dt>记录时间</dt>
+              <dd>{formatDateRange(dateRange)}</dd>
+            </div>
+          </dl>
+        </header>
+
+        <section className={styles.entries} aria-labelledby="entries-title">
+          <div className={styles.entriesHeading}>
+            <h2 id="entries-title">日记目录</h2>
+            <span>{diaries.length} 篇记录</span>
+          </div>
+
+          {diaries.length === 0 ? (
+            <div className={styles.empty}>
+              <h3>第一篇日记还在路上</h3>
+              <p>完成记录后，它会出现在这里。</p>
+            </div>
+          ) : (
+            <ol className={styles.diaryList}>
+              {diaries.map((diary) => (
+                <li key={diary.slug}>
+                  <Link
+                    href={`/diaries/${diary.slug}`}
+                    className={styles.diaryLink}
+                  >
+                    <time dateTime={diary.date}>
+                      {fullDateFormatter.format(new Date(diary.date))}
+                    </time>
+                    <span className={styles.diaryCopy}>
+                      <strong>{diary.title}</strong>
+                      <span>{getDiaryPreview(diary, 96)}</span>
+                    </span>
+                    <span className={styles.arrow} aria-hidden="true">
+                      <ArrowRightIcon size={20} weight="regular" />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
       </div>
-
-      <Typography.Title
-        level={2}
-        className="page-heading"
-        style={{ textAlign: "center" }}
-      >
-        {child.displayName} 的成长日记
-      </Typography.Title>
-      <Typography.Paragraph
-        type="secondary"
-        className="page-subtitle"
-        style={{ textAlign: "center" }}
-      >
-        共 {diaries.length} 篇日记
-      </Typography.Paragraph>
-
-      <Divider className="section-divider" />
-
-      {diaries.length === 0 ? (
-        <Empty className="empty-state" description="还没有日记" />
-      ) : (
-        diaries.map((diary) => (
-          <Link
-            key={diary.slug}
-            href={`/diaries/${diary.slug}`}
-            style={{ display: "block", marginBottom: 12, textDecoration: "none" }}
-          >
-            <Card
-              hoverable
-              className="static-card"
-              style={{ borderLeft: "3px solid #4caf50" }}
-              styles={{ body: { padding: "16px 24px" } }}
-            >
-              <Space orientation="vertical" size={5} style={{ width: "100%" }}>
-                <Typography.Text type="secondary">
-                  <CalendarOutlined style={{ marginRight: 6 }} />
-                  {chineseDateFormatter.format(new Date(diary.date))}
-                </Typography.Text>
-                <Typography.Text strong style={{ fontSize: 16, color: "#2e7d32" }}>
-                  {diary.title}
-                </Typography.Text>
-                <Typography.Paragraph
-                  ellipsis={{ rows: 2 }}
-                  type="secondary"
-                  style={{ margin: 0, fontSize: 13, whiteSpace: "pre-wrap" }}
-                >
-                  <FileTextOutlined style={{ marginRight: 6, color: "#52c41a" }} />
-                  {getPreview(diary)}
-                </Typography.Paragraph>
-              </Space>
-            </Card>
-          </Link>
-        ))
-      )}
     </div>
   );
 }

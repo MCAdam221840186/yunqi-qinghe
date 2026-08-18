@@ -1,13 +1,23 @@
-"use client";
-
-import { TeamOutlined } from "@ant-design/icons";
-import { Empty, Grid, Timeline, Typography } from "antd";
-import ReactMarkdown from "react-markdown";
+import Image from "next/image";
+import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { teamDiaries, type TeamDiaryRecord } from "@/lib/content";
+import teamNotebooksImage from "@/assets/team-notebooks.webp";
+import { teamDiaries } from "@/lib/content";
+import { createPageMetadata } from "@/lib/site";
+import styles from "./page.module.css";
 
-const { Title, Text } = Typography;
-const { useBreakpoint } = Grid;
+export const metadata = createPageMetadata({
+  title: "团队日志",
+  description: "浏览云启青禾团队按时间记录的工作日志。",
+  path: "/team-diaries/",
+});
+
+const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "Asia/Shanghai",
+});
 
 const monthDayFormatter = new Intl.DateTimeFormat("zh-CN", {
   month: "numeric",
@@ -20,91 +30,84 @@ const weekdayFormatter = new Intl.DateTimeFormat("zh-CN", {
   timeZone: "Asia/Shanghai",
 });
 
-const fullDateFormatter = new Intl.DateTimeFormat("zh-CN", {
-  year: "numeric",
+const updatedFormatter = new Intl.DateTimeFormat("zh-CN", {
   month: "long",
   day: "numeric",
-  timeZone: "Asia/Shanghai",
-});
-
-const timeFormatter = new Intl.DateTimeFormat("zh-CN", {
   hour: "2-digit",
   minute: "2-digit",
   hour12: false,
   timeZone: "Asia/Shanghai",
 });
 
-function DateBadge({ diary }: { diary: TeamDiaryRecord }) {
-  const date = new Date(diary.date);
-
-  return (
-    <div className="team-date-badge">
-      <Text strong>{monthDayFormatter.format(date)}</Text>
-      <Text type="secondary">{weekdayFormatter.format(date)}</Text>
-    </div>
-  );
-}
+const markdownComponents: Components = {
+  h1: ({ children }) => <h3>{children}</h3>,
+  h2: ({ children }) => <h3>{children}</h3>,
+  h3: ({ children }) => <h4>{children}</h4>,
+  h4: ({ children }) => <h4>{children}</h4>,
+};
 
 export default function TeamDiariesPage() {
-  const screens = useBreakpoint();
-  const useAlternateLayout = Boolean(screens.md);
-
   return (
-    <div>
-      <header className="team-page-header">
-        <div>
-          <Title level={3} className="team-page-title">
-            <TeamOutlined aria-hidden="true" />
-            <span>团队日志</span>
-          </Title>
-          <Text type="secondary">记录团队的每一天</Text>
+    <div className={styles.page}>
+      <header className={styles.header}>
+        <div className={styles.headerCopy}>
+          <p className={styles.kicker}>团队日志</p>
+          <h1>一起走过的日子，也有自己的年轮</h1>
+          <p className={styles.intro}>
+            按时间保存团队的工作片段，让每一次讨论、尝试和更新都有迹可循。
+          </p>
         </div>
+        <figure className={styles.visual}>
+          <Image
+            src={teamNotebooksImage}
+            alt="窗边叠放的旧笔记本上覆着一枝绿叶"
+            sizes="(max-width: 767px) calc(100vw - 2rem), 38vw"
+            preload
+          />
+        </figure>
       </header>
 
       {teamDiaries.length === 0 ? (
-        <Empty className="empty-state" description="还没有团队日志" />
+        <section className={styles.empty} aria-labelledby="empty-title">
+          <h2 id="empty-title">团队日志正在整理中</h2>
+          <p>完成第一篇记录后，它会出现在这里。</p>
+        </section>
       ) : (
-        <Timeline
-          mode={useAlternateLayout ? "alternate" : "start"}
-          className={`team-timeline ${
-            useAlternateLayout ? "team-timeline-alternate" : "team-timeline-compact"
-          }`}
-          items={teamDiaries.map((diary, index) => {
-            const isGreen = index % 2 === 0;
+        <ol className={styles.timeline} aria-label="团队日志时间线">
+          {teamDiaries.map((diary, index) => {
             const date = new Date(diary.date);
+            const title = diary.title || dateFormatter.format(date);
 
-            return {
-              key: `${diary.date}-${index}`,
-              color: "#4caf50",
-              placement: useAlternateLayout
-                ? isGreen
-                  ? "end"
-                  : "start"
-                : undefined,
-              title: useAlternateLayout ? <DateBadge diary={diary} /> : undefined,
-              content: (
-                <article
-                  className={`team-diary-card ${
-                    isGreen ? "team-diary-card-green" : "team-diary-card-blue"
-                  }`}
-                >
-                  {!useAlternateLayout && <DateBadge diary={diary} />}
-                  <Title level={4} className="team-diary-title">
-                    {diary.title || fullDateFormatter.format(date)}
-                  </Title>
-                  <div className="markdown-body">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+            return (
+              <li key={`${diary.date}-${index}`} className={styles.timelineItem}>
+                <div className={styles.dateBlock}>
+                  <time dateTime={diary.date}>
+                    <strong>{monthDayFormatter.format(date)}</strong>
+                    <span>{weekdayFormatter.format(date)}</span>
+                  </time>
+                </div>
+
+                <article className={styles.entry}>
+                  <h2>{title}</h2>
+                  <div className={styles.markdown}>
+                    <ReactMarkdown
+                      remarkPlugins={[remarkGfm]}
+                      components={markdownComponents}
+                    >
                       {diary.markdown}
                     </ReactMarkdown>
                   </div>
-                  <Text type="secondary" className="team-diary-updated">
-                    更新于 {timeFormatter.format(new Date(diary.updatedAt))}
-                  </Text>
+                  <p className={styles.updated}>
+                    更新于{" "}
+                    <time dateTime={diary.updatedAt}>
+                      {updatedFormatter.format(new Date(diary.updatedAt))}
+                    </time>
+                  </p>
                 </article>
-              ),
-            };
+              </li>
+            );
           })}
-        />
+        </ol>
       )}
     </div>
   );

@@ -270,6 +270,66 @@ export function getDiaryCountForChild(childSlug: string): number {
   );
 }
 
+export function getLatestDiaries(limit = 3): DiaryRecord[] {
+  if (!Number.isInteger(limit) || limit < 0) {
+    throw new Error("limit 必须是非负整数");
+  }
+  return sortDiariesNewestFirst(diaries).slice(0, limit);
+}
+
+export function getLatestDiaryForChild(
+  childSlug: string,
+): DiaryRecord | undefined {
+  return getDiariesForChild(childSlug)[0];
+}
+
+export interface DiaryDateRange {
+  readonly earliest: string;
+  readonly latest: string;
+}
+
+export function getDiaryDateRange(
+  childSlug?: string,
+): DiaryDateRange | undefined {
+  const records = childSlug
+    ? diaries.filter((diary) => diary.childSlug === childSlug)
+    : diaries;
+  if (records.length === 0) return undefined;
+
+  const ordered = [...records].sort(
+    (left, right) => Date.parse(left.date) - Date.parse(right.date),
+  );
+  return Object.freeze({
+    earliest: ordered[0].date,
+    latest: ordered[ordered.length - 1].date,
+  });
+}
+
+export interface AdjacentDiaries {
+  readonly previous: DiaryRecord | undefined;
+  readonly next: DiaryRecord | undefined;
+}
+
+export function getAdjacentDiaries(diary: DiaryRecord): AdjacentDiaries {
+  const ordered = [...diaries]
+    .filter((candidate) => candidate.childSlug === diary.childSlug)
+    .sort(
+      (left, right) =>
+        Date.parse(left.date) - Date.parse(right.date) ||
+        left.slug.localeCompare(right.slug),
+    );
+  const index = ordered.findIndex((candidate) => candidate.slug === diary.slug);
+
+  if (index < 0) {
+    return Object.freeze({ previous: undefined, next: undefined });
+  }
+
+  return Object.freeze({
+    previous: index > 0 ? ordered[index - 1] : undefined,
+    next: index < ordered.length - 1 ? ordered[index + 1] : undefined,
+  });
+}
+
 export function getDiaryAuthor(diary: DiaryRecord): ChildRecord {
   const child = getChildBySlug(diary.childSlug);
   if (!child) {

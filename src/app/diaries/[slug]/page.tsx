@@ -4,8 +4,14 @@ import {
   diaries,
   getDiaryAuthor,
   getDiaryBySlug,
+  getAdjacentDiaries,
   getDiaryPreview,
 } from "@/lib/content";
+import {
+  createBreadcrumbJsonLd,
+  createPageMetadata,
+  serializeJsonLd,
+} from "@/lib/site";
 import DiaryDetailView from "./DiaryDetailView";
 
 type DiaryPageProps = {
@@ -37,24 +43,14 @@ export async function generateMetadata({
   const title = diary.title;
   const description = `${child.displayName}：${getDiaryPreview(diary, 100)}`;
 
-  return {
+  return createPageMetadata({
     title,
     description,
-    openGraph: {
-      title,
-      description,
-      type: "article",
-      publishedTime: diary.date,
-      authors: [child.displayName],
-      images: [],
-    },
-    twitter: {
-      card: "summary",
-      title,
-      description,
-      images: [],
-    },
-  };
+    path: `/diaries/${diary.slug}/`,
+    type: "article",
+    publishedTime: diary.date,
+    authors: [child.displayName],
+  });
 }
 
 export default async function DiaryDetailPage({ params }: DiaryPageProps) {
@@ -62,6 +58,25 @@ export default async function DiaryDetailPage({ params }: DiaryPageProps) {
   const diary = getDiaryBySlug(slug);
 
   if (!diary) notFound();
+  const child = getDiaryAuthor(diary);
+  const breadcrumbs = createBreadcrumbJsonLd([
+    { name: "首页", path: "/" },
+    { name: "成长日志", path: "/diaries/" },
+    { name: child.displayName, path: `/children/${child.slug}/` },
+    { name: diary.title, path: `/diaries/${diary.slug}/` },
+  ]);
 
-  return <DiaryDetailView diary={diary} child={getDiaryAuthor(diary)} />;
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: serializeJsonLd(breadcrumbs) }}
+      />
+      <DiaryDetailView
+        diary={diary}
+        child={child}
+        adjacent={getAdjacentDiaries(diary)}
+      />
+    </>
+  );
 }

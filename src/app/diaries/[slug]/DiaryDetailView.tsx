@@ -1,22 +1,11 @@
-"use client";
-
-import type { ReactNode } from "react";
 import Link from "next/link";
-import {
-  ArrowLeftOutlined,
-  BookOutlined,
-  CalendarOutlined,
-  MessageOutlined,
-  SmileOutlined,
-  StarOutlined,
-  UserOutlined,
-} from "@ant-design/icons";
-import { Button, Card, Divider, Space, Typography } from "antd";
+import { ArrowLeftIcon } from "@phosphor-icons/react/ssr";
 import type {
   ChildRecord,
   DiaryRecord,
   StructuredDiaryFields,
 } from "@/lib/content";
+import styles from "./page.module.css";
 
 const chineseDateFormatter = new Intl.DateTimeFormat("zh-CN", {
   year: "numeric",
@@ -25,130 +14,118 @@ const chineseDateFormatter = new Intl.DateTimeFormat("zh-CN", {
   timeZone: "Asia/Shanghai",
 });
 
-const structuredFieldStyles: ReadonlyArray<{
+const structuredFields: ReadonlyArray<{
   key: keyof StructuredDiaryFields;
   label: string;
-  icon: ReactNode;
-  background: string;
 }> = [
-  {
-    key: "learned",
-    label: "今天我学会了",
-    icon: <BookOutlined style={{ color: "#52c41a", fontSize: 18 }} />,
-    background: "#f6ffed",
-  },
-  {
-    key: "happiest",
-    label: "今天我最开心的事情",
-    icon: <SmileOutlined style={{ color: "#faad14", fontSize: 18 }} />,
-    background: "#fffbe6",
-  },
-  {
-    key: "message",
-    label: "我想对明天的自己说",
-    icon: <MessageOutlined style={{ color: "#722ed1", fontSize: 18 }} />,
-    background: "#f9f0ff",
-  },
-  {
-    key: "comment",
-    label: "老师评语",
-    icon: <StarOutlined style={{ color: "#1890ff", fontSize: 18 }} />,
-    background: "#e6f7ff",
-  },
+  { key: "learned", label: "今天我学会了" },
+  { key: "happiest", label: "今天我最开心的事情" },
+  { key: "message", label: "我想对明天的自己说" },
+  { key: "comment", label: "老师评语" },
 ];
 
-function StructuredDiary({ fields }: { fields: StructuredDiaryFields }) {
-  return structuredFieldStyles.map((field) => {
-    const value = fields[field.key];
-    if (!value) return null;
+type AdjacentDiaries = {
+  readonly previous: DiaryRecord | undefined;
+  readonly next: DiaryRecord | undefined;
+};
 
-    return (
-      <section
-        key={field.key}
-        style={{
-          marginBottom: 16,
-          padding: "20px 24px",
-          borderRadius: 12,
-          background: field.background,
-        }}
-      >
-        <Space style={{ marginBottom: 8 }}>
-          {field.icon}
-          <Typography.Text strong style={{ fontSize: 15 }}>
-            {field.label}
-          </Typography.Text>
-        </Space>
-        <div
-          style={{
-            marginTop: 4,
-            color: "#262626",
-            fontSize: 15,
-            lineHeight: 1.8,
-            whiteSpace: "pre-wrap",
-          }}
-        >
-          {value}
-        </div>
-      </section>
-    );
-  });
+function StructuredDiary({ fields }: { fields: StructuredDiaryFields }) {
+  const sections = structuredFields.filter((field) => fields[field.key]);
+
+  if (sections.length === 0) {
+    return <p className={styles.emptyBody}>暂无正文内容。</p>;
+  }
+
+  return (
+    <div className={styles.structuredBody}>
+      {sections.map((field) => (
+        <section key={field.key} className={styles.structuredSection}>
+          <h2>{field.label}</h2>
+          <p>{fields[field.key]}</p>
+        </section>
+      ))}
+    </div>
+  );
+}
+
+function AdjacentLink({
+  diary,
+  label,
+  direction,
+}: {
+  diary: DiaryRecord;
+  label: string;
+  direction: "previous" | "next";
+}) {
+  return (
+    <Link
+      href={`/diaries/${diary.slug}`}
+      className={styles.adjacentLink}
+      data-direction={direction}
+    >
+      <span>{label}</span>
+      <strong>{diary.title}</strong>
+    </Link>
+  );
 }
 
 export default function DiaryDetailView({
   diary,
   child,
+  adjacent,
 }: {
   diary: DiaryRecord;
   child: ChildRecord;
+  adjacent: AdjacentDiaries;
 }) {
-  return (
-    <div>
-      <Space style={{ marginBottom: 24 }}>
-        <Link href={`/children/${child.slug}`}>
-          <Button type="text" icon={<ArrowLeftOutlined />}>
-            返回
-          </Button>
-        </Link>
-      </Space>
+  const hasAdjacentDiary = Boolean(adjacent.previous || adjacent.next);
 
-      <Card
-        className="static-card"
-        style={{ boxShadow: "0 1px 4px rgba(0,0,0,0.08)" }}
-        styles={{ body: { padding: "32px 40px" } }}
-      >
-        <header style={{ marginBottom: 24, textAlign: "center" }}>
-          <Typography.Title level={2} className="page-heading">
-            {diary.title}
-          </Typography.Title>
-          <Space size={16} wrap>
-            <Typography.Text type="secondary">
-              <UserOutlined style={{ marginRight: 4 }} />
-              {child.displayName}
-            </Typography.Text>
-            <Typography.Text type="secondary">
-              <CalendarOutlined style={{ marginRight: 4 }} />
+  return (
+    <div className={styles.page}>
+      <Link href={`/children/${child.slug}`} className={styles.backLink}>
+        <ArrowLeftIcon size={18} weight="bold" aria-hidden="true" />
+        返回{child.displayName}的成长册
+      </Link>
+
+      <article className={styles.article}>
+        <header className={styles.header}>
+          <p className={styles.kicker}>成长日记</p>
+          <h1>{diary.title}</h1>
+          <div className={styles.meta}>
+            <Link href={`/children/${child.slug}`}>{child.displayName}</Link>
+            <time dateTime={diary.date}>
               {chineseDateFormatter.format(new Date(diary.date))}
-            </Typography.Text>
-          </Space>
+            </time>
+          </div>
         </header>
 
-        <Divider style={{ marginTop: 0, marginBottom: 24 }} />
+        <div className={styles.body}>
+          {diary.kind === "plain" ? (
+            <p className={styles.plainBody}>{diary.body || "暂无正文内容。"}</p>
+          ) : (
+            <StructuredDiary fields={diary.fields} />
+          )}
+        </div>
+      </article>
 
-        {diary.kind === "plain" ? (
-          <div
-            style={{
-              color: "#262626",
-              fontSize: 15,
-              lineHeight: 1.8,
-              whiteSpace: "pre-wrap",
-            }}
-          >
-            {diary.body || "（暂无内容）"}
-          </div>
-        ) : (
-          <StructuredDiary fields={diary.fields} />
-        )}
-      </Card>
+      {hasAdjacentDiary && (
+        <nav className={styles.adjacentNav} aria-label="同一成长册的相邻日记">
+          {adjacent.previous ? (
+            <AdjacentLink
+              diary={adjacent.previous}
+              label="上一篇"
+              direction="previous"
+            />
+          ) : null}
+          {adjacent.next && (
+            <AdjacentLink
+              diary={adjacent.next}
+              label="下一篇"
+              direction="next"
+            />
+          )}
+        </nav>
+      )}
     </div>
   );
 }
