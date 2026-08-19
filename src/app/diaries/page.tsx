@@ -34,9 +34,6 @@ export default function DiariesPage() {
         <div className={styles.headerCopy}>
           <p className={styles.kicker}>成长日志</p>
           <h1>每一段成长，都值得被认真看见</h1>
-          <p className={styles.intro}>
-            {children.length} 本匿名成长册，记录学习、陪伴与那些闪闪发亮的普通一天。
-          </p>
         </div>
         <figure className={styles.visual}>
           <Image

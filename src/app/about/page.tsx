@@ -18,15 +18,11 @@ export default function AboutPage() {
       <header className={styles.header}>
         <p className={styles.kicker}>团队介绍</p>
         <h1>认识云启青禾与同行伙伴</h1>
-        <p className={styles.intro}>
-          云启青禾是一支支教团队。这个网站用于介绍我们的行动、成员和持续发生的成长故事。
-        </p>
       </header>
 
       <section className={styles.team} aria-labelledby="team-title">
         <div className={styles.sectionHeading}>
           <h2 id="team-title">团队成员</h2>
-          <p>网站由成员持续维护，成员资料来自现有公开内容。</p>
         </div>
 
         {teamMembers.length === 0 ? (

@@ -61,13 +61,6 @@
   line-height: 1.05;
 }
 
-.identityNote {
-  max-width: 21rem;
-  margin: 1.25rem 0 0;
-  color: var(--color-text-muted);
-  line-height: 1.75;
-}
-
 .facts {
   display: grid;
   gap: 1.25rem;

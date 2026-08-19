@@ -161,6 +161,7 @@ type TeamDiary = {
 - 自动跟随 `prefers-color-scheme`，不要增加本地存储主题状态或首屏闪烁。
 - 动效只使用 `transform` 与 `opacity`，并尊重 `prefers-reduced-motion` / `useReducedMotion()`。
 - 不使用 `window` 滚动监听、React 滚动 state、滚动劫持、无限动画或无目的装饰动效。
+- 页面与栏目大标题默认独立呈现，不在其正下方添加仅用于复述栏目用途的解释性副文案；保留承担真实内容、状态说明或操作指引的正文。
 - 首页叙事必须优先展示团队；成长日志只能作为靠后的二级内容。
 
 ## GitHub Pages 与资源路径

@@ -53,9 +53,6 @@ export default function TeamDiariesPage() {
         <div className={styles.headerCopy}>
           <p className={styles.kicker}>团队日志</p>
           <h1>一起走过的日子，也有自己的年轮</h1>
-          <p className={styles.intro}>
-            按时间保存团队的工作片段，让每一次讨论、尝试和更新都有迹可循。
-          </p>
         </div>
         <figure className={styles.visual}>
           <Image

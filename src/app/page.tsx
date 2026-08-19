@@ -46,9 +46,6 @@ export default function HomePage() {
         <AnimatedHero className={styles.heroCopy}>
           <p className={styles.eyebrow}>云启青禾支教团队</p>
           <h1 id="home-title">向光而行，与成长同行</h1>
-          <p className={styles.lede}>
-            记录支教路上的行动与思考，也珍藏孩子们在学习与创作中的成长。
-          </p>
           <div className={styles.heroActions}>
             <Link className={styles.primaryLink} href="/about/">
               认识我们

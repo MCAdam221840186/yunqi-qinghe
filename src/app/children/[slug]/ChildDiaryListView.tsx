@@ -65,7 +65,6 @@ export default function ChildDiaryListView({
           </span>
           <p className={styles.kicker}>匿名成长册</p>
           <h1>{child.displayName}</h1>
-          <p className={styles.identityNote}>持续记录真实而具体的成长片段。</p>
 
           <dl className={styles.facts}>
             <div>
