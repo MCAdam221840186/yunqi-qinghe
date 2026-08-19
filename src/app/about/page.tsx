@@ -1,12 +1,20 @@
+import Image from "next/image";
+import teamGroupImage from "@/assets/team-group.webp";
 import { teamMembers } from "@/lib/content";
 import { createPageMetadata } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
   title: "团队介绍",
-  description: "了解云启青禾支教团队及参与网站记录与维护的团队成员。",
+  description:
+    "了解南京大学“云启青禾”支教团、团队成员，以及在云南省双柏县开展的支教与少儿阅读生态调研。",
   path: "/about/",
 });
+
+const teamIntroduction = [
+  "南京大学“云启青禾”支教团是信息管理学院指导下，由 8 名来自不同学院的学子组成的校级重点暑期社会实践团队，专业覆盖文理工多个领域，成员梯队涵盖本科一年级至博士一年级，于暑期前往云南省楚雄彝族自治州双柏县开展支教与调研实践活动。",
+  "团队成员将完成为期两周的乡村夏令营支教和调研工作，以“AI科普+五育并举”为核心，开设阅读推广、非遗传承、科学科普等多元素质课程；并针对当地少儿群体，采取访谈、实地走访、问卷调查等形式，开展关于双柏县民族山区少儿阅读生态现状的全域调研。",
+] as const;
 
 function getInitial(name: string): string {
   return Array.from(name.trim())[0] ?? "青";
@@ -19,6 +27,23 @@ export default function AboutPage() {
         <p className={styles.kicker}>团队介绍</p>
         <h1>认识云启青禾与同行伙伴</h1>
       </header>
+
+      <section className={styles.profile} aria-labelledby="team-profile-title">
+        <figure className={styles.profileVisual}>
+          <Image
+            src={teamGroupImage}
+            alt="云启青禾支教团队八名成员在活动现场合照"
+            sizes="(max-width: 899px) calc(100vw - 2rem), (max-width: 1180px) 58vw, 680px"
+          />
+        </figure>
+
+        <div className={styles.profileCopy}>
+          <h2 id="team-profile-title">文理工交融的支教团队</h2>
+          {teamIntroduction.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
+        </div>
+      </section>
 
       <section className={styles.team} aria-labelledby="team-title">
         <div className={styles.sectionHeading}>

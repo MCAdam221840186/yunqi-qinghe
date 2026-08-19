@@ -7,7 +7,7 @@
 
 .header {
   max-width: 900px;
-  margin-bottom: clamp(5rem, 11vw, 10rem);
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
 }
 
 .kicker {
@@ -27,6 +27,60 @@
   letter-spacing: -0.06em;
   line-height: 1.04;
   text-wrap: balance;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
+  gap: clamp(2.5rem, 6vw, 5.5rem);
+  align-items: start;
+  margin-bottom: clamp(5.5rem, 12vw, 10rem);
+}
+
+.profileVisual {
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-soft);
+  box-shadow: var(--shadow-image);
+}
+
+.profileVisual img {
+  width: 100%;
+  height: auto;
+}
+
+.profileCopy {
+  padding-bottom: 0.5rem;
+}
+
+.profileCopy h2 {
+  margin: 0 0 1.5rem;
+  color: var(--color-text);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  font-weight: 650;
+  letter-spacing: -0.04em;
+  line-height: 1.16;
+  text-wrap: balance;
+}
+
+.profileCopy p {
+  margin: 0;
+  color: var(--color-text-muted);
+  line-height: 1.9;
+  text-wrap: pretty;
+}
+
+.profileCopy p:first-of-type {
+  color: var(--color-text);
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-weight: 540;
+  letter-spacing: -0.01em;
+}
+
+.profileCopy p + p {
+  margin-top: 1.25rem;
 }
 
 .team {
@@ -139,17 +193,34 @@
   }
 }
 
+@media (max-width: 899px) {
+  .profile {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .profileCopy {
+    max-width: 46rem;
+    padding-bottom: 0;
+  }
+}
+
 @media (max-width: 767px) {
   .page {
     padding: 3rem 1rem 5rem;
   }
 
   .header {
-    margin-bottom: 5rem;
+    margin-bottom: 3.5rem;
   }
 
   .header h1 {
     font-size: clamp(2.45rem, 12vw, 4rem);
+  }
+
+  .profile {
+    gap: 2.25rem;
+    margin-bottom: 5.5rem;
   }
 
   .team {
