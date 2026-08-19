@@ -1,11 +1,6 @@
 import Link from "next/link";
+import { siteSections } from "@/lib/navigation";
 import styles from "./SiteFooter.module.css";
-
-const footerNavigation = [
-  { href: "/diaries", label: "成长日志" },
-  { href: "/team-diaries", label: "团队日志" },
-  { href: "/about", label: "团队成员" },
-] as const;
 
 export default function SiteFooter() {
   return (
@@ -15,11 +10,11 @@ export default function SiteFooter() {
           <Link href="/" className={styles.brand}>
             云启青禾
           </Link>
-          <p>记录每一株幼苗的成长故事</p>
+          <p>向光而行，与成长同行</p>
         </div>
 
         <nav className={styles.navigation} aria-label="页脚导航">
-          {footerNavigation.map((item) => (
+          {siteSections.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
             </Link>

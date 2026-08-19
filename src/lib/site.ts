@@ -12,11 +12,12 @@ export const siteUrl = normalizeSiteUrl(
 
 export const siteConfig = Object.freeze({
   name: "云启青禾",
-  description: "记录每一株幼苗的成长故事",
+  description:
+    "云启青禾支教团队的公开展示网站，记录团队行动、支教故事与孩子们的成长片段。",
   locale: "zh_CN",
   language: "zh-CN",
   socialImagePath: "/og-v2.jpg",
-  socialImageAlt: "一本空白成长日记与向光生长的绿色幼苗",
+  socialImageAlt: "纸页与向光生长的绿色幼苗",
 });
 
 export function absoluteUrl(path = "/"): string {

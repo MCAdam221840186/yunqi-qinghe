@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: absoluteUrl("/diaries/"),
       lastModified: latestDiaryDate,
       changeFrequency: "monthly",
-      priority: 0.9,
+      priority: 0.6,
     },
     ...children.map((child) => {
       const childDiaries = diaries.filter(
@@ -46,25 +46,25 @@ export default function sitemap(): MetadataRoute.Sitemap {
         url: absoluteUrl(`/children/${child.slug}/`),
         lastModified: latestDate(childDiaries.map((diary) => diary.date)),
         changeFrequency: "monthly" as const,
-        priority: 0.75,
+        priority: 0.5,
       };
     }),
     ...diaries.map((diary) => ({
       url: absoluteUrl(`/diaries/${diary.slug}/`),
       lastModified: new Date(diary.date),
       changeFrequency: "yearly" as const,
-      priority: 0.65,
+      priority: 0.4,
     })),
     {
       url: absoluteUrl("/team-diaries/"),
       lastModified: latestTeamDate,
       changeFrequency: "monthly",
-      priority: 0.7,
+      priority: 0.8,
     },
     {
       url: absoluteUrl("/about/"),
       changeFrequency: "yearly",
-      priority: 0.6,
+      priority: 0.9,
     },
   ];
 }

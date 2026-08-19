@@ -3,8 +3,8 @@ import { createPageMetadata } from "@/lib/site";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
-  title: "团队成员",
-  description: "了解维护云启青禾静态成长日记网站的团队成员。",
+  title: "团队介绍",
+  description: "了解云启青禾支教团队及参与网站记录与维护的团队成员。",
   path: "/about/",
 });
 
@@ -16,10 +16,10 @@ export default function AboutPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <p className={styles.kicker}>关于我们</p>
-        <h1>让真实的成长，被温柔地保存下来</h1>
+        <p className={styles.kicker}>团队介绍</p>
+        <h1>认识云启青禾与同行伙伴</h1>
         <p className={styles.intro}>
-          这个静态成长日记网站帮助老师记录和保存孩子们的成长故事。
+          云启青禾是一支支教团队。这个网站用于介绍我们的行动、成员和持续发生的成长故事。
         </p>
       </header>
 

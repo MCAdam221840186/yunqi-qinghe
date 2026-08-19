@@ -11,39 +11,28 @@ import {
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { siteSections, type SiteSectionId } from "@/lib/navigation";
 import styles from "./SiteHeader.module.css";
 
-const navigation = [
-  {
-    href: "/diaries",
-    label: "成长日志",
-    icon: BookOpenText,
-  },
-  {
-    href: "/team-diaries",
-    label: "团队日志",
-    icon: Notebook,
-  },
-  {
-    href: "/about",
-    label: "团队成员",
-    icon: UsersThree,
-  },
-] as const;
+const sectionIcons = {
+  about: UsersThree,
+  "team-diaries": Notebook,
+  diaries: BookOpenText,
+} as const;
 
-function getActiveHref(pathname: string) {
+function getActiveSectionId(pathname: string): SiteSectionId | null {
   const segments = pathname.split("/").filter(Boolean);
-  if (segments.includes("team-diaries")) return "/team-diaries";
-  if (segments.includes("about")) return "/about";
+  if (segments.includes("team-diaries")) return "team-diaries";
+  if (segments.includes("about")) return "about";
   if (segments.includes("diaries") || segments.includes("children")) {
-    return "/diaries";
+    return "diaries";
   }
   return null;
 }
 
 export default function SiteHeader() {
   const pathname = usePathname();
-  const activeHref = getActiveHref(pathname);
+  const activeSectionId = getActiveSectionId(pathname);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -98,8 +87,9 @@ export default function SiteHeader() {
         </Link>
 
         <nav className={styles.desktopNav} aria-label="主导航">
-          {navigation.map(({ href, icon: Icon, label }) => {
-            const active = activeHref === href;
+          {siteSections.map(({ id, href, label }) => {
+            const Icon = sectionIcons[id];
+            const active = activeSectionId === id;
             return (
               <Link
                 key={href}
@@ -114,7 +104,7 @@ export default function SiteHeader() {
           })}
         </nav>
 
-        <p className={styles.headerNote}>记录每一株幼苗的成长故事</p>
+        <p className={styles.headerNote}>支教 · 陪伴 · 共同成长</p>
 
         <button
           ref={menuButtonRef}
@@ -160,8 +150,9 @@ export default function SiteHeader() {
           </div>
 
           <nav className={styles.mobileNav} aria-label="移动端主导航">
-            {navigation.map(({ href, icon: Icon, label }) => {
-              const active = activeHref === href;
+            {siteSections.map(({ id, href, label }) => {
+              const Icon = sectionIcons[id];
+              const active = activeSectionId === id;
               return (
                 <Link
                   key={href}
@@ -177,7 +168,7 @@ export default function SiteHeader() {
             })}
           </nav>
 
-          <p className={styles.dialogNote}>记录成长，珍藏每一次用心的陪伴。</p>
+          <p className={styles.dialogNote}>支教 · 陪伴 · 共同成长</p>
         </div>
       </dialog>
     </header>
