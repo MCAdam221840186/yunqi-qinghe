@@ -1,8 +1,6 @@
 import {
   ArrowRight,
-  BookOpenText,
   Notebook,
-  Palette,
   UsersThree,
 } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
@@ -27,14 +25,9 @@ const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
   timeZone: "Asia/Shanghai",
 });
 
-const sectionIcons = {
-  about: UsersThree,
-  "team-diaries": Notebook,
-  diaries: BookOpenText,
-  works: Palette,
-} as const;
-
-const homeSections = siteSections.filter((section) => section.id !== "works");
+const homeSections = siteSections.filter(
+  (section) => section.id === "about" || section.id === "team-diaries",
+);
 
 const worksPreview = {
   leaf: getArtwork("leaf-17"),
@@ -80,15 +73,6 @@ export default function HomePage() {
         </AnimatedHero>
       </section>
 
-      <section className={styles.mission} aria-labelledby="mission-title">
-        <Reveal className={styles.missionInner}>
-          <p className={styles.eyebrow}>关于云启青禾</p>
-          <h2 id="mission-title">
-            云启青禾是一支支教团队。我们用这个网站介绍团队、记录支教行动，并公开呈现经过匿名处理的成长片段。
-          </h2>
-        </Reveal>
-      </section>
-
       <section className={styles.routes} aria-labelledby="routes-title">
         <Reveal className={styles.routesIntro}>
           <h2 id="routes-title">从认识团队开始</h2>
@@ -96,7 +80,7 @@ export default function HomePage() {
 
         <div className={styles.routeList}>
           {homeSections.map((section, index) => {
-            const Icon = sectionIcons[section.id];
+            const Icon = section.id === "about" ? UsersThree : Notebook;
             return (
               <Reveal key={section.id} delay={index * 0.06}>
                 <Link href={section.href} className={styles.routeLink}>
