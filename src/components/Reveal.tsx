@@ -24,7 +24,7 @@ export default function Reveal({
     <LazyMotion features={domAnimation} strict>
       <m.div
         className={className}
-        initial={reducedMotion ? false : { opacity: 0, y: distance }}
+        initial={{ opacity: 0, y: distance }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount }}
         transition={

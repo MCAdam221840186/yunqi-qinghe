@@ -15,7 +15,7 @@ export default function AnimatedHero({ children, className }: AnimatedHeroProps)
     <LazyMotion features={domAnimation} strict>
       <m.div
         className={className}
-        initial={reducedMotion ? false : { opacity: 0, y: 28 }}
+        initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={
           reducedMotion

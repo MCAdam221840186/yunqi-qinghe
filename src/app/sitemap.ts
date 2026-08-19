@@ -62,6 +62,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
+      url: absoluteUrl("/works/"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
       url: absoluteUrl("/about/"),
       changeFrequency: "yearly",
       priority: 0.9,

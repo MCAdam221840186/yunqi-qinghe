@@ -157,8 +157,119 @@
 }
 
 .latest,
-.routes {
+.routes,
+.worksPreview {
   padding-top: clamp(5rem, 10vw, 9rem);
+}
+
+.worksPreview {
+  display: grid;
+  grid-template-areas: "desk copy";
+  grid-template-columns: minmax(0, 7fr) minmax(18rem, 4fr);
+  gap: clamp(2.5rem, 7vw, 7rem);
+  align-items: center;
+}
+
+.worksCopy {
+  min-width: 0;
+  max-width: 29rem;
+  grid-area: copy;
+}
+
+.worksCopy h2 {
+  max-width: 9.5ch;
+  margin: 0;
+  font-size: clamp(2.35rem, 4.4vw, 4.35rem);
+  font-weight: 690;
+  letter-spacing: -0.06em;
+  line-height: 1.08;
+}
+
+.worksCopy p {
+  max-width: 34ch;
+  margin: 1.4rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.worksLink {
+  display: inline-flex;
+  min-height: 3.25rem;
+  margin-top: 2rem;
+  padding: 0.76rem 1.25rem;
+  border: 1px solid var(--color-accent-strong);
+  border-radius: 999px;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-on-accent);
+  background: var(--color-accent-strong);
+  font-weight: 720;
+  text-decoration: none;
+  transition:
+    transform 180ms var(--ease-out),
+    background-color 180ms ease;
+}
+
+.worksLink:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.worksLink:active {
+  transform: translateY(1px);
+}
+
+.worksDesk {
+  position: relative;
+  min-width: 0;
+  min-height: clamp(31rem, 46vw, 39rem);
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  grid-area: desk;
+  isolation: isolate;
+  background: var(--color-sky);
+}
+
+.workSheet {
+  position: absolute;
+  margin: 0;
+  padding: clamp(0.25rem, 0.55vw, 0.45rem);
+  border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
+  border-radius: 3px;
+  background: var(--color-surface);
+  box-shadow: 0 1.25rem 3rem rgb(35 74 50 / 0.18);
+}
+
+.workSheet img {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  filter: none;
+}
+
+.workLeaf {
+  top: 8%;
+  left: 5%;
+  z-index: 1;
+  width: 54%;
+  transform: rotate(-3deg);
+}
+
+.workKite {
+  top: 11%;
+  right: 4%;
+  z-index: 2;
+  width: 46%;
+  transform: rotate(2.5deg);
+}
+
+.workEmotion {
+  bottom: 6%;
+  left: 27%;
+  z-index: 3;
+  width: 52%;
+  transform: rotate(1deg);
 }
 
 .sectionHeading {
@@ -323,6 +434,26 @@
   .latestGrid {
     grid-template-columns: 1fr;
   }
+
+  .worksPreview {
+    grid-template-areas:
+      "copy"
+      "desk";
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.75rem;
+  }
+
+  .worksCopy {
+    max-width: 39rem;
+  }
+
+  .worksCopy h2 {
+    max-width: 12ch;
+  }
+
+  .worksDesk {
+    min-height: clamp(29rem, 70vw, 36rem);
+  }
 }
 
 @media (max-width: 767px) {
@@ -388,6 +519,36 @@
   .routeLink {
     min-height: 7.5rem;
   }
+
+  .worksPreview {
+    gap: 2.25rem;
+  }
+
+  .worksCopy h2 {
+    font-size: clamp(2.2rem, 11vw, 3.5rem);
+  }
+
+  .worksDesk {
+    min-height: clamp(21rem, 83vw, 28rem);
+  }
+
+  .workLeaf {
+    top: 10%;
+    left: 1%;
+    width: 57%;
+  }
+
+  .workKite {
+    top: 5%;
+    right: 1%;
+    width: 50%;
+  }
+
+  .workEmotion {
+    bottom: 4%;
+    left: 19%;
+    width: 64%;
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -403,7 +564,13 @@
 @media (prefers-reduced-motion: reduce) {
   .primaryLink,
   .secondaryLink,
+  .worksLink,
   .routeArrow {
     transition: none;
+  }
+
+  .worksLink:hover,
+  .worksLink:active {
+    transform: none;
   }
 }

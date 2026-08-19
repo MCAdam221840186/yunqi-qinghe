@@ -5,6 +5,7 @@ import {
   Leaf,
   List,
   Notebook,
+  Palette,
   UsersThree,
   X,
 } from "@phosphor-icons/react";
@@ -18,12 +19,14 @@ const sectionIcons = {
   about: UsersThree,
   "team-diaries": Notebook,
   diaries: BookOpenText,
+  works: Palette,
 } as const;
 
 function getActiveSectionId(pathname: string): SiteSectionId | null {
   const segments = pathname.split("/").filter(Boolean);
   if (segments.includes("team-diaries")) return "team-diaries";
   if (segments.includes("about")) return "about";
+  if (segments.includes("works")) return "works";
   if (segments.includes("diaries") || segments.includes("children")) {
     return "diaries";
   }

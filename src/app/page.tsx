@@ -2,6 +2,7 @@ import {
   ArrowRight,
   BookOpenText,
   Notebook,
+  Palette,
   UsersThree,
 } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
@@ -9,6 +10,7 @@ import Link from "next/link";
 import heroImage from "@/assets/hero-growth.webp";
 import AnimatedHero from "@/components/AnimatedHero";
 import Reveal from "@/components/Reveal";
+import { getArtwork } from "@/content/works";
 import {
   getDiaryAuthor,
   getDiaryPreview,
@@ -29,6 +31,15 @@ const sectionIcons = {
   about: UsersThree,
   "team-diaries": Notebook,
   diaries: BookOpenText,
+  works: Palette,
+} as const;
+
+const homeSections = siteSections.filter((section) => section.id !== "works");
+
+const worksPreview = {
+  leaf: getArtwork("leaf-17"),
+  kite: getArtwork("kite-03"),
+  emotion: getArtwork("emotion-13"),
 } as const;
 
 export default function HomePage() {
@@ -84,7 +95,7 @@ export default function HomePage() {
         </Reveal>
 
         <div className={styles.routeList}>
-          {siteSections.map((section, index) => {
+          {homeSections.map((section, index) => {
             const Icon = sectionIcons[section.id];
             return (
               <Reveal key={section.id} delay={index * 0.06}>
@@ -105,6 +116,52 @@ export default function HomePage() {
             );
           })}
         </div>
+      </section>
+
+      <section
+        className={styles.worksPreview}
+        aria-labelledby="works-preview-title"
+      >
+        <Reveal className={styles.worksCopy}>
+          <h2 id="works-preview-title">课桌展开，就是一座美术馆</h2>
+          <p>
+            叶片、颜色与纸上的线条，记录着孩子们怎样观察、感受和讲故事。
+          </p>
+          <Link className={styles.worksLink} href="/works/">
+            创作展
+            <ArrowRight aria-hidden="true" size={19} weight="bold" />
+          </Link>
+        </Reveal>
+
+        <Reveal className={styles.worksDesk} delay={0.08} amount={0.15}>
+          <figure className={`${styles.workSheet} ${styles.workLeaf}`}>
+            <Image
+              src={worksPreview.leaf.image}
+              alt={worksPreview.leaf.alt}
+              sizes="(max-width: 767px) 55vw, (max-width: 900px) 48vw, 31vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
+          <figure className={`${styles.workSheet} ${styles.workKite}`}>
+            <Image
+              src={worksPreview.kite.image}
+              alt={worksPreview.kite.alt}
+              sizes="(max-width: 767px) 48vw, (max-width: 900px) 43vw, 27vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
+          <figure className={`${styles.workSheet} ${styles.workEmotion}`}>
+            <Image
+              src={worksPreview.emotion.image}
+              alt={worksPreview.emotion.alt}
+              sizes="(max-width: 767px) 62vw, (max-width: 900px) 50vw, 30vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
+        </Reveal>
       </section>
 
       <section className={styles.latest} aria-labelledby="latest-title">
