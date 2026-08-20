@@ -1,6 +1,7 @@
 "use client";
 
-import { domAnimation, LazyMotion, m, useReducedMotion } from "motion/react";
+import { domAnimation, LazyMotion, useReducedMotion } from "motion/react";
+import * as m from "motion/react-m";
 import type { ReactNode } from "react";
 
 interface RevealProps {
@@ -22,9 +23,10 @@ export default function Reveal({
 
   return (
     <LazyMotion features={domAnimation} strict>
+      {/* Keep server output visible if hydration is delayed or absent. */}
       <m.div
         className={className}
-        initial={{ opacity: 0, y: distance }}
+        initial={{ opacity: 1, y: distance }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount }}
         transition={

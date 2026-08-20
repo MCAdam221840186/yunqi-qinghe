@@ -1,6 +1,7 @@
 "use client";
 
-import { domAnimation, LazyMotion, m, useReducedMotion } from "motion/react";
+import { domAnimation, LazyMotion, useReducedMotion } from "motion/react";
+import * as m from "motion/react-m";
 import type { ReactNode } from "react";
 
 interface AnimatedHeroProps {
@@ -13,9 +14,10 @@ export default function AnimatedHero({ children, className }: AnimatedHeroProps)
 
   return (
     <LazyMotion features={domAnimation} strict>
+      {/* Keep the static export readable before Motion hydrates. */}
       <m.div
         className={className}
-        initial={{ opacity: 0, y: 28 }}
+        initial={{ opacity: 1, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
         transition={
           reducedMotion
