@@ -8,6 +8,8 @@ import {
   ArtworkTrigger,
   type ArtworkLightboxItem,
 } from "@/components/ArtworkLightbox";
+import DisplayHeading from "@/components/DisplayHeading";
+import headingStyles from "@/components/DisplayHeading.module.css";
 import Reveal from "@/components/Reveal";
 import {
   artworks,
@@ -106,8 +108,16 @@ export default function WorksPage() {
 
         <header className={styles.hero} aria-labelledby="works-title">
           <AnimatedHero className={styles.heroCopy}>
-            <p className={styles.eyebrow}>儿童创作展</p>
-            <h1 id="works-title">课桌展开，就是一座美术馆</h1>
+            <p className={headingStyles.eyebrow}>儿童创作展</p>
+            <DisplayHeading
+              as="h1"
+              id="works-title"
+              variant="galleryHero"
+              lines={[
+                { before: "课桌展开，" },
+                { accent: "就是一座美术馆", tone: "primary" },
+              ]}
+            />
             <p className={styles.heroLead}>
               纸、叶、墨和颜色，在孩子们手里变成了没有标准答案的世界。
             </p>
@@ -144,7 +154,12 @@ export default function WorksPage() {
 
         <section className={styles.materials} aria-labelledby="materials-title">
           <Reveal className={styles.chapterHeading}>
-            <h2 id="materials-title">材料落到纸上</h2>
+            <DisplayHeading
+              as="h2"
+              id="materials-title"
+              variant="galleryChapter"
+              lines={[{ before: "材料落到纸上" }]}
+            />
             <p>
               叶片保留纹路，蜡染借来对称。熟悉的材料，被重新组合成山、花和动物。
             </p>
@@ -188,7 +203,12 @@ export default function WorksPage() {
 
         <section className={styles.colors} aria-labelledby="colors-title">
           <Reveal className={styles.chapterHeading}>
-            <h2 id="colors-title">颜色有自己的位置</h2>
+            <DisplayHeading
+              as="h2"
+              id="colors-title"
+              variant="galleryChapter"
+              lines={[{ before: "颜色有自己的" }, { accent: "位置" }]}
+            />
             <p>
               每个圆盘都从同一张模板出发，却用颜色和符号留下不同的感受。
             </p>
@@ -215,7 +235,15 @@ export default function WorksPage() {
 
         <section className={styles.writing} aria-labelledby="writing-title">
           <Reveal className={styles.chapterHeading}>
-            <h2 id="writing-title">同一句话，不同笔迹</h2>
+            <DisplayHeading
+              as="h2"
+              id="writing-title"
+              variant="galleryChapter"
+              lines={[
+                { before: "同一句话，" },
+                { before: "不同笔迹", tone: "primary" },
+              ]}
+            />
             <p>
               心想事成被写了四次。轻重、停顿和留白，让相同的字有了不同声音。
             </p>
@@ -240,7 +268,12 @@ export default function WorksPage() {
 
         <section className={styles.stories} aria-labelledby="stories-title">
           <Reveal className={styles.chapterHeading}>
-            <h2 id="stories-title">故事先从封面开始</h2>
+            <DisplayHeading
+              as="h2"
+              id="stories-title"
+              variant="galleryChapter"
+              lines={[{ before: "故事先从" }, { accent: "封面开始" }]}
+            />
             <p>
               这里展示的是孩子们手工制作的绘本封面。书名、纸张和颜色，先为故事打开一扇门。
             </p>
@@ -267,7 +300,12 @@ export default function WorksPage() {
 
         <section className={styles.flight} aria-labelledby="flight-title">
           <Reveal className={styles.chapterHeading}>
-            <h2 id="flight-title">把想象放进风里</h2>
+            <DisplayHeading
+              as="h2"
+              id="flight-title"
+              variant="galleryChapter"
+              lines={[{ before: "把想象放进风里" }]}
+            />
             <p>
               火箭、猫头鹰、花鸟和鱼从同一张课桌起飞，带着各自的颜色。
             </p>
@@ -295,7 +333,14 @@ export default function WorksPage() {
         </section>
 
         <Reveal className={styles.closing}>
-          <h2>同一张课桌，装得下很多种答案。</h2>
+          <DisplayHeading
+            as="h2"
+            variant="statement"
+            lines={[
+              { before: "同一张课桌，" },
+              { before: "装得下", accent: "很多种答案", after: "。" },
+            ]}
+          />
           <Link href="/diaries/">
             成长日志
             <ArrowRight aria-hidden="true" size={19} weight="bold" />

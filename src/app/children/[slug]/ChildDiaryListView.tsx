@@ -8,6 +8,7 @@ import {
   type ChildRecord,
   type DiaryRecord,
 } from "@/lib/content";
+import displayHeadingStyles from "@/components/DisplayHeading.module.css";
 import styles from "./page.module.css";
 
 const fullDateFormatter = new Intl.DateTimeFormat("zh-CN", {
@@ -63,8 +64,10 @@ export default function ChildDiaryListView({
           <span className={styles.monogram} aria-hidden="true">
             {getInitial(child.displayName)}
           </span>
-          <p className={styles.kicker}>匿名成长册</p>
-          <h1>{child.displayName}</h1>
+          <p className={displayHeadingStyles.eyebrow}>匿名成长册</p>
+          <h1 className={displayHeadingStyles.contentHero}>
+            {child.displayName}
+          </h1>
 
           <dl className={styles.facts}>
             <div>
@@ -80,13 +83,20 @@ export default function ChildDiaryListView({
 
         <section className={styles.entries} aria-labelledby="entries-title">
           <div className={styles.entriesHeading}>
-            <h2 id="entries-title">日记目录</h2>
+            <h2
+              id="entries-title"
+              className={displayHeadingStyles.sectionTitle}
+            >
+              日记目录
+            </h2>
             <span>{diaries.length} 篇记录</span>
           </div>
 
           {diaries.length === 0 ? (
             <div className={styles.empty}>
-              <h3>第一篇日记还在路上</h3>
+              <h3 className={displayHeadingStyles.stateTitle}>
+                第一篇日记还在路上
+              </h3>
               <p>完成记录后，它会出现在这里。</p>
             </div>
           ) : (
@@ -101,7 +111,9 @@ export default function ChildDiaryListView({
                       {fullDateFormatter.format(new Date(diary.date))}
                     </time>
                     <span className={styles.diaryCopy}>
-                      <strong>{diary.title}</strong>
+                      <strong className={displayHeadingStyles.contentTitle}>
+                        {diary.title}
+                      </strong>
                       <span>{getDiaryPreview(diary, 96)}</span>
                     </span>
                     <span className={styles.arrow} aria-hidden="true">

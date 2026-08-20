@@ -7,6 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import heroImage from "@/assets/hero-growth.webp";
 import AnimatedHero from "@/components/AnimatedHero";
+import DisplayHeading from "@/components/DisplayHeading";
+import headingStyles from "@/components/DisplayHeading.module.css";
 import Reveal from "@/components/Reveal";
 import { getArtwork } from "@/content/works";
 import {
@@ -48,8 +50,21 @@ export default function HomePage() {
 
       <section className={styles.hero} aria-labelledby="home-title">
         <AnimatedHero className={styles.heroCopy}>
-          <p className={styles.eyebrow}>云启青禾支教团队</p>
-          <h1 id="home-title">向光而行，与成长同行</h1>
+          <p className={headingStyles.eyebrow}>云启青禾支教团队</p>
+          <DisplayHeading
+            as="h1"
+            id="home-title"
+            variant="brandHero"
+            lines={[
+              { before: "向光而行，" },
+              {
+                before: "与",
+                accent: "成长",
+                after: "同行",
+                tone: "primary",
+              },
+            ]}
+          />
           <div className={styles.heroActions}>
             <Link className={styles.primaryLink} href="/about/">
               认识我们
@@ -66,6 +81,7 @@ export default function HomePage() {
           <Image
             src={heroImage}
             alt="晨光中的绿色幼苗从层叠纸页之间生长"
+            fill
             sizes="(max-width: 767px) calc(100vw - 2rem), 56vw"
             preload
           />
@@ -75,7 +91,12 @@ export default function HomePage() {
 
       <section className={styles.routes} aria-labelledby="routes-title">
         <Reveal className={styles.routesIntro}>
-          <h2 id="routes-title">从认识团队开始</h2>
+          <DisplayHeading
+            as="h2"
+            id="routes-title"
+            variant="section"
+            lines={[{ before: "从认识团队开始" }]}
+          />
         </Reveal>
 
         <div className={styles.routeList}>
@@ -86,7 +107,9 @@ export default function HomePage() {
                 <Link href={section.href} className={styles.routeLink}>
                   <Icon aria-hidden="true" size={24} weight="regular" />
                   <span>
-                    <strong>{section.label}</strong>
+                    <strong className={headingStyles.contentTitle}>
+                      {section.label}
+                    </strong>
                     <small>{section.description}</small>
                   </span>
                   <ArrowRight
@@ -107,7 +130,19 @@ export default function HomePage() {
         aria-labelledby="works-preview-title"
       >
         <Reveal className={styles.worksCopy}>
-          <h2 id="works-preview-title">课桌展开，就是一座美术馆</h2>
+          <DisplayHeading
+            as="h2"
+            id="works-preview-title"
+            variant="section"
+            lines={[
+              { before: "课桌展开，" },
+              {
+                before: "就是一座",
+                accent: "美术馆",
+                tone: "primary",
+              },
+            ]}
+          />
           <p>
             叶片、颜色与纸上的线条，记录着孩子们怎样观察、感受和讲故事。
           </p>
@@ -150,7 +185,12 @@ export default function HomePage() {
 
       <section className={styles.latest} aria-labelledby="latest-title">
         <Reveal className={styles.sectionHeading}>
-          <h2 id="latest-title">最近记录的成长</h2>
+          <DisplayHeading
+            as="h2"
+            id="latest-title"
+            variant="section"
+            lines={[{ before: "最近记录的成长" }]}
+          />
           <Link href="/diaries/" className={styles.textLink}>
             查看全部
             <ArrowRight aria-hidden="true" size={17} weight="bold" />
@@ -169,7 +209,7 @@ export default function HomePage() {
                       {dateFormatter.format(new Date(diary.date))}
                     </time>
                   </div>
-                  <h3>{diary.title}</h3>
+                  <h3 className={headingStyles.contentTitle}>{diary.title}</h3>
                   <p>{getDiaryPreview(diary, 72)}</p>
                   <Link
                     href={`/diaries/${diary.slug}/`}

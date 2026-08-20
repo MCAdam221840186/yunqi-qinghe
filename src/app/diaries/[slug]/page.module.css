@@ -12,7 +12,7 @@
   margin-bottom: clamp(3rem, 7vw, 6rem);
   color: var(--color-text-muted);
   font-size: 0.9rem;
-  font-weight: 620;
+  font-weight: 600;
   text-decoration: none;
   transition: transform 180ms ease;
 }
@@ -32,24 +32,6 @@
   border-bottom: 1px solid var(--color-border);
 }
 
-.kicker {
-  margin: 0 0 1.25rem;
-  color: var(--color-accent-strong);
-  font-size: 0.76rem;
-  font-weight: 720;
-  letter-spacing: 0.15em;
-}
-
-.header h1 {
-  margin: 0;
-  color: var(--color-text);
-  font-size: clamp(2.6rem, 7vw, 5.25rem);
-  font-weight: 680;
-  letter-spacing: -0.055em;
-  line-height: 1.06;
-  text-wrap: balance;
-}
-
 .meta {
   display: flex;
   flex-wrap: wrap;
@@ -62,7 +44,7 @@
 
 .meta a {
   color: var(--color-accent-strong);
-  font-weight: 650;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -96,11 +78,8 @@
 }
 
 .structuredSection h2 {
-  margin: 0 0 0.85rem;
+  margin-bottom: 0.85rem;
   color: var(--color-accent-strong);
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
 }
 
 .emptyBody {
@@ -149,14 +128,12 @@
 .adjacentLink span {
   color: var(--color-text-muted);
   font-size: 0.78rem;
-  font-weight: 650;
+  font-weight: 600;
 }
 
 .adjacentLink strong {
   max-width: 100%;
   overflow: hidden;
-  font-size: 1rem;
-  font-weight: 650;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -168,10 +145,6 @@
 
   .backLink {
     margin-bottom: 3.5rem;
-  }
-
-  .header h1 {
-    font-size: clamp(2.45rem, 13vw, 4rem);
   }
 
   .body {

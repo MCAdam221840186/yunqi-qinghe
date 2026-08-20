@@ -5,6 +5,7 @@ import type {
   DiaryRecord,
   StructuredDiaryFields,
 } from "@/lib/content";
+import displayHeadingStyles from "@/components/DisplayHeading.module.css";
 import styles from "./page.module.css";
 
 const chineseDateFormatter = new Intl.DateTimeFormat("zh-CN", {
@@ -40,7 +41,7 @@ function StructuredDiary({ fields }: { fields: StructuredDiaryFields }) {
     <div className={styles.structuredBody}>
       {sections.map((field) => (
         <section key={field.key} className={styles.structuredSection}>
-          <h2>{field.label}</h2>
+          <h2 className={displayHeadingStyles.utilityTitle}>{field.label}</h2>
           <p>{fields[field.key]}</p>
         </section>
       ))}
@@ -64,7 +65,9 @@ function AdjacentLink({
       data-direction={direction}
     >
       <span>{label}</span>
-      <strong>{diary.title}</strong>
+      <strong className={displayHeadingStyles.utilityTitle}>
+        {diary.title}
+      </strong>
     </Link>
   );
 }
@@ -89,8 +92,8 @@ export default function DiaryDetailView({
 
       <article className={styles.article}>
         <header className={styles.header}>
-          <p className={styles.kicker}>成长日记</p>
-          <h1>{diary.title}</h1>
+          <p className={displayHeadingStyles.eyebrow}>成长日记</p>
+          <h1 className={displayHeadingStyles.contentHero}>{diary.title}</h1>
           <div className={styles.meta}>
             <Link href={`/children/${child.slug}`}>{child.displayName}</Link>
             <time dateTime={diary.date}>

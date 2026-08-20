@@ -2,6 +2,8 @@ import Image from "next/image";
 import ReactMarkdown, { type Components } from "react-markdown";
 import remarkGfm from "remark-gfm";
 import teamNotebooksImage from "@/assets/team-notebooks.webp";
+import DisplayHeading from "@/components/DisplayHeading";
+import displayHeadingStyles from "@/components/DisplayHeading.module.css";
 import { teamDiaries } from "@/lib/content";
 import { createPageMetadata } from "@/lib/site";
 import styles from "./page.module.css";
@@ -40,10 +42,18 @@ const updatedFormatter = new Intl.DateTimeFormat("zh-CN", {
 });
 
 const markdownComponents: Components = {
-  h1: ({ children }) => <h3>{children}</h3>,
-  h2: ({ children }) => <h3>{children}</h3>,
-  h3: ({ children }) => <h4>{children}</h4>,
-  h4: ({ children }) => <h4>{children}</h4>,
+  h1: ({ children }) => (
+    <h3 className={displayHeadingStyles.contentTitle}>{children}</h3>
+  ),
+  h2: ({ children }) => (
+    <h3 className={displayHeadingStyles.contentTitle}>{children}</h3>
+  ),
+  h3: ({ children }) => (
+    <h4 className={displayHeadingStyles.utilityTitle}>{children}</h4>
+  ),
+  h4: ({ children }) => (
+    <h4 className={displayHeadingStyles.utilityTitle}>{children}</h4>
+  ),
 };
 
 export default function TeamDiariesPage() {
@@ -51,14 +61,25 @@ export default function TeamDiariesPage() {
     <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerCopy}>
-          <p className={styles.kicker}>团队日志</p>
-          <h1>一起走过的日子，也有自己的年轮</h1>
+          <p className={displayHeadingStyles.eyebrow}>团队日志</p>
+          <DisplayHeading
+            as="h1"
+            variant="pageHero"
+            lines={[
+              { before: "一起走过的日子，" },
+              {
+                before: "也有自己的",
+                accent: "年轮",
+                tone: "primary",
+              },
+            ]}
+          />
         </div>
         <figure className={styles.visual}>
           <Image
             src={teamNotebooksImage}
             alt="窗边叠放的旧笔记本上覆着一枝绿叶"
-            sizes="(max-width: 767px) calc(100vw - 2rem), 38vw"
+            sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 900px) min(calc(100vw - 2.5rem), 42rem), 38vw"
             preload
           />
         </figure>
@@ -66,7 +87,9 @@ export default function TeamDiariesPage() {
 
       {teamDiaries.length === 0 ? (
         <section className={styles.empty} aria-labelledby="empty-title">
-          <h2 id="empty-title">团队日志正在整理中</h2>
+          <h2 id="empty-title" className={displayHeadingStyles.stateTitle}>
+            团队日志正在整理中
+          </h2>
           <p>完成第一篇记录后，它会出现在这里。</p>
         </section>
       ) : (
@@ -85,7 +108,7 @@ export default function TeamDiariesPage() {
                 </div>
 
                 <article className={styles.entry}>
-                  <h2>{title}</h2>
+                  <h2 className={displayHeadingStyles.contentTitle}>{title}</h2>
                   <div className={styles.markdown}>
                     <ReactMarkdown
                       remarkPlugins={[remarkGfm]}

@@ -1,5 +1,7 @@
 import Image from "next/image";
 import teamGroupImage from "@/assets/team-group.webp";
+import DisplayHeading from "@/components/DisplayHeading";
+import headingStyles from "@/components/DisplayHeading.module.css";
 import { teamMembers } from "@/lib/content";
 import { createPageMetadata } from "@/lib/site";
 import styles from "./page.module.css";
@@ -24,8 +26,19 @@ export default function AboutPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <p className={styles.kicker}>团队介绍</p>
-        <h1>认识云启青禾与同行伙伴</h1>
+        <p className={headingStyles.eyebrow}>团队介绍</p>
+        <DisplayHeading
+          as="h1"
+          variant="pageHero"
+          lines={[
+            { before: "认识云启青禾" },
+            {
+              before: "与",
+              accent: "同行伙伴",
+              tone: "primary",
+            },
+          ]}
+        />
       </header>
 
       <section className={styles.profile} aria-labelledby="team-profile-title">
@@ -38,7 +51,9 @@ export default function AboutPage() {
         </figure>
 
         <div className={styles.profileCopy}>
-          <h2 id="team-profile-title">文理工交融的支教团队</h2>
+          <h2 id="team-profile-title" className={headingStyles.sectionTitle}>
+            文理工交融的支教团队
+          </h2>
           {teamIntroduction.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
@@ -47,12 +62,14 @@ export default function AboutPage() {
 
       <section className={styles.team} aria-labelledby="team-title">
         <div className={styles.sectionHeading}>
-          <h2 id="team-title">团队成员</h2>
+          <h2 id="team-title" className={headingStyles.sectionTitle}>
+            团队成员
+          </h2>
         </div>
 
         {teamMembers.length === 0 ? (
           <div className={styles.empty}>
-            <h3>成员资料正在整理中</h3>
+            <h3 className={headingStyles.stateTitle}>成员资料正在整理中</h3>
             <p>资料完成后会在这里展示。</p>
           </div>
         ) : (
@@ -65,8 +82,14 @@ export default function AboutPage() {
                   </span>
 
                   <div className={styles.memberCopy}>
-                    {member.role && <p className={styles.role}>{member.role}</p>}
-                    <h3>{member.name}</h3>
+                    {member.role && (
+                      <p className={`${headingStyles.eyebrow} ${styles.role}`}>
+                        {member.role}
+                      </p>
+                    )}
+                    <h3 className={headingStyles.contentTitle}>
+                      {member.name}
+                    </h3>
                     {member.description && <p>{member.description}</p>}
                   </div>
                 </article>

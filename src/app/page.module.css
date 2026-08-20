@@ -6,7 +6,7 @@
 
 .hero {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(24rem, 7fr);
+  grid-template-columns: minmax(0, 5.5fr) minmax(24rem, 6.5fr);
   gap: clamp(2rem, 5vw, 5.5rem);
   min-height: calc(100dvh - var(--header-height));
   padding: clamp(2.25rem, 6vw, 5.75rem) 0 clamp(3rem, 6vw, 5rem);
@@ -17,24 +17,6 @@
   position: relative;
   z-index: 1;
   max-width: 39rem;
-}
-
-.eyebrow {
-  margin: 0 0 1rem;
-  color: var(--color-accent-strong);
-  font-size: 0.76rem;
-  font-weight: 760;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
-}
-
-.hero h1 {
-  max-width: 8.5ch;
-  margin: 0;
-  font-size: clamp(3.65rem, 6.2vw, 6.7rem);
-  font-weight: 780;
-  letter-spacing: -0.075em;
-  line-height: 0.96;
 }
 
 .heroActions {
@@ -52,7 +34,7 @@
   border-radius: 999px;
   align-items: center;
   gap: 0.75rem;
-  font-weight: 720;
+  font-weight: 700;
   text-decoration: none;
   transition:
     transform 180ms var(--ease-out),
@@ -91,6 +73,7 @@
 .heroVisual {
   position: relative;
   min-width: 0;
+  height: clamp(32rem, 62dvh, 43rem);
 }
 
 .heroVisual::before {
@@ -105,7 +88,7 @@
 
 .heroVisual img {
   width: 100%;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   border-radius: var(--radius-card);
   box-shadow: var(--shadow-image);
   object-fit: cover;
@@ -124,7 +107,7 @@
   background: rgb(18 45 29 / 0.78);
   backdrop-filter: blur(10px);
   font-size: 0.78rem;
-  font-weight: 720;
+  font-weight: 700;
   letter-spacing: 0.08em;
 }
 
@@ -149,12 +132,8 @@
 }
 
 .worksCopy h2 {
-  max-width: 9.5ch;
-  margin: 0;
-  font-size: clamp(2.35rem, 4.4vw, 4.35rem);
-  font-weight: 690;
-  letter-spacing: -0.06em;
-  line-height: 1.08;
+  --display-line-offset: 0.18em;
+  --display-section-size: clamp(2.4rem, 3.6vw, 3.6rem);
 }
 
 .worksCopy p {
@@ -175,7 +154,7 @@
   gap: 0.75rem;
   color: var(--color-on-accent);
   background: var(--color-accent-strong);
-  font-weight: 720;
+  font-weight: 700;
   text-decoration: none;
   transition:
     transform 180ms var(--ease-out),
@@ -251,14 +230,6 @@
   align-items: end;
 }
 
-.sectionHeading h2,
-.routesIntro h2 {
-  max-width: 18ch;
-  margin: 0;
-  font-size: clamp(2.25rem, 5vw, 4.75rem);
-  letter-spacing: -0.06em;
-}
-
 .textLink {
   display: inline-flex;
   padding: 0.4rem 0;
@@ -304,13 +275,7 @@
 
 .diaryMeta span {
   color: var(--color-accent-strong);
-  font-weight: 720;
-}
-
-.diaryPreview h3 {
-  margin: 0;
-  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
-  line-height: 1.35;
+  font-weight: 700;
 }
 
 .diaryPreview p {
@@ -328,7 +293,7 @@
   align-items: center;
   gap: 0.45rem;
   color: var(--color-accent-strong);
-  font-weight: 720;
+  font-weight: 700;
   text-decoration: none;
 }
 
@@ -347,10 +312,6 @@
 .routesIntro {
   position: sticky;
   top: calc(var(--header-height) + 2rem);
-}
-
-.routesIntro h2 {
-  font-size: clamp(2.1rem, 3.6vw, 3.65rem);
 }
 
 .routeList {
@@ -377,11 +338,6 @@
   min-width: 0;
   flex-direction: column;
   gap: 0.35rem;
-}
-
-.routeLink strong {
-  font-size: clamp(1.3rem, 2.5vw, 2rem);
-  letter-spacing: -0.03em;
 }
 
 .routeLink small {
@@ -419,10 +375,6 @@
     max-width: 39rem;
   }
 
-  .worksCopy h2 {
-    max-width: 12ch;
-  }
-
   .worksDesk {
     min-height: clamp(29rem, 70vw, 36rem);
   }
@@ -440,17 +392,10 @@
     gap: 2.75rem;
   }
 
-  .hero h1 {
-    font-size: clamp(3.25rem, 15vw, 5rem);
-  }
-
   .heroVisual {
     width: min(100%, 31rem);
+    height: min(112vw, 31rem);
     justify-self: end;
-  }
-
-  .heroVisual img {
-    max-height: 46rem;
   }
 
   .sectionHeading {
@@ -484,7 +429,8 @@
   }
 
   .worksCopy h2 {
-    font-size: clamp(2.2rem, 11vw, 3.5rem);
+    --display-line-offset: 0;
+    --display-section-size: clamp(2.2rem, 9.8vw, 2.9rem);
   }
 
   .worksDesk {

@@ -2,6 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import journalImage from "@/assets/journal-light.webp";
+import DisplayHeading from "@/components/DisplayHeading";
+import headingStyles from "@/components/DisplayHeading.module.css";
 import {
   children,
   getDiaryCountForChild,
@@ -32,14 +34,25 @@ export default function DiariesPage() {
     <div className={styles.page}>
       <header className={styles.header}>
         <div className={styles.headerCopy}>
-          <p className={styles.kicker}>成长日志</p>
-          <h1>每一段成长，都值得被认真看见</h1>
+          <p className={headingStyles.eyebrow}>成长日志</p>
+          <DisplayHeading
+            as="h1"
+            variant="pageHero"
+            lines={[
+              { before: "每一段成长，" },
+              {
+                before: "都值得被",
+                accent: "认真看见",
+                tone: "primary",
+              },
+            ]}
+          />
         </div>
         <figure className={styles.visual}>
           <Image
             src={journalImage}
             alt="阳光照在打开的空白笔记本、铅笔和绿叶上"
-            sizes="(max-width: 767px) calc(100vw - 2rem), 38vw"
+            sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 900px) calc(100vw - 2.5rem), 38vw"
             preload
           />
         </figure>
@@ -47,7 +60,9 @@ export default function DiariesPage() {
 
       {children.length === 0 ? (
         <section className={styles.empty} aria-labelledby="empty-title">
-          <h2 id="empty-title">成长册正在准备中</h2>
+          <h2 id="empty-title" className={headingStyles.stateTitle}>
+            成长册正在准备中
+          </h2>
           <p>还没有可以展示的成长记录。</p>
         </section>
       ) : (
@@ -68,7 +83,9 @@ export default function DiariesPage() {
                   </span>
 
                   <span className={styles.identity}>
-                    <strong>{child.displayName}</strong>
+                    <strong className={headingStyles.contentTitle}>
+                      {child.displayName}
+                    </strong>
                     <span>
                       {latestDiary
                         ? `最近记录：${latestDiary.title}`

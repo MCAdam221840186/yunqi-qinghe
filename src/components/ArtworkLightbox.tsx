@@ -15,6 +15,7 @@ import {
   type MouseEvent as ReactMouseEvent,
   type ReactNode,
 } from "react";
+import displayHeadingStyles from "./DisplayHeading.module.css";
 import styles from "./ArtworkLightbox.module.css";
 
 export interface ArtworkLightboxItem {
@@ -192,8 +193,15 @@ export function ArtworkLightboxProvider({
         <div className={styles.panel}>
           <header className={styles.toolbar}>
             <div className={styles.titleGroup} aria-live="polite" aria-atomic="true">
-              <p className={styles.kicker}>作品大图</p>
-              <h2 id={titleId} className={styles.medium}>
+              <p
+                className={`${displayHeadingStyles.eyebrow} ${styles.kicker}`}
+              >
+                作品大图
+              </p>
+              <h2
+                id={titleId}
+                className={`${displayHeadingStyles.utilityTitle} ${styles.medium}`}
+              >
                 {activeItem?.medium ?? "孩子们的创作"}
               </h2>
             </div>
@@ -222,7 +230,11 @@ export function ArtworkLightboxProvider({
                 draggable={false}
               />
             ) : (
-              <p className={styles.emptyState}>暂时没有可查看的作品</p>
+              <p
+                className={`${displayHeadingStyles.stateTitle} ${styles.emptyState}`}
+              >
+                暂时没有可查看的作品
+              </p>
             )}
           </div>
 
