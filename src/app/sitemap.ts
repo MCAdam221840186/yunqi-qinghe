@@ -13,16 +13,23 @@ function latestDate(values: readonly string[]): Date | undefined {
   );
 }
 
+function recordedDates(
+  records: readonly { readonly recordedOn: string | null }[],
+): string[] {
+  return records
+    .map((record) => record.recordedOn)
+    .filter((value): value is string => value !== null);
+}
+
 export default function sitemap(): MetadataRoute.Sitemap {
-  const latestDiaryDate = latestDate(diaries.map((diary) => diary.date));
+  const latestGrowthDate = latestDate(recordedDates(diaries));
   const latestTeamDate = latestDate(
     teamDiaries.map((diary) => diary.updatedAt),
   );
   const latestSiteDate = latestDate(
-    [
-      latestDiaryDate?.toISOString(),
-      latestTeamDate?.toISOString(),
-    ].filter((value): value is string => Boolean(value)),
+    [latestGrowthDate?.toISOString(), latestTeamDate?.toISOString()].filter(
+      (value): value is string => Boolean(value),
+    ),
   );
 
   return [
@@ -34,7 +41,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: absoluteUrl("/diaries/"),
-      lastModified: latestDiaryDate,
+      lastModified: latestGrowthDate,
       changeFrequency: "monthly",
       priority: 0.6,
     },
@@ -44,14 +51,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       );
       return {
         url: absoluteUrl(`/children/${child.slug}/`),
-        lastModified: latestDate(childDiaries.map((diary) => diary.date)),
+        lastModified: latestDate(recordedDates(childDiaries)),
         changeFrequency: "monthly" as const,
         priority: 0.5,
       };
     }),
     ...diaries.map((diary) => ({
       url: absoluteUrl(`/diaries/${diary.slug}/`),
-      lastModified: new Date(diary.date),
+      lastModified: diary.recordedOn
+        ? new Date(diary.recordedOn)
+        : undefined,
       changeFrequency: "yearly" as const,
       priority: 0.4,
     })),

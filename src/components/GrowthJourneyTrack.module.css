@@ -1,0 +1,172 @@
+.root {
+  --growth-track-edge: clamp(1rem, 3vw, 1.5rem);
+  --growth-track-item-width: min(82vw, 24rem);
+
+  min-width: 0;
+}
+
+.track {
+  position: relative;
+  display: grid;
+  grid-auto-columns: var(--growth-track-item-width);
+  grid-auto-flow: column;
+  gap: clamp(0.9rem, 2.4vw, 1.4rem);
+  margin: 0;
+  padding: 0.25rem var(--growth-track-edge) 0.8rem;
+  padding-inline-end: max(
+    var(--growth-track-edge),
+    calc(100% - var(--growth-track-item-width) - var(--growth-track-edge))
+  );
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-padding-inline: var(--growth-track-edge);
+  scroll-snap-type: x mandatory;
+  scrollbar-color: var(--color-border) transparent;
+  scrollbar-width: thin;
+  list-style: none;
+  touch-action: pan-x pan-y pinch-zoom;
+  -webkit-overflow-scrolling: touch;
+}
+
+.track > * {
+  min-width: 0;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+.track::-webkit-scrollbar {
+  height: 0.45rem;
+}
+
+.track::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.track::-webkit-scrollbar-thumb {
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background: var(--color-border);
+  background-clip: padding-box;
+}
+
+.emptyState {
+  display: grid;
+  min-height: 12rem;
+  place-items: center;
+  margin: 0;
+  padding: 1.5rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-card);
+  color: var(--color-text-muted);
+  text-align: center;
+  background: var(--color-surface-soft);
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.8rem;
+  padding-inline: var(--growth-track-edge);
+}
+
+.controlButton {
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--color-line);
+  border-radius: 999px;
+  color: var(--color-text);
+  font: inherit;
+  background: var(--color-surface);
+  cursor: pointer;
+  transition:
+    transform 180ms var(--ease-out),
+    opacity 180ms var(--ease-out);
+}
+
+.controlButton:first-child {
+  justify-self: start;
+}
+
+.controlButton:last-child {
+  justify-self: end;
+}
+
+.controlButton:disabled {
+  opacity: 0.38;
+  cursor: default;
+}
+
+.position {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 0.84rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .controlButton:not(:disabled):hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent-strong);
+    background: var(--color-accent-soft);
+    transform: translateY(-1px);
+  }
+}
+
+.controlButton:not(:disabled):active {
+  transform: translateY(0);
+}
+
+@media (max-width: 40rem) {
+  .root {
+    --growth-track-edge: 1rem;
+    --growth-track-item-width: min(84vw, 22rem);
+  }
+
+  .track {
+    gap: 0.85rem;
+  }
+
+  .controlButton {
+    width: 2.75rem;
+    padding: 0;
+  }
+
+  .controlLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .position {
+    font-size: 0.78rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .track {
+    scroll-behavior: auto;
+  }
+
+  .controlButton {
+    transition: none;
+  }
+
+  .controlButton:hover,
+  .controlButton:active {
+    transform: none;
+  }
+}

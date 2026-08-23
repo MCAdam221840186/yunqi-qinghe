@@ -32,7 +32,7 @@ export async function generateMetadata({
 
   if (!diary) {
     return {
-      title: "日记未找到",
+      title: "成长记录未找到",
       robots: { index: false, follow: false },
       openGraph: { images: [] },
       twitter: { images: [] },
@@ -48,7 +48,7 @@ export async function generateMetadata({
     description,
     path: `/diaries/${diary.slug}/`,
     type: "article",
-    publishedTime: diary.date,
+    publishedTime: diary.recordedOn ?? undefined,
     authors: [child.displayName],
   });
 }

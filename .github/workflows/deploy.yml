@@ -35,6 +35,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Check reviewed growth content
+        run: npm run growth-content:check
+
+      - name: Check public growth card mappings
+        run: npm run growth-cards:check-public
+
       - name: Lint
         run: npm run lint
 

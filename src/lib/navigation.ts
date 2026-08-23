@@ -24,7 +24,7 @@ export const siteSections: readonly SiteSection[] = [
     id: "diaries",
     href: "/diaries/",
     label: "成长日志",
-    description: "查看经过匿名处理的孩子成长片段。",
+    description: "阅读孩子们真实、完整且可回溯的成长记录。",
   },
   {
     id: "works",

@@ -107,7 +107,7 @@ export default function SiteHeader() {
           })}
         </nav>
 
-        <p className={styles.headerNote}>支教 · 陪伴 · 共同成长</p>
+        <p className={styles.headerNote}>支教、陪伴与共同成长</p>
 
         <button
           ref={menuButtonRef}
@@ -171,7 +171,7 @@ export default function SiteHeader() {
             })}
           </nav>
 
-          <p className={styles.dialogNote}>支教 · 陪伴 · 共同成长</p>
+          <p className={styles.dialogNote}>支教、陪伴与共同成长</p>
         </div>
       </dialog>
     </header>

@@ -31,7 +31,7 @@ export async function generateMetadata({
 
   if (!child) {
     return {
-      title: "成长日记未找到",
+      title: "成长记录未找到",
       robots: { index: false, follow: false },
       openGraph: { images: [] },
       twitter: { images: [] },
@@ -39,8 +39,8 @@ export async function generateMetadata({
   }
 
   const count = getDiariesForChild(child.slug).length;
-  const title = `${child.displayName} 的成长日记`;
-  const description = `浏览 ${child.displayName} 的 ${count} 篇成长日记。`;
+  const title = `${child.displayName}的成长记录`;
+  const description = `${child.displayName}，${child.className}。从 ${count} 份真实材料中阅读这段成长线索：${child.story.summary}`;
 
   return createPageMetadata({
     title,

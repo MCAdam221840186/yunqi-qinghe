@@ -6,30 +6,28 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import heroImage from "@/assets/hero-growth.webp";
-import AnimatedHero from "@/components/AnimatedHero";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
-import Reveal from "@/components/Reveal";
 import { getArtwork } from "@/content/works";
 import {
   getDiaryAuthor,
+  getDiaryBySlug,
   getDiaryPreview,
-  getLatestDiaries,
+  getGrowthCardAsset,
 } from "@/lib/content";
 import { siteSections } from "@/lib/navigation";
 import { createWebsiteJsonLd, serializeJsonLd } from "@/lib/site";
 import styles from "./page.module.css";
 
-const dateFormatter = new Intl.DateTimeFormat("zh-CN", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-  timeZone: "Asia/Shanghai",
-});
-
 const homeSections = siteSections.filter(
   (section) => section.id === "about" || section.id === "team-diaries",
 );
+
+const curatedGrowthDiarySlugs = [
+  "student-009-session-01-b",
+  "student-006-session-01-a",
+  "student-018-session-04-a",
+] as const;
 
 const worksPreview = {
   leaf: getArtwork("leaf-17"),
@@ -38,7 +36,25 @@ const worksPreview = {
 } as const;
 
 export default function HomePage() {
-  const latestDiaries = getLatestDiaries(3);
+  const growthHighlights = curatedGrowthDiarySlugs.map((slug) => {
+    const diary = getDiaryBySlug(slug);
+    if (!diary) {
+      throw new Error(`首页成长高光缺少记录：${slug}`);
+    }
+
+    const author = getDiaryAuthor(diary);
+    const storyHighlight = author.story.highlights.find(
+      (highlight) => highlight.diarySlug === diary.slug,
+    );
+
+    return {
+      diary,
+      author,
+      image: getGrowthCardAsset(diary.imageId).thumbnail,
+      note: storyHighlight?.note ?? getDiaryPreview(diary, 72),
+      quote: storyHighlight?.quote ?? getDiaryPreview(diary, 48),
+    };
+  });
   const websiteJsonLd = createWebsiteJsonLd();
 
   return (
@@ -49,7 +65,7 @@ export default function HomePage() {
       />
 
       <section className={styles.hero} aria-labelledby="home-title">
-        <AnimatedHero className={styles.heroCopy}>
+        <div className={styles.heroCopy}>
           <p className={headingStyles.eyebrow}>云启青禾支教团队</p>
           <DisplayHeading
             as="h1"
@@ -75,9 +91,9 @@ export default function HomePage() {
               <ArrowRight aria-hidden="true" size={19} weight="bold" />
             </Link>
           </div>
-        </AnimatedHero>
+        </div>
 
-        <AnimatedHero className={styles.heroVisual}>
+        <div className={styles.heroVisual}>
           <Image
             src={heroImage}
             alt="晨光中的绿色幼苗从层叠纸页之间生长"
@@ -86,24 +102,24 @@ export default function HomePage() {
             preload
           />
           <p className={styles.imageCaption}>向光生长</p>
-        </AnimatedHero>
+        </div>
       </section>
 
       <section className={styles.routes} aria-labelledby="routes-title">
-        <Reveal className={styles.routesIntro}>
+        <div className={styles.routesIntro}>
           <DisplayHeading
             as="h2"
             id="routes-title"
             variant="section"
             lines={[{ before: "从认识团队开始" }]}
           />
-        </Reveal>
+        </div>
 
         <div className={styles.routeList}>
-          {homeSections.map((section, index) => {
+          {homeSections.map((section) => {
             const Icon = section.id === "about" ? UsersThree : Notebook;
             return (
-              <Reveal key={section.id} delay={index * 0.06}>
+              <div key={section.id}>
                 <Link href={section.href} className={styles.routeLink}>
                   <Icon aria-hidden="true" size={24} weight="regular" />
                   <span>
@@ -119,7 +135,7 @@ export default function HomePage() {
                     weight="bold"
                   />
                 </Link>
-              </Reveal>
+              </div>
             );
           })}
         </div>
@@ -129,7 +145,7 @@ export default function HomePage() {
         className={styles.worksPreview}
         aria-labelledby="works-preview-title"
       >
-        <Reveal className={styles.worksCopy}>
+        <div className={styles.worksCopy}>
           <DisplayHeading
             as="h2"
             id="works-preview-title"
@@ -150,9 +166,9 @@ export default function HomePage() {
             创作展
             <ArrowRight aria-hidden="true" size={19} weight="bold" />
           </Link>
-        </Reveal>
+        </div>
 
-        <Reveal className={styles.worksDesk} delay={0.08} amount={0.15}>
+        <div className={styles.worksDesk}>
           <figure className={`${styles.workSheet} ${styles.workLeaf}`}>
             <Image
               src={worksPreview.leaf.image}
@@ -180,48 +196,85 @@ export default function HomePage() {
               loading="lazy"
             />
           </figure>
-        </Reveal>
+        </div>
       </section>
 
       <section className={styles.latest} aria-labelledby="latest-title">
-        <Reveal className={styles.sectionHeading}>
+        <div className={styles.sectionHeading}>
           <DisplayHeading
             as="h2"
             id="latest-title"
             variant="section"
-            lines={[{ before: "最近记录的成长" }]}
+            lines={[{ before: "三张卡，看见成长发生" }]}
           />
           <Link href="/diaries/" className={styles.textLink}>
-            查看全部
+            查看成长日志
             <ArrowRight aria-hidden="true" size={17} weight="bold" />
           </Link>
-        </Reveal>
+        </div>
 
-        <div className={styles.latestGrid}>
-          {latestDiaries.map((diary, index) => {
-            const author = getDiaryAuthor(diary);
-            return (
-              <Reveal key={diary.slug} delay={index * 0.06}>
-                <article className={styles.diaryPreview}>
-                  <div className={styles.diaryMeta}>
-                    <span>{author.displayName}</span>
-                    <time dateTime={diary.date}>
-                      {dateFormatter.format(new Date(diary.date))}
-                    </time>
-                  </div>
-                  <h3 className={headingStyles.contentTitle}>{diary.title}</h3>
-                  <p>{getDiaryPreview(diary, 72)}</p>
-                  <Link
-                    href={`/diaries/${diary.slug}/`}
-                    aria-label={`阅读${author.displayName}的日记《${diary.title}》`}
+        <div className={styles.highlightGrid}>
+          {growthHighlights.map(
+            ({ diary, author, image, note, quote }, index) => {
+              const isLead = index === 0;
+              return (
+                <div
+                  key={diary.slug}
+                  className={
+                    isLead ? styles.highlightLeadSlot : styles.highlightSideSlot
+                  }
+                >
+                  <article
+                    className={`${styles.diaryPreview} ${
+                      isLead ? styles.diaryLead : styles.diaryCompact
+                    }`}
                   >
-                    阅读这篇日记
-                    <ArrowRight aria-hidden="true" size={17} weight="bold" />
-                  </Link>
-                </article>
-              </Reveal>
-            );
-          })}
+                    <Link
+                      className={styles.diaryCard}
+                      href={`/diaries/${diary.slug}/`}
+                      aria-label={`查看${author.displayName}的成长记录卡《${diary.title}》`}
+                    >
+                      <figure className={styles.diaryImage}>
+                        <Image
+                          src={image}
+                          alt={`${author.displayName}的成长记录卡《${diary.title}》`}
+                          sizes={
+                            isLead
+                              ? "(max-width: 900px) calc(100vw - 2rem), 46vw"
+                              : "(max-width: 900px) calc(100vw - 2rem), 17vw"
+                          }
+                          placeholder="blur"
+                        />
+                      </figure>
+
+                      <div className={styles.diaryCopy}>
+                        <div className={styles.diaryMeta}>
+                          <span className={styles.diaryIdentity}>
+                            <strong>{author.displayName}</strong>
+                            <span>{author.className}</span>
+                          </span>
+                          <span>{diary.dateLabel}</span>
+                        </div>
+                        <h3 className={headingStyles.contentTitle}>
+                          {diary.title}
+                        </h3>
+                        <blockquote>“{quote}”</blockquote>
+                        <p>{note}</p>
+                        <span className={styles.diaryRead}>
+                          查看原卡与转写
+                          <ArrowRight
+                            aria-hidden="true"
+                            size={17}
+                            weight="bold"
+                          />
+                        </span>
+                      </div>
+                    </Link>
+                  </article>
+                </div>
+              );
+            },
+          )}
         </div>
       </section>
     </div>
