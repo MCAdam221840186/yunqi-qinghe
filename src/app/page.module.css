@@ -110,8 +110,131 @@
 
 .latest,
 .teamDiaryGateway,
+.readingPreview,
 .worksPreview {
   padding-top: clamp(5rem, 10vw, 9rem);
+}
+
+.readingPreview {
+  display: grid;
+  grid-template-columns: minmax(18rem, 0.82fr) minmax(0, 1.18fr);
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 7rem);
+}
+
+.readingPaper {
+  position: relative;
+  width: min(100%, 29rem);
+  margin: 0;
+  padding: clamp(0.4rem, 0.8vw, 0.65rem);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  justify-self: end;
+  background: #fff;
+  box-shadow: var(--shadow-image);
+  transform: rotate(-1.5deg);
+}
+
+.readingPaper::before {
+  position: absolute;
+  inset: 8% -12% -5% 10%;
+  z-index: -1;
+  border-radius: var(--radius-card);
+  background: var(--color-sky);
+  content: "";
+  transform: rotate(3deg);
+}
+
+.readingPaper img {
+  width: 100%;
+  height: auto;
+  filter: none;
+}
+
+.readingPaper figcaption {
+  padding: 0.75rem 0.5rem 0.2rem;
+  color: #526057;
+  font-size: 0.72rem;
+}
+
+.readingCopy {
+  max-width: 37rem;
+}
+
+.readingIcon {
+  display: grid;
+  width: 4rem;
+  height: 4rem;
+  margin-bottom: 1.6rem;
+  border: 1px solid color-mix(
+    in srgb,
+    var(--color-accent-strong) 32%,
+    var(--color-border)
+  );
+  border-radius: var(--radius-card);
+  place-items: center;
+  color: var(--color-accent-strong);
+  background: var(--color-surface);
+}
+
+.readingCopy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.6vw, 3.3rem);
+  line-height: 1.25;
+}
+
+.readingCopy > p:not(:first-of-type) {
+  max-width: 31rem;
+  margin: 1.2rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.readingActions {
+  display: flex;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.readingPrimary,
+.readingDownload {
+  display: inline-flex;
+  min-height: 3.15rem;
+  padding: 0.72rem 1.15rem;
+  border: 1px solid var(--color-accent-strong);
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 180ms var(--ease-out),
+    background-color 180ms ease;
+}
+
+.readingPrimary {
+  color: var(--color-on-accent);
+  background: var(--color-accent-strong);
+}
+
+.readingDownload {
+  color: var(--color-accent-strong);
+  background: var(--color-surface);
+}
+
+.readingPrimary:hover,
+.readingDownload:hover {
+  transform: translateY(-2px);
+}
+
+.readingPrimary:hover {
+  background: var(--color-accent);
+}
+
+.readingDownload:hover {
+  background: var(--color-accent-soft);
 }
 
 .teamDiaryLink {
@@ -562,6 +685,11 @@
     gap: 2.75rem;
   }
 
+  .readingPreview {
+    grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
+    gap: 3rem;
+  }
+
   .worksCopy {
     max-width: 39rem;
   }
@@ -639,6 +767,31 @@
     min-height: 2.75rem;
   }
 
+  .readingPreview {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .readingPaper {
+    width: min(82vw, 28rem);
+    justify-self: center;
+  }
+
+  .readingPaper::before {
+    inset: 8% 0 -4% 6%;
+    transform: rotate(1deg);
+  }
+
+  .readingCopy h2 {
+    font-size: clamp(2rem, 9.5vw, 2.75rem);
+  }
+
+  .readingActions,
+  .readingPrimary,
+  .readingDownload {
+    width: 100%;
+  }
+
   .worksPreview {
     gap: 2.25rem;
   }
@@ -679,6 +832,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .primaryLink,
+  .readingPrimary,
+  .readingDownload,
   .worksLink,
   .teamDiaryLink,
   .teamDiaryAction svg,
@@ -691,6 +846,8 @@
   .worksLink:active,
   .primaryLink:hover,
   .primaryLink:active,
+  .readingPrimary:hover,
+  .readingDownload:hover,
   .diaryCard:hover,
   .diaryCard:active {
     transform: none;

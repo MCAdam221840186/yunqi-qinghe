@@ -1,8 +1,14 @@
-import { ArrowRight, Notebook } from "@phosphor-icons/react/ssr";
+import {
+  ArrowRight,
+  Books,
+  DownloadSimple,
+  Notebook,
+} from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import qingheBlackboardImage from "@/assets/hero-qinghe-blackboard.webp";
 import qiyunBlackboardImage from "@/assets/hero-qiyun-blackboard.webp";
+import booklistPreview from "@/assets/reading/booklist-page-1.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { getArtwork } from "@/content/works";
@@ -21,6 +27,16 @@ const teamDiarySection = (() => {
 
   if (!section) {
     throw new Error("首页缺少团队日志导航配置");
+  }
+
+  return section;
+})();
+
+const readingSection = (() => {
+  const section = siteSections.find((item) => item.id === "reading");
+
+  if (!section) {
+    throw new Error("首页缺少阅读共建导航配置");
   }
 
   return section;
@@ -137,6 +153,51 @@ export default function HomePage() {
             <ArrowRight aria-hidden="true" size={19} weight="bold" />
           </span>
         </Link>
+      </section>
+
+      <section
+        className={styles.readingPreview}
+        aria-labelledby="reading-preview-title"
+      >
+        <figure className={styles.readingPaper}>
+          <Image
+            src={booklistPreview}
+            alt="云南省双柏县乡村小学分级阅读书单第一页预览"
+            sizes="(max-width: 767px) min(82vw, 28rem), (max-width: 900px) 42vw, 33vw"
+            placeholder="blur"
+            loading="lazy"
+          />
+          <figcaption>团队调研成果，110 条分级书目</figcaption>
+        </figure>
+
+        <div className={styles.readingCopy}>
+          <span className={styles.readingIcon} aria-hidden="true">
+            <Books size={29} weight="regular" />
+          </span>
+          <p className={headingStyles.eyebrow}>{readingSection.label}</p>
+          <h2
+            id="reading-preview-title"
+            className={headingStyles.sectionTitle}
+          >
+            从适合此刻的一本书开始
+          </h2>
+          <p>{readingSection.description}</p>
+          <div className={styles.readingActions}>
+            <Link className={styles.readingPrimary} href="/reading/books/">
+              按年级找书
+              <ArrowRight aria-hidden="true" size={18} weight="bold" />
+            </Link>
+            <Link
+              className={styles.readingDownload}
+              href="/downloads/shuangbai-primary-school-graded-reading-list.pdf"
+              download
+              prefetch={false}
+            >
+              <DownloadSimple aria-hidden="true" size={18} weight="bold" />
+              下载 PDF
+            </Link>
+          </div>
+        </div>
       </section>
 
       <section

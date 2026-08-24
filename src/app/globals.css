@@ -294,6 +294,25 @@ main {
 }
 
 @media print {
+  :root {
+    color-scheme: light;
+    --color-bg: #fff;
+    --color-surface: #fff;
+    --color-surface-soft: #f4f7f5;
+    --color-text: #17251c;
+    --color-text-muted: #53645a;
+    --color-muted: var(--color-text-muted);
+    --color-accent: #397a50;
+    --color-accent-strong: #245d39;
+    --color-on-accent: #fff;
+    --color-accent-soft: #e5f0e8;
+    --color-sky: #eef4f6;
+    --color-border: #b9c8be;
+    --color-line: var(--color-border);
+    --shadow-soft: none;
+    --shadow-image: none;
+  }
+
   body::before {
     display: none;
   }

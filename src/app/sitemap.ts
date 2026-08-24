@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { children, diaries, teamDiaries } from "@/lib/content";
+import { readingActivities, readingResources } from "@/lib/reading";
 import { absoluteUrl } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -26,10 +27,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const latestTeamDate = latestDate(
     teamDiaries.map((diary) => diary.updatedAt),
   );
+  const latestReadingDate = latestDate([
+    ...readingResources.map((resource) => resource.lastCheckedOn),
+    ...readingActivities.flatMap((activity) => [
+      activity.publishedOn,
+      activity.lastCheckedOn,
+    ]),
+  ]);
   const latestSiteDate = latestDate(
-    [latestGrowthDate?.toISOString(), latestTeamDate?.toISOString()].filter(
-      (value): value is string => Boolean(value),
-    ),
+    [
+      latestGrowthDate?.toISOString(),
+      latestTeamDate?.toISOString(),
+      latestReadingDate?.toISOString(),
+    ].filter((value): value is string => Boolean(value)),
   );
 
   return [
@@ -69,6 +79,29 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: latestTeamDate,
       changeFrequency: "monthly",
       priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/reading/"),
+      lastModified: latestReadingDate,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+    {
+      url: absoluteUrl("/reading/books/"),
+      changeFrequency: "yearly",
+      priority: 0.7,
+    },
+    {
+      url: absoluteUrl("/reading/resources/"),
+      lastModified: latestReadingDate,
+      changeFrequency: "monthly",
+      priority: 0.6,
+    },
+    {
+      url: absoluteUrl("/reading/activities/"),
+      lastModified: latestReadingDate,
+      changeFrequency: "monthly",
+      priority: 0.6,
     },
     {
       url: absoluteUrl("/works/"),

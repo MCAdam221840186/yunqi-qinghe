@@ -2,6 +2,7 @@
 
 import {
   BookOpenText,
+  Books,
   Leaf,
   List,
   Notebook,
@@ -18,6 +19,7 @@ import styles from "./SiteHeader.module.css";
 const sectionIcons = {
   about: UsersThree,
   "team-diaries": Notebook,
+  reading: Books,
   diaries: BookOpenText,
   works: Palette,
 } as const;
@@ -25,6 +27,7 @@ const sectionIcons = {
 function getActiveSectionId(pathname: string): SiteSectionId | null {
   const segments = pathname.split("/").filter(Boolean);
   if (segments.includes("team-diaries")) return "team-diaries";
+  if (segments.includes("reading")) return "reading";
   if (segments.includes("about")) return "about";
   if (segments.includes("works")) return "works";
   if (segments.includes("diaries") || segments.includes("children")) {
@@ -33,9 +36,18 @@ function getActiveSectionId(pathname: string): SiteSectionId | null {
   return null;
 }
 
+function getSectionAriaCurrent(
+  pathname: string,
+  sectionId: SiteSectionId,
+): "page" | "location" | undefined {
+  if (getActiveSectionId(pathname) !== sectionId) return undefined;
+
+  const segments = pathname.split("/").filter(Boolean);
+  return segments.at(-1) === sectionId ? "page" : "location";
+}
+
 export default function SiteHeader() {
   const pathname = usePathname();
-  const activeSectionId = getActiveSectionId(pathname);
   const dialogRef = useRef<HTMLDialogElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
@@ -92,13 +104,12 @@ export default function SiteHeader() {
         <nav className={styles.desktopNav} aria-label="主导航">
           {siteSections.map(({ id, href, label }) => {
             const Icon = sectionIcons[id];
-            const active = activeSectionId === id;
             return (
               <Link
                 key={href}
                 href={href}
                 className={styles.navLink}
-                aria-current={active ? "page" : undefined}
+                aria-current={getSectionAriaCurrent(pathname, id)}
               >
                 <Icon size={18} weight="regular" aria-hidden="true" />
                 <span>{label}</span>
@@ -155,13 +166,12 @@ export default function SiteHeader() {
           <nav className={styles.mobileNav} aria-label="移动端主导航">
             {siteSections.map(({ id, href, label }) => {
               const Icon = sectionIcons[id];
-              const active = activeSectionId === id;
               return (
                 <Link
                   key={href}
                   href={href}
                   className={styles.mobileNavLink}
-                  aria-current={active ? "page" : undefined}
+                  aria-current={getSectionAriaCurrent(pathname, id)}
                   onClick={closeMenu}
                 >
                   <Icon size={22} weight="regular" aria-hidden="true" />

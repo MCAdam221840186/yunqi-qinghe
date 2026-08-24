@@ -1,4 +1,9 @@
-export type SiteSectionId = "about" | "team-diaries" | "diaries" | "works";
+export type SiteSectionId =
+  | "about"
+  | "team-diaries"
+  | "reading"
+  | "diaries"
+  | "works";
 
 export interface SiteSection {
   id: SiteSectionId;
@@ -19,6 +24,12 @@ export const siteSections: readonly SiteSection[] = [
     href: "/team-diaries/",
     label: "团队日志",
     description: "阅读支教路上的行动记录与团队思考。",
+  },
+  {
+    id: "reading",
+    href: "/reading/",
+    label: "阅读共建",
+    description: "按年级选书，连接合法阅读资源，看见双柏的阅读行动。",
   },
   {
     id: "diaries",

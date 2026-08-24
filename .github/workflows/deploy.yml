@@ -41,6 +41,9 @@ jobs:
       - name: Check public growth card mappings
         run: npm run growth-cards:check-public
 
+      - name: Check reading content
+        run: npm run reading-content:check
+
       - name: Lint
         run: npm run lint
 

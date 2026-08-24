@@ -11,7 +11,8 @@
     "growth-content:check": "node scripts/build-growth-review.mjs --check",
     "growth-cards": "node scripts/process-growth-cards.mjs",
     "growth-cards:check": "node scripts/process-growth-cards.mjs --check",
-    "growth-cards:check-public": "node scripts/process-growth-cards.mjs --check-public"
+    "growth-cards:check-public": "node scripts/process-growth-cards.mjs --check-public",
+    "reading-content:check": "node scripts/check-reading-content.mjs"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

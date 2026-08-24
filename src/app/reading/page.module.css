@@ -1,0 +1,457 @@
+.page {
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+  padding: 1rem clamp(1rem, 3vw, 2.5rem) clamp(5rem, 9vw, 8rem);
+}
+
+.hero {
+  display: grid;
+  min-height: calc(100dvh - var(--header-height) - 3.75rem);
+  padding: clamp(2.25rem, 4vw, 4rem) 0 clamp(4rem, 7vw, 6rem);
+  grid-template-columns: minmax(0, 6.4fr) minmax(22rem, 4.6fr);
+  align-items: center;
+  gap: clamp(3rem, 7vw, 7.5rem);
+}
+
+.heroCopy {
+  max-width: 44rem;
+}
+
+.heroCopy h1 {
+  --display-page-size: clamp(3rem, 5.4vw, 5.65rem);
+  --display-line-offset: 0.2em;
+}
+
+.lede {
+  max-width: 34rem;
+  margin: 1.75rem 0 0;
+  color: var(--color-text-muted);
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+  line-height: 1.85;
+  text-wrap: pretty;
+}
+
+.heroActions {
+  display: flex;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.primaryAction,
+.secondaryAction {
+  display: inline-flex;
+  min-height: 3.25rem;
+  padding: 0.75rem 1.2rem;
+  border: 1px solid var(--color-accent-strong);
+  border-radius: 999px;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    transform 180ms var(--ease-out),
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.primaryAction {
+  color: var(--color-on-accent);
+  background: var(--color-accent-strong);
+}
+
+.secondaryAction {
+  color: var(--color-accent-strong);
+  background: color-mix(in srgb, var(--color-surface) 82%, transparent);
+}
+
+.primaryAction:hover,
+.secondaryAction:hover {
+  transform: translateY(-2px);
+}
+
+.primaryAction:hover {
+  background: var(--color-accent);
+}
+
+.secondaryAction:hover {
+  background: var(--color-accent-soft);
+}
+
+.preview {
+  position: relative;
+  width: min(100%, 29rem);
+  margin: 0;
+  justify-self: center;
+}
+
+.preview::before {
+  position: absolute;
+  inset: 8% -8% -4% 7%;
+  z-index: -1;
+  border-radius: var(--radius-card);
+  background: var(--color-sky);
+  content: "";
+  transform: rotate(2.5deg);
+}
+
+.previewPaper {
+  overflow: hidden;
+  padding: clamp(0.45rem, 1vw, 0.75rem);
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: var(--shadow-image);
+  transform: rotate(-1.4deg);
+}
+
+.previewPaper img {
+  width: 100%;
+  height: auto;
+  filter: none;
+}
+
+.preview figcaption {
+  display: flex;
+  margin-top: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.preview figcaption span {
+  color: var(--color-accent-strong);
+  font-weight: 700;
+}
+
+.paths {
+  padding-top: clamp(4rem, 8vw, 7rem);
+}
+
+.sectionIntro {
+  max-width: 44rem;
+  margin-bottom: clamp(2rem, 4vw, 3.25rem);
+}
+
+.sectionIntro h2 {
+  margin: 0;
+}
+
+.pathGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) minmax(19rem, 0.85fr);
+  gap: 1rem;
+}
+
+.bookPath,
+.secondaryPath {
+  color: inherit;
+  text-decoration: none;
+  transition:
+    transform 180ms var(--ease-out),
+    border-color 180ms ease,
+    background-color 180ms ease;
+}
+
+.bookPath {
+  display: grid;
+  min-height: 31rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  grid-template-rows: auto 1fr auto auto;
+  background: color-mix(in srgb, var(--color-sky) 55%, var(--color-surface));
+}
+
+.bookPath:hover,
+.secondaryPath:hover {
+  border-color: color-mix(
+    in srgb,
+    var(--color-accent-strong) 52%,
+    var(--color-border)
+  );
+  transform: translateY(-2px);
+}
+
+.pathIcon,
+.smallIcon {
+  display: grid;
+  border: 1px solid color-mix(
+    in srgb,
+    var(--color-accent-strong) 32%,
+    var(--color-border)
+  );
+  place-items: center;
+  color: var(--color-accent-strong);
+  background: color-mix(in srgb, var(--color-surface) 86%, transparent);
+}
+
+.pathIcon {
+  width: 4rem;
+  height: 4rem;
+  border-radius: var(--radius-card);
+}
+
+.pathCopy {
+  align-self: end;
+  padding-block: 2rem;
+}
+
+.pathLabel {
+  margin: 0 0 0.7rem;
+  color: var(--color-accent-strong);
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+}
+
+.pathCopy h3,
+.secondaryPath h3 {
+  margin: 0;
+}
+
+.pathCopy h3 {
+  max-width: 18ch;
+  font-size: clamp(1.75rem, 3vw, 2.7rem);
+  line-height: 1.25;
+}
+
+.pathCopy > p:last-child,
+.secondaryPath p:last-child {
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+.pathCopy > p:last-child {
+  max-width: 38rem;
+  margin: 1rem 0 0;
+}
+
+.gradeCounts {
+  display: grid;
+  margin: 0;
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.gradeCounts div {
+  min-width: 0;
+}
+
+.gradeCounts dt,
+.gradeCounts dd {
+  margin: 0;
+}
+
+.gradeCounts dt {
+  color: var(--color-text-muted);
+  font-size: 0.78rem;
+}
+
+.gradeCounts dd {
+  margin-top: 0.2rem;
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.pathAction {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.75rem;
+  margin-top: 1.15rem;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-accent-strong);
+  font-weight: 700;
+}
+
+.pathAction svg,
+.cornerArrow {
+  transition: transform 180ms var(--ease-out);
+}
+
+.bookPath:hover .pathAction svg,
+.secondaryPath:hover .cornerArrow {
+  transform: translateX(0.3rem);
+}
+
+.secondaryPaths {
+  display: grid;
+  gap: 1rem;
+}
+
+.secondaryPath {
+  position: relative;
+  display: grid;
+  min-height: 15rem;
+  padding: 1.6rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: start;
+  gap: 1rem;
+  background: var(--color-surface);
+}
+
+.secondaryPath:hover {
+  background: var(--color-surface-soft);
+}
+
+.smallIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: var(--radius);
+}
+
+.secondaryPath h3 {
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
+}
+
+.secondaryPath p:last-child {
+  margin: 0.75rem 0 0;
+  font-size: 0.9rem;
+}
+
+.cornerArrow {
+  margin-top: 0.85rem;
+  color: var(--color-accent-strong);
+}
+
+.rightsNote {
+  display: grid;
+  max-width: 56rem;
+  margin: clamp(4rem, 8vw, 7rem) auto 0;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 1rem;
+  color: var(--color-accent-strong);
+  background: color-mix(
+    in srgb,
+    var(--color-accent-soft) 54%,
+    var(--color-surface)
+  );
+}
+
+.rightsNote h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.rightsNote p {
+  margin: 0.45rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  line-height: 1.75;
+}
+
+@media (max-width: 880px) {
+  .hero {
+    min-height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .preview {
+    width: min(70vw, 30rem);
+    justify-self: end;
+  }
+
+  .preview::before {
+    inset: 8% 1% -4% 4%;
+    transform: rotate(1deg);
+  }
+
+  .pathGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .bookPath {
+    min-height: 28rem;
+  }
+
+  .secondaryPaths {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .page {
+    padding-inline: 1rem;
+  }
+
+  .hero {
+    padding: 2rem 0 4rem;
+    gap: 3rem;
+  }
+
+  .heroCopy h1 {
+    --display-page-size: clamp(2.55rem, 12vw, 4rem);
+    --display-line-offset: 0;
+  }
+
+  .heroActions,
+  .primaryAction,
+  .secondaryAction {
+    width: 100%;
+  }
+
+  .preview {
+    width: min(88vw, 27rem);
+    justify-self: center;
+  }
+
+  .bookPath {
+    min-height: 0;
+    padding: 1.4rem;
+  }
+
+  .pathCopy h3 {
+    font-size: 1.75rem;
+  }
+
+  .gradeCounts {
+    grid-template-columns: 1fr;
+  }
+
+  .secondaryPaths {
+    grid-template-columns: 1fr;
+  }
+
+  .secondaryPath {
+    min-height: 0;
+    padding: 1.4rem;
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .cornerArrow {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primaryAction,
+  .secondaryAction,
+  .bookPath,
+  .secondaryPath,
+  .pathAction svg,
+  .cornerArrow {
+    transition: none;
+  }
+
+  .primaryAction:hover,
+  .secondaryAction:hover,
+  .bookPath:hover,
+  .secondaryPath:hover,
+  .bookPath:hover .pathAction svg,
+  .secondaryPath:hover .cornerArrow {
+    transform: none;
+  }
+}

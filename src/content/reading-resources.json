@@ -1,0 +1,178 @@
+[
+  {
+    "id": "smartedu-reading",
+    "name": "国家智慧教育读书平台",
+    "kind": "国家教育阅读平台",
+    "summary": "汇集青少年人文社科、自然科学、文学与艺术阅读内容，提供电子书、导读、书评和主题读书活动。",
+    "url": "https://reading.smartedu.cn/",
+    "accessNote": "注册：网页入口可直接打开；电子书与导读可浏览，上传作品、收藏、学习足迹等互动功能可能要求国家智慧教育通行证。",
+    "serviceModes": [
+      "在线阅读",
+      "导读书评",
+      "读书活动",
+      "适合：学生、教师、家长"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "smartedu-language-museum",
+    "name": "中国语言文字数字博物馆",
+    "kind": "官方语言文化数字博物馆",
+    "summary": "以语言文字和中华经典为主题，汇集分级诗词、数字图书、示范诵读、方言辞书与互动学习资源。",
+    "url": "https://szyb.smartedu.cn/",
+    "accessNote": "注册：公共内容可直接浏览；收藏、学习足迹等个性功能可能要求智慧教育平台登录。平台是教育部、国家语委建设的免费公共产品。",
+    "serviceModes": [
+      "数字图书",
+      "经典诵读",
+      "数字展览",
+      "适合：学生、语文教师、家长"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "china-digital-science-museum",
+    "name": "中国数字科技馆",
+    "kind": "国家级科普资源平台",
+    "summary": "由中国科学技术馆主办，提供儿童科普、科学文章、动画视频、线上展览和教育专题，适合作为课堂拓展。",
+    "url": "https://www.cdstm.cn/",
+    "accessNote": "注册：大部分文章、视频、专题和儿童内容无需登录；登录主要用于个性化推荐，不建议未成年人为普通浏览单独注册。",
+    "serviceModes": [
+      "科普文章",
+      "科普视频",
+      "数字展览",
+      "适合：学生、科学教师、家长"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "nlc-digital-resources",
+    "name": "中国国家数字图书馆资源入口",
+    "kind": "国家图书馆数字资源",
+    "summary": "集中提供电子图书、少儿资源、近代文献、古籍、公开课和音视频，是检索国家馆藏数字内容的权威入口。",
+    "url": "https://www.nlc.cn/web/index.shtml",
+    "accessNote": "注册：资源目录可直接浏览；古籍、近代文献等有开放内容，当代电子书及部分采购库需读者云门户或读者卡登录，权限依资源而异。",
+    "serviceModes": [
+      "电子书",
+      "少儿资源",
+      "古籍与近代文献",
+      "适合：学生、教师、研究者"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "nlc-wenjin-classics",
+    "name": "国家图书馆文津经典诵读",
+    "kind": "中华经典公益阅读",
+    "summary": "每日呈现古诗词或经典名句，并配全文、注解、译释和朗诵内容，适合语文晨读与传统文化导读。",
+    "url": "https://www.nlc.cn/web/ziyuanfuwu/ziyuantuijian/new_wjjdsd/index.shtml",
+    "accessNote": "注册：无需读者证，可匿名浏览诗词全文、注解、朗诵与往期内容，是门槛较低的轻量阅读入口。",
+    "serviceModes": [
+      "诗词全文",
+      "注解译释",
+      "音频诵读",
+      "适合：学生、语文教师、家长"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "nlc-intelligent-ancient-books",
+    "name": "中华古籍智慧化服务平台",
+    "kind": "国家图书馆开放古籍平台",
+    "summary": "整合国家图书馆及各地万余种古籍资源，提供影像、文本对照、检索、自动句读翻译和特色专题导览。",
+    "url": "https://guji.nlc.cn/",
+    "accessNote": "注册：基础检索与开放资源可直接使用；智能助手仅宜作阅读辅助，不应输入学生隐私，也不能替代权威释读。",
+    "serviceModes": [
+      "古籍影像",
+      "全文检索",
+      "句读翻译辅助",
+      "适合：高年级学生、教师、研究者"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "nlc-accessible-library",
+    "name": "中国盲人数字图书馆",
+    "kind": "无障碍数字图书馆",
+    "summary": "为视障及其他阅读障碍者提供可由读屏操作的电子书、有声书、讲座和影音，是专门的无障碍阅读入口。",
+    "url": "https://www.cdlvi.cn/user/index",
+    "accessNote": "注册：完整使用需以残疾人证号、姓名和手机号认证，仅限阅读障碍者。该要求服务于版权例外下的专用访问，其他访客不得使用受限资源。",
+    "serviceModes": [
+      "无障碍电子书",
+      "有声书",
+      "读屏阅读",
+      "适合：视障学生、特教教师"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "yunnan-library-ebooks",
+    "name": "云南省图书馆电子书资源",
+    "kind": "省级公共图书馆数字资源",
+    "summary": "汇集云南省图书馆采购的电子书、连环画和综合阅读库，适合本地师生获取经过图书馆授权的数字文献。",
+    "url": "https://www.ynlib.cn/zy/szzy/dzzy/ts",
+    "accessNote": "注册：资源目录可直接浏览，馆外阅读全文通常需云图读者证。线上办证服务恢复时间以云南省图书馆最新公告为准。",
+    "serviceModes": [
+      "电子书",
+      "连环画",
+      "移动阅读",
+      "适合：云南学生、教师、家长"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "capital-library-children",
+    "name": "首都图书馆少儿数字资源",
+    "kind": "公共图书馆少儿数字资源",
+    "summary": "汇集绘本、少儿期刊、双语分级读物、科普互动和中小学数据库，方便教师按资源类型筛选优质内容。",
+    "url": "https://www.clcn.net.cn/resources/default/index?cat_id=11",
+    "accessNote": "注册：资源说明可匿名浏览；馆外进入授权数据库通常需北京市联合读者卡和密码，部分资源只支持馆内访问。",
+    "serviceModes": [
+      "电子绘本",
+      "少儿期刊",
+      "双语分级阅读",
+      "适合：儿童、教师、家长"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "national-public-culture-books",
+    "name": "国家公共文化云·读好书",
+    "kind": "国家公共文化服务平台",
+    "summary": "由文化和旅游部直属公益机构建设，提供读书榜单及跨网页、App 使用的基层数字文化资源。",
+    "url": "https://www.culturedc.cn/web2.1/book-list.html?sort=new",
+    "accessNote": "注册：榜单入口可直接打开；部分全文、收藏或跨端功能可能要求手机号登录，未成年人宜由监护人协助使用。",
+    "serviceModes": [
+      "阅读榜单",
+      "在线书刊",
+      "移动阅读",
+      "适合：学生、教师、基层文化工作者"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  },
+  {
+    "id": "book-dash-open-books",
+    "name": "Book Dash 开放儿童绘本库",
+    "kind": "CC 开放儿童绘本平台",
+    "summary": "开放绘本库支持按主题和语言筛选，提供整本在线阅读、下载、打印、音频和源文件，适合低龄英语共读。",
+    "url": "https://bookdash.org/books/",
+    "accessNote": "注册：无需注册；全部 Book Dash 图书采用 CC BY 4.0，可阅读、下载、打印、翻译和分享，但必须保留适当署名。内容以英语、南非语言和无字书为主。",
+    "serviceModes": [
+      "在线阅读",
+      "整本下载",
+      "打印与音频",
+      "适合：低年级学生、英语教师"
+    ],
+    "lastCheckedOn": "2026-08-25",
+    "status": "active"
+  }
+]

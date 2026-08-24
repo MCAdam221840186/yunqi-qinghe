@@ -1,0 +1,866 @@
+[
+  {
+    "id": "g12-story-01-he-daren-yiqi-du",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 1,
+    "title": "和大人一起读",
+    "note": "全套4册"
+  },
+  {
+    "id": "g12-story-02-xiao-liyu-tiao-longmen",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 2,
+    "title": "小鲤鱼跳龙门",
+    "creditLine": "金近/著"
+  },
+  {
+    "id": "g12-story-03-gudu-de-xiao-pangxie",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 3,
+    "title": "孤独的小螃蟹",
+    "creditLine": "冰波/著"
+  },
+  {
+    "id": "g12-story-04-xiao-gou-de-xiao-fangzi",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 4,
+    "title": "小狗的小房子",
+    "creditLine": "孙幼军/著"
+  },
+  {
+    "id": "g12-story-05-wai-naodai-mu-touzhuang",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 5,
+    "title": "“歪脑袋”木头桩",
+    "creditLine": "严文井/著"
+  },
+  {
+    "id": "g12-story-06-yi-zhi-xiang-fei-de-mao",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 6,
+    "title": "一只想飞的猫",
+    "creditLine": "陈伯吹/著"
+  },
+  {
+    "id": "g12-story-07-qi-se-hua",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 7,
+    "title": "七色花",
+    "creditLine": "卡泰耶夫/著"
+  },
+  {
+    "id": "g12-story-08-shen-bi-ma-liang",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 8,
+    "title": "神笔马良",
+    "creditLine": "洪汛涛/著"
+  },
+  {
+    "id": "g12-story-09-yuanwang-de-shixian",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 9,
+    "title": "愿望的实现",
+    "creditLine": "泰戈尔/著"
+  },
+  {
+    "id": "g12-story-10-yiqi-zhangda-de-wanju",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 10,
+    "title": "一起长大的玩具",
+    "creditLine": "金波/著"
+  },
+  {
+    "id": "g12-story-11-mei-tounao-he-bu-gaoxing",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 11,
+    "title": "没头脑和不高兴",
+    "creditLine": "任溶溶/著"
+  },
+  {
+    "id": "g12-story-12-xiao-bazhang-tonghua",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 12,
+    "title": "小巴掌童话",
+    "creditLine": "张秋生/著"
+  },
+  {
+    "id": "g12-story-13-xiao-ma-guo-he",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 13,
+    "title": "小马过河",
+    "creditLine": "彭文席/著"
+  },
+  {
+    "id": "g12-story-14-da-tou-erzi-he-xiao-tou-baba",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 14,
+    "title": "大头儿子和小头爸爸",
+    "creditLine": "郑春华/著"
+  },
+  {
+    "id": "g12-story-15-fulangzi-de-gushi",
+    "gradeBand": "grade-1-2",
+    "category": "story",
+    "order": 15,
+    "title": "弗朗兹的故事",
+    "creditLine": "克里斯蒂娜·涅斯特林格/著，湘雪/译"
+  },
+  {
+    "id": "g12-red-16-wu-xing-hong-qi",
+    "gradeBand": "grade-1-2",
+    "category": "red",
+    "order": 16,
+    "title": "五星红旗",
+    "creditLine": "华琪，杨汝戬，马堪岱/主编"
+  },
+  {
+    "id": "g12-red-17-zhonghua-renwu-gushi-xianfeng",
+    "gradeBand": "grade-1-2",
+    "category": "red",
+    "order": 17,
+    "title": "中华人物故事汇·中华先锋人物故事汇"
+  },
+  {
+    "id": "g12-picture-18-luobo-huilai-le",
+    "gradeBand": "grade-1-2",
+    "category": "picture",
+    "order": 18,
+    "title": "萝卜回来了",
+    "creditLine": "方轶群/文，严个凡/画"
+  },
+  {
+    "id": "g12-picture-19-chi-heiye-de-daxiang",
+    "gradeBand": "grade-1-2",
+    "category": "picture",
+    "order": 19,
+    "title": "吃黑夜的大象",
+    "creditLine": "白冰/著，沈苑苑/绘"
+  },
+  {
+    "id": "g12-picture-20-wo-you-youqing-yao-chuzu",
+    "gradeBand": "grade-1-2",
+    "category": "picture",
+    "order": 20,
+    "title": "我有友情要出租",
+    "creditLine": "方素珍/著，郝洛玟/绘"
+  },
+  {
+    "id": "g12-picture-21-yi-yuan-qingcai-cheng-le-jing",
+    "gradeBand": "grade-1-2",
+    "category": "picture",
+    "order": 21,
+    "title": "一园青菜成了精",
+    "creditLine": "周翔/绘"
+  },
+  {
+    "id": "g12-picture-22-tuanyuan",
+    "gradeBand": "grade-1-2",
+    "category": "picture",
+    "order": 22,
+    "title": "团圆",
+    "creditLine": "余丽琼/文，朱成梁/图"
+  },
+  {
+    "id": "g12-picture-23-baba-de-hua-shaping-xiaowu",
+    "gradeBand": "grade-1-2",
+    "category": "picture",
+    "order": 23,
+    "title": "爸爸的画，沙坪小屋",
+    "creditLine": "丰成宝，丰一吟/著，丰子恺/绘"
+  },
+  {
+    "id": "g12-science-24-xiao-huixing-luxing-ji",
+    "gradeBand": "grade-1-2",
+    "category": "science",
+    "order": 24,
+    "title": "小彗星旅行记",
+    "creditLine": "徐刚/著、绘"
+  },
+  {
+    "id": "g12-science-25-lai-he-shui-ba",
+    "gradeBand": "grade-1-2",
+    "category": "science",
+    "order": 25,
+    "title": "来喝水吧",
+    "creditLine": "葛瑞米·贝斯/文、图"
+  },
+  {
+    "id": "g34-story-01-daocaoren",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 1,
+    "title": "稻草人",
+    "creditLine": "叶圣陶/著"
+  },
+  {
+    "id": "g34-story-02-antusheng-tonghua",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 2,
+    "title": "安徒生童话"
+  },
+  {
+    "id": "g34-story-03-gelin-tonghua",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 3,
+    "title": "格林童话"
+  },
+  {
+    "id": "g34-story-04-zhongguo-gudai-yuyan",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 4,
+    "title": "中国古代寓言"
+  },
+  {
+    "id": "g34-story-05-yisuo-yuyan",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 5,
+    "title": "伊索寓言"
+  },
+  {
+    "id": "g34-story-06-kelieluofu-yuyan",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 6,
+    "title": "克雷洛夫寓言"
+  },
+  {
+    "id": "g34-story-07-zhongguo-gudai-shenhua",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 7,
+    "title": "中国古代神话"
+  },
+  {
+    "id": "g34-story-08-shanhai-jing",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 8,
+    "title": "山海经"
+  },
+  {
+    "id": "g34-story-09-shijie-jingdian-shenhua-yu-chuanshuo",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 9,
+    "title": "世界经典神话与传说故事"
+  },
+  {
+    "id": "g34-story-10-lin-handa-zhongguo-lishi-gushi-ji",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 10,
+    "title": "林汉达中国历史故事集",
+    "creditLine": "林汉达，雪岗/编著"
+  },
+  {
+    "id": "g34-story-11-juli-furen-de-gushi",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 11,
+    "title": "居里夫人的故事",
+    "creditLine": "埃列娜·杜尔利/著"
+  },
+  {
+    "id": "g34-story-12-baohulu-de-mimi",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 12,
+    "title": "宝葫芦的秘密",
+    "creditLine": "张天翼/著"
+  },
+  {
+    "id": "g34-story-13-sanmao-liulang-ji",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 13,
+    "title": "三毛流浪记",
+    "creditLine": "张乐平/著"
+  },
+  {
+    "id": "g34-story-14-xiaci-kaichuan-gang",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 14,
+    "title": "“下次开船”港",
+    "creditLine": "严文井/著"
+  },
+  {
+    "id": "g34-story-15-sun-wukong-zai-women-cunli",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 15,
+    "title": "孙悟空在我们村里",
+    "creditLine": "郭风/著"
+  },
+  {
+    "id": "g34-story-16-maozi-de-mimi",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 16,
+    "title": "帽子的秘密",
+    "creditLine": "柯岩/文"
+  },
+  {
+    "id": "g34-story-17-xiao-butou-qiyu-ji",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 17,
+    "title": "小布头奇遇记",
+    "creditLine": "孙幼军/著"
+  },
+  {
+    "id": "g34-story-18-tuikai-chuangzi-kanjian-ni",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 18,
+    "title": "推开窗子看见你",
+    "creditLine": "金波/著"
+  },
+  {
+    "id": "g34-story-19-benlang-de-gushi",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 19,
+    "title": "笨狼的故事",
+    "creditLine": "汤素兰/著"
+  },
+  {
+    "id": "g34-story-20-pan-zhong-can",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 20,
+    "title": "盘中餐",
+    "creditLine": "于虹呈/著"
+  },
+  {
+    "id": "g34-story-21-xialuo-de-wang",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 21,
+    "title": "夏洛的网",
+    "creditLine": "E.B. 怀特/著，任溶溶/译"
+  },
+  {
+    "id": "g34-story-22-chuangbian-de-xiao-doudou",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 22,
+    "title": "窗边的小豆豆",
+    "creditLine": "黑柳彻子/著，赵玉皎/译"
+  },
+  {
+    "id": "g34-story-23-zhongguo-56-minzu-shenhua-yizu",
+    "gradeBand": "grade-3-4",
+    "category": "story",
+    "order": 23,
+    "title": "中国56个民族神话故事-彝族卷",
+    "creditLine": "李学勤，潘守永/主编"
+  },
+  {
+    "id": "g34-red-24-zhou-enlai-jiyu-qingshaonian",
+    "gradeBand": "grade-3-4",
+    "category": "red",
+    "order": 24,
+    "title": "周恩来寄语：青少年版",
+    "creditLine": "周恩来思想生平研究会/编"
+  },
+  {
+    "id": "g34-red-25-leifeng-de-gushi",
+    "gradeBand": "grade-3-4",
+    "category": "red",
+    "order": 25,
+    "title": "雷锋的故事",
+    "creditLine": "陈广生，崔家骏/著"
+  },
+  {
+    "id": "g34-red-26-diqiu-de-hong-piaodai",
+    "gradeBand": "grade-3-4",
+    "category": "red",
+    "order": 26,
+    "title": "地球的红飘带",
+    "creditLine": "魏巍/原著，王素/改编，沈尧伊/绘画"
+  },
+  {
+    "id": "g34-picture-27-zhongguo-guobo-ertong-lishi-baike-huiben",
+    "gradeBand": "grade-3-4",
+    "category": "picture",
+    "order": 27,
+    "title": "中国国家博物馆儿童历史百科绘本"
+  },
+  {
+    "id": "g34-picture-28-fu-yu-zi",
+    "gradeBand": "grade-3-4",
+    "category": "picture",
+    "order": 28,
+    "title": "父与子",
+    "creditLine": "埃·奥·卜劳恩/著"
+  },
+  {
+    "id": "g34-picture-29-yizu-chuangshi-shishi-chamu",
+    "gradeBand": "grade-3-4",
+    "category": "picture",
+    "order": 29,
+    "title": "彝族创世史诗（查姆）儿童绘本"
+  },
+  {
+    "id": "g34-science-30-shi-wan-ge-weishenme",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 30,
+    "title": "十万个为什么",
+    "creditLine": "米·伊林/著"
+  },
+  {
+    "id": "g34-science-31-kankan-women-de-diqiu",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 31,
+    "title": "看看我们的地球",
+    "creditLine": "李四光/著"
+  },
+  {
+    "id": "g34-science-32-renlei-qiyuan-de-yanhua-guocheng",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 32,
+    "title": "人类起源的演化过程",
+    "creditLine": "贾兰坡/著"
+  },
+  {
+    "id": "g34-science-33-huichen-de-luxing",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 33,
+    "title": "灰尘的旅行",
+    "creditLine": "高士其/著"
+  },
+  {
+    "id": "g34-science-34-liu-xingshi-zhongguo-dili",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 34,
+    "title": "刘兴诗爷爷给孩子讲中国地理",
+    "creditLine": "刘兴诗/著"
+  },
+  {
+    "id": "g34-science-35-kunchong-manhua",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 35,
+    "title": "昆虫漫话",
+    "creditLine": "陶秉珍/著"
+  },
+  {
+    "id": "g34-science-36-yixiang-tiankai-de-kexue-youxi",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 36,
+    "title": "异想天开的科学游戏",
+    "creditLine": "高云峰/著"
+  },
+  {
+    "id": "g34-science-37-wanwu-jianshi-shaoer",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 37,
+    "title": "万物简史：少儿彩绘版",
+    "creditLine": "布莱森/著"
+  },
+  {
+    "id": "g34-science-38-lazhu-de-gushi",
+    "gradeBand": "grade-3-4",
+    "category": "science",
+    "order": 38,
+    "title": "蜡烛的故事",
+    "creditLine": "法拉第/著"
+  },
+  {
+    "id": "g56-story-01-zhongguo-minjian-gushi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 1,
+    "title": "中国民间故事"
+  },
+  {
+    "id": "g56-story-02-ouzhou-minjian-gushi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 2,
+    "title": "欧洲民间故事"
+  },
+  {
+    "id": "g56-story-03-lienahu-de-gushi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 3,
+    "title": "列那狐的故事"
+  },
+  {
+    "id": "g56-story-04-lubinxun-piaoliu-ji",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 4,
+    "title": "鲁滨逊漂流记",
+    "creditLine": "笛福/著"
+  },
+  {
+    "id": "g56-story-05-niersi-qie-e-luxing-ji",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 5,
+    "title": "尼尔斯骑鹅旅行记",
+    "creditLine": "拉格洛夫/著"
+  },
+  {
+    "id": "g56-story-06-ailisi-manyou-qijing",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 6,
+    "title": "爱丽丝漫游奇境",
+    "creditLine": "刘易斯/著"
+  },
+  {
+    "id": "g56-story-07-tangmu-suoya-lixian-ji",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 7,
+    "title": "汤姆·索亚历险记",
+    "creditLine": "马克·吐温/著"
+  },
+  {
+    "id": "g56-story-08-dalin-he-xiaolin",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 8,
+    "title": "大林和小林",
+    "creditLine": "张天翼/著"
+  },
+  {
+    "id": "g56-story-09-feifa-zhihui",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 9,
+    "title": "非法智慧",
+    "creditLine": "张之路/著"
+  },
+  {
+    "id": "g56-story-10-caofangzi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 10,
+    "title": "草房子",
+    "creditLine": "曹文轩/著"
+  },
+  {
+    "id": "g56-story-11-nansheng-jiali-quanzhuan",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 11,
+    "title": "男生贾里全传",
+    "creditLine": "秦文君/著"
+  },
+  {
+    "id": "g56-story-12-jintian-wo-shi-shengqishou",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 12,
+    "title": "今天我是升旗手",
+    "creditLine": "黄蓓佳/著"
+  },
+  {
+    "id": "g56-story-13-zhima-kaimen",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 13,
+    "title": "芝麻开门",
+    "creditLine": "祁智/著"
+  },
+  {
+    "id": "g56-story-14-ni-shi-wo-de-mei",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 14,
+    "title": "你是我的妹",
+    "creditLine": "彭学军/著"
+  },
+  {
+    "id": "g56-story-15-heiyan",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 15,
+    "title": "黑焰",
+    "creditLine": "格日勒其木格·黑鹤/著"
+  },
+  {
+    "id": "g56-story-16-xiao-wangzi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 16,
+    "title": "小王子",
+    "creditLine": "圣·埃克苏佩里/著，柳鸣九/译"
+  },
+  {
+    "id": "g56-story-17-yongyuan-jiang-bu-wan-de-gushi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 17,
+    "title": "永远讲不完的故事",
+    "creditLine": "米切尔·恩德/著，李士勋/译"
+  },
+  {
+    "id": "g56-story-18-hali-bote-yu-mofashi",
+    "gradeBand": "grade-5-6",
+    "category": "story",
+    "order": 18,
+    "title": "哈利波特与魔法石",
+    "creditLine": "J.K. 罗琳/著，苏农/译"
+  },
+  {
+    "id": "g56-red-19-xiao-yingxiong-yulai",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 19,
+    "title": "小英雄雨来",
+    "creditLine": "管桦/著"
+  },
+  {
+    "id": "g56-red-20-xi-jinping-jiang-gushi-shaonian",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 20,
+    "title": "习近平讲故事：少年版",
+    "creditLine": "人民日报评论部/著"
+  },
+  {
+    "id": "g56-red-21-zhonghua-renwu-gushi-xianlie",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 21,
+    "title": "中华人物故事汇·中华先烈人物故事汇"
+  },
+  {
+    "id": "g56-red-22-diyu-waiwu-zhonghua-yinghao",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 22,
+    "title": "“抵御外侮——中华英豪传奇”丛书",
+    "creditLine": "张海鹏/主编"
+  },
+  {
+    "id": "g56-red-23-keai-de-zhongguo",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 23,
+    "title": "可爱的中国",
+    "creditLine": "方志敏/著"
+  },
+  {
+    "id": "g56-red-24-xiaobing-zhangga",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 24,
+    "title": "小兵张嘎",
+    "creditLine": "徐光耀/著"
+  },
+  {
+    "id": "g56-red-25-shanshan-de-hongxing",
+    "gradeBand": "grade-5-6",
+    "category": "red",
+    "order": 25,
+    "title": "闪闪的红星",
+    "creditLine": "李心田/著"
+  },
+  {
+    "id": "g56-classic-26-xiyou-ji",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 26,
+    "title": "西游记",
+    "note": "建议选择白话青少年版、精简改编版"
+  },
+  {
+    "id": "g56-classic-27-sanguo-yanyi",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 27,
+    "title": "三国演义",
+    "note": "建议选择白话青少年版、精简改编版"
+  },
+  {
+    "id": "g56-classic-28-shuihu-zhuan",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 28,
+    "title": "水浒传",
+    "note": "建议选择白话青少年版、精简改编版"
+  },
+  {
+    "id": "g56-classic-29-honglou-meng",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 29,
+    "title": "红楼梦",
+    "note": "建议选择白话青少年版、精简改编版"
+  },
+  {
+    "id": "g56-classic-30-tongnian",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 30,
+    "title": "童年",
+    "creditLine": "高尔基/著"
+  },
+  {
+    "id": "g56-classic-31-ai-de-jiaoyu",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 31,
+    "title": "爱的教育",
+    "creditLine": "亚米契斯/著"
+  },
+  {
+    "id": "g56-classic-32-ji-xiao-duzhe",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 32,
+    "title": "寄小读者",
+    "creditLine": "冰心/著"
+  },
+  {
+    "id": "g56-classic-33-hulanhe-zhuan",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 33,
+    "title": "呼兰河传",
+    "creditLine": "萧红/著"
+  },
+  {
+    "id": "g56-classic-34-chengnan-jiushi",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 34,
+    "title": "城南旧事",
+    "creditLine": "林海音/著"
+  },
+  {
+    "id": "g56-classic-35-jiaru-gei-wo-san-tian-guangming",
+    "gradeBand": "grade-5-6",
+    "category": "classic",
+    "order": 35,
+    "title": "假如给我三天光明",
+    "creditLine": "海伦·凯勒/著，李汉昭/译"
+  },
+  {
+    "id": "g56-science-36-daguo-zhongqi",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 36,
+    "title": "大国重器：图说当代中国重大科技成果",
+    "creditLine": "贲德/主编"
+  },
+  {
+    "id": "g56-science-37-zhongguo-lishi-kexue-faming",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 37,
+    "title": "中国历史上的科学发明：插图本",
+    "creditLine": "钱伟长/著"
+  },
+  {
+    "id": "g56-science-38-zhongguo-ertong-ditu-shijie-yichan",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 38,
+    "title": "中国儿童地图百科全书·世界遗产",
+    "creditLine": "《世界遗产》编委会/编著"
+  },
+  {
+    "id": "g56-science-39-xiaoxuesheng-shipin-anquan",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 39,
+    "title": "小学生食品安全知识读本",
+    "creditLine": "刘烈刚，杨雪锋/主编"
+  },
+  {
+    "id": "g56-science-40-haicuo-tu-biji",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 40,
+    "title": "海错图笔记",
+    "creditLine": "张辰亮/著"
+  },
+  {
+    "id": "g56-science-41-meiyue-zhi-xing",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 41,
+    "title": "每月之星",
+    "creditLine": "陶宏/著"
+  },
+  {
+    "id": "g56-science-42-kongjian-jianshi",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 42,
+    "title": "空间简史",
+    "creditLine": "托马斯·马卡卡罗，克劳迪奥·M. 达达里/著"
+  },
+  {
+    "id": "g56-science-43-bbc-kepu-sanbuqu",
+    "gradeBand": "grade-5-6",
+    "category": "science",
+    "order": 43,
+    "title": "BBC科普三部曲",
+    "creditLine": "伊恩·斯图尔特，约翰·林奇，保尔·罗斯等/著"
+  },
+  {
+    "id": "g56-featured-44-qigong-gei-ni-jiang-shufa",
+    "gradeBand": "grade-5-6",
+    "category": "featured",
+    "order": 44,
+    "title": "启功给你讲书法",
+    "creditLine": "启功/著"
+  },
+  {
+    "id": "g56-featured-45-zhige-alu-yizu-yingxiong-shishi",
+    "gradeBand": "grade-5-6",
+    "category": "featured",
+    "order": 45,
+    "title": "支格阿鲁：彝族英雄史诗"
+  },
+  {
+    "id": "g56-featured-46-sanshiliu-zhi-fengxiang",
+    "gradeBand": "grade-5-6",
+    "category": "featured",
+    "order": 46,
+    "title": "三十六支蜂箱",
+    "creditLine": "余闲/著"
+  },
+  {
+    "id": "g56-featured-47-shangang-shang-de-suomahua",
+    "gradeBand": "grade-5-6",
+    "category": "featured",
+    "order": 47,
+    "title": "山岗上的索玛花",
+    "creditLine": "徐继东/著"
+  }
+]
