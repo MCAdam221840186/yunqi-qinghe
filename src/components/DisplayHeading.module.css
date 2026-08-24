@@ -73,21 +73,6 @@
   line-height: 1.02;
 }
 
-.brandHero .line:nth-child(2) {
-  isolation: isolate;
-  padding: 0.02em 0.1em 0.08em;
-}
-
-.brandHero .line:nth-child(2)::before {
-  position: absolute;
-  inset: 0.09em -0.08em -0.02em -0.12em;
-  z-index: -1;
-  border-radius: 2px;
-  background: var(--color-sky);
-  content: "";
-  transform: rotate(-0.7deg);
-}
-
 .pageHero {
   --display-line-offset: 0.28em;
   font-size: var(--display-page-size, clamp(2.9rem, 4.8vw, 4.8rem));
@@ -176,11 +161,6 @@
 @media (max-width: 767px) {
   .heading {
     --display-line-offset: 0;
-  }
-
-  .brandHero .line:nth-child(2)::before {
-    inset: 0.08em -0.05em 0 -0.05em;
-    transform: none;
   }
 
   .contentHero {

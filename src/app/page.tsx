@@ -1,11 +1,8 @@
-import {
-  ArrowRight,
-  Notebook,
-  UsersThree,
-} from "@phosphor-icons/react/ssr";
+import { ArrowRight, Notebook } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import Link from "next/link";
-import heroImage from "@/assets/hero-growth.webp";
+import qingheBlackboardImage from "@/assets/hero-qinghe-blackboard.webp";
+import qiyunBlackboardImage from "@/assets/hero-qiyun-blackboard.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { getArtwork } from "@/content/works";
@@ -19,9 +16,15 @@ import { siteSections } from "@/lib/navigation";
 import { createWebsiteJsonLd, serializeJsonLd } from "@/lib/site";
 import styles from "./page.module.css";
 
-const homeSections = siteSections.filter(
-  (section) => section.id === "about" || section.id === "team-diaries",
-);
+const teamDiarySection = (() => {
+  const section = siteSections.find((item) => item.id === "team-diaries");
+
+  if (!section) {
+    throw new Error("首页缺少团队日志导航配置");
+  }
+
+  return section;
+})();
 
 const curatedGrowthDiarySlugs = [
   "student-009-session-01-b",
@@ -72,12 +75,11 @@ export default function HomePage() {
             id="home-title"
             variant="brandHero"
             lines={[
-              { before: "向光而行，" },
+              { before: "启云心童梦，" },
               {
-                before: "与",
-                accent: "成长",
-                after: "同行",
-                tone: "primary",
+                before: "看",
+                accent: "青禾",
+                after: "生长",
               },
             ]}
           />
@@ -86,59 +88,55 @@ export default function HomePage() {
               认识我们
               <ArrowRight aria-hidden="true" size={19} weight="bold" />
             </Link>
-            <Link className={styles.secondaryLink} href="/team-diaries/">
-              团队日志
-              <ArrowRight aria-hidden="true" size={19} weight="bold" />
-            </Link>
           </div>
         </div>
 
         <div className={styles.heroVisual}>
-          <Image
-            src={heroImage}
-            alt="晨光中的绿色幼苗从层叠纸页之间生长"
-            fill
-            sizes="(max-width: 767px) calc(100vw - 2rem), 56vw"
-            preload
-          />
-          <p className={styles.imageCaption}>向光生长</p>
+          <figure className={`${styles.heroFrame} ${styles.heroFrameQiyun}`}>
+            <Image
+              src={qiyunBlackboardImage}
+              alt="云启青禾团队绘制的“启云心童梦”主题黑板报"
+              sizes="(max-width: 900px) calc(100vw - 2rem), 52vw"
+              placeholder="blur"
+              preload
+            />
+          </figure>
+          <figure className={`${styles.heroFrame} ${styles.heroFrameQinghe}`}>
+            {/* React 19 otherwise promotes eager images to preloads. */}
+            <Image
+              src={qingheBlackboardImage}
+              alt="云启青禾团队绘制的“看青禾生长”主题黑板报"
+              sizes="(max-width: 900px) calc(100vw - 2rem), 52vw"
+              placeholder="blur"
+              loading="eager"
+              fetchPriority="low"
+            />
+          </figure>
         </div>
       </section>
 
-      <section className={styles.routes} aria-labelledby="routes-title">
-        <div className={styles.routesIntro}>
-          <DisplayHeading
-            as="h2"
-            id="routes-title"
-            variant="section"
-            lines={[{ before: "从认识团队开始" }]}
-          />
-        </div>
-
-        <div className={styles.routeList}>
-          {homeSections.map((section) => {
-            const Icon = section.id === "about" ? UsersThree : Notebook;
-            return (
-              <div key={section.id}>
-                <Link href={section.href} className={styles.routeLink}>
-                  <Icon aria-hidden="true" size={24} weight="regular" />
-                  <span>
-                    <strong className={headingStyles.contentTitle}>
-                      {section.label}
-                    </strong>
-                    <small>{section.description}</small>
-                  </span>
-                  <ArrowRight
-                    className={styles.routeArrow}
-                    aria-hidden="true"
-                    size={19}
-                    weight="bold"
-                  />
-                </Link>
-              </div>
-            );
-          })}
-        </div>
+      <section
+        className={styles.teamDiaryGateway}
+        aria-labelledby="team-diary-gateway-title"
+      >
+        <Link href={teamDiarySection.href} className={styles.teamDiaryLink}>
+          <span className={styles.teamDiaryIcon} aria-hidden="true">
+            <Notebook size={32} weight="regular" />
+          </span>
+          <div className={styles.teamDiaryCopy}>
+            <h2
+              id="team-diary-gateway-title"
+              className={headingStyles.sectionTitle}
+            >
+              {teamDiarySection.label}
+            </h2>
+            <p>{teamDiarySection.description}</p>
+          </div>
+          <span className={styles.teamDiaryAction}>
+            阅读团队日志
+            <ArrowRight aria-hidden="true" size={19} weight="bold" />
+          </span>
+        </Link>
       </section>
 
       <section
