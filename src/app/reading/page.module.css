@@ -324,35 +324,6 @@
   color: var(--color-accent-strong);
 }
 
-.rightsNote {
-  display: grid;
-  max-width: 56rem;
-  margin: clamp(4rem, 8vw, 7rem) auto 0;
-  padding: clamp(1.4rem, 3vw, 2rem);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 1rem;
-  color: var(--color-accent-strong);
-  background: color-mix(
-    in srgb,
-    var(--color-accent-soft) 54%,
-    var(--color-surface)
-  );
-}
-
-.rightsNote h2 {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.rightsNote p {
-  margin: 0.45rem 0 0;
-  color: var(--color-text-muted);
-  font-size: 0.9rem;
-  line-height: 1.75;
-}
-
 @media (max-width: 880px) {
   .hero {
     min-height: auto;

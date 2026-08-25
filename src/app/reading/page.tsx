@@ -4,7 +4,6 @@ import {
   CalendarDots,
   DownloadSimple,
   GlobeHemisphereWest,
-  ShieldCheck,
 } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import Link from "next/link";
@@ -172,16 +171,6 @@ export default function ReadingPage() {
           </div>
         </div>
       </section>
-
-      <aside className={styles.rightsNote} aria-label="版权与隐私说明">
-        <ShieldCheck size={25} weight="regular" aria-hidden="true" />
-        <div>
-          <h2>清楚标明内容边界</h2>
-          <p>
-            本站不上传受版权保护的图书全文，也不采集学生身份、阅读行为或设备数据。外部资源均保留原始机构入口与核验日期。
-          </p>
-        </div>
-      </aside>
     </div>
   );
 }

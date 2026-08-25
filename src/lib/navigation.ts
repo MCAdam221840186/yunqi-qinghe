@@ -26,12 +26,6 @@ export const siteSections: readonly SiteSection[] = [
     description: "阅读支教路上的行动记录与团队思考。",
   },
   {
-    id: "reading",
-    href: "/reading/",
-    label: "阅读共建",
-    description: "按年级选书，连接合法阅读资源，看见双柏的阅读行动。",
-  },
-  {
     id: "diaries",
     href: "/diaries/",
     label: "成长日志",
@@ -42,5 +36,11 @@ export const siteSections: readonly SiteSection[] = [
     href: "/works/",
     label: "创作展",
     description: "走进孩子们用色彩、纸页与自然材料展开的创作。",
+  },
+  {
+    id: "reading",
+    href: "/reading/",
+    label: "阅读共建",
+    description: "按年级选书，连接合法阅读资源，看见双柏的阅读行动。",
   },
 ];

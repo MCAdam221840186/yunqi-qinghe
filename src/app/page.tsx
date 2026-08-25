@@ -1,7 +1,6 @@
 import {
   ArrowRight,
   Books,
-  DownloadSimple,
   Notebook,
 } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
@@ -155,109 +154,6 @@ export default function HomePage() {
         </Link>
       </section>
 
-      <section
-        className={styles.readingPreview}
-        aria-labelledby="reading-preview-title"
-      >
-        <figure className={styles.readingPaper}>
-          <Image
-            src={booklistPreview}
-            alt="云南省双柏县乡村小学分级阅读书单第一页预览"
-            sizes="(max-width: 767px) min(82vw, 28rem), (max-width: 900px) 42vw, 33vw"
-            placeholder="blur"
-            loading="lazy"
-          />
-          <figcaption>团队调研成果，110 条分级书目</figcaption>
-        </figure>
-
-        <div className={styles.readingCopy}>
-          <span className={styles.readingIcon} aria-hidden="true">
-            <Books size={29} weight="regular" />
-          </span>
-          <p className={headingStyles.eyebrow}>{readingSection.label}</p>
-          <h2
-            id="reading-preview-title"
-            className={headingStyles.sectionTitle}
-          >
-            从适合此刻的一本书开始
-          </h2>
-          <p>{readingSection.description}</p>
-          <div className={styles.readingActions}>
-            <Link className={styles.readingPrimary} href="/reading/books/">
-              按年级找书
-              <ArrowRight aria-hidden="true" size={18} weight="bold" />
-            </Link>
-            <Link
-              className={styles.readingDownload}
-              href="/downloads/shuangbai-primary-school-graded-reading-list.pdf"
-              download
-              prefetch={false}
-            >
-              <DownloadSimple aria-hidden="true" size={18} weight="bold" />
-              下载 PDF
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className={styles.worksPreview}
-        aria-labelledby="works-preview-title"
-      >
-        <div className={styles.worksCopy}>
-          <DisplayHeading
-            as="h2"
-            id="works-preview-title"
-            variant="section"
-            lines={[
-              { before: "课桌展开，" },
-              {
-                before: "就是一座",
-                accent: "美术馆",
-                tone: "primary",
-              },
-            ]}
-          />
-          <p>
-            叶片、颜色与纸上的线条，记录着孩子们怎样观察、感受和讲故事。
-          </p>
-          <Link className={styles.worksLink} href="/works/">
-            创作展
-            <ArrowRight aria-hidden="true" size={19} weight="bold" />
-          </Link>
-        </div>
-
-        <div className={styles.worksDesk}>
-          <figure className={`${styles.workSheet} ${styles.workLeaf}`}>
-            <Image
-              src={worksPreview.leaf.image}
-              alt={worksPreview.leaf.alt}
-              sizes="(max-width: 767px) 55vw, (max-width: 900px) 48vw, 31vw"
-              placeholder="blur"
-              loading="lazy"
-            />
-          </figure>
-          <figure className={`${styles.workSheet} ${styles.workKite}`}>
-            <Image
-              src={worksPreview.kite.image}
-              alt={worksPreview.kite.alt}
-              sizes="(max-width: 767px) 48vw, (max-width: 900px) 43vw, 27vw"
-              placeholder="blur"
-              loading="lazy"
-            />
-          </figure>
-          <figure className={`${styles.workSheet} ${styles.workEmotion}`}>
-            <Image
-              src={worksPreview.emotion.image}
-              alt={worksPreview.emotion.alt}
-              sizes="(max-width: 767px) 62vw, (max-width: 900px) 50vw, 30vw"
-              placeholder="blur"
-              loading="lazy"
-            />
-          </figure>
-        </div>
-      </section>
-
       <section className={styles.latest} aria-labelledby="latest-title">
         <div className={styles.sectionHeading}>
           <DisplayHeading
@@ -334,6 +230,100 @@ export default function HomePage() {
               );
             },
           )}
+        </div>
+      </section>
+
+      <section
+        className={styles.worksPreview}
+        aria-labelledby="works-preview-title"
+      >
+        <div className={styles.worksCopy}>
+          <DisplayHeading
+            as="h2"
+            id="works-preview-title"
+            variant="section"
+            lines={[
+              { before: "课桌展开，" },
+              {
+                before: "就是一座",
+                accent: "美术馆",
+                tone: "primary",
+              },
+            ]}
+          />
+          <p>
+            叶片、颜色与纸上的线条，记录着孩子们怎样观察、感受和讲故事。
+          </p>
+          <Link className={styles.worksLink} href="/works/">
+            创作展
+            <ArrowRight aria-hidden="true" size={19} weight="bold" />
+          </Link>
+        </div>
+
+        <div className={styles.worksDesk}>
+          <figure className={`${styles.workSheet} ${styles.workLeaf}`}>
+            <Image
+              src={worksPreview.leaf.image}
+              alt={worksPreview.leaf.alt}
+              sizes="(max-width: 767px) 55vw, (max-width: 900px) 48vw, 31vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
+          <figure className={`${styles.workSheet} ${styles.workKite}`}>
+            <Image
+              src={worksPreview.kite.image}
+              alt={worksPreview.kite.alt}
+              sizes="(max-width: 767px) 48vw, (max-width: 900px) 43vw, 27vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
+          <figure className={`${styles.workSheet} ${styles.workEmotion}`}>
+            <Image
+              src={worksPreview.emotion.image}
+              alt={worksPreview.emotion.alt}
+              sizes="(max-width: 767px) 62vw, (max-width: 900px) 50vw, 30vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section
+        className={styles.readingPreview}
+        aria-labelledby="reading-preview-title"
+      >
+        <figure className={styles.readingPaper}>
+          <Image
+            src={booklistPreview}
+            alt="云南省双柏县乡村小学分级阅读书单第一页预览"
+            sizes="(max-width: 767px) min(82vw, 28rem), (max-width: 900px) 42vw, 33vw"
+            placeholder="blur"
+            loading="lazy"
+          />
+          <figcaption>团队调研成果，110 条分级书目</figcaption>
+        </figure>
+
+        <div className={styles.readingCopy}>
+          <span className={styles.readingIcon} aria-hidden="true">
+            <Books size={29} weight="regular" />
+          </span>
+          <p className={headingStyles.eyebrow}>{readingSection.label}</p>
+          <h2
+            id="reading-preview-title"
+            className={headingStyles.sectionTitle}
+          >
+            从适合此刻的一本书开始
+          </h2>
+          <p>{readingSection.description}</p>
+          <div className={styles.readingActions}>
+            <Link className={styles.readingPrimary} href="/reading/">
+              进入阅读共建
+              <ArrowRight aria-hidden="true" size={18} weight="bold" />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
