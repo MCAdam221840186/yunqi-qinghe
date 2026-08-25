@@ -1,7 +1,5 @@
-import { ArrowRight } from "@phosphor-icons/react/ssr";
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import type { ReactNode } from "react";
 import {
   ArtworkLightboxProvider,
@@ -658,29 +656,6 @@ export default function WorksPage() {
               </WorksMotionLayer>
             </WorksMotionScene>
           ) : null}
-
-          <WorksMotionScene
-            as="footer"
-            className={styles.closing}
-            stagger={0.1}
-          >
-            <WorksMotionLayer fromY={20} fromScale={1}>
-              <DisplayHeading
-                as="h2"
-                variant="statement"
-                lines={[
-                  { before: "同一张课桌，" },
-                  { before: "装得下", accent: "很多种答案", after: "。" },
-                ]}
-              />
-            </WorksMotionLayer>
-            <WorksMotionLayer fromY={14} fromScale={1}>
-              <Link href="/diaries/">
-                成长日志
-                <ArrowRight aria-hidden="true" size={19} weight="bold" />
-              </Link>
-            </WorksMotionLayer>
-          </WorksMotionScene>
         </div>
       </WorksMotionRoot>
     </ArtworkLightboxProvider>

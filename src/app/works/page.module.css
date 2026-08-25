@@ -624,40 +624,6 @@
   border-radius: calc(var(--radius-card) * 1.4);
 }
 
-.closing {
-  display: grid;
-  margin-top: clamp(5rem, 9vw, 8rem);
-  padding-top: clamp(2rem, 5vw, 4rem);
-  border-top: 1px solid var(--color-border);
-  grid-template-columns: minmax(0, 8fr) minmax(10rem, 3fr);
-  gap: 2rem;
-  align-items: end;
-}
-
-.closing h2 {
-  --display-line-offset: 0.32em;
-  --display-statement-size: clamp(2.6rem, 5vw, 4.6rem);
-  max-width: 17ch;
-}
-
-.closing a {
-  display: inline-flex;
-  min-height: 3.25rem;
-  padding: 0.75rem 1.25rem;
-  border: 1px solid var(--color-accent-strong);
-  border-radius: 999px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.65rem;
-  color: var(--color-on-accent);
-  background: var(--color-accent-strong);
-  font-weight: 600;
-  text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    background-color 180ms ease;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .artworkButton:hover {
     z-index: 8;
@@ -671,11 +637,6 @@
 
   .exhibitionMapInner a:hover::after {
     transform: scaleX(1);
-  }
-
-  .closing a:hover {
-    background: var(--color-accent);
-    transform: translateY(-2px);
   }
 }
 
@@ -1053,20 +1014,6 @@
   .closingPortraitFigure {
     aspect-ratio: 16 / 10;
   }
-
-  .closing {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .closing h2 {
-    --display-line-offset: 0;
-    --display-statement-size: clamp(1.86rem, 8.8vw, 3.2rem);
-  }
-
-  .closing a {
-    width: fit-content;
-  }
 }
 
 @media (max-width: 390px) {
@@ -1132,8 +1079,7 @@
 @media (prefers-reduced-motion: reduce) {
   .artworkButton,
   .exhibitionMapInner a,
-  .exhibitionMapInner a::after,
-  .closing a {
+  .exhibitionMapInner a::after {
     transition: none;
   }
 
@@ -1144,9 +1090,5 @@
 
   .artworkButton:hover {
     transform: rotate(var(--paper-rotation));
-  }
-
-  .closing a:hover {
-    transform: none;
   }
 }
