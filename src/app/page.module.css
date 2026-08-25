@@ -109,33 +109,59 @@
 }
 
 .openingMoment {
+  --opening-gutter: clamp(1rem, 1.25vw, 1.5rem);
+  --opening-space: clamp(0.75rem, 1.5vw, 1.5rem);
+
   display: grid;
-  min-height: calc(100dvh - var(--header-height));
-  padding: clamp(1.75rem, 4vw, 3.5rem) 0;
+  width: calc(
+    100vw - var(--opening-gutter) - var(--opening-gutter)
+  );
+  margin-inline: calc(50% - 50vw + var(--opening-gutter));
+  padding: var(--opening-space) 0;
   align-items: center;
+}
+
+.openingTitle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
 .openingStage {
   position: relative;
-  width: min(100%, calc(160dvh - 18.5rem));
+  width: 100%;
+  height: min(
+    calc(
+      100dvh - var(--header-height) - var(--opening-space) -
+        var(--opening-space)
+    ),
+    calc(75vw - var(--opening-gutter) - var(--opening-gutter))
+  );
+  min-height: 0;
   justify-self: center;
   isolation: isolate;
 }
 
 .openingStage::before {
   position: absolute;
-  inset: -0.85rem 2.5% -0.7rem;
+  inset: -0.45rem 1% -0.4rem;
   z-index: -1;
   border-radius: var(--radius-card);
   background: var(--color-sky);
   content: "";
-  transform: rotate(0.65deg);
+  transform: rotate(0.3deg);
 }
 
 .openingPhoto {
   position: relative;
   width: 100%;
-  aspect-ratio: 8 / 5;
+  height: 100%;
   margin: 0;
   overflow: hidden;
   border: 1px solid color-mix(
@@ -154,32 +180,6 @@
   object-fit: cover;
   object-position: center bottom;
   filter: none;
-}
-
-.openingCopy {
-  position: absolute;
-  top: clamp(1rem, min(3vw, 3.5dvh), 2.5rem);
-  left: clamp(1rem, min(3vw, 3.5dvh), 2.5rem);
-  z-index: 1;
-  width: min(32rem, calc(100% - clamp(2rem, 6vw, 5rem)));
-  padding: clamp(1.4rem, min(3vw, 3.5dvh), 2.4rem);
-  border: 1px solid var(--color-border);
-  border-inline-start: 0.38rem solid var(--color-accent-strong);
-  border-radius: var(--radius-card);
-  color: var(--color-text);
-  background: var(--color-surface);
-  box-shadow: 0 1.2rem 3.5rem rgb(34 68 46 / 0.16);
-}
-
-.openingCopy h1 {
-  --display-section-size: clamp(2.05rem, min(3.8vw, 5dvh), 3.45rem);
-}
-
-.openingCopy p {
-  max-width: 31rem;
-  margin: 1.15rem 0 0;
-  color: var(--color-text-muted);
-  line-height: 1.8;
 }
 
 .latest,
@@ -715,28 +715,25 @@
     justify-self: end;
   }
 
+  .openingMoment {
+    --opening-gutter: clamp(0.5rem, 2.5vw, 1rem);
+
+    padding: clamp(0.75rem, 2vw, 1rem) 0 clamp(1.5rem, 4vw, 2.5rem);
+  }
+
   .openingStage {
-    display: grid;
     width: 100%;
-    gap: 1.25rem;
+    height: auto;
   }
 
   .openingStage::before {
-    inset: auto 4% -0.65rem 4%;
-    height: 58%;
-    transform: rotate(0.5deg);
-  }
-
-  .openingCopy {
-    position: static;
-    width: 100%;
-    order: 1;
-    box-shadow: none;
+    inset: -0.3rem 2% -0.4rem;
+    transform: rotate(0.25deg);
   }
 
   .openingPhoto {
+    height: auto;
     aspect-ratio: 4 / 3;
-    order: 2;
   }
 
   .openingPhoto img {
@@ -808,19 +805,6 @@
 
   .heroFrame {
     width: 96%;
-  }
-
-  .openingMoment {
-    padding: 1.5rem 0 2.5rem;
-    align-items: start;
-  }
-
-  .openingCopy {
-    padding: 1.35rem;
-  }
-
-  .openingCopy h1 {
-    --display-section-size: clamp(2rem, 9.5vw, 2.7rem);
   }
 
   .sectionHeading {
@@ -921,12 +905,6 @@
     bottom: 4%;
     left: 19%;
     width: 64%;
-  }
-}
-
-@media (prefers-color-scheme: dark) and (min-width: 901px) {
-  .openingCopy {
-    box-shadow: 0 1.2rem 3.5rem rgb(4 10 6 / 0.34);
   }
 }
 

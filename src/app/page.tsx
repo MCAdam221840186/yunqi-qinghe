@@ -87,36 +87,19 @@ export default function HomePage() {
         className={styles.openingMoment}
         aria-labelledby="home-title"
       >
+        <h1 className={styles.openingTitle} id="home-title">
+          云启青禾支教团队开营仪式合照
+        </h1>
         <div className={styles.openingStage}>
           <figure className={styles.openingPhoto}>
             <Image
               src={openingCeremonyImage}
               alt="开营仪式上，云启青禾支教团志愿者与孩子们在写有‘启云心童梦’和‘看青禾生长’的黑板前合影"
-              sizes="(max-width: 900px) calc(100vw - 2rem), (max-width: 1280px) calc(100vw - 5rem), 1200px"
+              sizes="(max-width: 900px) calc(100vw - 1.25rem), calc(100vw - 3rem)"
               placeholder="blur"
               preload
             />
           </figure>
-
-          <div className={styles.openingCopy}>
-            <DisplayHeading
-              as="h1"
-              id="home-title"
-              variant="section"
-              lines={[
-                {
-                  before: "故事从这张",
-                },
-                {
-                  accent: "合照",
-                  after: "开始",
-                },
-              ]}
-            />
-            <p>
-              开营仪式当天，孩子们与志愿者在教室留下合影。随后的团队行动、课堂创作与成长记录，也从这里展开。
-            </p>
-          </div>
         </div>
       </section>
 
