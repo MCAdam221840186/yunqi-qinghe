@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import qingheBlackboardImage from "@/assets/hero-qinghe-blackboard.webp";
 import qiyunBlackboardImage from "@/assets/hero-qiyun-blackboard.webp";
+import openingCeremonyImage from "@/assets/opening-ceremony-group.webp";
 import booklistPreview from "@/assets/reading/booklist-page-1.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
@@ -82,12 +83,52 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteJsonLd) }}
       />
 
-      <section className={styles.hero} aria-labelledby="home-title">
+      <section
+        className={styles.openingMoment}
+        aria-labelledby="home-title"
+      >
+        <div className={styles.openingStage}>
+          <figure className={styles.openingPhoto}>
+            <Image
+              src={openingCeremonyImage}
+              alt="开营仪式上，云启青禾支教团志愿者与孩子们在写有‘启云心童梦’和‘看青禾生长’的黑板前合影"
+              sizes="(max-width: 900px) calc(100vw - 2rem), (max-width: 1280px) calc(100vw - 5rem), 1200px"
+              placeholder="blur"
+              preload
+            />
+          </figure>
+
+          <div className={styles.openingCopy}>
+            <DisplayHeading
+              as="h1"
+              id="home-title"
+              variant="section"
+              lines={[
+                {
+                  before: "故事从这张",
+                },
+                {
+                  accent: "合照",
+                  after: "开始",
+                },
+              ]}
+            />
+            <p>
+              开营仪式当天，孩子们与志愿者在教室留下合影。随后的团队行动、课堂创作与成长记录，也从这里展开。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section
+        className={styles.hero}
+        aria-labelledby="blackboard-story-title"
+      >
         <div className={styles.heroCopy}>
           <p className={headingStyles.eyebrow}>云启青禾支教团队</p>
           <DisplayHeading
-            as="h1"
-            id="home-title"
+            as="h2"
+            id="blackboard-story-title"
             variant="brandHero"
             lines={[
               { before: "启云心童梦，" },
@@ -113,18 +154,16 @@ export default function HomePage() {
               alt="云启青禾团队绘制的“启云心童梦”主题黑板报"
               sizes="(max-width: 900px) calc(100vw - 2rem), 52vw"
               placeholder="blur"
-              preload
+              loading="lazy"
             />
           </figure>
           <figure className={`${styles.heroFrame} ${styles.heroFrameQinghe}`}>
-            {/* React 19 otherwise promotes eager images to preloads. */}
             <Image
               src={qingheBlackboardImage}
               alt="云启青禾团队绘制的“看青禾生长”主题黑板报"
               sizes="(max-width: 900px) calc(100vw - 2rem), 52vw"
               placeholder="blur"
-              loading="eager"
-              fetchPriority="low"
+              loading="lazy"
             />
           </figure>
         </div>
