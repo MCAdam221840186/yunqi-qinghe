@@ -12,7 +12,10 @@
     "growth-cards": "node scripts/process-growth-cards.mjs",
     "growth-cards:check": "node scripts/process-growth-cards.mjs --check",
     "growth-cards:check-public": "node scripts/process-growth-cards.mjs --check-public",
-    "reading-content:check": "node scripts/check-reading-content.mjs"
+    "reading-content:check": "node scripts/check-reading-content.mjs",
+    "team-diaries": "node scripts/process-team-diaries.mjs",
+    "team-diaries:check": "node scripts/process-team-diaries.mjs --check",
+    "team-diaries:check-built": "node scripts/process-team-diaries.mjs --check-built"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",

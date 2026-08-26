@@ -50,7 +50,11 @@ npm run build
 - `src/content/growth-card-assets.generated.ts`：由图片脚本生成的静态导入注册表
 - `src/assets/growth-cards/`：可公开的高质量 WebP 与约 480px 缩略图
 - `src/content/team-members.json`：团队成员
-- `src/content/team-diaries.json`：团队日志
+- `src/content/team-diaries.json`：Day 1 至 Day 8 的 8 篇正式团队日志
+- `src/content/team-diary-assets.generated.ts`：70 组完整图与缩略图静态注册表
+- `src/assets/team-diaries/`：按 Day 保存的小红书发布版 WebP 与 640px 缩略图
+- `scripts/team-diaries-manifest.json`：团队日志来源 note ID、图序、尺寸、哈希与逐图 alt 清单
+- `scripts/process-team-diaries.mjs`：团队日志内容和图片的可重复生成与完整性检查
 
 原始导入目录 `../成长记录卡` 不进入仓库。更新审校内容后先重新生成公开数据，再生成或检查公开图片：
 
@@ -60,7 +64,11 @@ npm run growth-cards
 npm run growth-content:check
 npm run growth-cards:check-public
 npm run growth-cards:check
+npm run team-diaries:check
+npm run team-diaries:check-built # 在 npm run build 之后检查 out/
 ```
+
+团队日志总览位于 `/team-diaries/`，8 篇静态详情使用 `/team-diaries/day-01/` 至 `/team-diaries/day-08/`。正文在服务器组件中渲染；首页与总览只使用缩略图，完整图由详情页主视觉或无障碍灯箱加载。
 
 `src/lib/content.ts` 会在构建期验证儿童、卡片、图片、成长节点和代表卡引用，要求正好 40 位孩子与 157 张公开材料且无重复、无遗漏、无孤儿。内容检查会核对规范审校源、生成文件与清单映射；公开图片检查不依赖私有原图，也会验证 314 个 WebP 的格式、尺寸、元数据、文件集合与静态注册表。完整图片检查同时验证 161 张源材料全部进入清单、157 张公开、4 张因缺失归属而排除及输出可重复性。原卡日期缺失或存疑时，公开页忠实显示原始标签，时间排序使用独立 `sessionOrder`，不得为补齐时间线而推断日期。字迹无法可靠辨认时不补猜，并在相应详情页展示核对说明。
 

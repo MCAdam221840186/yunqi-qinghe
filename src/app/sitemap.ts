@@ -25,7 +25,7 @@ function recordedDates(
 export default function sitemap(): MetadataRoute.Sitemap {
   const latestGrowthDate = latestDate(recordedDates(diaries));
   const latestTeamDate = latestDate(
-    teamDiaries.map((diary) => diary.updatedAt),
+    teamDiaries.map((diary) => diary.updatedOn ?? diary.publishedOn),
   );
   const latestReadingDate = latestDate([
     ...readingResources.map((resource) => resource.lastCheckedOn),
@@ -80,6 +80,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.8,
     },
+    ...teamDiaries.map((diary) => ({
+      url: absoluteUrl(`/team-diaries/${diary.slug}/`),
+      lastModified: new Date(diary.updatedOn ?? diary.publishedOn),
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    })),
     {
       url: absoluteUrl("/reading/"),
       lastModified: latestReadingDate,

@@ -31,9 +31,13 @@ export interface PageMetadataOptions {
   readonly path: string;
   readonly type?: "website" | "article";
   readonly publishedTime?: string;
+  readonly modifiedTime?: string;
   readonly authors?: readonly string[];
+  readonly tags?: readonly string[];
   readonly socialImagePath?: string;
   readonly socialImageAlt?: string;
+  readonly socialImageWidth?: number;
+  readonly socialImageHeight?: number;
 }
 
 export function createPageMetadata({
@@ -42,15 +46,19 @@ export function createPageMetadata({
   path,
   type = "website",
   publishedTime,
+  modifiedTime,
   authors = [],
+  tags = [],
   socialImagePath = siteConfig.socialImagePath,
   socialImageAlt = siteConfig.socialImageAlt,
+  socialImageWidth = 1200,
+  socialImageHeight = 630,
 }: PageMetadataOptions): Metadata {
   const canonical = absoluteUrl(path);
   const socialImage = {
     url: absoluteUrl(socialImagePath),
-    width: 1200,
-    height: 630,
+    width: socialImageWidth,
+    height: socialImageHeight,
     alt: socialImageAlt,
   };
   const openGraph =
@@ -63,7 +71,9 @@ export function createPageMetadata({
           url: canonical,
           siteName: siteConfig.name,
           publishedTime,
+          modifiedTime,
           authors: [...authors],
+          tags: [...tags],
           images: [socialImage],
         }
       : {

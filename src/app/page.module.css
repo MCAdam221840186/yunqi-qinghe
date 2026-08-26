@@ -183,7 +183,7 @@
 }
 
 .latest,
-.teamDiaryGateway,
+.teamDiaryJourney,
 .readingPreview,
 .worksPreview {
   padding-top: clamp(5rem, 10vw, 9rem);
@@ -297,93 +297,282 @@
   background: var(--color-accent);
 }
 
-.teamDiaryLink {
+.teamDiaryJourney {
   display: grid;
-  min-height: 12rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1.48fr);
+  align-items: start;
+  gap: clamp(3rem, 6vw, 6rem);
+}
+
+.journeyIntroduction {
+  max-width: 30rem;
+  padding-top: clamp(0.75rem, 2.5vw, 2.5rem);
+}
+
+.journeyIntroduction::before {
+  display: block;
+  width: 3.75rem;
+  height: 0.28rem;
+  margin-bottom: 1.5rem;
+  border-radius: 999px;
+  background: var(--color-accent);
+  content: "";
+}
+
+.journeyIntroduction h2 {
+  margin: 0;
+  font-size: clamp(2.35rem, 4.3vw, 4.25rem);
+  letter-spacing: -0.045em;
+  line-height: 1.14;
+}
+
+.journeySummary {
+  max-width: 31rem;
+  margin: 1.4rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.8;
+}
+
+.journeyStats {
+  display: grid;
+  max-width: 27rem;
+  margin: clamp(2rem, 4vw, 3.25rem) 0 0;
+  padding: 1.15rem 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--color-border);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.journeyStats > div {
+  min-width: 0;
+}
+
+.journeyStats > div + div {
+  padding-left: clamp(1rem, 2vw, 1.6rem);
+  border-left: 1px solid var(--color-border);
+}
+
+.journeyStats dt {
+  color: var(--color-text-muted);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+}
+
+.journeyStats dd {
+  display: flex;
+  margin: 0.5rem 0 0;
+  align-items: baseline;
+  gap: 0.42rem;
+  color: var(--color-text);
+}
+
+.journeyStats strong {
+  color: var(--color-accent-strong);
+  font-size: clamp(1.9rem, 3vw, 2.75rem);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.journeyStats span {
+  color: var(--color-text-muted);
+  font-size: 0.82rem;
+  line-height: 1.35;
+}
+
+.journeyAction {
+  display: inline-flex;
+  min-height: 3.25rem;
+  margin-top: 2rem;
+  padding: 0.76rem 1.25rem;
+  border: 1px solid var(--color-accent-strong);
+  border-radius: 999px;
   align-items: center;
-  gap: clamp(1.25rem, 3vw, 2.5rem);
-  color: inherit;
-  background: color-mix(
-    in srgb,
-    var(--color-sky) 58%,
-    var(--color-surface)
-  );
+  justify-content: center;
+  gap: 0.72rem;
+  color: var(--color-on-accent);
+  background: var(--color-accent-strong);
+  font-weight: 700;
   text-decoration: none;
+  white-space: nowrap;
   transition:
-    border-color 180ms ease,
+    transform 180ms var(--ease-out),
     background-color 180ms ease;
 }
 
-.teamDiaryLink:hover {
-  border-color: color-mix(
-    in srgb,
-    var(--color-accent-strong) 48%,
-    var(--color-border)
-  );
-  background: color-mix(
-    in srgb,
-    var(--color-accent-soft) 50%,
-    var(--color-surface)
-  );
-}
-
-.teamDiaryIcon {
-  display: grid;
-  width: 4.25rem;
-  height: 4.25rem;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-accent-strong) 32%,
-    var(--color-border)
-  );
-  border-radius: var(--radius-card);
-  place-items: center;
-  color: var(--color-accent-strong);
-  background: color-mix(
-    in srgb,
-    var(--color-surface) 88%,
-    transparent
-  );
-}
-
-.teamDiaryCopy {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: 0.6rem;
-}
-
-.teamDiaryCopy h2 {
-  margin: 0;
-}
-
-.teamDiaryCopy p {
-  max-width: 34rem;
-  margin: 0;
-  color: var(--color-text-muted);
-  line-height: 1.75;
-}
-
-.teamDiaryAction {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  gap: 0.65rem;
-  color: var(--color-accent-strong);
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.teamDiaryAction svg {
+.journeyAction svg {
   transition: transform 180ms var(--ease-out);
 }
 
-.teamDiaryLink:hover .teamDiaryAction svg {
+.journeyAction:hover {
+  background: var(--color-accent);
+  transform: translateY(-2px);
+}
+
+.journeyAction:hover svg {
   transform: translateX(0.35rem);
+}
+
+.journeyAction:active {
+  transform: translateY(1px);
+}
+
+.journeyVisual {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  grid-template-areas:
+    "closing opening"
+    "closing midpoint";
+  grid-template-columns: minmax(0, 1.48fr) minmax(12.5rem, 0.72fr);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  align-items: stretch;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
+  isolation: isolate;
+}
+
+.journeyVisual::before {
+  position: absolute;
+  inset: 7% -1rem 3% 5%;
+  z-index: -1;
+  border-radius: var(--radius-card);
+  background: color-mix(
+    in srgb,
+    var(--color-sky) 72%,
+    var(--color-surface)
+  );
+  content: "";
+  transform: rotate(0.65deg);
+}
+
+.journeyEntry {
+  min-width: 0;
+  border-radius: var(--radius-card);
+  color: inherit;
+  text-decoration: none;
+}
+
+.journeyEntry figure {
+  display: grid;
+  height: 100%;
+  min-width: 0;
+  margin: 0;
+  gap: 0.9rem;
+}
+
+.journeyClosing {
+  grid-area: closing;
+}
+
+.journeyOpening {
+  grid-area: opening;
+}
+
+.journeyMidpoint {
+  grid-area: midpoint;
+}
+
+.journeyClosing figure {
+  grid-template-rows: minmax(0, 1fr) auto;
+}
+
+.journeyPhoto {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid color-mix(
+    in srgb,
+    var(--color-border) 78%,
+    transparent
+  );
+  border-radius: var(--radius-card);
+  background: var(--color-surface-soft);
+  box-shadow: 0 1.35rem 3.2rem rgb(34 68 46 / 0.13);
+  transition:
+    transform 180ms var(--ease-out),
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.journeyClosing .journeyPhoto {
+  min-height: clamp(28rem, 42vw, 37rem);
+}
+
+.journeyOpening .journeyPhoto,
+.journeyMidpoint .journeyPhoto {
+  aspect-ratio: 4 / 3;
+}
+
+.journeyPhoto img {
+  object-fit: cover;
+  filter: none;
+  transition: transform 280ms var(--ease-out);
+}
+
+.journeyCaption {
+  display: grid;
+  min-width: 0;
+  padding-inline: 0.18rem;
+  gap: 0.48rem;
+}
+
+.journeyChapter {
+  display: flex;
+  align-items: baseline;
+  gap: 0.62rem;
+  color: var(--color-text-muted);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.journeyChapter strong {
+  color: var(--color-accent-strong);
+  font-size: 0.92rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.01em;
+}
+
+.journeyCaption h3 {
+  display: -webkit-box;
+  margin: 0;
+  overflow: hidden;
+  font-size: clamp(0.96rem, 1.25vw, 1.16rem);
+  letter-spacing: -0.015em;
+  line-height: 1.45;
+  transition: color 180ms ease;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.journeyClosing .journeyCaption h3 {
+  max-width: 30ch;
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+}
+
+.journeyEntry:hover .journeyPhoto {
+  border-color: color-mix(
+    in srgb,
+    var(--color-accent-strong) 52%,
+    var(--color-border)
+  );
+  box-shadow: 0 1.6rem 3.6rem rgb(34 68 46 / 0.18);
+}
+
+.journeyEntry:hover .journeyPhoto img {
+  transform: scale(1.025);
+}
+
+.journeyEntry:hover .journeyCaption h3 {
+  color: var(--color-accent-strong);
+}
+
+.journeyEntry:active .journeyPhoto {
+  transform: translateY(1px);
+}
+
+.journeyEntry:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 5px;
 }
 
 .worksPreview {
@@ -698,6 +887,26 @@
   transform: translateX(0.3rem);
 }
 
+@media (max-width: 1100px) {
+  .teamDiaryJourney {
+    grid-template-columns: minmax(0, 1fr);
+    gap: clamp(2.75rem, 6vw, 4.5rem);
+  }
+
+  .journeyIntroduction {
+    max-width: 44rem;
+    padding-top: 0;
+  }
+
+  .journeySummary {
+    max-width: 38rem;
+  }
+
+  .journeyStats {
+    max-width: 31rem;
+  }
+}
+
 @media (max-width: 900px) {
   .hero {
     min-height: auto;
@@ -835,21 +1044,48 @@
     margin-bottom: 1rem;
   }
 
-  .teamDiaryLink {
+  .teamDiaryJourney {
+    gap: 2.5rem;
+  }
+
+  .journeyIntroduction h2 {
+    font-size: clamp(2.25rem, 10vw, 3.2rem);
+  }
+
+  .journeyAction {
+    width: 100%;
+  }
+
+  .journeyVisual {
+    grid-template-areas:
+      "closing"
+      "opening"
+      "midpoint";
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    gap: 1.75rem;
+  }
+
+  .journeyVisual::before {
+    inset: 4% -0.35rem 1.5% 4%;
+    transform: rotate(0.4deg);
+  }
+
+  .journeyClosing .journeyPhoto {
     min-height: 0;
-    padding: 1.5rem;
-    grid-template-columns: 1fr;
-    align-items: start;
-    gap: 1.4rem;
+    aspect-ratio: 4 / 3;
   }
 
-  .teamDiaryIcon {
-    width: 3.75rem;
-    height: 3.75rem;
+  .journeyEntry figure,
+  .journeyClosing figure {
+    height: auto;
+    grid-template-rows: auto auto;
   }
 
-  .teamDiaryAction {
-    min-height: 2.75rem;
+  .journeyCaption h3,
+  .journeyClosing .journeyCaption h3 {
+    max-width: 38ch;
+    font-size: clamp(1.08rem, 5vw, 1.35rem);
   }
 
   .readingPreview {
@@ -909,8 +1145,17 @@
 }
 
 @media (prefers-color-scheme: dark) {
+  .journeyPhoto,
   .diaryCard {
     box-shadow: none;
+  }
+
+  .journeyVisual::before {
+    background: color-mix(
+      in srgb,
+      var(--color-sky) 72%,
+      var(--color-surface)
+    );
   }
 }
 
@@ -918,8 +1163,11 @@
   .primaryLink,
   .readingPrimary,
   .worksLink,
-  .teamDiaryLink,
-  .teamDiaryAction svg,
+  .journeyAction,
+  .journeyAction svg,
+  .journeyPhoto,
+  .journeyPhoto img,
+  .journeyCaption h3,
   .diaryCard,
   .diaryRead svg {
     transition: none;
@@ -930,12 +1178,16 @@
   .primaryLink:hover,
   .primaryLink:active,
   .readingPrimary:hover,
+  .journeyAction:hover,
+  .journeyAction:active,
+  .journeyEntry:active .journeyPhoto,
+  .journeyEntry:hover .journeyPhoto img,
   .diaryCard:hover,
   .diaryCard:active {
     transform: none;
   }
 
-  .teamDiaryLink:hover .teamDiaryAction svg,
+  .journeyAction:hover svg,
   .diaryCard:hover .diaryRead svg {
     transform: none;
   }

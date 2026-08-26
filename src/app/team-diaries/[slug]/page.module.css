@@ -1,0 +1,403 @@
+.page {
+  width: min(100%, var(--max-width));
+  margin-inline: auto;
+  padding: clamp(2.25rem, 5vw, 4.5rem) clamp(1rem, 3vw, 2.5rem)
+    clamp(5rem, 10vw, 9rem);
+}
+
+.backLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  margin-bottom: clamp(3rem, 7vw, 6.5rem);
+  align-items: center;
+  gap: 0.65rem;
+  color: var(--color-text-muted);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+  transition:
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.backLink:hover {
+  color: var(--color-accent-strong);
+  transform: translateX(-0.2rem);
+}
+
+.header {
+  display: grid;
+  margin-bottom: clamp(3rem, 7vw, 6rem);
+  grid-template-columns: minmax(7rem, 0.25fr) minmax(0, 1fr);
+  gap: clamp(2rem, 6vw, 7rem);
+  align-items: start;
+}
+
+.dayMarker {
+  display: grid;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-accent);
+  gap: 0.1rem;
+  color: var(--color-accent-strong);
+}
+
+.dayMarker > span,
+.dayMarker > small {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 750;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.dayMarker > strong {
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 500;
+  line-height: 0.96;
+  letter-spacing: -0.07em;
+  font-variant-numeric: tabular-nums;
+}
+
+.dayMarker > small {
+  margin-top: 0.75rem;
+  letter-spacing: 0.08em;
+}
+
+.headerCopy {
+  min-width: 0;
+}
+
+.eyebrow,
+.readingIntro p,
+.adjacentHeading p {
+  margin: 0;
+  color: var(--color-accent-strong);
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.header h1 {
+  max-width: 18ch;
+  margin: 0.8rem 0 0;
+  font-size: clamp(2.5rem, 6.8vw, 6rem);
+  font-weight: 680;
+  line-height: 1.02;
+  letter-spacing: -0.055em;
+  text-wrap: balance;
+}
+
+.meta {
+  display: flex;
+  margin: clamp(2.25rem, 5vw, 3.5rem) 0 0;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: 1.25rem clamp(2rem, 5vw, 4.25rem);
+}
+
+.meta div {
+  display: grid;
+  gap: 0.3rem;
+}
+
+.meta dt,
+.meta dd {
+  margin: 0;
+  line-height: 1.55;
+}
+
+.meta dt {
+  color: var(--color-text-muted);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+}
+
+.meta dd {
+  font-size: 0.88rem;
+  font-weight: 620;
+  font-variant-numeric: tabular-nums;
+}
+
+.sourceLink {
+  display: inline-flex;
+  min-height: 2.75rem;
+  margin-top: 1.5rem;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--color-accent-strong);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-underline-offset: 0.28em;
+}
+
+.sourceLink:hover {
+  text-decoration-thickness: 2px;
+}
+
+.reading {
+  width: min(100%, var(--reading-width));
+  margin: clamp(5rem, 10vw, 9rem) auto 0;
+}
+
+.readingIntro {
+  display: grid;
+  margin-bottom: clamp(2rem, 5vw, 3rem);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--color-border);
+  grid-template-columns: minmax(6.5rem, 0.28fr) minmax(0, 1fr);
+  align-items: end;
+  gap: 1.5rem;
+}
+
+.readingIntro h2,
+.adjacentHeading h2 {
+  margin: 0;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+}
+
+.markdown {
+  color: var(--color-text);
+  font-size: clamp(1.04rem, 1.5vw, 1.16rem);
+  line-height: 2;
+}
+
+.markdown p {
+  white-space: pre-line;
+}
+
+.markdown > :first-child {
+  margin-top: 0;
+}
+
+.markdown > :last-child {
+  margin-bottom: 0;
+}
+
+.tags {
+  display: flex;
+  margin: clamp(2.5rem, 6vw, 4rem) 0 0;
+  padding: 1.25rem 0 0;
+  border-top: 1px solid var(--color-border);
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  list-style: none;
+}
+
+.tags li {
+  padding: 0.38rem 0.72rem;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-accent-strong);
+  background: var(--color-surface-soft);
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+
+.adjacentNav {
+  margin-top: clamp(5rem, 11vw, 10rem);
+  padding-top: clamp(2rem, 5vw, 3.5rem);
+  border-top: 1px solid var(--color-border);
+}
+
+.adjacentHeading {
+  display: grid;
+  margin-bottom: 1.75rem;
+  grid-template-columns: minmax(7rem, 0.25fr) minmax(0, 1fr);
+  align-items: end;
+  gap: clamp(1rem, 4vw, 3rem);
+}
+
+.adjacentGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.adjacentLink {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 10rem;
+  padding: 0.65rem 3.25rem 0.65rem 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  grid-template-columns: minmax(7rem, 0.42fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(0.85rem, 2vw, 1.4rem);
+  color: var(--color-text);
+  background: var(--color-surface);
+  text-decoration: none;
+  overflow: hidden;
+  transition:
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms var(--ease-out);
+}
+
+.adjacentLink[data-direction="next"] {
+  grid-column: 2;
+}
+
+.adjacentLink:hover {
+  border-color: var(--color-accent);
+  color: var(--color-accent-strong);
+  transform: translateY(-0.2rem);
+}
+
+.adjacentImage {
+  display: block;
+  height: 100%;
+  min-height: 8.6rem;
+  overflow: hidden;
+  border-radius: calc(var(--radius-card) - 0.35rem);
+  background: var(--color-surface-soft);
+}
+
+.adjacentImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.adjacentCopy {
+  display: grid;
+  min-width: 0;
+  gap: 0.45rem;
+}
+
+.adjacentCopy small,
+.adjacentCopy > span {
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.06em;
+}
+
+.adjacentCopy strong {
+  display: -webkit-box;
+  overflow: hidden;
+  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  line-height: 1.4;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.adjacentLink > svg {
+  position: absolute;
+  top: 50%;
+  right: 1.2rem;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 64rem) {
+  .header {
+    grid-template-columns: minmax(6rem, 0.2fr) minmax(0, 1fr);
+    gap: 2.5rem;
+  }
+
+  .adjacentLink {
+    grid-template-columns: minmax(6rem, 0.36fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .page {
+    padding: 2rem 1rem 5rem;
+  }
+
+  .backLink {
+    margin-bottom: 3.5rem;
+  }
+
+  .header {
+    margin-bottom: 3rem;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .dayMarker {
+    grid-template-columns: auto auto minmax(0, 1fr);
+    align-items: baseline;
+    gap: 0.55rem;
+  }
+
+  .dayMarker > strong {
+    font-size: 2.2rem;
+    letter-spacing: -0.04em;
+  }
+
+  .dayMarker > small {
+    margin: 0;
+    justify-self: end;
+  }
+
+  .header h1 {
+    font-size: clamp(2.35rem, 12vw, 4rem);
+  }
+
+  .meta {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .reading {
+    margin-top: 4.5rem;
+  }
+
+  .readingIntro,
+  .adjacentHeading {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+
+  .adjacentGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .adjacentLink[data-direction="next"] {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 31rem) {
+  .meta {
+    grid-template-columns: 1fr;
+  }
+
+  .adjacentLink {
+    min-height: 8.5rem;
+    padding-right: 2.85rem;
+    grid-template-columns: minmax(5.5rem, 34vw) minmax(0, 1fr);
+  }
+
+  .adjacentImage {
+    min-height: 7.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .backLink,
+  .adjacentLink {
+    transition: none;
+  }
+
+  .backLink:hover,
+  .adjacentLink:hover {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .dayMarker,
+  .meta,
+  .tags,
+  .adjacentNav,
+  .adjacentLink {
+    border-color: CanvasText;
+  }
+}

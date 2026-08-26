@@ -51,3 +51,30 @@ src/assets/growth-cards/<studentSlug>/<outputStem>-thumb.webp
 The generated `src/content/growth-card-assets.generated.ts` module exports
 `GrowthCardImageId`, `GrowthCardImageAsset`, and `growthCardImageAssets`. Do not
 edit generated assets or the registry by hand.
+
+## Team diary image pipeline
+
+`process-team-diaries.mjs` imports the eight reviewed Xiaohongshu captures from
+the parent workspace and writes the public Day 1 through Day 8 content, 70
+ordered full WebP images, 70 longest-edge 640px thumbnails, a hash manifest,
+and the static import registry. Capture JSON and temporary CDN responses stay
+outside this repository. Canonical source links are stored without query
+parameters or share tracking data.
+
+```bash
+npm run team-diaries
+npm run team-diaries:check
+npm run team-diaries:check-built # run after npm run build
+```
+
+The generator removes EXIF and XMP chunks from the WebP container without
+re-encoding the compressed image payload. ICC color profiles are retained.
+The check command verifies the exact `9/8/10/9/11/8/7/8` image distribution,
+source and output dimensions, four SHA-256 values per image, thumbnail size,
+content order, static registry freshness, orphan assets, canonical links, and
+repository privacy rules. The built-output check scans the exported site before
+CI uploads it, rejecting captured CDN links, share identifiers, and tokens. CI
+only needs the committed manifest and outputs;
+when the parent workspace still contains the temporary responses, the same
+check also proves that each committed full image preserves its source image
+payload.

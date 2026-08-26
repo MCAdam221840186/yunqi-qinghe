@@ -1,8 +1,4 @@
-import {
-  ArrowRight,
-  Books,
-  Notebook,
-} from "@phosphor-icons/react/ssr";
+import { ArrowRight, Books } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import Link from "next/link";
 import qingheBlackboardImage from "@/assets/hero-qinghe-blackboard.webp";
@@ -13,10 +9,13 @@ import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { getArtwork } from "@/content/works";
 import {
+  contentStats,
   getDiaryAuthor,
   getDiaryBySlug,
   getDiaryPreview,
   getGrowthCardAsset,
+  getTeamDiaryImages,
+  teamDiaries,
 } from "@/lib/content";
 import { siteSections } from "@/lib/navigation";
 import { createWebsiteJsonLd, serializeJsonLd } from "@/lib/site";
@@ -54,6 +53,20 @@ const worksPreview = {
   emotion: getArtwork("emotion-13"),
 } as const;
 
+function getFeaturedTeamDiary(dayNumber: 1 | 4 | 8) {
+  const diary = teamDiaries.find((item) => item.dayNumber === dayNumber);
+  if (!diary) {
+    throw new Error(`首页团队日志缺少 Day ${dayNumber}`);
+  }
+
+  const cover = getTeamDiaryImages(diary)[0];
+  if (!cover) {
+    throw new Error(`首页团队日志 Day ${dayNumber} 缺少封面图片`);
+  }
+
+  return { diary, cover };
+}
+
 export default function HomePage() {
   const growthHighlights = curatedGrowthDiarySlugs.map((slug) => {
     const diary = getDiaryBySlug(slug);
@@ -74,6 +87,32 @@ export default function HomePage() {
       quote: storyHighlight?.quote ?? getDiaryPreview(diary, 48),
     };
   });
+  const dayOne = getFeaturedTeamDiary(1);
+  const dayFour = getFeaturedTeamDiary(4);
+  const dayEight = getFeaturedTeamDiary(8);
+  const teamDiaryChapters = [
+    {
+      ...dayEight,
+      chapterLabel: "结营回望",
+      className: `${styles.journeyEntry} ${styles.journeyClosing}`,
+      imageSizes:
+        "(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 61vw, 38vw",
+    },
+    {
+      ...dayOne,
+      chapterLabel: "开营起点",
+      className: `${styles.journeyEntry} ${styles.journeyOpening}`,
+      imageSizes:
+        "(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 30vw, 20vw",
+    },
+    {
+      ...dayFour,
+      chapterLabel: "旅程中段",
+      className: `${styles.journeyEntry} ${styles.journeyMidpoint}`,
+      imageSizes:
+        "(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 30vw, 20vw",
+    },
+  ] as const;
   const websiteJsonLd = createWebsiteJsonLd();
 
   return (
@@ -153,27 +192,79 @@ export default function HomePage() {
       </section>
 
       <section
-        className={styles.teamDiaryGateway}
-        aria-labelledby="team-diary-gateway-title"
+        className={styles.teamDiaryJourney}
+        aria-labelledby="team-diary-journey-title"
       >
-        <Link href={teamDiarySection.href} className={styles.teamDiaryLink}>
-          <span className={styles.teamDiaryIcon} aria-hidden="true">
-            <Notebook size={32} weight="regular" />
-          </span>
-          <div className={styles.teamDiaryCopy}>
-            <h2
-              id="team-diary-gateway-title"
-              className={headingStyles.sectionTitle}
-            >
-              {teamDiarySection.label}
-            </h2>
-            <p>{teamDiarySection.description}</p>
-          </div>
-          <span className={styles.teamDiaryAction}>
-            阅读团队日志
+        <div className={styles.journeyIntroduction}>
+          <h2
+            id="team-diary-journey-title"
+            className={headingStyles.sectionTitle}
+          >
+            {teamDiarySection.label}，八日旅程
+          </h2>
+          <p className={styles.journeySummary}>
+            从第一天的相遇到第八天的告别，课堂、陪伴与心情被一页页留在现场。
+          </p>
+
+          <dl className={styles.journeyStats} aria-label="团队日志统计">
+            <div>
+              <dt>旅程档案</dt>
+              <dd>
+                <strong>{contentStats.teamDiaries}</strong>
+                <span>篇记录</span>
+              </dd>
+            </div>
+            <div>
+              <dt>现场影像</dt>
+              <dd>
+                <strong>{contentStats.teamDiaryAssets}</strong>
+                <span>张现场影像</span>
+              </dd>
+            </div>
+          </dl>
+
+          <Link href={teamDiarySection.href} className={styles.journeyAction}>
+            从 Day 1 读到 Day 8
             <ArrowRight aria-hidden="true" size={19} weight="bold" />
-          </span>
-        </Link>
+          </Link>
+        </div>
+
+        <div
+          className={styles.journeyVisual}
+          role="group"
+          aria-label="Day 1、Day 4 与 Day 8 影像章节"
+        >
+          {teamDiaryChapters.map(
+            ({ diary, cover, chapterLabel, className, imageSizes }) => (
+              <Link
+                key={diary.slug}
+                className={className}
+                href={`/team-diaries/${diary.slug}/`}
+                aria-label={`阅读 Day ${diary.dayNumber} 团队日志《${diary.title}》`}
+              >
+                <figure>
+                  <div className={styles.journeyPhoto}>
+                    <Image
+                      src={cover.thumbnail}
+                      alt={cover.alt}
+                      fill
+                      sizes={imageSizes}
+                      placeholder="blur"
+                      loading="lazy"
+                    />
+                  </div>
+                  <figcaption className={styles.journeyCaption}>
+                    <span className={styles.journeyChapter}>
+                      <strong>Day {diary.dayNumber}</strong>
+                      <span>{chapterLabel}</span>
+                    </span>
+                    <h3>{diary.title}</h3>
+                  </figcaption>
+                </figure>
+              </Link>
+            ),
+          )}
+        </div>
       </section>
 
       <section className={styles.latest} aria-labelledby="latest-title">

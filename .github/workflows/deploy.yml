@@ -44,6 +44,9 @@ jobs:
       - name: Check reading content
         run: npm run reading-content:check
 
+      - name: Check team diary content and images
+        run: npm run team-diaries:check
+
       - name: Lint
         run: npm run lint
 
@@ -55,6 +58,9 @@ jobs:
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
           NEXT_PUBLIC_SITE_URL: ${{ steps.pages.outputs.base_url }}
+
+      - name: Check built output for team diary privacy
+        run: npm run team-diaries:check-built
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v5

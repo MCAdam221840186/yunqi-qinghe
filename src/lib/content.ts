@@ -1,5 +1,6 @@
 import type { StaticImageData } from "next/image";
 import { growthCardImageAssets } from "@/content/growth-card-assets.generated";
+import { teamDiaryImageAssets } from "@/content/team-diary-assets.generated";
 import {
   growthChildren,
   growthDiaries,
@@ -74,11 +75,42 @@ export interface TeamMemberRecord {
   readonly description: string;
 }
 
+export type TeamDiarySlug =
+  | "day-01"
+  | "day-02"
+  | "day-03"
+  | "day-04"
+  | "day-05"
+  | "day-06"
+  | "day-07"
+  | "day-08";
+
+export interface TeamDiaryImageRef {
+  readonly id: string;
+  readonly alt: string;
+}
+
 export interface TeamDiaryRecord {
-  readonly date: string;
+  readonly slug: TeamDiarySlug;
+  readonly dayNumber: number;
+  readonly publishedOn: string;
+  readonly updatedOn?: string;
+  readonly location?: string;
+  readonly author: "NJU 云启青禾";
   readonly title: string;
+  readonly summary: string;
   readonly markdown: string;
-  readonly updatedAt: string;
+  readonly tags: readonly string[];
+  readonly sourceUrl: string;
+  readonly images: readonly TeamDiaryImageRef[];
+}
+
+export interface TeamDiaryAsset {
+  readonly full: StaticImageData;
+  readonly thumbnail: StaticImageData;
+}
+
+export interface TeamDiaryImage extends TeamDiaryImageRef, TeamDiaryAsset {
 }
 
 export interface ContentStats {
@@ -88,6 +120,7 @@ export interface ContentStats {
   readonly classes: number;
   readonly teamMembers: number;
   readonly teamDiaries: number;
+  readonly teamDiaryAssets: number;
 }
 
 type UnknownRecord = Record<string, unknown>;
@@ -100,6 +133,15 @@ const ISO_DAY_PATTERN = /^\d{4}-\d{2}-\d{2}$/;
 const EXPECTED_GROWTH_CHILD_COUNT = 40;
 const EXPECTED_GROWTH_CARD_COUNT = 157;
 const EXPECTED_CLASS_COUNT = 6;
+const EXPECTED_TEAM_DIARY_COUNT = 8;
+const EXPECTED_TEAM_DIARY_IMAGE_COUNT = 70;
+const EXPECTED_TEAM_DIARY_IMAGE_COUNTS = Object.freeze([
+  9, 8, 10, 9, 11, 8, 7, 8,
+]);
+const TEAM_DIARY_SLUG_PATTERN = /^day-0[1-8]$/;
+const TEAM_DIARY_IMAGE_ID_PATTERN = /^day-0[1-8]-\d{2}$/;
+const TEAM_DIARY_SOURCE_PATTERN =
+  /^https:\/\/www\.xiaohongshu\.com\/explore\/[a-f0-9]{24}$/;
 
 function isRecord(value: unknown): value is UnknownRecord {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -304,11 +346,37 @@ function readTeamMember(item: unknown, label: string): TeamMemberRecord {
 
 function readTeamDiary(item: unknown, label: string): TeamDiaryRecord {
   const record = readRecord(item, label);
+  const slug = readSlug(record.slug, `${label}.slug`);
+  if (!TEAM_DIARY_SLUG_PATTERN.test(slug)) {
+    throw new Error(`${label}.slug 必须是 day-01 至 day-08`);
+  }
+  const author = readString(record.author, `${label}.author`);
+  if (author !== "NJU 云启青禾") {
+    throw new Error(`${label}.author 必须是 NJU 云启青禾`);
+  }
+
   return Object.freeze({
-    date: readIsoDate(record.date, `${label}.date`),
-    title: readString(record.title, `${label}.title`, { allowEmpty: true }),
+    slug: slug as TeamDiarySlug,
+    dayNumber: readPositiveInteger(record.dayNumber, `${label}.dayNumber`),
+    publishedOn: readIsoDate(record.publishedOn, `${label}.publishedOn`),
+    updatedOn:
+      record.updatedOn === undefined
+        ? undefined
+        : readIsoDate(record.updatedOn, `${label}.updatedOn`),
+    location: readOptionalString(record.location, `${label}.location`),
+    author,
+    title: readString(record.title, `${label}.title`),
+    summary: readString(record.summary, `${label}.summary`),
     markdown: readString(record.markdown, `${label}.markdown`),
-    updatedAt: readIsoDate(record.updatedAt, `${label}.updatedAt`),
+    tags: readStringArray(record.tags, `${label}.tags`),
+    sourceUrl: readString(record.sourceUrl, `${label}.sourceUrl`),
+    images: readArray(record.images, `${label}.images`, (image, imageLabel) => {
+      const imageRecord = readRecord(image, imageLabel);
+      return Object.freeze({
+        id: readSlug(imageRecord.id, `${imageLabel}.id`),
+        alt: readString(imageRecord.alt, `${imageLabel}.alt`),
+      });
+    }),
   });
 }
 
@@ -321,9 +389,7 @@ export const teamMembers = readArray(
 );
 export const teamDiaries = Object.freeze(
   [...readArray(teamDiariesJson, "teamDiaries", readTeamDiary)].sort(
-    (left, right) =>
-      Date.parse(left.date) - Date.parse(right.date) ||
-      left.updatedAt.localeCompare(right.updatedAt),
+    (left, right) => left.dayNumber - right.dayNumber,
   ),
 );
 
@@ -337,8 +403,21 @@ export const growthCardAssets: Readonly<Record<string, GrowthCardAsset>> =
     ),
   );
 
+export const teamDiaryAssets: Readonly<Record<string, TeamDiaryAsset>> =
+  Object.freeze(
+    Object.fromEntries(
+      Object.entries(teamDiaryImageAssets).map(([imageId, asset]) => [
+        imageId,
+        Object.freeze({ full: asset.full, thumbnail: asset.thumbnail }),
+      ]),
+    ),
+  );
+
 const childrenBySlug = new Map(children.map((child) => [child.slug, child]));
 const diariesBySlug = new Map(diaries.map((diary) => [diary.slug, diary]));
+const teamDiariesBySlug = new Map(
+  teamDiaries.map((diary) => [diary.slug, diary]),
+);
 
 function assertUniqueValues<T>(
   records: readonly T[],
@@ -423,6 +502,25 @@ function validateAsset(imageId: string, asset: GrowthCardAsset): void {
   }
 }
 
+function validateTeamDiaryAsset(
+  imageId: string,
+  asset: TeamDiaryAsset,
+): void {
+  for (const [variant, image] of [
+    ["full", asset.full],
+    ["thumbnail", asset.thumbnail],
+  ] as const) {
+    if (
+      !image ||
+      typeof image.src !== "string" ||
+      image.width < 1 ||
+      image.height < 1
+    ) {
+      throw new Error(`团队日志图片 ${imageId}.${variant} 不是有效的静态图片`);
+    }
+  }
+}
+
 export function validateContent(): ContentStats {
   assertUniqueValues(children, "children.slug", (child) => child.slug);
   assertUniqueValues(
@@ -433,6 +531,7 @@ export function validateContent(): ContentStats {
   assertUniqueValues(diaries, "diaries.slug", (diary) => diary.slug);
   assertUniqueValues(diaries, "diaries.imageId", (diary) => diary.imageId);
   assertUniqueValues(teamMembers, "teamMembers.name", (member) => member.name);
+  assertUniqueValues(teamDiaries, "teamDiaries.slug", (diary) => diary.slug);
 
   if (children.length !== EXPECTED_GROWTH_CHILD_COUNT) {
     throw new Error(
@@ -451,6 +550,76 @@ export function validateContent(): ContentStats {
     throw new Error(
       `成长卡图片数量应为 ${EXPECTED_GROWTH_CARD_COUNT}，当前为 ${assetIds.length}`,
     );
+  }
+
+  if (teamDiaries.length !== EXPECTED_TEAM_DIARY_COUNT) {
+    throw new Error(
+      `团队日志数量应为 ${EXPECTED_TEAM_DIARY_COUNT}，当前为 ${teamDiaries.length}`,
+    );
+  }
+
+  const teamDiaryAssetIds = Object.keys(teamDiaryAssets);
+  if (teamDiaryAssetIds.length !== EXPECTED_TEAM_DIARY_IMAGE_COUNT) {
+    throw new Error(
+      `团队日志图片数量应为 ${EXPECTED_TEAM_DIARY_IMAGE_COUNT}，当前为 ${teamDiaryAssetIds.length}`,
+    );
+  }
+
+  const referencedTeamDiaryImageIds = new Set<string>();
+  for (const [index, diary] of teamDiaries.entries()) {
+    const expectedDayNumber = index + 1;
+    const expectedSlug = `day-${String(expectedDayNumber).padStart(2, "0")}`;
+    const expectedImageCount = EXPECTED_TEAM_DIARY_IMAGE_COUNTS[index];
+
+    if (diary.dayNumber !== expectedDayNumber || diary.slug !== expectedSlug) {
+      throw new Error(
+        `团队日志第 ${expectedDayNumber} 篇必须使用 ${expectedSlug} 与对应 dayNumber`,
+      );
+    }
+    if (diary.images.length !== expectedImageCount) {
+      throw new Error(
+        `${diary.slug} 图片数量应为 ${expectedImageCount}，当前为 ${diary.images.length}`,
+      );
+    }
+    if (diary.tags.length === 0) {
+      throw new Error(`${diary.slug} 至少需要一个原帖话题`);
+    }
+    if (!TEAM_DIARY_SOURCE_PATTERN.test(diary.sourceUrl)) {
+      throw new Error(`${diary.slug} 的来源必须是无查询参数的小红书 canonical 链接`);
+    }
+    if (
+      diary.updatedOn &&
+      Date.parse(diary.updatedOn) < Date.parse(diary.publishedOn)
+    ) {
+      throw new Error(`${diary.slug} 的 updatedOn 早于 publishedOn`);
+    }
+
+    for (const [imageIndex, image] of diary.images.entries()) {
+      const expectedImageId = `${diary.slug}-${String(imageIndex + 1).padStart(2, "0")}`;
+      if (
+        !TEAM_DIARY_IMAGE_ID_PATTERN.test(image.id) ||
+        image.id !== expectedImageId
+      ) {
+        throw new Error(
+          `${diary.slug} 第 ${imageIndex + 1} 张图片必须使用 ${expectedImageId}`,
+        );
+      }
+      if (referencedTeamDiaryImageIds.has(image.id)) {
+        throw new Error(`团队日志图片 ${image.id} 被重复引用`);
+      }
+      referencedTeamDiaryImageIds.add(image.id);
+      const asset = teamDiaryAssets[image.id];
+      if (!asset) {
+        throw new Error(`${diary.slug} 缺少图片资源 ${image.id}`);
+      }
+      validateTeamDiaryAsset(image.id, asset);
+    }
+  }
+
+  for (const imageId of teamDiaryAssetIds) {
+    if (!referencedTeamDiaryImageIds.has(imageId)) {
+      throw new Error(`团队日志图片 ${imageId} 没有对应内容记录`);
+    }
   }
 
   for (const diary of diaries) {
@@ -522,10 +691,61 @@ export function validateContent(): ContentStats {
     classes: classCount,
     teamMembers: teamMembers.length,
     teamDiaries: teamDiaries.length,
+    teamDiaryAssets: teamDiaryAssetIds.length,
   });
 }
 
 export const contentStats = validateContent();
+
+export function getTeamDiaryBySlug(
+  slug: string,
+): TeamDiaryRecord | undefined {
+  return teamDiariesBySlug.get(slug as TeamDiarySlug);
+}
+
+export function getTeamDiaryImageAsset(imageId: string): TeamDiaryAsset {
+  const asset = teamDiaryAssets[imageId];
+  if (!asset) throw new Error(`找不到团队日志图片：${imageId}`);
+  return asset;
+}
+
+export function getTeamDiaryImages(
+  diary: TeamDiaryRecord,
+): readonly TeamDiaryImage[] {
+  return Object.freeze(
+    diary.images.map((image) =>
+      Object.freeze({ ...image, ...getTeamDiaryImageAsset(image.id) }),
+    ),
+  );
+}
+
+export function getTeamDiaryCoverAsset(
+  diary: TeamDiaryRecord,
+): TeamDiaryAsset {
+  const cover = diary.images[0];
+  if (!cover) throw new Error(`${diary.slug} 缺少封面图片`);
+  return getTeamDiaryImageAsset(cover.id);
+}
+
+export interface AdjacentTeamDiaries {
+  readonly previous: TeamDiaryRecord | undefined;
+  readonly next: TeamDiaryRecord | undefined;
+}
+
+export function getAdjacentTeamDiaries(
+  diary: TeamDiaryRecord,
+): AdjacentTeamDiaries {
+  const index = teamDiaries.findIndex(
+    (candidate) => candidate.slug === diary.slug,
+  );
+  if (index < 0) {
+    return Object.freeze({ previous: undefined, next: undefined });
+  }
+  return Object.freeze({
+    previous: index > 0 ? teamDiaries[index - 1] : undefined,
+    next: index < teamDiaries.length - 1 ? teamDiaries[index + 1] : undefined,
+  });
+}
 
 export function getChildBySlug(slug: string): ChildRecord | undefined {
   return childrenBySlug.get(slug);

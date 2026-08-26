@@ -20,11 +20,11 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - 默认分支：`main`
 - 产品定位：面向老师、家长、志愿者与公益支持者的公开支教团队展示站。
 - 第一叙事是“云启青禾支教团队、团队行动与支教故事”。
-- 后续规划包括“儿童成果”和“线上阅读共建平台”，目前尚未建立公开路由或占位页。只有用户明确提出时再实现。
+- “线上阅读共建平台”已建立公开路由；“儿童成果”仍是后续规划，只有用户明确提出时再实现。
 - 这是纯静态公开网站。运行时没有数据库、服务端 API、登录、Token、Server Actions 或云端数据写入。
 - 相邻的 `../diary-notebook` 是旧项目，只读保留。默认工作范围仅限本仓库。
 
-当前内容基线：40 位真实姓名儿童、157 份公开成长记录、161 张源材料、8 位团队成员、3 篇团队日志。4 张无姓名或班级的自由书写页无法可靠确认归属，必须保留在内部清单中并标记排除，不生成公开资产、数据或页面。本批儿童材料已确认获得真实姓名、班级、手写内容、教师评语、教师署名和原卡图片的完整公开展示授权。团队日志仍是用户暂时保留的测试内容，不要擅自改写或删除；用户之后会提供正式内容。
+当前内容基线：40 位真实姓名儿童、157 份公开成长记录、161 张源材料、8 位团队成员、8 篇正式团队日志与 70 张团队现场影像。4 张无姓名或班级的自由书写页无法可靠确认归属，必须保留在内部清单中并标记排除，不生成公开资产、数据或页面。本批儿童材料已确认获得真实姓名、班级、手写内容、教师评语、教师署名和原卡图片的完整公开展示授权；8 篇团队日志及 70 张配图也已确认具备公开展示授权。
 
 ## 开始工作前
 
@@ -36,15 +36,17 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ## 固定路由与信息架构
 
-公开内容 URL 共 202 个：
+公开内容 URL 共 214 个：
 
 - `/`：团队导向首页
 - `/about/`：团队介绍
 - `/team-diaries/`：团队日志
+- `/team-diaries/[slug]/`：8 篇 Day 1 至 Day 8 团队日志详情
 - `/diaries/`：真实成长日志目录
 - `/children/[slug]/`：40 个儿童成长页
 - `/diaries/[slug]/`：157 个原卡与转写详情页
 - `/works/`：儿童创作展
+- `/reading/`、`/reading/books/`、`/reading/resources/`、`/reading/activities/`：阅读共建
 
 另有静态 `404`、`robots.txt` 和 `sitemap.xml`。
 
@@ -61,7 +63,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Next.js 16.3.1 App Router、React 19、TypeScript strict。
 - `output: "export"` 生成 `out/`，并启用 `trailingSlash: true` 和 `images.unoptimized: true`。
 - 页面、成长内容读取、日期处理和 Markdown 渲染均在 Server Components / 构建期完成。
-- 客户端边界应保持为少量叶组件：`SiteHeader`、`Reveal`、通用媒体查看器与 `GrowthJourneyTrack`。首页保持静态 Server Component，不再使用自动入场包装。
+- 客户端边界应保持为少量叶组件：`SiteHeader`、`Reveal`、通用媒体查看器、`GrowthJourneyTrack` 与团队日志灯箱。首页保持静态 Server Component，不再使用自动入场包装。
 - 不要把页面或内容布局整体改成 Client Component，否则会把日记 JSON、Markdown 解析器和无关内容重新打进客户端包。
 - 语义 HTML + CSS Modules 是主要 UI 实现方式；全局 CSS 只放设计令牌、基础样式和 Markdown 公共样式。
 - 图标统一使用 Phosphor；动效统一使用 Motion。不要重新引入 Ant Design、图标混用或手写 SVG 图标。
@@ -79,6 +81,9 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `scripts/growth-cards-manifest.json`：161 张源图的方向、裁切、归属或排除原因清单。
 - `scripts/process-growth-cards.mjs`：Sharp 图片预处理与可重复性检查。
 - `src/content/growth-card-assets.generated.ts`：自动生成的静态图片注册表。
+- `scripts/team-diaries-manifest.json`：8 篇团队日志、70 张原序图片的尺寸、哈希与 alt 清单。
+- `scripts/process-team-diaries.mjs`：团队日志内容、完整图、640px 缩略图、清单与静态注册表的生成和检查。
+- `src/content/team-diary-assets.generated.ts`：70 组团队日志图片静态导入注册表。
 - `src/content/*.json`：团队成员和团队日志内容。
 - `src/assets/`：页面位图，必须使用静态导入。
 - `public/og-v2.jpg`：当前社交预览图。
@@ -91,6 +96,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - `src/content/growth-card-assets.generated.ts`
 - `src/content/team-members.json`
 - `src/content/team-diaries.json`
+- `src/content/team-diary-assets.generated.ts`
 
 公开模型：
 
@@ -153,10 +159,18 @@ type TeamMember = {
 };
 
 type TeamDiary = {
-  date: string;
+  slug: "day-01" | "day-02" | "day-03" | "day-04" | "day-05" | "day-06" | "day-07" | "day-08";
+  dayNumber: number;
+  publishedOn: string;
+  updatedOn?: string;
+  location?: string;
+  author: "NJU 云启青禾";
   title: string;
+  summary: string;
   markdown: string;
-  updatedAt: string;
+  tags: string[];
+  sourceUrl: string;
+  images: Array<{ id: string; alt: string }>;
 };
 ```
 
@@ -167,10 +181,11 @@ type TeamDiary = {
 - 图片清单必须覆盖全部 161 张源材料，其中 157 张标记为公开，4 张以 `missing-attribution` 原因排除。排除项不得拥有儿童 slug、日志 slug、输出路径或公开图片注册项。
 - 原始日期只写入 `dateLabel`；只有原卡明确且可信时才写 `recordedOn`，不得推断缺失年份或静默修正错填日期。
 - 字迹无法可靠辨认时不得补猜。具体核对说明写入 `transcriptionNotes`，并在单卡详情页公开说明省略或规范之处。
-- 儿童成长记录使用独立 `sessionOrder` 排序；团队日志默认按日期升序。
+- 儿童成长记录使用独立 `sessionOrder` 排序；团队日志按 `dayNumber` 从 Day 1 至 Day 8 排序。
 - 每位儿童必须有一句成长总结、一张代表卡和 1 至 3 个能回溯到具体卡片的成长节点。
 - 渲染逻辑必须同时兼容 `plain` 自由书写和 `structured` 标准卡。
 - 团队日志 Markdown 支持 GitHub Flavored Markdown，并继续在服务端渲染。
+- 团队日志必须正好为 8 篇、70 张图，每篇图片数为 `9/8/10/9/11/8/7/8`；完整图、缩略图、清单和静态注册表不得有遗漏、错序或孤儿资源。
 - 修改成长图片后先运行 `npm run growth-cards`，提交前运行 `npm run growth-content:check`、`npm run growth-cards:check-public`、`npm run growth-cards:check` 和构建，让内容、公开映射、图片及 `src/lib/content.ts` 校验真正执行。
 
 ## 隐私与公开边界
@@ -223,9 +238,11 @@ npm run growth-content
 npm run growth-content:check
 npm run growth-cards:check-public
 npm run growth-cards:check
+npm run team-diaries:check
 npm run lint
 npm run typecheck
 npm run build
+npm run team-diaries:check-built
 ```
 
 无环境变量的 `npm run build` 验证本地根路径。GitHub Pages 子路径构建在 PowerShell 中使用：
@@ -248,7 +265,7 @@ Remove-Item Env:NEXT_PUBLIC_SITE_URL
 2. `npm run typecheck` 通过。
 3. 无环境变量根路径构建通过。
 4. `/yunqi-qinghe` 子路径构建通过。
-5. 仍生成 40 个儿童页、157 个成长卡详情页、团队日志、团队介绍、创作展、robots、sitemap 和中文 404。
+5. 仍生成 40 个儿童页、157 个成长卡详情页、团队日志总览、8 个团队日志详情页、团队介绍、阅读共建、创作展、robots、sitemap 和中文 404。
 6. 子路径构建中 CSS、JS、字体、图片、favicon、导航和深层链接都带正确前缀，没有裸 `/_next/` 或裸根路径媒体。
 7. 视觉改动在 1440px、768px、375px 下检查浅色、深色和减少动态效果；同时测试键盘与移动抽屉。
 8. 检查未知 slug 返回 404，深层链接可直接刷新。
@@ -262,7 +279,7 @@ Remove-Item Env:NEXT_PUBLIC_SITE_URL
 - 优先做最小、清晰、可维护的改动，不顺手重构无关模块。
 - 保留用户原始内容和声音；除非用户要求，不改写日记和团队日志正文。
 - 不伪造团队历史、成果、人数、数据或社会影响。
-- 未来加入儿童成果或线上阅读共建时，先确认内容结构、公开授权和新路由，再更新 `siteSections`、metadata、sitemap 与导航。
+- 未来加入儿童成果时，先确认内容结构、公开授权和新路由，再更新 `siteSections`、metadata、sitemap 与导航。
 - 诊断任务只报告原因；只有用户要求修复时才修改代码。
 - 默认发布只包含当前任务相关修改；用户已有的无关工作树改动不得擅自提交。
 - 交付时报告实际修改、验证结果、提交或部署状态，以及任何未完成的验收项。
