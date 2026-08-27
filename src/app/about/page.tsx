@@ -2,6 +2,7 @@ import Image from "next/image";
 import teamGroupImage from "@/assets/team-group.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import { teamMembers } from "@/lib/content";
 import { createPageMetadata } from "@/lib/site";
 import styles from "./page.module.css";
@@ -39,6 +40,10 @@ export default function AboutPage() {
             },
           ]}
         />
+        <NatureOrnament
+          variant="sprig"
+          className={styles.headerOrnament}
+        />
       </header>
 
       <section className={styles.profile} aria-labelledby="team-profile-title">
@@ -65,6 +70,10 @@ export default function AboutPage() {
           <h2 id="team-title" className={headingStyles.sectionTitle}>
             团队成员
           </h2>
+          <NatureOrnament
+            variant="sprig"
+            className={styles.sectionOrnament}
+          />
         </div>
 
         {teamMembers.length === 0 ? (

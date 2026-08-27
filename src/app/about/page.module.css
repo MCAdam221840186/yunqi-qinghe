@@ -6,13 +6,32 @@
 }
 
 .header {
+  position: relative;
   max-width: 900px;
-  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+  margin-bottom: clamp(2.75rem, 5.5vw, 4.75rem);
+  isolation: isolate;
 }
 
 .header h1 {
+  position: relative;
+  z-index: 1;
   --display-line-offset: 0.34em;
   --display-page-size: clamp(2.9rem, 4.8vw, 4.8rem);
+}
+
+.header > p {
+  position: relative;
+  z-index: 1;
+}
+
+.headerOrnament {
+  --nature-ornament-size: clamp(9rem, 14vw, 11rem);
+
+  position: absolute;
+  top: -1.75rem;
+  right: clamp(-4rem, -4vw, -2rem);
+  z-index: 0;
+  transform: rotate(8deg);
 }
 
 .profile {
@@ -20,7 +39,7 @@
   grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
   gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: start;
-  margin-bottom: clamp(5.5rem, 12vw, 10rem);
+  margin-bottom: clamp(4.5rem, 9.5vw, 8rem);
 }
 
 .profileVisual {
@@ -70,6 +89,17 @@
   align-items: start;
 }
 
+.sectionHeading {
+  min-width: 0;
+}
+
+.sectionOrnament {
+  --nature-ornament-size: 3.5rem;
+
+  margin-top: 1.15rem;
+  transform: rotate(-5deg);
+}
+
 .memberList {
   margin: 0;
   padding: 0;
@@ -86,7 +116,7 @@
   grid-template-columns: minmax(7rem, 0.8fr) minmax(0, 2fr);
   gap: clamp(2rem, 6vw, 5rem);
   align-items: center;
-  padding: clamp(2.5rem, 6vw, 5rem) 0;
+  padding: clamp(2.25rem, 5vw, 4rem) 0;
 }
 
 .initial {
@@ -138,7 +168,7 @@
   .member {
     grid-template-columns: 4.75rem minmax(0, 1fr);
     gap: 1.25rem;
-    padding-block: 2.25rem;
+    padding-block: 2rem;
   }
 
   .initial {
@@ -158,13 +188,21 @@
   }
 }
 
+@media (min-width: 768px) and (max-width: 1023px) {
+  .headerOrnament {
+    --nature-ornament-size: 9rem;
+
+    right: 0;
+  }
+}
+
 @media (max-width: 767px) {
   .page {
     padding: 3rem 1rem 5rem;
   }
 
   .header {
-    margin-bottom: 3.5rem;
+    margin-bottom: 2.75rem;
   }
 
   .header h1 {
@@ -174,7 +212,7 @@
 
   .profile {
     gap: 2.25rem;
-    margin-bottom: 5.5rem;
+    margin-bottom: 4.5rem;
   }
 
   .team {
@@ -190,5 +228,13 @@
 
   .initial {
     font-size: 5.75rem;
+  }
+
+  .headerOrnament {
+    display: none;
+  }
+
+  .sectionOrnament {
+    --nature-ornament-size: 3rem;
   }
 }

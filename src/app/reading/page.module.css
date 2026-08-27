@@ -157,13 +157,16 @@
 }
 
 .bookPath {
+  position: relative;
   display: grid;
-  min-height: 31rem;
+  min-height: 27rem;
   padding: clamp(1.5rem, 4vw, 3rem);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   grid-template-rows: auto 1fr auto auto;
+  overflow: hidden;
   background: color-mix(in srgb, var(--color-sky) 55%, var(--color-surface));
+  isolation: isolate;
 }
 
 .bookPath:hover,
@@ -290,14 +293,16 @@
 .secondaryPath {
   position: relative;
   display: grid;
-  min-height: 15rem;
+  min-height: 12.5rem;
   padding: 1.6rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: start;
   gap: 1rem;
+  overflow: hidden;
   background: var(--color-surface);
+  isolation: isolate;
 }
 
 .secondaryPath:hover {
@@ -324,6 +329,55 @@
   color: var(--color-accent-strong);
 }
 
+.bookPath > :not(.bookPathOrnament),
+.secondaryPath > :not(.resourceOrnament):not(.activityOrnament) {
+  position: relative;
+  z-index: 1;
+}
+
+.bookPathOrnament,
+.resourceOrnament,
+.activityOrnament {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.bookPathOrnament {
+  --nature-ornament-size: clamp(7rem, 10vw, 8.5rem);
+
+  top: 1.35rem;
+  right: clamp(1.2rem, 3vw, 2.5rem);
+  transform: rotate(4deg);
+}
+
+.resourceOrnament {
+  --nature-ornament-size: 5.25rem;
+
+  right: 0.85rem;
+  bottom: -0.8rem;
+  opacity: 0.82;
+  transform: rotate(-7deg);
+}
+
+.activityOrnament {
+  --nature-ornament-size: 4.75rem;
+
+  top: 0.9rem;
+  right: 2.75rem;
+  transform: rotate(1deg);
+}
+
+.activityOrnament::after {
+  position: absolute;
+  top: -0.95rem;
+  left: 52%;
+  width: 1px;
+  height: 1.2rem;
+  background: currentColor;
+  content: "";
+}
+
 @media (max-width: 880px) {
   .hero {
     min-height: auto;
@@ -345,7 +399,7 @@
   }
 
   .bookPath {
-    min-height: 28rem;
+    min-height: 27rem;
   }
 
   .secondaryPaths {
@@ -384,6 +438,13 @@
     padding: 1.4rem;
   }
 
+  .bookPathOrnament {
+    --nature-ornament-size: 6.5rem;
+
+    top: 0.9rem;
+    right: 0.8rem;
+  }
+
   .pathCopy h3 {
     font-size: 1.75rem;
   }
@@ -400,6 +461,19 @@
     min-height: 0;
     padding: 1.4rem;
     grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .resourceOrnament {
+    --nature-ornament-size: 4.75rem;
+
+    right: 0.55rem;
+  }
+
+  .activityOrnament {
+    --nature-ornament-size: 3.75rem;
+
+    top: 0.75rem;
+    right: 0.75rem;
   }
 
   .cornerArrow {

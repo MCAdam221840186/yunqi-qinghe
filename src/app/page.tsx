@@ -7,6 +7,7 @@ import openingCeremonyImage from "@/assets/opening-ceremony-group.webp";
 import booklistPreview from "@/assets/reading/booklist-page-1.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import { getArtwork } from "@/content/works";
 import {
   contentStats,
@@ -196,6 +197,10 @@ export default function HomePage() {
         aria-labelledby="team-diary-journey-title"
       >
         <div className={styles.journeyIntroduction}>
+          <NatureOrnament
+            variant="sprig"
+            className={styles.journeyOrnament}
+          />
           <h2
             id="team-diary-journey-title"
             className={headingStyles.sectionTitle}
@@ -268,6 +273,12 @@ export default function HomePage() {
       </section>
 
       <section className={styles.latest} aria-labelledby="latest-title">
+        <span className={styles.latestOrnamentFrame}>
+          <NatureOrnament
+            variant="sprig"
+            className={styles.latestOrnament}
+          />
+        </span>
         <div className={styles.sectionHeading}>
           <DisplayHeading
             as="h2"
@@ -408,16 +419,22 @@ export default function HomePage() {
         className={styles.readingPreview}
         aria-labelledby="reading-preview-title"
       >
-        <figure className={styles.readingPaper}>
-          <Image
-            src={booklistPreview}
-            alt="云南省双柏县乡村小学分级阅读书单第一页预览"
-            sizes="(max-width: 767px) min(82vw, 28rem), (max-width: 900px) 42vw, 33vw"
-            placeholder="blur"
-            loading="lazy"
+        <div className={styles.readingPaperStage}>
+          <NatureOrnament
+            variant="leafSeal"
+            className={styles.readingLeafSeal}
           />
-          <figcaption>团队调研成果，110 条分级书目</figcaption>
-        </figure>
+          <figure className={styles.readingPaper}>
+            <Image
+              src={booklistPreview}
+              alt="云南省双柏县乡村小学分级阅读书单第一页预览"
+              sizes="(max-width: 767px) min(82vw, 28rem), (max-width: 900px) 42vw, 33vw"
+              placeholder="blur"
+              loading="lazy"
+            />
+            <figcaption>团队调研成果，110 条分级书目</figcaption>
+          </figure>
+        </div>
 
         <div className={styles.readingCopy}>
           <span className={styles.readingIcon} aria-hidden="true">

@@ -1,7 +1,7 @@
 .page {
   width: min(100%, var(--max-width));
   margin: 0 auto;
-  padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(5rem, 9vw, 8rem);
+  padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(4rem, 7vw, 6rem);
 }
 
 .hero {
@@ -186,7 +186,7 @@
 .teamDiaryJourney,
 .readingPreview,
 .worksPreview {
-  padding-top: clamp(5rem, 10vw, 9rem);
+  padding-top: clamp(4.5rem, 7vw, 6.5rem);
 }
 
 .readingPreview {
@@ -196,27 +196,44 @@
   gap: clamp(2.5rem, 7vw, 7rem);
 }
 
-.readingPaper {
+.readingPaperStage {
   position: relative;
   width: min(100%, 29rem);
+  justify-self: end;
+  isolation: isolate;
+}
+
+.readingPaperStage::before {
+  position: absolute;
+  inset: 8% -12% -5% 10%;
+  z-index: 0;
+  border-radius: var(--radius-card);
+  background: var(--color-sky);
+  content: "";
+  transform: rotate(3deg);
+}
+
+.readingPaper {
+  position: relative;
+  z-index: 2;
+  width: 100%;
   margin: 0;
   padding: clamp(0.4rem, 0.8vw, 0.65rem);
   border: 1px solid var(--color-border);
   border-radius: 4px;
-  justify-self: end;
   background: #fff;
   box-shadow: var(--shadow-image);
   transform: rotate(-1.5deg);
 }
 
-.readingPaper::before {
+.readingLeafSeal {
+  --nature-ornament-size: clamp(4.75rem, 8vw, 6.5rem);
+
   position: absolute;
-  inset: 8% -12% -5% 10%;
-  z-index: -1;
-  border-radius: var(--radius-card);
-  background: var(--color-sky);
-  content: "";
-  transform: rotate(3deg);
+  right: clamp(-1.5rem, -2vw, -0.75rem);
+  bottom: 8%;
+  z-index: 1;
+  transform: rotate(8deg);
 }
 
 .readingPaper img {
@@ -309,14 +326,11 @@
   padding-top: clamp(0.75rem, 2.5vw, 2.5rem);
 }
 
-.journeyIntroduction::before {
-  display: block;
-  width: 3.75rem;
-  height: 0.28rem;
-  margin-bottom: 1.5rem;
-  border-radius: 999px;
-  background: var(--color-accent);
-  content: "";
+.journeyOrnament {
+  --nature-ornament-size: 3.75rem;
+
+  margin-bottom: 1.25rem;
+  transform: rotate(-5deg);
 }
 
 .journeyIntroduction h2 {
@@ -679,6 +693,36 @@
   z-index: 3;
   width: 52%;
   transform: rotate(1deg);
+}
+
+.latest {
+  position: relative;
+  isolation: isolate;
+}
+
+.latestOrnamentFrame {
+  position: absolute;
+  top: clamp(6.25rem, 8vw, 7.75rem);
+  right: clamp(-2.5rem, -3vw, -1rem);
+  width: clamp(4.5rem, 6vw, 5.5rem);
+  height: clamp(6rem, 10vw, 8rem);
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.latest .sectionHeading,
+.latest .highlightGrid {
+  position: relative;
+  z-index: 1;
+}
+
+.latestOrnament {
+  --nature-ornament-size: clamp(9rem, 12vw, 11rem);
+
+  position: absolute;
+  top: 0;
+  right: clamp(-5.5rem, -6vw, -4.5rem);
+  transform: rotate(8deg);
 }
 
 .sectionHeading {
@@ -1093,14 +1137,20 @@
     gap: 3rem;
   }
 
-  .readingPaper {
+  .readingPaperStage {
     width: min(82vw, 28rem);
     justify-self: center;
   }
 
-  .readingPaper::before {
+  .readingPaperStage::before {
     inset: 8% 0 -4% 6%;
     transform: rotate(1deg);
+  }
+
+  .readingLeafSeal {
+    --nature-ornament-size: 4.5rem;
+
+    right: -0.75rem;
   }
 
   .readingCopy h2 {
@@ -1141,6 +1191,14 @@
     bottom: 4%;
     left: 19%;
     width: 64%;
+  }
+
+  .journeyOrnament {
+    --nature-ornament-size: 3rem;
+  }
+
+  .latestOrnamentFrame {
+    display: none;
   }
 }
 

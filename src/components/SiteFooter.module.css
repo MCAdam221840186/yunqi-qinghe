@@ -1,9 +1,14 @@
 .footer {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
   border-top: 1px solid var(--color-line);
   background: var(--color-surface);
 }
 
 .inner {
+  position: relative;
+  z-index: 1;
   display: grid;
   width: min(calc(100% - 3rem), var(--max-width));
   min-height: 12rem;
@@ -57,6 +62,16 @@
   justify-self: end;
 }
 
+.footerSprig {
+  --nature-ornament-size: clamp(6.5rem, 9vw, 9rem);
+
+  position: absolute;
+  right: max(1.25rem, calc((100vw - var(--max-width)) / 2));
+  bottom: -0.8rem;
+  z-index: 0;
+  transform: rotate(-8deg);
+}
+
 @media (max-width: 767px) {
   .inner {
     width: min(calc(100% - 2rem), var(--max-width));
@@ -74,6 +89,13 @@
 
   .copyright {
     justify-self: start;
+  }
+
+  .footerSprig {
+    --nature-ornament-size: 6.5rem;
+
+    right: -1rem;
+    bottom: -0.65rem;
   }
 }
 

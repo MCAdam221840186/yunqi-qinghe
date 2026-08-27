@@ -8,6 +8,7 @@ import {
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import GrowthJourneyTrack from "@/components/GrowthJourneyTrack";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import {
   contentStats,
   getChildrenGroupedByClass,
@@ -28,24 +29,28 @@ export const metadata = createPageMetadata({
 
 const journeyStages = [
   {
+    stage: 1 as const,
     eyebrow: "相遇与尝试",
     title: "先把陌生，变成愿意试一试",
     copy: "从魔方、魔术到合唱和运动，第一步不是立刻做得完美，而是在同伴身边开口、动手，再给自己一次机会。",
     themes: ["新尝试", "同伴关系", "勇气"],
   },
   {
+    stage: 2 as const,
     eyebrow: "文化与创作",
     title: "看见更大的世界，也留下自己的线条",
     copy: "大学、民族文化与科学课打开新的窗口。孩子们把好奇装进小册子，也用画面和文字说出各自看见的世界。",
     themes: ["文化", "科学", "表达"],
   },
   {
+    stage: 3 as const,
     eyebrow: "表达与坚持",
     title: "情绪有了名字，坚持也有了回声",
     copy: "书法、电影、音乐、人工智能和风筝让感受变得具体。一次没完成，可以换一种方法，再耐心向前一点。",
     themes: ["情绪", "创造", "坚持"],
   },
   {
+    stage: 4 as const,
     eyebrow: "收获与告别",
     title: "把被看见的成长，带到明天",
     copy: "奖状不是故事的终点。孩子们在回望中确认自己的变化，也把感谢、不舍和下一次想做的事认真写了下来。",
@@ -155,6 +160,11 @@ export default function DiariesPage() {
                   <li key={theme}>{theme}</li>
                 ))}
               </ul>
+              <NatureOrnament
+                variant="growthStage"
+                stage={stage.stage}
+                className={styles.stageOrnament}
+              />
             </li>
           ))}
         </GrowthJourneyTrack>

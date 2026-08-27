@@ -1,0 +1,183 @@
+.ornament {
+  display: block;
+  flex: 0 0 auto;
+  color: var(--color-ornament);
+  pointer-events: none;
+  user-select: none;
+}
+
+.sprig {
+  position: relative;
+  width: var(--nature-ornament-size, clamp(6rem, 10vw, 9rem));
+  aspect-ratio: 8 / 5;
+}
+
+.sprig::before {
+  position: absolute;
+  right: 4%;
+  bottom: 30%;
+  left: 5%;
+  height: 1px;
+  border-radius: 999px;
+  background: currentColor;
+  content: "";
+  transform: rotate(-14deg);
+  transform-origin: left center;
+}
+
+.sprigLeaf {
+  position: absolute;
+  width: 29%;
+  height: auto;
+}
+
+.sprigLeafOne {
+  bottom: 31%;
+  left: 17%;
+  transform: rotate(-54deg);
+}
+
+.sprigLeafTwo {
+  right: 33%;
+  bottom: 27%;
+  transform: rotate(31deg) scaleX(-1);
+}
+
+.sprigLeafThree {
+  right: 1%;
+  bottom: 40%;
+  transform: rotate(-31deg);
+}
+
+.bookLeaf {
+  position: relative;
+  width: var(--nature-ornament-size, clamp(3.75rem, 6vw, 5rem));
+  aspect-ratio: 5 / 4;
+}
+
+.bookIcon {
+  position: absolute;
+  inset: 8% 2% 0;
+  width: 88%;
+  height: 88%;
+}
+
+.bookLeafIcon {
+  position: absolute;
+  top: -1%;
+  right: -2%;
+  width: 39%;
+  height: auto;
+  transform: rotate(18deg);
+}
+
+.leafSeal {
+  position: relative;
+  display: grid;
+  width: var(--nature-ornament-size, clamp(3.75rem, 6vw, 5rem));
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.leafSeal::before {
+  position: absolute;
+  inset: 0.35rem;
+  border: 1px solid currentColor;
+  border-radius: inherit;
+  content: "";
+}
+
+.sealLeafIcon {
+  width: 48%;
+  height: auto;
+  transform: rotate(-12deg);
+}
+
+.growthStage {
+  position: relative;
+  width: var(--nature-ornament-size, clamp(3rem, 5vw, 4.25rem));
+  aspect-ratio: 1;
+}
+
+.growthStage::before,
+.growthStage::after {
+  position: absolute;
+  background: currentColor;
+  content: "";
+}
+
+.growthStage::before {
+  bottom: 13%;
+  left: 50%;
+  width: 1px;
+  height: 76%;
+  border-radius: 999px;
+  transform: rotate(-6deg);
+  transform-origin: bottom center;
+}
+
+.growthStage::after {
+  right: 11%;
+  bottom: 7%;
+  left: 11%;
+  height: 0.35rem;
+  border-top: 1px solid currentColor;
+  border-radius: 50%;
+  background: transparent;
+}
+
+.growthLeaf {
+  position: absolute;
+  width: 34%;
+  height: auto;
+}
+
+.growthLeaf1 {
+  bottom: 20%;
+  left: 22%;
+  transform: rotate(-48deg);
+}
+
+.growthLeaf2 {
+  right: 20%;
+  bottom: 35%;
+  transform: rotate(37deg) scaleX(-1);
+}
+
+.growthLeaf3 {
+  bottom: 51%;
+  left: 25%;
+  transform: rotate(-42deg);
+}
+
+.growthLeaf4 {
+  top: 3%;
+  left: 40%;
+  transform: rotate(-13deg);
+}
+
+.stageOne::before {
+  height: 31%;
+}
+
+.stageTwo::before {
+  height: 47%;
+}
+
+.stageThree::before {
+  height: 63%;
+}
+
+@media (forced-colors: active) {
+  .ornament {
+    display: none;
+  }
+}
+
+@media print {
+  .ornament {
+    display: none;
+  }
+}

@@ -10,6 +10,7 @@ import Link from "next/link";
 import booklistPreview from "@/assets/reading/booklist-page-1.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import ReadingBreadcrumbs from "@/components/ReadingBreadcrumbs";
 import { readingBooks } from "@/lib/reading";
 import { gradeBandLabels, gradeBands } from "@/lib/reading-types";
@@ -132,6 +133,10 @@ export default function ReadingPage() {
               浏览完整书单
               <ArrowRight size={18} weight="bold" aria-hidden="true" />
             </span>
+            <NatureOrnament
+              variant="bookLeaf"
+              className={styles.bookPathOrnament}
+            />
           </Link>
 
           <div className={styles.secondaryPaths}>
@@ -150,6 +155,10 @@ export default function ReadingPage() {
                 weight="bold"
                 aria-hidden="true"
               />
+              <NatureOrnament
+                variant="leafSeal"
+                className={styles.resourceOrnament}
+              />
             </Link>
 
             <Link className={styles.secondaryPath} href="/reading/activities/">
@@ -166,6 +175,10 @@ export default function ReadingPage() {
                 size={18}
                 weight="bold"
                 aria-hidden="true"
+              />
+              <NatureOrnament
+                variant="sprig"
+                className={styles.activityOrnament}
               />
             </Link>
           </div>

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteSections } from "@/lib/navigation";
+import { NatureOrnament } from "./NatureOrnament";
 import styles from "./SiteFooter.module.css";
 
 export default function SiteFooter() {
@@ -23,6 +24,7 @@ export default function SiteFooter() {
 
         <p className={styles.copyright}>© 云启青禾</p>
       </div>
+      <NatureOrnament variant="sprig" className={styles.footerSprig} />
     </footer>
   );
 }

@@ -14,6 +14,11 @@
   --color-border: #c9d7ce;
   --color-line: var(--color-border);
   --color-focus: #17683d;
+  --color-ornament: color-mix(
+    in srgb,
+    var(--color-accent-strong) 22%,
+    transparent
+  );
   --radius-card: 1rem;
   --radius: var(--radius-card);
   --shadow-soft: 0 1.25rem 3.75rem rgb(35 74 50 / 0.12);
