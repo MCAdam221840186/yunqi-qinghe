@@ -1,6 +1,8 @@
 import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import Image from "next/image";
 import Link from "next/link";
+import { BotanicalCanopy } from "@/components/BotanicalCanopy";
+import { BotanicalMotionSurface } from "@/components/BotanicalMotionSurface";
 import DisplayHeading from "@/components/DisplayHeading";
 import displayHeadingStyles from "@/components/DisplayHeading.module.css";
 import {
@@ -10,6 +12,7 @@ import {
   type TeamDiaryRecord,
 } from "@/lib/content";
 import { createPageMetadata } from "@/lib/site";
+import DayJourneyNav from "./DayJourneyNav";
 import styles from "./page.module.css";
 
 export const metadata = createPageMetadata({
@@ -107,89 +110,94 @@ export default function TeamDiariesPage() {
 
   return (
     <div className={styles.page}>
-      <header className={styles.hero}>
-        <div className={styles.heroCopy}>
-          <p className={displayHeadingStyles.eyebrow}>团队日志 · 八日旅程</p>
-          <DisplayHeading
-            as="h1"
-            variant="pageHero"
-            lines={[
-              { before: "从初见出发，" },
-              { before: "沿着", accent: "八天" },
-              { before: "走向告别" },
-            ]}
+      <BotanicalMotionSurface mode="immersive" className={styles.heroSurface}>
+        <header className={styles.hero}>
+          <BotanicalCanopy
+            variant="side"
+            side="end"
+            density="lush"
+            className={styles.heroCanopy}
           />
-          <p className={styles.heroLead}>
-            八位志愿者、一群山里的孩子，从开营的第一声问候，到结营时舍不得放开的拥抱。每一日，都是这段双向奔赴里不可替代的一章。
-          </p>
 
-          <dl className={styles.stats} aria-label="团队日志统计">
-            <div>
-              <dt>{contentStats.teamDiaries}</dt>
-              <dd>篇正式记录</dd>
-            </div>
-            <div>
-              <dt>{contentStats.teamDiaryAssets}</dt>
-              <dd>张现场影像</dd>
-            </div>
-            <div>
-              <dt>8</dt>
-              <dd>个连续章节</dd>
-            </div>
-          </dl>
-        </div>
+          <div className={styles.heroCopy}>
+            <p className={displayHeadingStyles.eyebrow}>团队日志 · 八日旅程</p>
+            <DisplayHeading
+              as="h1"
+              variant="pageHero"
+              lines={[
+                { before: "从初见出发，" },
+                { before: "沿着", accent: "八天" },
+                { before: "走向告别" },
+              ]}
+            />
+            <p className={styles.heroLead}>
+              八位志愿者、一群山里的孩子，从开营的第一声问候，到结营时舍不得放开的拥抱。每一日，都是这段双向奔赴里不可替代的一章。
+            </p>
 
-        <div
-          className={styles.heroCollage}
-          role="group"
-          aria-label="从开营到结营的旅程影像"
-        >
-          <figure className={`${styles.heroFigure} ${styles.heroOpening}`}>
-            <Image
-              src={openingCover.thumbnail}
-              alt={openingCover.alt}
-              sizes="(max-width: 767px) 58vw, (max-width: 1100px) 34vw, 27rem"
-              placeholder="blur"
-              preload
-            />
-            <figcaption>Day 1 · 初见</figcaption>
-          </figure>
-          <figure className={`${styles.heroFigure} ${styles.heroMiddle}`}>
-            <Image
-              src={middleCover.thumbnail}
-              alt={middleCover.alt}
-              sizes="(max-width: 767px) 34vw, (max-width: 1100px) 22vw, 17rem"
-              placeholder="blur"
-            />
-            <figcaption>Day 4 · 相伴</figcaption>
-          </figure>
-          <figure className={`${styles.heroFigure} ${styles.heroClosing}`}>
-            <Image
-              src={closingCover.thumbnail}
-              alt={closingCover.alt}
-              sizes="(max-width: 767px) 40vw, (max-width: 1100px) 25vw, 20rem"
-              placeholder="blur"
-            />
-            <figcaption>Day 8 · 告别</figcaption>
-          </figure>
-        </div>
-      </header>
+            <dl className={styles.stats} aria-label="团队日志统计">
+              <div>
+                <dt>{contentStats.teamDiaries}</dt>
+                <dd>篇正式记录</dd>
+              </div>
+              <div>
+                <dt>{contentStats.teamDiaryAssets}</dt>
+                <dd>张现场影像</dd>
+              </div>
+              <div>
+                <dt>8</dt>
+                <dd>个连续章节</dd>
+              </div>
+            </dl>
+          </div>
 
-      <nav className={styles.dayNav} aria-label="Day 章节导航">
-        <span className={styles.dayNavLabel}>沿途章节</span>
-        <ol>
-          {teamDiaries.map((diary) => (
-            <li key={diary.slug}>
-              <a href={`#${diary.slug}`}>
-                <span>Day</span>
-                <strong>{diary.dayNumber}</strong>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
+          <div
+            className={styles.heroCollage}
+            role="group"
+            aria-label="从开营到结营的旅程影像"
+          >
+            <figure className={`${styles.heroFigure} ${styles.heroOpening}`}>
+              <Image
+                src={openingCover.thumbnail}
+                alt={openingCover.alt}
+                sizes="(max-width: 767px) 58vw, (max-width: 1100px) 34vw, 27rem"
+                placeholder="blur"
+                preload
+              />
+              <figcaption>Day 1 · 初见</figcaption>
+            </figure>
+            <figure className={`${styles.heroFigure} ${styles.heroMiddle}`}>
+              <Image
+                src={middleCover.thumbnail}
+                alt={middleCover.alt}
+                sizes="(max-width: 767px) 34vw, (max-width: 1100px) 22vw, 17rem"
+                placeholder="blur"
+              />
+              <figcaption>Day 4 · 相伴</figcaption>
+            </figure>
+            <figure className={`${styles.heroFigure} ${styles.heroClosing}`}>
+              <Image
+                src={closingCover.thumbnail}
+                alt={closingCover.alt}
+                sizes="(max-width: 767px) 40vw, (max-width: 1100px) 25vw, 20rem"
+                placeholder="blur"
+              />
+              <figcaption>Day 8 · 告别</figcaption>
+            </figure>
+          </div>
+        </header>
+      </BotanicalMotionSurface>
+
+      <DayJourneyNav
+        items={teamDiaries.map(({ slug, dayNumber }) => ({ slug, dayNumber }))}
+      />
 
       <section className={styles.journey} aria-labelledby="journey-title">
+        <BotanicalCanopy
+          variant="shadowBand"
+          density="quiet"
+          className={styles.journeyCanopy}
+        />
+
         <div className={styles.journeyHeading}>
           <p className={displayHeadingStyles.eyebrow}>按日阅读</p>
           <h2 id="journey-title" className={displayHeadingStyles.sectionTitle}>

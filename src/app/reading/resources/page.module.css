@@ -26,6 +26,7 @@
 }
 
 .criteria {
+  position: relative;
   display: grid;
   padding: 1.35rem;
   border: 1px solid var(--color-border);
@@ -33,12 +34,29 @@
   grid-template-columns: auto minmax(0, 1fr);
   align-items: start;
   gap: 0.9rem;
+  overflow: hidden;
   color: var(--color-accent-strong);
   background: color-mix(
     in srgb,
     var(--color-accent-soft) 54%,
     var(--color-surface)
   );
+  isolation: isolate;
+}
+
+.criteria > :not(.criteriaOrnament) {
+  position: relative;
+  z-index: 1;
+}
+
+.criteriaOrnament {
+  --nature-ornament-size: clamp(3.75rem, 5vw, 4.5rem);
+
+  position: absolute;
+  right: 0.5rem;
+  bottom: -0.8rem;
+  z-index: 0;
+  transform: rotate(-7deg);
 }
 
 .criteria h2,

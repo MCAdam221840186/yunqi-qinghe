@@ -1,0 +1,192 @@
+.canopy {
+  --botanical-layer-opacity: 1;
+  --botanical-mirror: 1;
+
+  position: absolute;
+  z-index: 0;
+  display: block;
+  overflow: hidden;
+  opacity: var(--botanical-layer-opacity);
+  pointer-events: none;
+  user-select: none;
+}
+
+.arch {
+  width: var(--botanical-size, min(110vw, 100rem));
+  aspect-ratio: 1672 / 941;
+}
+
+.side {
+  width: var(--botanical-size, clamp(28rem, 34vw, 34rem));
+  aspect-ratio: 2 / 3;
+}
+
+.shadowBand {
+  width: var(--botanical-size, 112vw);
+  height: var(--botanical-height, clamp(11rem, 18vw, 18rem));
+}
+
+.orientation,
+.layer {
+  position: absolute;
+  inset: 0;
+  display: block;
+}
+
+.orientation {
+  transform: rotate(var(--botanical-rotate, 0deg))
+    scaleX(var(--botanical-mirror));
+  transform-origin: center;
+}
+
+.side[data-side="start"] {
+  --botanical-mirror: -1;
+}
+
+.layer {
+  background: currentColor;
+  backface-visibility: hidden;
+  mask-image: var(--botanical-mask-image);
+  mask-mode: alpha;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: contain;
+  transform-origin: center;
+  -webkit-mask-image: var(--botanical-mask-image);
+  -webkit-mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+}
+
+.shadowBand .layer {
+  inset: -22% -2%;
+  mask-position: center 8%;
+  mask-size: cover;
+  -webkit-mask-position: center 8%;
+  -webkit-mask-size: cover;
+}
+
+.farLayer {
+  color: var(--color-botanical-wash);
+  opacity: 0.84;
+  transform: translate3d(
+      var(--botanical-far-x, 0px),
+      calc(
+        var(--botanical-far-y, 0px) + var(--botanical-scroll-far, 0px) +
+          var(--botanical-reveal-y, 0px)
+      ),
+      0
+    )
+    scale(1.035);
+}
+
+.shadowLayer {
+  color: var(--color-botanical-shadow);
+  opacity: 0.9;
+  transform: translate3d(0, var(--botanical-reveal-y, 0px), 0)
+    scale(0.985);
+}
+
+:global([data-botanical-motion]) .layer {
+  will-change: transform, opacity;
+}
+
+.nearLayer {
+  color: var(--color-botanical-line);
+  opacity: 0.88;
+  transform: translate3d(
+      var(--botanical-near-x, 0px),
+      calc(
+        var(--botanical-near-y, 0px) + var(--botanical-scroll-near, 0px) +
+          var(--botanical-reveal-y, 0px)
+      ),
+      0
+    )
+    rotate(var(--botanical-near-rotate, 0deg)) scale(0.965);
+}
+
+.quiet .farLayer {
+  opacity: 0.6;
+}
+
+.quiet .shadowLayer {
+  opacity: 0.66;
+}
+
+.quiet .nearLayer {
+  opacity: 0.5;
+}
+
+.lush .farLayer {
+  opacity: 0.92;
+}
+
+.lush .nearLayer {
+  opacity: 0.94;
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .farLayer {
+    transform: translate3d(
+        0,
+        calc(
+          var(--botanical-scroll-tablet-far, 0px) +
+            var(--botanical-reveal-y, 0px)
+        ),
+        0
+      )
+      scale(1.035);
+  }
+
+  .nearLayer {
+    transform: translate3d(
+        0,
+        calc(
+          var(--botanical-scroll-tablet-near, 0px) +
+            var(--botanical-reveal-y, 0px)
+        ),
+        0
+      )
+      scale(0.965);
+  }
+}
+
+@media (max-width: 767px) {
+  .canopy {
+    --botanical-reveal-y: 0px !important;
+  }
+
+  .farLayer,
+  .shadowLayer {
+    transform: none;
+  }
+
+  .nearLayer {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer {
+    transform: none;
+    will-change: auto;
+  }
+}
+
+@media (forced-colors: active) {
+  .canopy {
+    display: none !important;
+  }
+}
+
+@media print {
+  .canopy {
+    display: none !important;
+  }
+}
+
+@supports not ((mask-image: url("")) or (-webkit-mask-image: url(""))) {
+  .canopy {
+    display: none;
+  }
+}

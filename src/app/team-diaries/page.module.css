@@ -3,14 +3,30 @@
   margin-inline: auto;
   padding: clamp(3rem, 7vw, 6.5rem) clamp(1rem, 3vw, 2.5rem)
     clamp(6rem, 12vw, 10rem);
+  overflow-x: clip;
+}
+
+.heroSurface {
+  min-width: 0;
 }
 
 .hero {
+  position: relative;
   display: grid;
   min-height: min(46rem, calc(100dvh - var(--header-height)));
   grid-template-columns: minmax(20rem, 0.88fr) minmax(29rem, 1.12fr);
   align-items: center;
   gap: clamp(3rem, 7vw, 7rem);
+}
+
+.heroCanopy {
+  --botanical-size: clamp(26rem, 38vw, 34rem);
+  --botanical-rotate: -4deg;
+  --botanical-layer-opacity: 0.52;
+
+  top: 50%;
+  right: clamp(-8rem, -6vw, -3rem);
+  transform: translateY(-50%);
 }
 
 .heroCopy {
@@ -67,6 +83,7 @@
 
 .heroCollage {
   position: relative;
+  z-index: 1;
   min-height: clamp(32rem, 51vw, 44rem);
 }
 
@@ -171,6 +188,16 @@
     background-color 160ms ease;
 }
 
+.dayNavLeaf {
+  flex: 0 0 auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: rotate(-24deg) scale(0.72);
+  transition:
+    opacity 180ms ease,
+    transform 220ms var(--ease-out);
+}
+
 .dayNav li:last-child a {
   border-right: 1px solid var(--color-border);
 }
@@ -190,11 +217,36 @@
   background: var(--color-accent-soft);
 }
 
+.dayNav a[aria-current="location"] {
+  color: var(--color-accent-strong);
+  background: var(--color-accent-soft);
+}
+
+.dayNav a[aria-current="location"] .dayNavLeaf {
+  opacity: 0.82;
+  transform: rotate(-12deg) scale(1);
+}
+
 .journey {
+  position: relative;
   padding-top: clamp(5rem, 10vw, 9rem);
+  isolation: isolate;
+}
+
+.journeyCanopy {
+  --botanical-size: 100%;
+  --botanical-height: clamp(10rem, 17vw, 15rem);
+  --botanical-rotate: 1deg;
+  --botanical-layer-opacity: 0.24;
+
+  top: clamp(28rem, 45vw, 42rem);
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .journeyHeading {
+  position: relative;
+  z-index: 1;
   display: grid;
   max-width: 53rem;
   margin-bottom: clamp(3.5rem, 8vw, 7rem);
@@ -218,6 +270,8 @@
 }
 
 .chapters {
+  position: relative;
+  z-index: 1;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -415,6 +469,14 @@
     justify-self: end;
   }
 
+  .heroCanopy {
+    --botanical-size: clamp(23rem, 52vw, 30rem);
+    --botanical-layer-opacity: 0.46;
+
+    top: 62%;
+    right: -5rem;
+  }
+
   .dayNav {
     grid-template-columns: 1fr;
     gap: 0.35rem;
@@ -465,6 +527,19 @@
 
   .heroCollage {
     min-height: min(118vw, 34rem);
+  }
+
+  .heroCanopy {
+    --botanical-size: 14rem;
+    --botanical-layer-opacity: 0.4;
+
+    top: 3rem;
+    right: -5.5rem;
+    transform: none;
+  }
+
+  .journeyCanopy {
+    display: none;
   }
 
   .dayNav {
@@ -524,6 +599,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .dayNav a,
+  .dayNavLeaf,
   .chapterLink,
   .chapterLink svg {
     transition: none;
@@ -536,9 +612,24 @@
 }
 
 @media (forced-colors: active) {
+  .dayNavLeaf {
+    display: none;
+  }
+
+  .dayNav a[aria-current="location"] {
+    outline: 2px solid Highlight;
+    outline-offset: -2px;
+  }
+
   .heroFigure img,
   .chapterVisual img,
   .chapterLink {
     border-color: CanvasText;
+  }
+}
+
+@media print {
+  .dayNavLeaf {
+    display: none;
   }
 }

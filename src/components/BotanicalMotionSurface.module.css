@@ -1,0 +1,19 @@
+.surface {
+  position: relative;
+  isolation: isolate;
+}
+
+@media (max-width: 767px), (prefers-reduced-motion: reduce) {
+  .surface {
+    --botanical-near-x: 0px !important;
+    --botanical-near-y: 0px !important;
+    --botanical-far-x: 0px !important;
+    --botanical-far-y: 0px !important;
+    --botanical-near-rotate: 0deg !important;
+    --botanical-scroll-near: 0px !important;
+    --botanical-scroll-far: 0px !important;
+    --botanical-scroll-tablet-near: 0px !important;
+    --botanical-scroll-tablet-far: 0px !important;
+    --botanical-reveal-y: 0px !important;
+  }
+}

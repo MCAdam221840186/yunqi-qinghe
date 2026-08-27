@@ -4,6 +4,27 @@
   padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(4rem, 7vw, 6rem);
 }
 
+.openingScene {
+  --opening-gutter: clamp(1rem, 1.25vw, 1.5rem);
+
+  width: calc(
+    100vw - var(--opening-gutter) - var(--opening-gutter)
+  );
+  margin-inline: calc(50% - 50vw + var(--opening-gutter));
+  overflow: clip;
+}
+
+.openingCanopy {
+  --botanical-size: min(116vw, 104rem);
+  --botanical-layer-opacity: 0.48;
+  --botanical-rotate: -0.8deg;
+
+  top: clamp(-10rem, -10vw, -6rem);
+  left: 50%;
+  z-index: 2;
+  transform: translateX(-50%);
+}
+
 .hero {
   display: grid;
   grid-template-columns: minmax(0, 5.5fr) minmax(24rem, 6.5fr);
@@ -112,11 +133,11 @@
   --opening-gutter: clamp(1rem, 1.25vw, 1.5rem);
   --opening-space: clamp(0.75rem, 1.5vw, 1.5rem);
 
+  position: relative;
+  z-index: 1;
   display: grid;
-  width: calc(
-    100vw - var(--opening-gutter) - var(--opening-gutter)
-  );
-  margin-inline: calc(50% - 50vw + var(--opening-gutter));
+  width: 100%;
+  margin-inline: 0;
   padding: var(--opening-space) 0;
   align-items: center;
 }
@@ -180,6 +201,27 @@
   object-fit: cover;
   object-position: center bottom;
   filter: none;
+}
+
+.journeyTransition {
+  width: 100vw;
+  height: clamp(6.5rem, 10vw, 9rem);
+  margin-top: clamp(-4.25rem, -4.5vw, -2.5rem);
+  margin-bottom: clamp(-4rem, -4vw, -2.25rem);
+  margin-inline: calc(50% - 50vw);
+  overflow: clip;
+  pointer-events: none;
+}
+
+.journeyCanopy {
+  --botanical-size: 112vw;
+  --botanical-height: 100%;
+  --botanical-layer-opacity: 0.48;
+  --botanical-rotate: -0.4deg;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .latest,
@@ -324,13 +366,6 @@
 .journeyIntroduction {
   max-width: 30rem;
   padding-top: clamp(0.75rem, 2.5vw, 2.5rem);
-}
-
-.journeyOrnament {
-  --nature-ornament-size: 3.75rem;
-
-  margin-bottom: 1.25rem;
-  transform: rotate(-5deg);
 }
 
 .journeyIntroduction h2 {
@@ -700,13 +735,13 @@
   isolation: isolate;
 }
 
-.latestOrnamentFrame {
+.latestCanopyFrame {
   position: absolute;
-  top: clamp(6.25rem, 8vw, 7.75rem);
-  right: clamp(-2.5rem, -3vw, -1rem);
-  width: clamp(4.5rem, 6vw, 5.5rem);
-  height: clamp(6rem, 10vw, 8rem);
-  overflow: hidden;
+  top: clamp(5.5rem, 7vw, 7rem);
+  right: clamp(-2rem, -2vw, -0.75rem);
+  width: clamp(7rem, 10vw, 10rem);
+  height: clamp(18rem, 27vw, 25rem);
+  overflow: clip;
   pointer-events: none;
 }
 
@@ -716,13 +751,13 @@
   z-index: 1;
 }
 
-.latestOrnament {
-  --nature-ornament-size: clamp(9rem, 12vw, 11rem);
+.latestCanopy {
+  --botanical-size: clamp(20rem, 28vw, 27rem);
+  --botanical-layer-opacity: 0.4;
+  --botanical-rotate: 3deg;
 
-  position: absolute;
   top: 0;
-  right: clamp(-5.5rem, -6vw, -4.5rem);
-  transform: rotate(8deg);
+  right: clamp(-13rem, -14vw, -9rem);
 }
 
 .sectionHeading {
@@ -974,6 +1009,17 @@
     padding: clamp(0.75rem, 2vw, 1rem) 0 clamp(1.5rem, 4vw, 2.5rem);
   }
 
+  .openingScene {
+    --opening-gutter: clamp(0.5rem, 2.5vw, 1rem);
+  }
+
+  .openingCanopy {
+    --botanical-size: 126vw;
+    --botanical-layer-opacity: 0.42;
+
+    top: -4rem;
+  }
+
   .openingStage {
     width: 100%;
     height: auto;
@@ -986,11 +1032,11 @@
 
   .openingPhoto {
     height: auto;
-    aspect-ratio: 4 / 3;
+    aspect-ratio: 16 / 10;
   }
 
   .openingPhoto img {
-    object-position: center;
+    object-position: center 72%;
   }
 
   .highlightGrid {
@@ -1040,6 +1086,24 @@
 @media (max-width: 767px) {
   .page {
     padding-inline: 1rem;
+  }
+
+  .openingCanopy {
+    --botanical-size: 14rem;
+    --botanical-layer-opacity: 0.38;
+
+    top: -0.75rem;
+    right: -2.5rem;
+    left: auto;
+    transform: none;
+  }
+
+  .journeyTransition {
+    display: none;
+  }
+
+  .latestCanopyFrame {
+    display: none;
   }
 
   .hero {
@@ -1193,13 +1257,6 @@
     width: 64%;
   }
 
-  .journeyOrnament {
-    --nature-ornament-size: 3rem;
-  }
-
-  .latestOrnamentFrame {
-    display: none;
-  }
 }
 
 @media (prefers-color-scheme: dark) {

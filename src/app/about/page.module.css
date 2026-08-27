@@ -1,12 +1,27 @@
 .page {
   width: min(100%, 1180px);
   margin-inline: auto;
+  overflow: clip;
   padding: clamp(3.5rem, 8vw, 7.5rem) clamp(1.25rem, 4vw, 3rem)
     clamp(5rem, 10vw, 9rem);
 }
 
+.profileScene {
+  margin-bottom: clamp(4.5rem, 9.5vw, 8rem);
+}
+
+.profileCanopy {
+  --botanical-size: clamp(25rem, 42vw, 33rem);
+  --botanical-layer-opacity: 0.62;
+  --botanical-rotate: 5deg;
+
+  top: clamp(-4rem, -4vw, -2rem);
+  right: clamp(-8.5rem, -8vw, -4rem);
+}
+
 .header {
   position: relative;
+  z-index: 1;
   max-width: 900px;
   margin-bottom: clamp(2.75rem, 5.5vw, 4.75rem);
   isolation: isolate;
@@ -24,22 +39,14 @@
   z-index: 1;
 }
 
-.headerOrnament {
-  --nature-ornament-size: clamp(9rem, 14vw, 11rem);
-
-  position: absolute;
-  top: -1.75rem;
-  right: clamp(-4rem, -4vw, -2rem);
-  z-index: 0;
-  transform: rotate(8deg);
-}
-
 .profile {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
   gap: clamp(2.5rem, 6vw, 5.5rem);
   align-items: start;
-  margin-bottom: clamp(4.5rem, 9.5vw, 8rem);
+  margin-bottom: 0;
 }
 
 .profileVisual {
@@ -100,6 +107,10 @@
   transform: rotate(-5deg);
 }
 
+.memberStage {
+  min-width: 0;
+}
+
 .memberList {
   margin: 0;
   padding: 0;
@@ -140,6 +151,17 @@
   margin: 1.25rem 0 0;
   color: var(--color-text-muted);
   line-height: 1.85;
+}
+
+.memberStage > .memberTailCanopy {
+  --botanical-size: 100%;
+  --botanical-height: clamp(7rem, 12vw, 10rem);
+  --botanical-layer-opacity: 0.38;
+  --botanical-rotate: -0.7deg;
+
+  position: relative;
+  margin-top: clamp(1.5rem, 4vw, 3rem);
+  margin-bottom: clamp(-3rem, -3vw, -1.5rem);
 }
 
 .empty {
@@ -188,14 +210,6 @@
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .headerOrnament {
-    --nature-ornament-size: 9rem;
-
-    right: 0;
-  }
-}
-
 @media (max-width: 767px) {
   .page {
     padding: 3rem 1rem 5rem;
@@ -210,9 +224,17 @@
     --display-page-size: clamp(2.45rem, 12vw, 4rem);
   }
 
+  .profileCanopy {
+    --botanical-size: 14rem;
+    --botanical-layer-opacity: 0.36;
+
+    top: -1rem;
+    right: -5.5rem;
+  }
+
   .profile {
     gap: 2.25rem;
-    margin-bottom: 4.5rem;
+    margin-bottom: 0;
   }
 
   .team {
@@ -230,11 +252,11 @@
     font-size: 5.75rem;
   }
 
-  .headerOrnament {
+  .sectionOrnament {
     display: none;
   }
 
-  .sectionOrnament {
-    --nature-ornament-size: 3rem;
+  .memberStage > .memberTailCanopy {
+    display: none;
   }
 }

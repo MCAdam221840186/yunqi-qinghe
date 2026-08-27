@@ -1,5 +1,7 @@
 import Image from "next/image";
 import teamGroupImage from "@/assets/team-group.webp";
+import { BotanicalCanopy } from "@/components/BotanicalCanopy";
+import { BotanicalMotionSurface } from "@/components/BotanicalMotionSurface";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { NatureOrnament } from "@/components/NatureOrnament";
@@ -26,44 +28,59 @@ function getInitial(name: string): string {
 export default function AboutPage() {
   return (
     <div className={styles.page}>
-      <header className={styles.header}>
-        <p className={headingStyles.eyebrow}>团队介绍</p>
-        <DisplayHeading
-          as="h1"
-          variant="pageHero"
-          lines={[
-            { before: "认识云启青禾" },
-            {
-              before: "与",
-              accent: "同行伙伴",
-              tone: "primary",
-            },
-          ]}
+      <BotanicalMotionSurface
+        mode="immersive"
+        className={styles.profileScene}
+      >
+        <BotanicalCanopy
+          variant="side"
+          side="end"
+          density="lush"
+          className={styles.profileCanopy}
         />
-        <NatureOrnament
-          variant="sprig"
-          className={styles.headerOrnament}
-        />
-      </header>
 
-      <section className={styles.profile} aria-labelledby="team-profile-title">
-        <figure className={styles.profileVisual}>
-          <Image
-            src={teamGroupImage}
-            alt="云启青禾支教团队八名成员在活动现场合照"
-            sizes="(max-width: 899px) calc(100vw - 2rem), (max-width: 1180px) 58vw, 680px"
+        <header className={styles.header}>
+          <p className={headingStyles.eyebrow}>团队介绍</p>
+          <DisplayHeading
+            as="h1"
+            variant="pageHero"
+            lines={[
+              { before: "认识云启青禾" },
+              {
+                before: "与",
+                accent: "同行伙伴",
+                tone: "primary",
+              },
+            ]}
           />
-        </figure>
+        </header>
 
-        <div className={styles.profileCopy}>
-          <h2 id="team-profile-title" className={headingStyles.sectionTitle}>
-            文理工交融的支教团队
-          </h2>
-          {teamIntroduction.map((paragraph) => (
-            <p key={paragraph}>{paragraph}</p>
-          ))}
-        </div>
-      </section>
+        <section
+          className={styles.profile}
+          aria-labelledby="team-profile-title"
+        >
+          <figure className={styles.profileVisual}>
+            <Image
+              src={teamGroupImage}
+              alt="云启青禾支教团队八名成员在活动现场合照"
+              sizes="(max-width: 899px) calc(100vw - 2rem), (max-width: 1180px) 58vw, 680px"
+              preload
+            />
+          </figure>
+
+          <div className={styles.profileCopy}>
+            <h2
+              id="team-profile-title"
+              className={headingStyles.sectionTitle}
+            >
+              文理工交融的支教团队
+            </h2>
+            {teamIntroduction.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+      </BotanicalMotionSurface>
 
       <section className={styles.team} aria-labelledby="team-title">
         <div className={styles.sectionHeading}>
@@ -76,36 +93,46 @@ export default function AboutPage() {
           />
         </div>
 
-        {teamMembers.length === 0 ? (
-          <div className={styles.empty}>
-            <h3 className={headingStyles.stateTitle}>成员资料正在整理中</h3>
-            <p>资料完成后会在这里展示。</p>
-          </div>
-        ) : (
-          <ul className={styles.memberList}>
-            {teamMembers.map((member, index) => (
-              <li key={`${member.name}-${index}`}>
-                <article className={styles.member}>
-                  <span className={styles.initial} aria-hidden="true">
-                    {getInitial(member.name)}
-                  </span>
+        <div className={styles.memberStage}>
+          {teamMembers.length === 0 ? (
+            <div className={styles.empty}>
+              <h3 className={headingStyles.stateTitle}>成员资料正在整理中</h3>
+              <p>资料完成后会在这里展示。</p>
+            </div>
+          ) : (
+            <ul className={styles.memberList}>
+              {teamMembers.map((member, index) => (
+                <li key={`${member.name}-${index}`}>
+                  <article className={styles.member}>
+                    <span className={styles.initial} aria-hidden="true">
+                      {getInitial(member.name)}
+                    </span>
 
-                  <div className={styles.memberCopy}>
-                    {member.role && (
-                      <p className={`${headingStyles.eyebrow} ${styles.role}`}>
-                        {member.role}
-                      </p>
-                    )}
-                    <h3 className={headingStyles.contentTitle}>
-                      {member.name}
-                    </h3>
-                    {member.description && <p>{member.description}</p>}
-                  </div>
-                </article>
-              </li>
-            ))}
-          </ul>
-        )}
+                    <div className={styles.memberCopy}>
+                      {member.role && (
+                        <p
+                          className={`${headingStyles.eyebrow} ${styles.role}`}
+                        >
+                          {member.role}
+                        </p>
+                      )}
+                      <h3 className={headingStyles.contentTitle}>
+                        {member.name}
+                      </h3>
+                      {member.description && <p>{member.description}</p>}
+                    </div>
+                  </article>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <BotanicalCanopy
+            variant="shadowBand"
+            density="quiet"
+            className={styles.memberTailCanopy}
+          />
+        </div>
       </section>
     </div>
   );

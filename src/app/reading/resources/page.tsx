@@ -6,6 +6,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import ReadingBreadcrumbs from "@/components/ReadingBreadcrumbs";
 import { formatReadingDate, readingResources } from "@/lib/reading";
 import {
@@ -66,6 +67,10 @@ export default function ReadingResourcesPage() {
               不收录广告密集、来源不明，或要求未成年人提供不必要个人信息的网站。外部平台的注册与使用规则以其官方说明为准。
             </p>
           </div>
+          <NatureOrnament
+            variant="leafSeal"
+            className={styles.criteriaOrnament}
+          />
         </aside>
       </header>
 

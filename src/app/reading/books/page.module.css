@@ -26,10 +26,28 @@
 }
 
 .summary {
+  position: relative;
   padding: 1.35rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
+  overflow: hidden;
   background: color-mix(in srgb, var(--color-sky) 52%, var(--color-surface));
+  isolation: isolate;
+}
+
+.summary > :not(.summaryOrnament) {
+  position: relative;
+  z-index: 1;
+}
+
+.summaryOrnament {
+  --nature-ornament-size: clamp(3.75rem, 5vw, 4.5rem);
+
+  position: absolute;
+  top: 0.65rem;
+  right: 0.55rem;
+  z-index: 0;
+  transform: rotate(5deg);
 }
 
 .summaryHeading {
