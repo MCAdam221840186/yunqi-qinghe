@@ -215,7 +215,7 @@ export default function GrowthJourneyTrack({
     trackState.itemCount > 0 ? trackState.activeIndex + 1 : 0;
 
   return (
-    <div className={rootClassName}>
+    <div className={rootClassName} data-active-index={trackState.activeIndex}>
       <ol
         ref={trackRef}
         id={trackId}

@@ -36,10 +36,12 @@
   display: block;
   width: fit-content;
   max-width: 100%;
-  white-space: nowrap;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .line + .line {
+  max-width: calc(100% - var(--display-line-offset));
   margin-top: 0.08em;
   margin-inline-start: var(--display-line-offset);
 }

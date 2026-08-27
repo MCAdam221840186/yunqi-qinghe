@@ -1,7 +1,6 @@
 .footer {
   position: relative;
   isolation: isolate;
-  overflow: clip;
   border-top: 1px solid var(--color-line);
   background: var(--color-surface);
 }
@@ -12,7 +11,7 @@
   display: grid;
   width: min(calc(100% - 3rem), var(--max-width));
   min-height: 12rem;
-  grid-template-columns: 1.2fr auto 1fr;
+  grid-template-columns: minmax(8rem, 1fr) minmax(0, auto) auto;
   align-items: center;
   margin: 0 auto;
   gap: 2rem;
@@ -37,10 +36,30 @@
 }
 
 .navigation {
+  position: relative;
   display: flex;
+  min-width: 0;
+  padding: 2.5rem 0 0 3rem;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1.5rem;
+}
+
+.footerTurn {
+  --trace-stroke: 1px;
+  top: -1.25rem;
+  left: 0;
+  width: 3rem;
+  height: 2.5rem;
+}
+
+.footerRoute {
+  --trace-stroke: 1px;
+  top: 1.25rem;
+  left: 3rem;
+  width: calc(100% - 3rem);
+  height: 1px;
 }
 
 .navigation a {
@@ -67,9 +86,30 @@
 
   position: absolute;
   right: max(1.25rem, calc((100vw - var(--max-width)) / 2));
-  bottom: -0.8rem;
+  bottom: 0.25rem;
   z-index: 0;
   transform: rotate(-8deg);
+}
+
+@media (max-width: 1023px) {
+  .inner {
+    grid-template-columns: minmax(8rem, 1fr) minmax(0, auto);
+    padding-block: 2.5rem;
+    gap: 1.5rem;
+  }
+
+  .navigation {
+    padding-left: 2rem;
+    gap: 1rem;
+  }
+
+  .footerTurn { width: 2rem; }
+  .footerRoute { left: 2rem; width: calc(100% - 2rem); }
+
+  .copyright {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
 }
 
 @media (max-width: 767px) {
@@ -82,9 +122,16 @@
   }
 
   .navigation {
+    padding: 0;
     align-items: flex-start;
     justify-content: flex-start;
+    flex-wrap: wrap;
     gap: 1.25rem;
+  }
+
+  .footerTurn,
+  .footerRoute {
+    display: none;
   }
 
   .copyright {
@@ -94,8 +141,8 @@
   .footerSprig {
     --nature-ornament-size: 6.5rem;
 
-    right: -1rem;
-    bottom: -0.65rem;
+    right: 1rem;
+    bottom: 0.5rem;
   }
 }
 

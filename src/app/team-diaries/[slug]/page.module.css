@@ -34,11 +34,25 @@
 }
 
 .dayMarker {
+  position: relative;
   display: grid;
   padding-top: 1rem;
   border-top: 1px solid var(--color-accent);
   gap: 0.1rem;
   color: var(--color-accent-strong);
+}
+
+.dayMarker::after {
+  position: absolute;
+  top: calc(100% + 1.25rem);
+  left: 0;
+  width: 3.5rem;
+  height: 1rem;
+  border-bottom: 2px solid var(--color-trace);
+  border-left: 2px solid var(--color-trace);
+  border-bottom-left-radius: 1rem;
+  content: "";
+  pointer-events: none;
 }
 
 .dayMarker > span,
@@ -325,6 +339,13 @@
     gap: 0.55rem;
   }
 
+  .dayMarker::after {
+    top: -1px;
+    height: 0;
+    border-left: 0;
+    border-radius: 0;
+  }
+
   .dayMarker > strong {
     font-size: 2.2rem;
     letter-spacing: -0.04em;
@@ -399,5 +420,11 @@
   .adjacentNav,
   .adjacentLink {
     border-color: CanvasText;
+  }
+}
+
+@media print, (forced-colors: active) {
+  .dayMarker::after {
+    display: none;
   }
 }

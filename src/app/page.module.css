@@ -1,132 +1,51 @@
 .page {
-  width: min(100%, var(--max-width));
-  margin: 0 auto;
-  padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(4rem, 7vw, 6rem);
+  --home-gutter: clamp(3.5rem, 6.5vw, 5.5rem);
+  --home-spine-x: 0.875rem;
+  --section-space: clamp(4rem, 6.5vw, 6rem);
+  padding-bottom: clamp(4rem, 7vw, 6rem);
 }
 
-.hero {
-  display: grid;
-  grid-template-columns: minmax(0, 5.5fr) minmax(24rem, 6.5fr);
-  gap: clamp(2rem, 5vw, 5.5rem);
-  min-height: calc(100dvh - var(--header-height));
-  padding: clamp(2.25rem, 6vw, 5.75rem) 0 clamp(3rem, 6vw, 5rem);
-  align-items: center;
-}
-
-.heroCopy {
+.hero,
+.teamDiaryJourney,
+.latest,
+.worksPreview,
+.readingPreview {
   position: relative;
-  z-index: 1;
-  max-width: 39rem;
+  width: min(calc(100% - 3rem), var(--max-width));
+  margin-inline: auto;
+  padding-top: var(--section-space);
+  padding-left: var(--home-gutter);
+  isolation: isolate;
 }
 
-.heroCopy h2 {
-  --display-brand-size: clamp(2.9rem, 5.4vw, 5.8rem);
-}
-
-.heroActions {
-  display: flex;
-  margin-top: 2rem;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.primaryLink {
-  display: inline-flex;
-  min-height: 3.25rem;
-  padding: 0.76rem 1.25rem;
-  border: 1px solid var(--color-accent-strong);
-  border-radius: 999px;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--color-on-accent);
-  background: var(--color-accent-strong);
-  font-weight: 700;
-  text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    color 180ms ease,
-    background-color 180ms ease,
-    border-color 180ms ease;
-}
-
-.primaryLink:hover {
-  background: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.primaryLink:active {
-  transform: translateY(1px);
-}
-
-.heroVisual {
-  position: relative;
-  display: grid;
-  width: 100%;
-  aspect-ratio: 1.12;
-  min-width: 0;
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  gap: clamp(0.75rem, 1.5vw, 1rem);
-}
-
-.heroVisual::before {
-  position: absolute;
-  inset: -0.8rem 3% -0.6rem 3%;
-  z-index: -1;
-  border-radius: var(--radius-card);
-  background: var(--color-sky);
-  content: "";
-  transform: rotate(-1.5deg);
-}
-
-.heroFrame {
-  width: 94%;
+.sectionSpine {
+  top: 0;
+  left: var(--home-spine-x);
+  width: 1px;
   height: 100%;
-  min-height: 0;
-  margin: 0;
-  overflow: hidden;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-border) 72%,
-    transparent
-  );
-  border-radius: var(--radius-card);
-  background: var(--color-surface-soft);
-  box-shadow: var(--shadow-image);
 }
 
-.heroFrameQiyun {
-  justify-self: start;
+.mobileBranch {
+  display: none;
 }
 
-.heroFrameQinghe {
-  justify-self: end;
+.page h2[id] {
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
 }
 
-.heroFrame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
+/* A static, full-width photograph: only the empty ceiling is cropped. */
 .openingMoment {
-  --opening-gutter: clamp(1rem, 1.25vw, 1.5rem);
-  --opening-space: clamp(0.75rem, 1.5vw, 1.5rem);
-
-  display: grid;
-  width: calc(
-    100vw - var(--opening-gutter) - var(--opening-gutter)
-  );
-  margin-inline: calc(50% - 50vw + var(--opening-gutter));
-  padding: var(--opening-space) 0;
-  align-items: center;
+  width: min(calc(100% - 2rem), 90rem);
+  margin-inline: auto;
+  padding-top: clamp(0.75rem, 1.5vw, 1.25rem);
 }
 
 .openingTitle {
   position: absolute;
   width: 1px;
   height: 1px;
-  padding: 0;
   margin: -1px;
+  padding: 0;
   overflow: hidden;
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -136,39 +55,16 @@
 .openingStage {
   position: relative;
   width: 100%;
-  height: min(
-    calc(
-      100dvh - var(--header-height) - var(--opening-space) -
-        var(--opening-space)
-    ),
-    calc(75vw - var(--opening-gutter) - var(--opening-gutter))
-  );
-  min-height: 0;
-  justify-self: center;
-  isolation: isolate;
-}
-
-.openingStage::before {
-  position: absolute;
-  inset: -0.45rem 1% -0.4rem;
-  z-index: -1;
-  border-radius: var(--radius-card);
-  background: var(--color-sky);
-  content: "";
-  transform: rotate(0.3deg);
+  aspect-ratio: 16 / 9;
+  max-height: 620px;
 }
 
 .openingPhoto {
-  position: relative;
   width: 100%;
   height: 100%;
   margin: 0;
   overflow: hidden;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-border) 76%,
-    transparent
-  );
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   background: var(--color-surface-soft);
   box-shadow: var(--shadow-image);
@@ -179,361 +75,297 @@
   height: 100%;
   object-fit: cover;
   object-position: center bottom;
-  filter: none;
 }
 
-.latest,
-.teamDiaryJourney,
-.readingPreview,
-.worksPreview {
-  padding-top: clamp(4.5rem, 7vw, 6.5rem);
-}
-
-.readingPreview {
+.hero {
   display: grid;
-  grid-template-columns: minmax(18rem, 0.82fr) minmax(0, 1.18fr);
+  grid-template-columns: minmax(0, 0.94fr) minmax(0, 1.06fr);
   align-items: center;
-  gap: clamp(2.5rem, 7vw, 7rem);
+  padding-top: clamp(2.5rem, 4.5vw, 4rem);
+  padding-bottom: 1rem;
+  gap: clamp(2rem, 4vw, 4rem);
 }
 
-.readingPaperStage {
-  position: relative;
-  width: min(100%, 29rem);
-  justify-self: end;
-  isolation: isolate;
+.heroSpine {
+  top: 4rem;
+  left: var(--home-spine-x);
+  width: 1px;
+  height: calc(100% - 4rem);
 }
 
-.readingPaperStage::before {
-  position: absolute;
-  inset: 8% -12% -5% 10%;
-  z-index: 0;
-  border-radius: var(--radius-card);
-  background: var(--color-sky);
-  content: "";
-  transform: rotate(3deg);
+.heroCopy {
+  min-width: 0;
 }
 
-.readingPaper {
-  position: relative;
-  z-index: 2;
-  width: 100%;
-  margin: 0;
-  padding: clamp(0.4rem, 0.8vw, 0.65rem);
-  border: 1px solid var(--color-border);
-  border-radius: 4px;
-  background: #fff;
-  box-shadow: var(--shadow-image);
-  transform: rotate(-1.5deg);
+.heroCopy h2 {
+  --display-brand-size: clamp(2.5rem, 4.3vw, 4.5rem);
 }
 
-.readingLeafSeal {
-  --nature-ornament-size: clamp(4.75rem, 8vw, 6.5rem);
-
-  position: absolute;
-  right: clamp(-1.5rem, -2vw, -0.75rem);
-  bottom: 8%;
-  z-index: 1;
-  transform: rotate(8deg);
+.heroCopy h2 > span,
+.sectionHeading h2 > span,
+.worksCopy h2 > span {
+  white-space: normal;
 }
 
-.readingPaper img {
-  width: 100%;
-  height: auto;
-  filter: none;
-}
-
-.readingPaper figcaption {
-  padding: 0.75rem 0.5rem 0.2rem;
-  color: #526057;
-  font-size: 0.72rem;
-}
-
-.readingCopy {
-  max-width: 37rem;
-}
-
-.readingIcon {
-  display: grid;
-  width: 4rem;
-  height: 4rem;
-  margin-bottom: 1.6rem;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-accent-strong) 32%,
-    var(--color-border)
-  );
-  border-radius: var(--radius-card);
-  place-items: center;
-  color: var(--color-accent-strong);
-  background: var(--color-surface);
-}
-
-.readingCopy h2 {
-  margin: 0;
-  font-size: clamp(2rem, 3.6vw, 3.3rem);
-  line-height: 1.25;
-}
-
-.readingCopy > p:not(:first-of-type) {
-  max-width: 31rem;
-  margin: 1.2rem 0 0;
-  color: var(--color-text-muted);
-  line-height: 1.8;
-}
-
-.readingActions {
+.heroActions {
   display: flex;
-  margin-top: 1.8rem;
+  margin-top: 2rem;
   flex-wrap: wrap;
   gap: 0.75rem;
 }
 
+.primaryLink,
+.journeyAction,
+.worksLink,
 .readingPrimary {
   display: inline-flex;
-  min-height: 3.15rem;
-  padding: 0.72rem 1.15rem;
+  width: fit-content;
+  min-height: 3.25rem;
+  padding: 0.76rem 1.25rem;
   border: 1px solid var(--color-accent-strong);
   border-radius: 999px;
   align-items: center;
   justify-content: center;
-  gap: 0.65rem;
-  font-weight: 700;
-  text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    background-color 180ms ease;
-}
-
-.readingPrimary {
+  gap: 0.75rem;
   color: var(--color-on-accent);
   background: var(--color-accent-strong);
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
 }
 
-.readingPrimary:hover {
-  transform: translateY(-2px);
+.primaryLink svg,
+.journeyAction svg,
+.worksLink svg,
+.readingPrimary svg,
+.diaryRead svg,
+.textLink svg {
+  flex: 0 0 auto;
+  transition: transform 220ms var(--ease-out);
+}
+
+.primaryLink:is(:hover, :focus-visible),
+.journeyAction:is(:hover, :focus-visible),
+.worksLink:is(:hover, :focus-visible),
+.readingPrimary:is(:hover, :focus-visible) {
   background: var(--color-accent);
 }
 
-.teamDiaryJourney {
+.primaryLink:is(:hover, :focus-visible) svg,
+.journeyAction:is(:hover, :focus-visible) svg,
+.worksLink:is(:hover, :focus-visible) svg,
+.readingPrimary:is(:hover, :focus-visible) svg,
+.textLink:is(:hover, :focus-visible) svg {
+  transform: translateX(4px);
+}
+
+.primaryLink:active,
+.journeyAction:active,
+.worksLink:active,
+.readingPrimary:active {
+  transform: translateY(1px);
+}
+
+.heroVisual {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(17rem, 0.72fr) minmax(0, 1.48fr);
-  align-items: start;
-  gap: clamp(3rem, 6vw, 6rem);
+  min-width: 0;
+  width: 100%;
+  aspect-ratio: 1.14;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
 }
 
+.heroVisual::before {
+  position: absolute;
+  inset: 0 3%;
+  z-index: -1;
+  border-radius: var(--radius-card);
+  background: var(--color-sky);
+  content: "";
+  transform: rotate(-2deg);
+}
+
+.heroFrame {
+  width: 96%;
+  height: 100%;
+  min-height: 0;
+  margin: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface-soft);
+  box-shadow: var(--shadow-image);
+}
+
+.heroFrameQiyun { justify-self: start; }
+.heroFrameQinghe { justify-self: end; }
+
+.heroFrame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Three actual days form one left-to-right journey, not a feature-card grid. */
 .journeyIntroduction {
-  max-width: 30rem;
-  padding-top: clamp(0.75rem, 2.5vw, 2.5rem);
-}
-
-.journeyOrnament {
-  --nature-ornament-size: 3.75rem;
-
-  margin-bottom: 1.25rem;
-  transform: rotate(-5deg);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  column-gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
 }
 
 .journeyIntroduction h2 {
+  max-width: 17ch;
   margin: 0;
-  font-size: clamp(2.35rem, 4.3vw, 4.25rem);
-  letter-spacing: -0.045em;
-  line-height: 1.14;
+  font-size: clamp(2.25rem, 3.6vw, 3.5rem);
+  line-height: 1.2;
 }
 
 .journeySummary {
-  max-width: 31rem;
-  margin: 1.4rem 0 0;
+  max-width: 36rem;
+  margin: 1.2rem 0 0;
+  grid-column: 1;
   color: var(--color-text-muted);
   line-height: 1.8;
 }
 
 .journeyStats {
   display: grid;
-  max-width: 27rem;
-  margin: clamp(2rem, 4vw, 3.25rem) 0 0;
-  padding: 1.15rem 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
+  width: 17rem;
+  margin: 0.35rem 0 0;
+  padding-block: 1rem;
+  border-block: 1px solid var(--color-border);
+  grid-column: 2;
+  grid-row: 1 / 4;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.journeyStats > div {
-  min-width: 0;
+  gap: 1.25rem;
 }
 
 .journeyStats > div + div {
-  padding-left: clamp(1rem, 2vw, 1.6rem);
+  padding-left: 1.25rem;
   border-left: 1px solid var(--color-border);
 }
 
-.journeyStats dt {
+.journeyStats dt,
+.readingStats dt {
   color: var(--color-text-muted);
-  font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  font-size: 0.78rem;
 }
 
 .journeyStats dd {
   display: flex;
-  margin: 0.5rem 0 0;
-  align-items: baseline;
-  gap: 0.42rem;
-  color: var(--color-text);
+  margin: 0.9rem 0 0;
+  flex-direction: column;
+  gap: 0.65rem;
 }
 
 .journeyStats strong {
   color: var(--color-accent-strong);
-  font-size: clamp(1.9rem, 3vw, 2.75rem);
+  font-size: clamp(2.75rem, 4vw, 3.75rem);
+  font-weight: 550;
   font-variant-numeric: tabular-nums;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.055em;
   line-height: 1;
 }
 
 .journeyStats span {
   color: var(--color-text-muted);
   font-size: 0.82rem;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .journeyAction {
-  display: inline-flex;
-  min-height: 3.25rem;
-  margin-top: 2rem;
-  padding: 0.76rem 1.25rem;
-  border: 1px solid var(--color-accent-strong);
-  border-radius: 999px;
-  align-items: center;
-  justify-content: center;
-  gap: 0.72rem;
-  color: var(--color-on-accent);
-  background: var(--color-accent-strong);
-  font-weight: 700;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    transform 180ms var(--ease-out),
-    background-color 180ms ease;
-}
-
-.journeyAction svg {
-  transition: transform 180ms var(--ease-out);
-}
-
-.journeyAction:hover {
-  background: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.journeyAction:hover svg {
-  transform: translateX(0.35rem);
-}
-
-.journeyAction:active {
-  transform: translateY(1px);
+  grid-column: 1;
+  margin-top: 1.6rem;
 }
 
 .journeyVisual {
   position: relative;
   display: grid;
   min-width: 0;
-  grid-template-areas:
-    "closing opening"
-    "closing midpoint";
-  grid-template-columns: minmax(0, 1.48fr) minmax(12.5rem, 0.72fr);
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  align-items: stretch;
-  gap: clamp(1rem, 1.8vw, 1.5rem);
-  isolation: isolate;
+  margin-top: 4.5rem;
+  padding-top: 2rem;
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 0.82fr) minmax(0, 1.16fr);
+  align-items: start;
+  gap: clamp(1.5rem, 2.8vw, 2.75rem);
 }
 
-.journeyVisual::before {
-  position: absolute;
-  inset: 7% -1rem 3% 5%;
-  z-index: -1;
-  border-radius: var(--radius-card);
-  background: color-mix(
-    in srgb,
-    var(--color-sky) 72%,
-    var(--color-surface)
-  );
-  content: "";
-  transform: rotate(0.65deg);
+.journeyTurn,
+.growthTurn {
+  top: -4.5rem;
+  left: calc(var(--home-spine-x) - var(--home-gutter));
+  width: calc(var(--home-gutter) + 6rem - var(--home-spine-x));
+  height: 4.5rem;
+}
+
+.journeyRail,
+.growthRail {
+  --trace-stroke: 1px;
+  top: 0;
+  left: 1.25rem;
+  width: calc(100% - 2.5rem);
+  height: 1px;
 }
 
 .journeyEntry {
+  --journey-offset: 0rem;
+  position: relative;
   min-width: 0;
+  margin-top: var(--journey-offset);
   border-radius: var(--radius-card);
   color: inherit;
   text-decoration: none;
 }
 
+.journeyOpening { --journey-offset: 0rem; }
+.journeyMidpoint { --journey-offset: 4.5rem; }
+.journeyClosing { --journey-offset: 1.5rem; }
+
+.journeyPhotoStem {
+  --trace-stroke: 1px;
+  top: calc(-2rem - var(--journey-offset));
+  left: 1.25rem;
+  width: 1px;
+  height: calc(1.4rem + var(--journey-offset));
+}
+
 .journeyEntry figure {
   display: grid;
-  height: 100%;
   min-width: 0;
   margin: 0;
-  gap: 0.9rem;
-}
-
-.journeyClosing {
-  grid-area: closing;
-}
-
-.journeyOpening {
-  grid-area: opening;
-}
-
-.journeyMidpoint {
-  grid-area: midpoint;
-}
-
-.journeyClosing figure {
-  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 1rem;
 }
 
 .journeyPhoto {
   position: relative;
   min-width: 0;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-border) 78%,
-    transparent
-  );
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   background: var(--color-surface-soft);
-  box-shadow: 0 1.35rem 3.2rem rgb(34 68 46 / 0.13);
-  transition:
-    transform 180ms var(--ease-out),
-    border-color 180ms ease,
-    box-shadow 180ms ease;
+  box-shadow: var(--shadow-soft);
 }
 
-.journeyClosing .journeyPhoto {
-  min-height: clamp(28rem, 42vw, 37rem);
-}
-
-.journeyOpening .journeyPhoto,
-.journeyMidpoint .journeyPhoto {
-  aspect-ratio: 4 / 3;
-}
+.journeyMidpoint .journeyPhoto { aspect-ratio: 4 / 5; }
+.journeyClosing .journeyPhoto { aspect-ratio: 5 / 4; }
 
 .journeyPhoto img {
   object-fit: cover;
-  filter: none;
-  transition: transform 280ms var(--ease-out);
 }
 
 .journeyCaption {
   display: grid;
   min-width: 0;
-  padding-inline: 0.18rem;
-  gap: 0.48rem;
+  gap: 0.5rem;
 }
 
 .journeyChapter {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: 0.62rem;
+  gap: 0.65rem;
   color: var(--color-text-muted);
   font-size: 0.76rem;
   line-height: 1.4;
@@ -541,71 +373,210 @@
 
 .journeyChapter strong {
   color: var(--color-accent-strong);
-  font-size: 0.92rem;
+  font-size: 0.96rem;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.01em;
 }
 
 .journeyCaption h3 {
-  display: -webkit-box;
   margin: 0;
-  overflow: hidden;
-  font-size: clamp(0.96rem, 1.25vw, 1.16rem);
-  letter-spacing: -0.015em;
-  line-height: 1.45;
-  transition: color 180ms ease;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  font-size: clamp(1.02rem, 1.3vw, 1.22rem);
+  line-height: 1.5;
 }
 
 .journeyClosing .journeyCaption h3 {
-  max-width: 30ch;
-  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  font-size: clamp(1.1rem, 1.55vw, 1.4rem);
 }
 
-.journeyEntry:hover .journeyPhoto {
-  border-color: color-mix(
-    in srgb,
-    var(--color-accent-strong) 52%,
-    var(--color-border)
-  );
-  box-shadow: 0 1.6rem 3.6rem rgb(34 68 46 / 0.18);
+.journeyEntry:is(:hover, :focus-visible) .journeyPhoto,
+.diaryCard:is(:hover, :focus-visible) {
+  border-color: var(--color-accent-strong);
 }
 
-.journeyEntry:hover .journeyPhoto img {
-  transform: scale(1.025);
-}
-
-.journeyEntry:hover .journeyCaption h3 {
+.journeyEntry:is(:hover, :focus-visible) h3 {
   color: var(--color-accent-strong);
 }
 
-.journeyEntry:active .journeyPhoto {
-  transform: translateY(1px);
+/* The three children's cards are siblings on separate branches. */
+.sectionHeading {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 1.25rem;
 }
 
-.journeyEntry:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 5px;
+.sectionHeading h2 {
+  --display-section-size: clamp(1.8rem, 2.8vw, 2.85rem);
+}
+
+.textLink {
+  display: inline-flex;
+  width: fit-content;
+  min-height: 2.75rem;
+  padding: 0.4rem 0;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-accent-strong);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.textLink:is(:hover, :focus-visible) {
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.highlightGrid {
+  position: relative;
+  display: grid;
+  margin-top: 4.5rem;
+  padding-top: 2rem;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.92fr) minmax(0, 0.96fr);
+  align-items: start;
+  gap: clamp(1.2rem, 2.4vw, 2.5rem);
+}
+
+.highlightLeadSlot,
+.highlightSideSlot {
+  --card-offset: 0rem;
+  position: relative;
+  min-width: 0;
+  margin-top: var(--card-offset);
+}
+
+.highlightSideSlot[data-growth-branch="2"] { --card-offset: 3rem; }
+.highlightSideSlot[data-growth-branch="3"] { --card-offset: 1rem; }
+
+.cardStem {
+  --trace-stroke: 1px;
+  top: calc(-2rem - var(--card-offset));
+  left: 1.25rem;
+  width: 1px;
+  height: calc(1.4rem + var(--card-offset));
+}
+
+.diaryPreview { min-width: 0; }
+
+.diaryCard {
+  display: grid;
+  min-width: 0;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  color: inherit;
+  background: var(--color-surface);
+  box-shadow: var(--shadow-soft);
+  text-decoration: none;
+}
+
+.diaryImage {
+  display: grid;
+  min-width: 0;
+  height: 18rem;
+  margin: 0;
+  padding: 1rem;
+  border-radius: var(--radius-card) var(--radius-card) 0 0;
+  place-items: center;
+  background: var(--color-sky);
+}
+
+.diaryLead .diaryImage { height: 21rem; }
+.diaryCompact .diaryImage { height: 17rem; }
+
+.diaryImage img {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.diaryCopy {
+  display: flex;
+  min-width: 0;
+  padding: clamp(1.15rem, 2vw, 1.65rem);
+  flex-direction: column;
+}
+
+.diaryMeta {
+  display: flex;
+  margin-bottom: 1.25rem;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+  line-height: 1.5;
+}
+
+.diaryIdentity {
+  display: grid;
+  gap: 0.15rem;
+}
+
+.diaryIdentity strong {
+  color: var(--color-accent-strong);
+  font-size: 0.95rem;
+}
+
+.diaryCopy h3 {
+  margin: 0;
+  font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+  line-height: 1.4;
+}
+
+.diaryCopy blockquote {
+  margin: 1rem 0 0;
+  color: var(--color-text);
+  font-size: clamp(1.05rem, 1.45vw, 1.3rem);
+  font-weight: 600;
+  line-height: 1.7;
+}
+
+.diaryCopy p {
+  margin: 0.8rem 0 0;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  line-height: 1.8;
+}
+
+.diaryRead {
+  display: inline-flex;
+  width: fit-content;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--color-accent-strong);
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+.diaryCard:is(:hover, :focus-visible) .diaryRead svg {
+  transform: translateX(4px);
 }
 
 .worksPreview {
   display: grid;
   grid-template-areas: "desk copy";
-  grid-template-columns: minmax(0, 7fr) minmax(18rem, 4fr);
-  gap: clamp(2.5rem, 7vw, 7rem);
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
   align-items: center;
+  gap: clamp(2rem, 4.5vw, 4.5rem);
+}
+
+.worksTurn {
+  top: 0.75rem;
+  left: var(--home-spine-x);
+  width: calc(var(--home-gutter) + 8rem);
+  height: calc(var(--section-space) - 1.5rem);
 }
 
 .worksCopy {
   min-width: 0;
-  max-width: 29rem;
+  max-width: 30rem;
   grid-area: copy;
 }
 
 .worksCopy h2 {
-  --display-line-offset: 0.18em;
-  --display-section-size: clamp(2.4rem, 3.6vw, 3.6rem);
+  --display-line-offset: 0;
+  --display-section-size: clamp(2rem, 3vw, 3rem);
 }
 
 .worksCopy p {
@@ -615,37 +586,12 @@
   line-height: 1.8;
 }
 
-.worksLink {
-  display: inline-flex;
-  min-height: 3.25rem;
-  margin-top: 2rem;
-  padding: 0.76rem 1.25rem;
-  border: 1px solid var(--color-accent-strong);
-  border-radius: 999px;
-  align-items: center;
-  gap: 0.75rem;
-  color: var(--color-on-accent);
-  background: var(--color-accent-strong);
-  font-weight: 700;
-  text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    background-color 180ms ease;
-}
-
-.worksLink:hover {
-  background: var(--color-accent);
-  transform: translateY(-2px);
-}
-
-.worksLink:active {
-  transform: translateY(1px);
-}
+.worksLink { margin-top: 2rem; }
 
 .worksDesk {
   position: relative;
   min-width: 0;
-  min-height: clamp(31rem, 46vw, 39rem);
+  min-height: clamp(29rem, 41vw, 35rem);
   overflow: hidden;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
@@ -657,31 +603,30 @@
 .workSheet {
   position: absolute;
   margin: 0;
-  padding: clamp(0.25rem, 0.55vw, 0.45rem);
-  border: 1px solid color-mix(in srgb, var(--color-border) 78%, transparent);
-  border-radius: 3px;
+  padding: 0.45rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
   background: var(--color-surface);
-  box-shadow: 0 1.25rem 3rem rgb(35 74 50 / 0.18);
+  box-shadow: var(--shadow-soft);
 }
 
 .workSheet img {
   width: 100%;
   height: auto;
-  border-radius: 2px;
-  filter: none;
+  border-radius: calc(var(--radius-card) - 0.45rem);
 }
 
 .workLeaf {
   top: 8%;
-  left: 5%;
+  left: 4%;
   z-index: 1;
-  width: 54%;
+  width: 55%;
   transform: rotate(-3deg);
 }
 
 .workKite {
   top: 11%;
-  right: 4%;
+  right: 3%;
   z-index: 2;
   width: 46%;
   transform: rotate(2.5deg);
@@ -689,564 +634,352 @@
 
 .workEmotion {
   bottom: 6%;
-  left: 27%;
+  left: 25%;
   z-index: 3;
-  width: 52%;
+  width: 55%;
   transform: rotate(1deg);
 }
 
-.latest {
+.readingPreview {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
+  align-items: center;
+  padding-bottom: 2rem;
+  gap: clamp(3rem, 6vw, 6rem);
+}
+
+.readingSpine {
+  top: 0;
+  left: var(--home-spine-x);
+  width: 1px;
+  height: calc(100% - 6rem);
+}
+
+.readingTurn {
+  bottom: 0;
+  left: var(--home-spine-x);
+  width: calc(var(--home-gutter) + 10rem);
+  height: 6rem;
+}
+
+.readingPaperStage {
   position: relative;
+  width: min(100%, 26rem);
+  margin-bottom: 2rem;
+  justify-self: center;
   isolation: isolate;
 }
 
-.latestOrnamentFrame {
+.readingPaperStage::before {
   position: absolute;
-  top: clamp(6.25rem, 8vw, 7.75rem);
-  right: clamp(-2.5rem, -3vw, -1rem);
-  width: clamp(4.5rem, 6vw, 5.5rem);
-  height: clamp(6rem, 10vw, 8rem);
-  overflow: hidden;
-  pointer-events: none;
+  inset: 7% -5% -3% 8%;
+  border-radius: var(--radius-card);
+  background: var(--color-sky);
+  content: "";
+  transform: rotate(3deg);
 }
 
-.latest .sectionHeading,
-.latest .highlightGrid {
+.readingPaper {
   position: relative;
   z-index: 1;
+  width: 100%;
+  margin: 0;
+  padding: 0.65rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: var(--shadow-image);
+  transform: rotate(-1.5deg);
 }
 
-.latestOrnament {
-  --nature-ornament-size: clamp(9rem, 12vw, 11rem);
+.readingPaper img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
 
+.readingPaper figcaption {
+  padding: 0.75rem 0.35rem 0.2rem;
+  color: var(--color-text-muted);
+  font-size: 0.72rem;
+}
+
+.readingLeafSeal {
+  --nature-ornament-size: 6rem;
   position: absolute;
-  top: 0;
-  right: clamp(-5.5rem, -6vw, -4.5rem);
+  right: -1.5rem;
+  bottom: 10%;
   transform: rotate(8deg);
 }
 
-.sectionHeading {
+.readingCopy { min-width: 0; }
+
+.readingIcon {
   display: grid;
-  margin-bottom: clamp(2rem, 4vw, 3.25rem);
-  grid-template-columns: 1fr auto;
-  align-items: end;
-}
-
-.textLink {
-  display: inline-flex;
-  padding: 0.4rem 0;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--color-accent-strong);
-  font-weight: 700;
-  text-decoration-color: transparent;
-  text-underline-offset: 0.25em;
-  transition: text-decoration-color 160ms ease;
-}
-
-.textLink:hover {
-  text-decoration-color: currentColor;
-}
-
-.highlightGrid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.48fr) minmax(19rem, 0.86fr);
-  grid-template-rows: repeat(2, minmax(16rem, 1fr));
-  gap: 1rem;
-}
-
-.highlightLeadSlot {
-  min-width: 0;
-  min-height: 37rem;
-  grid-row: 1 / 3;
-}
-
-.highlightSideSlot {
-  min-width: 0;
-  min-height: 0;
-}
-
-.diaryPreview {
-  height: 100%;
-  min-width: 0;
-}
-
-.diaryCard {
-  display: grid;
-  height: 100%;
-  min-width: 0;
-  overflow: hidden;
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-bottom: 1.3rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
-  color: inherit;
-  background: var(--color-surface);
-  box-shadow: 0 1rem 2.5rem rgb(34 68 46 / 0.07);
-  text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    border-color 180ms ease,
-    box-shadow 180ms ease;
-}
-
-.diaryCard:hover {
-  border-color: color-mix(
-    in srgb,
-    var(--color-accent-strong) 52%,
-    var(--color-border)
-  );
-  box-shadow: 0 1.35rem 3.25rem rgb(34 68 46 / 0.12);
-  transform: translateY(-2px);
-}
-
-.diaryCard:active {
-  transform: translateY(1px);
-}
-
-.diaryCard:focus-visible {
-  outline: 3px solid var(--color-focus);
-  outline-offset: 4px;
-}
-
-.diaryLead .diaryCard {
-  grid-template-rows: minmax(20rem, 1fr) auto;
-}
-
-.diaryCompact .diaryCard {
-  grid-template-columns: minmax(8.5rem, 0.82fr) minmax(0, 1.18fr);
-}
-
-.diaryImage {
-  display: grid;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  padding: clamp(0.65rem, 1.35vw, 1rem);
   place-items: center;
-  background: var(--color-sky);
+  color: var(--color-accent-strong);
+  background: var(--color-surface);
 }
 
-.diaryImage img {
-  width: 100%;
-  height: 100%;
-  max-height: 100%;
-  border-radius: 3px;
-  object-fit: contain;
-  filter: none;
-  box-shadow: 0 0.8rem 2rem rgb(35 74 50 / 0.14);
+.readingCopy h2 {
+  margin: 0;
+  font-size: clamp(2rem, 3.3vw, 3.3rem);
+  line-height: 1.25;
 }
 
-.diaryLead .diaryImage {
-  min-height: 20rem;
+.readingCopy > p:not(:first-of-type) {
+  max-width: 32rem;
+  margin: 1.2rem 0 0;
+  color: var(--color-text-muted);
+  line-height: 1.8;
 }
 
-.diaryCopy {
-  display: flex;
-  min-width: 0;
-  padding: clamp(1.2rem, 2.3vw, 1.8rem);
-  flex-direction: column;
-}
-
-.diaryCompact .diaryCopy {
-  padding: 1.2rem;
-}
-
-.diaryMeta {
-  display: flex;
-  margin-bottom: clamp(1.1rem, 2vw, 1.7rem);
-  justify-content: space-between;
-  align-items: flex-start;
+.readingStats {
+  display: grid;
+  margin: 1.8rem 0 0;
+  padding-top: 1.15rem;
+  border-top: 1px solid var(--color-border);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 5.5rem), 1fr));
   gap: 1rem;
-  color: var(--color-text-muted);
-  font-size: 0.74rem;
-  line-height: 1.45;
 }
 
-.diaryIdentity {
+.readingStats dd {
   display: flex;
-  min-width: 0;
-  flex-direction: column;
-  gap: 0.12rem;
-}
-
-.diaryIdentity strong {
+  margin: 0.5rem 0 0;
+  align-items: baseline;
+  gap: 0.35rem;
   color: var(--color-accent-strong);
-  font-size: 0.84rem;
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-variant-numeric: tabular-nums;
+  line-height: 1.2;
 }
 
-.diaryCopy h3 {
-  margin-bottom: 0;
-}
-
-.diaryCopy blockquote {
-  display: -webkit-box;
-  max-width: 34ch;
-  margin: 1rem 0 0;
-  overflow: hidden;
-  color: var(--color-text);
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
-  font-weight: 650;
-  line-height: 1.65;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
-}
-
-.diaryCompact .diaryCopy blockquote {
-  font-size: 0.94rem;
-  line-height: 1.55;
-}
-
-.diaryCopy p {
-  display: -webkit-box;
-  max-width: 44ch;
-  margin: 0.7rem 0 0;
-  overflow: hidden;
+.readingStats dd span {
   color: var(--color-text-muted);
-  font-size: 0.88rem;
-  line-height: 1.65;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+  font-size: 0.78rem;
 }
 
-.diaryCompact .diaryCopy p {
-  font-size: 0.8rem;
+.readingActions {
+  display: flex;
+  margin-top: 1.8rem;
+  flex-wrap: wrap;
 }
 
-.diaryRead {
-  display: inline-flex;
-  width: fit-content;
-  margin-top: auto;
-  padding-top: 1.25rem;
-  align-items: center;
-  gap: 0.45rem;
-  color: var(--color-accent-strong);
-  font-size: 0.86rem;
-  font-weight: 700;
-}
-
-.diaryRead svg {
-  transition: transform 180ms var(--ease-out);
-}
-
-.diaryCard:hover .diaryRead svg {
-  transform: translateX(0.3rem);
-}
-
-@media (max-width: 1100px) {
-  .teamDiaryJourney {
-    grid-template-columns: minmax(0, 1fr);
-    gap: clamp(2.75rem, 6vw, 4.5rem);
+@media (max-width: 1023px) {
+  .page {
+    --home-gutter: 2.75rem;
+    --home-spine-x: 0.5rem;
   }
 
-  .journeyIntroduction {
-    max-width: 44rem;
-    padding-top: 0;
+  .hero,
+  .teamDiaryJourney,
+  .latest,
+  .worksPreview,
+  .readingPreview {
+    width: calc(100% - 2rem);
   }
 
-  .journeySummary {
-    max-width: 38rem;
-  }
-
-  .journeyStats {
-    max-width: 31rem;
-  }
-}
-
-@media (max-width: 900px) {
   .hero {
-    min-height: auto;
-    padding: 4rem 0 4.5rem;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
   }
 
-  .heroCopy {
-    max-width: 42rem;
-  }
+  .heroCopy h2 { --display-brand-size: clamp(2.8rem, 6vw, 4rem); }
 
   .heroVisual {
-    width: min(100%, 42rem);
+    width: min(100%, 38rem);
     justify-self: end;
   }
 
-  .openingMoment {
-    --opening-gutter: clamp(0.5rem, 2.5vw, 1rem);
+  .journeyIntroduction { column-gap: 2rem; }
+  .journeyStats { width: 13.5rem; gap: 0.8rem; }
+  .journeyStats > div + div { padding-left: 0.8rem; }
+  .journeyMidpoint { --journey-offset: 2.5rem; }
+  .journeyClosing { --journey-offset: 1rem; }
+  .journeyVisual { gap: 1.25rem; }
+  .journeyTurn { width: 8rem; }
 
-    padding: clamp(0.75rem, 2vw, 1rem) 0 clamp(1.5rem, 4vw, 2.5rem);
-  }
-
-  .openingStage {
-    width: 100%;
-    height: auto;
-  }
-
-  .openingStage::before {
-    inset: -0.3rem 2% -0.4rem;
-    transform: rotate(0.25deg);
-  }
-
-  .openingPhoto {
-    height: auto;
-    aspect-ratio: 4 / 3;
-  }
-
-  .openingPhoto img {
-    object-position: center;
+  .sectionHeading {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 0.8rem;
   }
 
   .highlightGrid {
-    grid-template-columns: 1fr;
-    grid-template-rows: none;
+    margin-top: 2rem;
+    padding-top: 0;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
   }
 
   .highlightLeadSlot,
-  .highlightSideSlot {
-    min-height: 0;
-    grid-row: auto;
+  .highlightSideSlot[data-growth-branch] { --card-offset: 0rem; }
+
+  .growthTurn,
+  .growthRail,
+  .cardStem { display: none; }
+
+  .mobileBranch {
+    --trace-stroke: 1px;
+    display: block;
+    top: 1.5rem;
+    left: calc(var(--home-spine-x) - var(--home-gutter));
+    width: calc(var(--home-gutter) - var(--home-spine-x) - 0.6rem);
+    height: 1px;
   }
 
-  .diaryLead .diaryCard,
-  .diaryCompact .diaryCard {
-    grid-template-columns: none;
-    grid-template-rows: minmax(18rem, 1fr) auto;
-  }
+  .journeyEntry .mobileBranch { display: none; }
 
+  .diaryCard { grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr); }
+
+  .diaryImage,
   .diaryLead .diaryImage,
   .diaryCompact .diaryImage {
-    min-height: 18rem;
+    height: 100%;
+    min-height: 19rem;
+    border-radius: var(--radius-card) 0 0 var(--radius-card);
   }
 
   .worksPreview {
-    grid-template-areas:
-      "copy"
-      "desk";
+    grid-template-areas: "copy" "desk";
     grid-template-columns: minmax(0, 1fr);
-    gap: 2.75rem;
+    gap: 2.5rem;
   }
 
-  .readingPreview {
-    grid-template-columns: minmax(16rem, 0.8fr) minmax(0, 1.2fr);
-    gap: 3rem;
-  }
+  .worksTurn { display: none; }
+  .worksCopy { max-width: 38rem; }
+  .worksDesk { min-height: clamp(28rem, 63vw, 38rem); }
+  .readingPreview { gap: 2.5rem; }
+  .readingTurn { width: 8rem; }
+}
 
-  .worksCopy {
-    max-width: 39rem;
-  }
-
-  .worksDesk {
-    min-height: clamp(29rem, 70vw, 36rem);
-  }
+@media (max-width: 900px) {
+  .openingStage { aspect-ratio: 16 / 10; }
 }
 
 @media (max-width: 767px) {
   .page {
-    padding-inline: 1rem;
+    --home-gutter: 1.65rem;
+    --home-spine-x: 0.15rem;
+    --section-space: 3.5rem;
   }
 
+  .sectionSpine,
+  .heroSpine,
+  .readingSpine { --trace-stroke: 1px; }
+
+  .openingMoment { width: calc(100% - 1rem); }
+
   .hero {
-    padding: 2.5rem 0 3rem;
+    padding-top: 2.5rem;
+    padding-bottom: 0;
     gap: 2rem;
   }
 
-  .heroCopy h2 {
-    --display-brand-size: clamp(2.75rem, 12vw, 4rem);
-  }
+  .heroSpine { top: 2.5rem; height: calc(100% - 2.5rem); }
+  .heroCopy h2 { --display-brand-size: clamp(2.2rem, 9.5vw, 3.6rem); }
+  .heroVisual { aspect-ratio: 1.12; gap: 0.7rem; }
 
-  .heroVisual {
+  .journeyIntroduction { grid-template-columns: minmax(0, 1fr); }
+
+  .journeyIntroduction h2 { font-size: clamp(2rem, 8.6vw, 2.8rem); }
+
+  .journeyStats {
     width: 100%;
-    aspect-ratio: 1.14;
+    max-width: 24rem;
+    margin-top: 1.5rem;
+    grid-column: 1;
+    grid-row: auto;
   }
 
-  .heroFrame {
-    width: 96%;
-  }
+  .journeyStats dd { flex-direction: row; flex-wrap: wrap; align-items: baseline; gap: 0.4rem; }
+  .journeyStats strong { font-size: 2.5rem; }
+  .journeyAction { width: 100%; margin-top: 1.5rem; }
 
-  .sectionHeading {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .highlightGrid {
-    gap: 1.25rem;
-  }
-
-  .diaryLead .diaryCard,
-  .diaryCompact .diaryCard {
-    grid-template-rows: minmax(16rem, 72vw) auto;
-  }
-
-  .diaryLead .diaryImage,
-  .diaryCompact .diaryImage {
-    min-height: 16rem;
-  }
-
-  .diaryCopy,
-  .diaryCompact .diaryCopy {
-    padding: 1.15rem;
-  }
-
-  .diaryMeta {
-    margin-bottom: 1rem;
-  }
-
-  .teamDiaryJourney {
+  .journeyVisual {
+    margin-top: 2.5rem;
+    padding-top: 0;
+    grid-template-columns: minmax(0, 1fr);
     gap: 2.5rem;
   }
 
-  .journeyIntroduction h2 {
-    font-size: clamp(2.25rem, 10vw, 3.2rem);
-  }
+  .journeyEntry { --journey-offset: 0rem; }
+  .journeyTurn,
+  .journeyRail,
+  .journeyPhotoStem,
+  .readingTurn { display: none; }
 
-  .journeyAction {
-    width: 100%;
-  }
+  .journeyEntry .mobileBranch { display: block; }
 
-  .journeyVisual {
-    grid-template-areas:
-      "closing"
-      "opening"
-      "midpoint";
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-rows: none;
-    gap: 1.75rem;
-  }
-
-  .journeyVisual::before {
-    inset: 4% -0.35rem 1.5% 4%;
-    transform: rotate(0.4deg);
-  }
-
-  .journeyClosing .journeyPhoto {
-    min-height: 0;
-    aspect-ratio: 4 / 3;
-  }
-
-  .journeyEntry figure,
-  .journeyClosing figure {
-    height: auto;
-    grid-template-rows: auto auto;
-  }
+  .journeyPhoto,
+  .journeyMidpoint .journeyPhoto,
+  .journeyClosing .journeyPhoto { aspect-ratio: 4 / 3; }
 
   .journeyCaption h3,
-  .journeyClosing .journeyCaption h3 {
-    max-width: 38ch;
-    font-size: clamp(1.08rem, 5vw, 1.35rem);
+  .journeyClosing .journeyCaption h3 { font-size: 1.15rem; }
+
+  .sectionHeading h2 { --display-section-size: clamp(1.8rem, 7.6vw, 2.5rem); }
+
+  .diaryCard { grid-template-columns: minmax(0, 1fr); }
+  .diaryImage,
+  .diaryLead .diaryImage,
+  .diaryCompact .diaryImage {
+    height: 17rem;
+    min-height: 0;
+    border-radius: var(--radius-card) var(--radius-card) 0 0;
   }
+
+  .diaryCopy { padding: 1.2rem; }
+  .diaryCopy h3 { font-size: 1.2rem; }
+  .diaryCopy blockquote { font-size: 1.08rem; }
+
+  .worksCopy h2 { --display-section-size: clamp(1.85rem, 7.9vw, 2.65rem); }
+  .worksDesk { min-height: clamp(21rem, 83vw, 28rem); }
+  .workLeaf { top: 10%; left: 1%; width: 57%; }
+  .workKite { top: 5%; right: 1%; width: 50%; }
+  .workEmotion { bottom: 4%; left: 18%; width: 66%; }
 
   .readingPreview {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr);
+    padding-bottom: 0;
+    gap: 2.5rem;
   }
 
-  .readingPaperStage {
-    width: min(82vw, 28rem);
-    justify-self: center;
-  }
-
-  .readingPaperStage::before {
-    inset: 8% 0 -4% 6%;
-    transform: rotate(1deg);
-  }
-
-  .readingLeafSeal {
-    --nature-ornament-size: 4.5rem;
-
-    right: -0.75rem;
-  }
-
-  .readingCopy h2 {
-    font-size: clamp(2rem, 9.5vw, 2.75rem);
-  }
-
-  .readingActions,
-  .readingPrimary {
-    width: 100%;
-  }
-
-  .worksPreview {
-    gap: 2.25rem;
-  }
-
-  .worksCopy h2 {
-    --display-line-offset: 0;
-    --display-section-size: clamp(2.2rem, 9.8vw, 2.9rem);
-  }
-
-  .worksDesk {
-    min-height: clamp(21rem, 83vw, 28rem);
-  }
-
-  .workLeaf {
-    top: 10%;
-    left: 1%;
-    width: 57%;
-  }
-
-  .workKite {
-    top: 5%;
-    right: 1%;
-    width: 50%;
-  }
-
-  .workEmotion {
-    bottom: 4%;
-    left: 19%;
-    width: 64%;
-  }
-
-  .journeyOrnament {
-    --nature-ornament-size: 3rem;
-  }
-
-  .latestOrnamentFrame {
-    display: none;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  .journeyPhoto,
-  .diaryCard {
-    box-shadow: none;
-  }
-
-  .journeyVisual::before {
-    background: color-mix(
-      in srgb,
-      var(--color-sky) 72%,
-      var(--color-surface)
-    );
-  }
+  .readingSpine { height: calc(100% - 2rem); }
+  .readingPaperStage { width: min(90%, 27rem); margin-bottom: 0; }
+  .readingPaperStage::before { inset: 7% 0 -3% 8%; }
+  .readingLeafSeal { --nature-ornament-size: 4.5rem; right: -0.8rem; }
+  .readingCopy h2 { font-size: clamp(1.85rem, 8vw, 2.65rem); }
+  .readingStats { gap: 0.5rem; }
+  .readingStats dd { font-size: 2rem; }
+  .readingPrimary { width: 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .primaryLink,
-  .readingPrimary,
-  .worksLink,
-  .journeyAction,
+  .primaryLink svg,
   .journeyAction svg,
-  .journeyPhoto,
-  .journeyPhoto img,
-  .journeyCaption h3,
-  .diaryCard,
-  .diaryRead svg {
+  .worksLink svg,
+  .readingPrimary svg,
+  .diaryRead svg,
+  .textLink svg {
     transition: none;
   }
 
-  .worksLink:hover,
-  .worksLink:active,
-  .primaryLink:hover,
-  .primaryLink:active,
-  .readingPrimary:hover,
-  .journeyAction:hover,
-  .journeyAction:active,
-  .journeyEntry:active .journeyPhoto,
-  .journeyEntry:hover .journeyPhoto img,
-  .diaryCard:hover,
-  .diaryCard:active {
-    transform: none;
-  }
-
-  .journeyAction:hover svg,
-  .diaryCard:hover .diaryRead svg {
+  .primaryLink:is(:hover, :focus-visible, :active),
+  .journeyAction:is(:hover, :focus-visible, :active),
+  .worksLink:is(:hover, :focus-visible, :active),
+  .readingPrimary:is(:hover, :focus-visible, :active),
+  .primaryLink:is(:hover, :focus-visible) svg,
+  .journeyAction:is(:hover, :focus-visible) svg,
+  .worksLink:is(:hover, :focus-visible) svg,
+  .readingPrimary:is(:hover, :focus-visible) svg,
+  .textLink:is(:hover, :focus-visible) svg,
+  .diaryCard:is(:hover, :focus-visible) .diaryRead svg {
     transform: none;
   }
 }

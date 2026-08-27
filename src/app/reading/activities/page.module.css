@@ -26,6 +26,7 @@
 }
 
 .windowNote {
+  position: relative;
   display: grid;
   padding: 1.35rem;
   border: 1px solid var(--color-border);
@@ -35,6 +36,15 @@
   gap: 0.9rem;
   color: var(--color-accent-strong);
   background: color-mix(in srgb, var(--color-sky) 58%, var(--color-surface));
+}
+
+.windowMarker {
+  --nature-ornament-size: 4.5rem;
+
+  position: absolute;
+  top: -1.8rem;
+  right: 1.35rem;
+  transform: rotate(-5deg);
 }
 
 .windowNote h2,
@@ -257,5 +267,17 @@
 
   .externalLink:hover svg {
     transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .windowMarker {
+    display: none;
+  }
+}
+
+@media print {
+  .windowMarker {
+    display: none;
   }
 }

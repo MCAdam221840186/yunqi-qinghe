@@ -6,14 +6,14 @@
 
 .hero {
   display: grid;
-  min-height: calc(100dvh - var(--header-height) - 3.75rem);
-  padding: clamp(2.25rem, 4vw, 4rem) 0 clamp(4rem, 7vw, 6rem);
-  grid-template-columns: minmax(0, 6.4fr) minmax(22rem, 4.6fr);
+  padding: clamp(2.25rem, 4vw, 4rem) 0 clamp(2.5rem, 5vw, 4.5rem);
+  grid-template-columns: minmax(0, 6.4fr) minmax(0, 4.6fr);
   align-items: center;
-  gap: clamp(3rem, 7vw, 7.5rem);
+  gap: clamp(3rem, 7vw, 6rem);
 }
 
 .heroCopy {
+  min-width: 0;
   max-width: 44rem;
 }
 
@@ -50,10 +50,6 @@
   gap: 0.65rem;
   font-weight: 700;
   text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    background-color 180ms ease,
-    color 180ms ease;
 }
 
 .primaryAction {
@@ -66,29 +62,63 @@
   background: color-mix(in srgb, var(--color-surface) 82%, transparent);
 }
 
-.primaryAction:hover,
-.secondaryAction:hover {
-  transform: translateY(-2px);
-}
-
-.primaryAction:hover {
+.primaryAction:is(:hover, :focus-visible) {
   background: var(--color-accent);
 }
 
-.secondaryAction:hover {
+.secondaryAction:is(:hover, :focus-visible) {
   background: var(--color-accent-soft);
+}
+
+.primaryAction svg,
+.secondaryAction svg {
+  flex-shrink: 0;
+  transition: transform 200ms var(--ease-out);
+}
+
+.primaryAction:is(:hover, :focus-visible) svg {
+  transform: translateX(4px);
+}
+
+.secondaryAction:is(:hover, :focus-visible) svg {
+  transform: translateY(4px);
+}
+
+.heroRoute {
+  position: relative;
+  width: clamp(7.5rem, 16vw, 13rem);
+  height: clamp(7.5rem, 13vw, 10.5rem);
+  margin: 1.75rem 0 0 1.5rem;
+  pointer-events: none;
+}
+
+.heroTrace {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.heroSprig {
+  --nature-ornament-size: 4.5rem;
+
+  position: absolute;
+  right: -2.75rem;
+  bottom: -0.45rem;
+  color: var(--color-trace);
+  transform: rotate(-12deg);
 }
 
 .preview {
   position: relative;
-  width: min(100%, 29rem);
+  width: min(100%, 27rem);
   margin: 0;
   justify-self: center;
+  isolation: isolate;
 }
 
 .preview::before {
   position: absolute;
-  inset: 8% -8% -4% 7%;
+  inset: 8% -7% -4% 7%;
   z-index: -1;
   border-radius: var(--radius-card);
   background: var(--color-sky);
@@ -128,11 +158,12 @@
 }
 
 .paths {
-  padding-top: clamp(4rem, 8vw, 7rem);
+  padding-top: clamp(2rem, 4vw, 3.5rem);
+  container-type: inline-size;
 }
 
 .sectionIntro {
-  max-width: 44rem;
+  max-width: 48rem;
   margin-bottom: clamp(2rem, 4vw, 3.25rem);
 }
 
@@ -141,134 +172,202 @@
 }
 
 .pathGrid {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.65fr) minmax(19rem, 0.85fr);
-  gap: 1rem;
+  grid-template-columns: minmax(0, 1.45fr) clamp(7.5rem, 10vw, 9rem) minmax(17rem, 0.85fr);
+  align-items: stretch;
 }
 
 .bookPath,
 .secondaryPath {
-  color: inherit;
-  text-decoration: none;
-  transition:
-    transform 180ms var(--ease-out),
-    border-color 180ms ease,
-    background-color 180ms ease;
-}
-
-.bookPath {
   position: relative;
-  display: grid;
-  min-height: 27rem;
-  padding: clamp(1.5rem, 4vw, 3rem);
+  min-width: 0;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
-  grid-template-rows: auto 1fr auto auto;
-  overflow: hidden;
-  background: color-mix(in srgb, var(--color-sky) 55%, var(--color-surface));
+  color: inherit;
+  text-decoration: none;
   isolation: isolate;
 }
 
-.bookPath:hover,
-.secondaryPath:hover {
-  border-color: color-mix(
-    in srgb,
-    var(--color-accent-strong) 52%,
-    var(--color-border)
-  );
-  transform: translateY(-2px);
+.bookPath {
+  display: grid;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  grid-template-rows: auto auto 1fr auto;
+  background: color-mix(in srgb, var(--color-sky) 55%, var(--color-surface));
+}
+
+.bookPath:is(:hover, :focus-visible),
+.secondaryPath:is(:hover, :focus-visible) {
+  border-color: var(--color-accent-strong);
+}
+
+.bookPath:focus-visible,
+.secondaryPath:focus-visible {
+  outline: 3px solid var(--color-accent-strong);
+  outline-offset: 5px;
+}
+
+.pathHeading {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.75rem;
 }
 
 .pathIcon,
 .smallIcon {
   display: grid;
-  border: 1px solid color-mix(
-    in srgb,
-    var(--color-accent-strong) 32%,
-    var(--color-border)
-  );
+  flex-shrink: 0;
+  border: 1px solid color-mix(in srgb, var(--color-accent-strong) 32%, var(--color-border));
+  border-radius: var(--radius-card);
   place-items: center;
   color: var(--color-accent-strong);
   background: color-mix(in srgb, var(--color-surface) 86%, transparent);
 }
 
 .pathIcon {
-  width: 4rem;
-  height: 4rem;
-  border-radius: var(--radius-card);
+  width: 3.5rem;
+  height: 3.5rem;
 }
 
-.pathCopy {
-  align-self: end;
-  padding-block: 2rem;
+.smallIcon {
+  width: 2.75rem;
+  height: 2.75rem;
 }
 
 .pathLabel {
-  margin: 0 0 0.7rem;
+  margin: 0;
   color: var(--color-accent-strong);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 750;
-  letter-spacing: 0.08em;
+  line-height: 1.65;
+}
+
+.pathNode {
+  display: flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  transition: transform 240ms var(--ease-out);
+}
+
+.bookPathOrnament {
+  --nature-ornament-size: 3.5rem;
+
+  color: var(--color-trace);
+}
+
+.resourceOrnament {
+  --nature-ornament-size: 2.8rem;
+
+  color: var(--color-trace);
+  transform: rotate(-8deg);
+}
+
+.activityOrnament {
+  --nature-ornament-size: 3.5rem;
+
+  color: var(--color-trace);
+  transform: rotate(-4deg);
+}
+
+.pathCopy {
+  padding: 1.75rem 0 1rem;
 }
 
 .pathCopy h3,
-.secondaryPath h3 {
+.secondaryCopy h3 {
   margin: 0;
+  text-wrap: pretty;
 }
 
 .pathCopy h3 {
   max-width: 18ch;
-  font-size: clamp(1.75rem, 3vw, 2.7rem);
-  line-height: 1.25;
+  font-size: clamp(1.75rem, 2.65vw, 2.5rem);
+  line-height: 1.35;
 }
 
-.pathCopy > p:last-child,
-.secondaryPath p:last-child {
+.pathCopy > p,
+.secondaryCopy > p {
+  margin: 0.9rem 0 0;
   color: var(--color-text-muted);
-  line-height: 1.75;
+  font-size: 0.94rem;
+  line-height: 1.8;
 }
 
-.pathCopy > p:last-child {
-  max-width: 38rem;
-  margin: 1rem 0 0;
-}
-
-.gradeCounts {
+.gradePapers {
   display: grid;
-  margin: 0;
-  padding: 1.2rem 0;
-  border-top: 1px solid var(--color-border);
-  border-bottom: 1px solid var(--color-border);
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1rem;
+  margin: 1rem 0 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 6.5rem), 1fr));
+  align-content: center;
+  align-items: start;
+  gap: 0.65rem;
 }
 
-.gradeCounts div {
+.gradePaper {
   min-width: 0;
+  min-height: 11rem;
+  padding: 1rem clamp(0.75rem, 1.25vw, 1rem) 1.25rem;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-card);
+  background: var(--color-surface);
+  box-shadow: 0 0.45rem 1.25rem color-mix(in srgb, var(--color-accent-strong) 7%, transparent);
+  transform: rotate(-1.6deg);
 }
 
-.gradeCounts dt,
-.gradeCounts dd {
+.gradePaper:nth-child(2) {
+  margin-top: 1.25rem;
+  background: color-mix(in srgb, var(--color-surface) 84%, var(--color-accent-soft));
+  transform: rotate(1.2deg);
+}
+
+.gradePaper:nth-child(3) {
+  margin-top: 0.35rem;
+  transform: rotate(-0.8deg);
+}
+
+.paperHeading {
+  display: grid;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--color-border);
+  gap: 0.3rem;
+}
+
+.paperHeading h4 {
   margin: 0;
+  color: var(--color-accent-strong);
+  font-size: 0.85rem;
+  font-weight: 750;
+  line-height: 1.55;
 }
 
-.gradeCounts dt {
+.paperHeading span {
   color: var(--color-text-muted);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
 }
 
-.gradeCounts dd {
-  margin-top: 0.2rem;
+.gradePaper ol {
+  display: grid;
+  margin: 0.85rem 0 0;
+  padding: 0;
+  gap: 0.7rem;
+  list-style: none;
+}
+
+.gradePaper li {
   color: var(--color-text);
-  font-size: 1.15rem;
-  font-weight: 700;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
 }
 
 .pathAction {
   display: inline-flex;
   width: fit-content;
   min-height: 2.75rem;
-  margin-top: 1.15rem;
   align-items: center;
   gap: 0.55rem;
   color: var(--color-accent-strong);
@@ -276,116 +375,189 @@
 }
 
 .pathAction svg,
-.cornerArrow {
-  transition: transform 180ms var(--ease-out);
+.secondaryArrow svg {
+  flex-shrink: 0;
+  transition: transform 240ms var(--ease-out);
 }
 
-.bookPath:hover .pathAction svg,
-.secondaryPath:hover .cornerArrow {
-  transform: translateX(0.3rem);
+.bookPath:is(:hover, :focus-visible) .pathNode,
+.secondaryPath:is(:hover, :focus-visible) .pathNode,
+.bookPath:is(:hover, :focus-visible) .pathAction svg,
+.secondaryPath:is(:hover, :focus-visible) .secondaryArrow svg {
+  transform: translateX(4px);
+}
+
+.pathJunction {
+  position: relative;
+  min-width: 0;
+  pointer-events: none;
+}
+
+.upperBranch,
+.lowerBranch {
+  left: 0;
+  width: 100%;
+  height: calc(25% + 0.25rem);
+}
+
+.upperBranch {
+  bottom: 50%;
+  transform: scaleY(-1);
+}
+
+.lowerBranch {
+  top: 50%;
 }
 
 .secondaryPaths {
   display: grid;
+  min-width: 0;
+  grid-template-rows: repeat(2, minmax(0, 1fr));
   gap: 1rem;
 }
 
 .secondaryPath {
-  position: relative;
-  display: grid;
-  min-height: 12.5rem;
-  padding: 1.6rem;
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-card);
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: start;
-  gap: 1rem;
-  overflow: hidden;
+  display: flex;
+  padding: clamp(1.35rem, 2.25vw, 1.75rem);
+  flex-direction: column;
   background: var(--color-surface);
-  isolation: isolate;
 }
 
-.secondaryPath:hover {
-  background: var(--color-surface-soft);
+.secondaryPath:last-child {
+  background: color-mix(in srgb, var(--color-accent-soft) 35%, var(--color-surface));
 }
 
-.smallIcon {
-  width: 3rem;
-  height: 3rem;
-  border-radius: var(--radius);
+.secondaryPath .pathHeading {
+  gap: 0.6rem;
 }
 
-.secondaryPath h3 {
-  font-size: clamp(1.25rem, 2vw, 1.55rem);
+.secondaryPath .pathNode {
+  width: 2.85rem;
+  height: 2.85rem;
 }
 
-.secondaryPath p:last-child {
-  margin: 0.75rem 0 0;
-  font-size: 0.9rem;
+.secondaryCopy {
+  margin-top: 1.2rem;
 }
 
-.cornerArrow {
-  margin-top: 0.85rem;
+.secondaryCopy h3 {
+  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  line-height: 1.4;
+}
+
+.secondaryCopy > p {
+  margin-top: 0.65rem;
+  font-size: 0.86rem;
+}
+
+.resourcePreview {
+  display: grid;
+  margin: 1.25rem 0 0;
+  padding: 0 0 0 0.85rem;
+  border-left: 2px solid var(--color-trace-soft);
+  gap: 0.4rem;
+  list-style: none;
+}
+
+.resourcePreview li {
+  color: var(--color-text);
+  font-size: 0.84rem;
+  line-height: 1.65;
+}
+
+.activityPreview {
+  margin-top: 1.25rem;
+  padding-left: 0.85rem;
+  border-left: 2px solid var(--color-trace-soft);
+}
+
+.activityPreview time {
+  color: var(--color-accent-strong);
+  font-size: 0.74rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.activityPreview p {
+  margin: 0.5rem 0 0;
+  color: var(--color-text);
+  font-size: 0.84rem;
+  line-height: 1.7;
+  text-wrap: pretty;
+}
+
+.secondaryArrow {
+  display: flex;
+  min-height: 2.25rem;
+  margin-top: auto;
+  padding-top: 0.85rem;
+  align-items: end;
+  align-self: end;
   color: var(--color-accent-strong);
 }
 
-.bookPath > :not(.bookPathOrnament),
-.secondaryPath > :not(.resourceOrnament):not(.activityOrnament) {
-  position: relative;
-  z-index: 1;
+.mobileTrace,
+.entryStem {
+  display: none;
 }
 
-.bookPathOrnament,
-.resourceOrnament,
-.activityOrnament {
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
+@media (max-width: 1100px) {
+  .pathGrid {
+    grid-template-columns: minmax(0, 1fr) 7.5rem minmax(16.5rem, 0.8fr);
+  }
+
+  .gradePapers {
+    gap: 0.5rem;
+  }
+
+  .gradePaper {
+    padding-inline: 0.7rem;
+  }
 }
 
-.bookPathOrnament {
-  --nature-ornament-size: clamp(7rem, 10vw, 8.5rem);
+@media (max-width: 1023px) {
+  .pathGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
 
-  top: 1.35rem;
-  right: clamp(1.2rem, 3vw, 2.5rem);
-  transform: rotate(4deg);
-}
+  .pathJunction {
+    display: none;
+  }
 
-.resourceOrnament {
-  --nature-ornament-size: 5.25rem;
+  .secondaryPaths {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: auto;
+    gap: 1.5rem;
+  }
 
-  right: 0.85rem;
-  bottom: -0.8rem;
-  opacity: 0.82;
-  transform: rotate(-7deg);
-}
-
-.activityOrnament {
-  --nature-ornament-size: 4.75rem;
-
-  top: 0.9rem;
-  right: 2.75rem;
-  transform: rotate(1deg);
-}
-
-.activityOrnament::after {
-  position: absolute;
-  top: -0.95rem;
-  left: 52%;
-  width: 1px;
-  height: 1.2rem;
-  background: currentColor;
-  content: "";
+  .gradePaper {
+    min-height: 10.5rem;
+    padding-inline: 1.25rem;
+  }
 }
 
 @media (max-width: 880px) {
   .hero {
-    min-height: auto;
     grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .heroRoute {
+    display: none;
+  }
+
+  .heroCopy {
+    position: relative;
+    max-width: none;
+  }
+
+  .heroActions {
+    max-width: 29rem;
   }
 
   .preview {
-    width: min(70vw, 30rem);
+    width: min(66vw, 28rem);
+    margin-top: 1rem;
     justify-self: end;
   }
 
@@ -393,110 +565,251 @@
     inset: 8% 1% -4% 4%;
     transform: rotate(1deg);
   }
-
-  .pathGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .bookPath {
-    min-height: 27rem;
-  }
-
-  .secondaryPaths {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 767px) {
   .page {
     padding-inline: 1rem;
   }
 
   .hero {
-    padding: 2rem 0 4rem;
-    gap: 3rem;
+    padding: 2rem 0 3rem;
+    gap: 2.5rem;
   }
 
   .heroCopy h1 {
-    --display-page-size: clamp(2.55rem, 12vw, 4rem);
+    --display-page-size: clamp(2.55rem, 10vw, 4rem);
     --display-line-offset: 0;
   }
 
+  .heroActions {
+    max-width: none;
+  }
+
+  .preview {
+    width: min(82vw, 27rem);
+    margin: 0;
+    justify-self: center;
+  }
+
+  .paths {
+    padding-top: 2.5rem;
+  }
+
+  .sectionIntro h2 {
+    font-size: clamp(1.75rem, 6.5vw, 2.5rem);
+  }
+
+  .pathGrid {
+    padding-left: 1.15rem;
+    gap: 1.5rem;
+  }
+
+  .mobileTrace {
+    --trace-stroke: 1px;
+    --trace-node-size: 0.45rem;
+
+    display: block;
+    top: 2rem;
+    left: 0;
+    width: 1px;
+    height: calc(100% - 4rem);
+  }
+
+  .entryStem {
+    --trace-stroke: 1px;
+    --trace-node-size: 0.45rem;
+
+    display: block;
+    top: 2rem;
+    left: calc(-1.15rem - 1px);
+    width: 1.15rem;
+    height: 1px;
+  }
+
+  .bookPath,
+  .secondaryPath {
+    padding: 1.35rem;
+  }
+
+  .pathHeading {
+    gap: 0.6rem;
+  }
+
+  .pathIcon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .pathNode {
+    width: 2.85rem;
+    height: 2.85rem;
+  }
+
+  .pathLabel {
+    font-size: 0.73rem;
+  }
+
+  .pathCopy {
+    padding-top: 1.25rem;
+  }
+
+  .pathCopy h3 {
+    font-size: clamp(1.65rem, 6.4vw, 2rem);
+  }
+
+  .pathCopy > p {
+    font-size: 0.88rem;
+  }
+
+  .gradePapers {
+    margin: 0.75rem 0 1.25rem;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+  }
+
+  .gradePaper,
+  .gradePaper:nth-child(2),
+  .gradePaper:nth-child(3) {
+    min-height: 0;
+    margin-top: 0;
+    padding: 1rem;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .paperHeading {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .gradePaper ol {
+    gap: 0.3rem;
+  }
+
+  .secondaryPaths {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .secondaryCopy h3 {
+    font-size: 1.35rem;
+  }
+
+  .secondaryArrow {
+    margin-top: 0.5rem;
+  }
+}
+
+@media (max-width: 520px) {
   .heroActions,
   .primaryAction,
   .secondaryAction {
     width: 100%;
   }
+}
 
-  .preview {
-    width: min(88vw, 27rem);
-    justify-self: center;
+/* Respond to the space the text needs, including a larger default font. */
+@container (max-width: 64rem) {
+  .pathGrid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
   }
 
-  .bookPath {
+  .pathJunction {
+    display: none;
+  }
+}
+
+@container (max-width: 30rem) {
+  .secondaryPaths,
+  .gradePapers {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .gradePaper,
+  .gradePaper:nth-child(2),
+  .gradePaper:nth-child(3) {
     min-height: 0;
-    padding: 1.4rem;
+    margin-top: 0;
+    transform: none;
   }
+}
 
-  .bookPathOrnament {
-    --nature-ornament-size: 6.5rem;
-
-    top: 0.9rem;
-    right: 0.8rem;
-  }
-
-  .pathCopy h3 {
-    font-size: 1.75rem;
-  }
-
-  .gradeCounts {
-    grid-template-columns: 1fr;
-  }
-
-  .secondaryPaths {
-    grid-template-columns: 1fr;
-  }
-
-  .secondaryPath {
-    min-height: 0;
-    padding: 1.4rem;
+@container (max-width: 18rem) {
+  .pathHeading {
     grid-template-columns: auto minmax(0, 1fr);
   }
 
-  .resourceOrnament {
-    --nature-ornament-size: 4.75rem;
-
-    right: 0.55rem;
-  }
-
-  .activityOrnament {
-    --nature-ornament-size: 3.75rem;
-
-    top: 0.75rem;
-    right: 0.75rem;
-  }
-
-  .cornerArrow {
+  .pathNode {
     display: none;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .primaryAction,
-  .secondaryAction,
-  .bookPath,
-  .secondaryPath,
+  .primaryAction svg,
+  .secondaryAction svg,
+  .pathNode,
   .pathAction svg,
-  .cornerArrow {
+  .secondaryArrow svg {
     transition: none;
   }
 
-  .primaryAction:hover,
-  .secondaryAction:hover,
-  .bookPath:hover,
-  .secondaryPath:hover,
-  .bookPath:hover .pathAction svg,
-  .secondaryPath:hover .cornerArrow {
+  .primaryAction:is(:hover, :focus-visible) svg,
+  .secondaryAction:is(:hover, :focus-visible) svg,
+  .bookPath:is(:hover, :focus-visible) .pathNode,
+  .secondaryPath:is(:hover, :focus-visible) .pathNode,
+  .bookPath:is(:hover, :focus-visible) .pathAction svg,
+  .secondaryPath:is(:hover, :focus-visible) .secondaryArrow svg {
+    transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .heroRoute,
+  .pathJunction,
+  .mobileTrace,
+  .entryStem,
+  .pathNode,
+  .preview::before {
+    display: none;
+  }
+
+  .gradePaper {
+    box-shadow: none;
+  }
+}
+
+@media print {
+  .heroRoute,
+  .pathJunction,
+  .mobileTrace,
+  .entryStem,
+  .pathNode,
+  .preview::before {
+    display: none;
+  }
+
+  .pathGrid {
+    display: block;
+    padding-left: 0;
+  }
+
+  .bookPath,
+  .secondaryPath {
+    break-inside: avoid;
+  }
+
+  .secondaryPaths {
+    margin-top: 1.5rem;
+  }
+
+  .gradePaper,
+  .gradePaper:nth-child(2),
+  .gradePaper:nth-child(3) {
+    margin-top: 0;
+    box-shadow: none;
     transform: none;
   }
 }

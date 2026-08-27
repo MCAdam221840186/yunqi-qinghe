@@ -1,6 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
+import { ArrowRightIcon } from "@phosphor-icons/react/ssr";
 import teamGroupImage from "@/assets/team-group.webp";
 import DisplayHeading from "@/components/DisplayHeading";
+import { GrowthTrace } from "@/components/GrowthTrace";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { NatureOrnament } from "@/components/NatureOrnament";
 import { teamMembers } from "@/lib/content";
@@ -27,34 +30,33 @@ export default function AboutPage() {
   return (
     <div className={styles.page}>
       <header className={styles.header}>
-        <p className={headingStyles.eyebrow}>团队介绍</p>
-        <DisplayHeading
-          as="h1"
-          variant="pageHero"
-          lines={[
-            { before: "认识云启青禾" },
-            {
-              before: "与",
-              accent: "同行伙伴",
-              tone: "primary",
-            },
-          ]}
-        />
-        <NatureOrnament
-          variant="sprig"
-          className={styles.headerOrnament}
-        />
-      </header>
-
-      <section className={styles.profile} aria-labelledby="team-profile-title">
+        <div className={styles.headerCopy}>
+          <p className={headingStyles.eyebrow}>团队介绍</p>
+          <DisplayHeading
+            as="h1"
+            variant="pageHero"
+            lines={[
+              { before: "认识云启青禾" },
+              {
+                before: "与",
+                accent: "同行伙伴",
+                tone: "primary",
+              },
+            ]}
+          />
+        </div>
         <figure className={styles.profileVisual}>
           <Image
             src={teamGroupImage}
             alt="云启青禾支教团队八名成员在活动现场合照"
-            sizes="(max-width: 899px) calc(100vw - 2rem), (max-width: 1180px) 58vw, 680px"
+            sizes="(max-width: 767px) calc(100vw - 2rem), (max-width: 1180px) 44vw, 500px"
+            preload
           />
         </figure>
+      </header>
 
+      <section className={styles.profile} aria-labelledby="team-profile-title">
+        <GrowthTrace variant="turn" reveal className={styles.profileTrace} />
         <div className={styles.profileCopy}>
           <h2 id="team-profile-title" className={headingStyles.sectionTitle}>
             文理工交融的支教团队
@@ -62,6 +64,35 @@ export default function AboutPage() {
           {teamIntroduction.map((paragraph) => (
             <p key={paragraph}>{paragraph}</p>
           ))}
+        </div>
+
+        <div className={styles.actions}>
+          <article className={styles.action}>
+            <GrowthTrace variant="branch" reveal className={styles.actionTrace} />
+            <h3>AI科普＋五育并举</h3>
+            <ul aria-label="多元素质课程">
+              <li>阅读推广</li>
+              <li>非遗传承</li>
+              <li>科学科普</li>
+            </ul>
+            <Link href="/team-diaries/day-02/">
+              走进课堂
+              <ArrowRightIcon size={18} aria-hidden="true" />
+            </Link>
+          </article>
+          <article className={styles.action}>
+            <GrowthTrace variant="branch" reveal className={styles.actionTrace} />
+            <h3>少儿阅读生态调研</h3>
+            <ul aria-label="阅读生态调研方法">
+              <li>访谈</li>
+              <li>实地走访</li>
+              <li>问卷调查</li>
+            </ul>
+            <Link href="/team-diaries/day-07/">
+              阅读家访日志
+              <ArrowRightIcon size={18} aria-hidden="true" />
+            </Link>
+          </article>
         </div>
       </section>
 
@@ -85,6 +116,7 @@ export default function AboutPage() {
           <ul className={styles.memberList}>
             {teamMembers.map((member, index) => (
               <li key={`${member.name}-${index}`}>
+                <GrowthTrace variant="branch" className={styles.memberBranch} />
                 <article className={styles.member}>
                   <span className={styles.initial} aria-hidden="true">
                     {getInitial(member.name)}

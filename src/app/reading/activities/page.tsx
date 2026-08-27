@@ -6,6 +6,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import ReadingBreadcrumbs from "@/components/ReadingBreadcrumbs";
 import { formatReadingDate, readingActivities } from "@/lib/reading";
 import {
@@ -59,6 +60,7 @@ export default function ReadingActivitiesPage() {
         </div>
 
         <aside className={styles.windowNote} aria-labelledby="window-note-title">
+          <NatureOrnament variant="sprig" className={styles.windowMarker} />
           <CalendarDots size={25} weight="regular" aria-hidden="true" />
           <div>
             <h2 id="window-note-title">滚动近 24 个月</h2>

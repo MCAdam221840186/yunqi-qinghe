@@ -6,6 +6,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { NatureOrnament } from "@/components/NatureOrnament";
 import ReadingBreadcrumbs from "@/components/ReadingBreadcrumbs";
 import { formatReadingDate, readingResources } from "@/lib/reading";
 import {
@@ -59,6 +60,7 @@ export default function ReadingResourcesPage() {
         </div>
 
         <aside className={styles.criteria} aria-labelledby="criteria-title">
+          <NatureOrnament variant="leafSeal" className={styles.criteriaMarker} />
           <ShieldCheck size={25} weight="regular" aria-hidden="true" />
           <div>
             <h2 id="criteria-title">我们的收录边界</h2>

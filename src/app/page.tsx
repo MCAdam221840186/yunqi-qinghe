@@ -7,6 +7,7 @@ import openingCeremonyImage from "@/assets/opening-ceremony-group.webp";
 import booklistPreview from "@/assets/reading/booklist-page-1.webp";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { GrowthTrace } from "@/components/GrowthTrace";
 import { NatureOrnament } from "@/components/NatureOrnament";
 import { getArtwork } from "@/content/works";
 import {
@@ -19,6 +20,7 @@ import {
   teamDiaries,
 } from "@/lib/content";
 import { siteSections } from "@/lib/navigation";
+import { readingActivities, readingBooks, readingResources } from "@/lib/reading";
 import { createWebsiteJsonLd, serializeJsonLd } from "@/lib/site";
 import styles from "./page.module.css";
 
@@ -93,25 +95,25 @@ export default function HomePage() {
   const dayEight = getFeaturedTeamDiary(8);
   const teamDiaryChapters = [
     {
-      ...dayEight,
-      chapterLabel: "结营回望",
-      className: `${styles.journeyEntry} ${styles.journeyClosing}`,
-      imageSizes:
-        "(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 61vw, 38vw",
-    },
-    {
       ...dayOne,
       chapterLabel: "开营起点",
       className: `${styles.journeyEntry} ${styles.journeyOpening}`,
       imageSizes:
-        "(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 30vw, 20vw",
+        "(max-width: 767px) calc(100vw - 4rem), 29vw",
     },
     {
       ...dayFour,
       chapterLabel: "旅程中段",
       className: `${styles.journeyEntry} ${styles.journeyMidpoint}`,
       imageSizes:
-        "(max-width: 767px) calc(100vw - 2rem), (max-width: 1100px) 30vw, 20vw",
+        "(max-width: 767px) calc(100vw - 4rem), 25vw",
+    },
+    {
+      ...dayEight,
+      chapterLabel: "结营回望",
+      className: `${styles.journeyEntry} ${styles.journeyClosing}`,
+      imageSizes:
+        "(max-width: 767px) calc(100vw - 4rem), 34vw",
     },
   ] as const;
   const websiteJsonLd = createWebsiteJsonLd();
@@ -147,6 +149,7 @@ export default function HomePage() {
         className={styles.hero}
         aria-labelledby="blackboard-story-title"
       >
+        <GrowthTrace variant="spine" reveal className={styles.heroSpine} />
         <div className={styles.heroCopy}>
           <p className={headingStyles.eyebrow}>云启青禾支教团队</p>
           <DisplayHeading
@@ -196,11 +199,8 @@ export default function HomePage() {
         className={styles.teamDiaryJourney}
         aria-labelledby="team-diary-journey-title"
       >
+        <GrowthTrace variant="spine" className={styles.sectionSpine} />
         <div className={styles.journeyIntroduction}>
-          <NatureOrnament
-            variant="sprig"
-            className={styles.journeyOrnament}
-          />
           <h2
             id="team-diary-journey-title"
             className={headingStyles.sectionTitle}
@@ -239,6 +239,8 @@ export default function HomePage() {
           role="group"
           aria-label="Day 1、Day 4 与 Day 8 影像章节"
         >
+          <GrowthTrace variant="turn" reveal className={styles.journeyTurn} />
+          <GrowthTrace variant="branch" reveal className={styles.journeyRail} />
           {teamDiaryChapters.map(
             ({ diary, cover, chapterLabel, className, imageSizes }) => (
               <Link
@@ -247,6 +249,8 @@ export default function HomePage() {
                 href={`/team-diaries/${diary.slug}/`}
                 aria-label={`阅读 Day ${diary.dayNumber} 团队日志《${diary.title}》`}
               >
+                <GrowthTrace variant="spine" className={styles.journeyPhotoStem} />
+                <GrowthTrace variant="branch" className={styles.mobileBranch} />
                 <figure>
                   <div className={styles.journeyPhoto}>
                     <Image
@@ -273,12 +277,7 @@ export default function HomePage() {
       </section>
 
       <section className={styles.latest} aria-labelledby="latest-title">
-        <span className={styles.latestOrnamentFrame}>
-          <NatureOrnament
-            variant="sprig"
-            className={styles.latestOrnament}
-          />
-        </span>
+        <GrowthTrace variant="spine" className={styles.sectionSpine} />
         <div className={styles.sectionHeading}>
           <DisplayHeading
             as="h2"
@@ -293,16 +292,21 @@ export default function HomePage() {
         </div>
 
         <div className={styles.highlightGrid}>
+          <GrowthTrace variant="turn" reveal className={styles.growthTurn} />
+          <GrowthTrace variant="branch" className={styles.growthRail} />
           {growthHighlights.map(
             ({ diary, author, image, note, quote }, index) => {
               const isLead = index === 0;
               return (
                 <div
                   key={diary.slug}
+                  data-growth-branch={index + 1}
                   className={
                     isLead ? styles.highlightLeadSlot : styles.highlightSideSlot
                   }
                 >
+                  <GrowthTrace variant="spine" reveal className={styles.cardStem} />
+                  <GrowthTrace variant="branch" className={styles.mobileBranch} />
                   <article
                     className={`${styles.diaryPreview} ${
                       isLead ? styles.diaryLead : styles.diaryCompact
@@ -319,8 +323,8 @@ export default function HomePage() {
                           alt={`${author.displayName}的成长记录卡《${diary.title}》`}
                           sizes={
                             isLead
-                              ? "(max-width: 900px) calc(100vw - 2rem), 46vw"
-                              : "(max-width: 900px) calc(100vw - 2rem), 17vw"
+                              ? "(max-width: 767px) calc(100vw - 4rem), 32vw"
+                              : "(max-width: 767px) calc(100vw - 4rem), 26vw"
                           }
                           placeholder="blur"
                         />
@@ -361,6 +365,8 @@ export default function HomePage() {
         className={styles.worksPreview}
         aria-labelledby="works-preview-title"
       >
+        <GrowthTrace variant="spine" className={styles.sectionSpine} />
+        <GrowthTrace variant="turn" reveal className={styles.worksTurn} />
         <div className={styles.worksCopy}>
           <DisplayHeading
             as="h2"
@@ -419,6 +425,8 @@ export default function HomePage() {
         className={styles.readingPreview}
         aria-labelledby="reading-preview-title"
       >
+        <GrowthTrace variant="spine" className={styles.readingSpine} />
+        <GrowthTrace variant="turn" className={styles.readingTurn} />
         <div className={styles.readingPaperStage}>
           <NatureOrnament
             variant="leafSeal"
@@ -432,7 +440,7 @@ export default function HomePage() {
               placeholder="blur"
               loading="lazy"
             />
-            <figcaption>团队调研成果，110 条分级书目</figcaption>
+            <figcaption>团队调研成果，{readingBooks.length} 条分级书目</figcaption>
           </figure>
         </div>
 
@@ -448,6 +456,20 @@ export default function HomePage() {
             从适合此刻的一本书开始
           </h2>
           <p>{readingSection.description}</p>
+          <dl className={styles.readingStats} aria-label="阅读共建内容统计">
+            <div>
+              <dt>分级书目</dt>
+              <dd>{readingBooks.length}<span>条</span></dd>
+            </div>
+            <div>
+              <dt>阅读资源</dt>
+              <dd>{readingResources.filter((item) => item.status === "active").length}<span>项</span></dd>
+            </div>
+            <div>
+              <dt>阅读活动</dt>
+              <dd>{readingActivities.length}<span>条</span></dd>
+            </div>
+          </dl>
           <div className={styles.readingActions}>
             <Link className={styles.readingPrimary} href="/reading/">
               进入阅读共建

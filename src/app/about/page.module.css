@@ -1,45 +1,42 @@
 .page {
+  --about-trace-gutter: clamp(3rem, 10vw, 8rem);
+
   width: min(100%, 1180px);
   margin-inline: auto;
-  padding: clamp(3.5rem, 8vw, 7.5rem) clamp(1.25rem, 4vw, 3rem)
-    clamp(5rem, 10vw, 9rem);
+  padding: clamp(3.5rem, 6vw, 5.5rem) clamp(1.25rem, 4vw, 3rem)
+    clamp(5rem, 9vw, 8rem);
 }
 
 .header {
-  position: relative;
-  max-width: 900px;
-  margin-bottom: clamp(2.75rem, 5.5vw, 4.75rem);
-  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  margin-bottom: clamp(6rem, 8vw, 7rem);
+}
+
+.headerCopy {
+  min-width: 0;
 }
 
 .header h1 {
-  position: relative;
-  z-index: 1;
-  --display-line-offset: 0.34em;
-  --display-page-size: clamp(2.9rem, 4.8vw, 4.8rem);
-}
-
-.header > p {
-  position: relative;
-  z-index: 1;
-}
-
-.headerOrnament {
-  --nature-ornament-size: clamp(9rem, 14vw, 11rem);
-
-  position: absolute;
-  top: -1.75rem;
-  right: clamp(-4rem, -4vw, -2rem);
-  z-index: 0;
-  transform: rotate(8deg);
+  --display-line-offset: 0.14em;
+  --display-page-size: clamp(2.7rem, 4.5vw, 4.25rem);
 }
 
 .profile {
-  display: grid;
-  grid-template-columns: minmax(0, 1.3fr) minmax(18rem, 0.7fr);
-  gap: clamp(2.5rem, 6vw, 5.5rem);
-  align-items: start;
-  margin-bottom: clamp(4.5rem, 9.5vw, 8rem);
+  position: relative;
+  margin-bottom: clamp(4.5rem, 8vw, 7rem);
+  padding-left: var(--about-trace-gutter);
+}
+
+.profileTrace {
+  --trace-radius: 10rem;
+
+  top: -6rem;
+  left: 0;
+  width: calc(var(--about-trace-gutter) - 1rem);
+  height: 7.5rem;
 }
 
 .profileVisual {
@@ -57,11 +54,14 @@
 }
 
 .profileCopy {
-  padding-bottom: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.6rem clamp(1.5rem, 4vw, 3rem);
 }
 
 .profileCopy h2 {
-  margin: 0 0 1.5rem;
+  grid-column: 1 / -1;
+  margin: 0;
 }
 
 .profileCopy p {
@@ -73,56 +73,158 @@
 
 .profileCopy p:first-of-type {
   color: var(--color-text);
-  font-size: clamp(1.05rem, 1.5vw, 1.2rem);
+  font-size: 1.05rem;
   font-weight: 500;
   letter-spacing: -0.01em;
 }
 
-.profileCopy p + p {
-  margin-top: 1.25rem;
+.actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 4vw, 3rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+
+.action {
+  position: relative;
+  min-width: 0;
+  padding-top: 1.8rem;
+}
+
+.actionTrace {
+  --trace-stroke: 1px;
+  --trace-node-size: 0.5rem;
+
+  top: 0;
+  left: 0;
+  width: calc(100% - 0.5rem);
+  height: 1px;
+}
+
+.action h3 {
+  margin: 0;
+  color: var(--color-text);
+  font-size: clamp(1.2rem, 2vw, 1.5rem);
+  letter-spacing: -0.025em;
+}
+
+.action ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 1.2rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  color: var(--color-text-muted);
+  font-size: 0.86rem;
+  list-style: none;
+}
+
+.action a {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.8rem;
+  color: var(--color-accent-strong);
+  font-size: 0.88rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.action a svg {
+  transition: transform 200ms var(--ease-out);
+}
+
+.action a:is(:hover, :focus-visible) {
+  text-decoration: underline;
+  text-underline-offset: 0.28em;
+}
+
+.action a:is(:hover, :focus-visible) svg {
+  transform: translateX(0.25rem);
 }
 
 .team {
-  display: grid;
-  grid-template-columns: minmax(13rem, 0.7fr) minmax(0, 2fr);
-  gap: clamp(3rem, 9vw, 8rem);
-  align-items: start;
+  position: relative;
+  padding-left: var(--about-trace-gutter);
 }
 
 .sectionHeading {
+  display: flex;
   min-width: 0;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.sectionHeading h2 {
+  margin: 0;
 }
 
 .sectionOrnament {
   --nature-ornament-size: 3.5rem;
 
-  margin-top: 1.15rem;
   transform: rotate(-5deg);
 }
 
 .memberList {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 clamp(2rem, 5vw, 4rem);
   margin: 0;
   padding: 0;
-  border-top: 1px solid var(--color-border);
   list-style: none;
 }
 
 .memberList > li {
+  position: relative;
+  padding-left: 2rem;
   border-bottom: 1px solid var(--color-border);
+}
+
+.memberList > li::before {
+  position: absolute;
+  top: 0;
+  bottom: -1px;
+  left: 0.25rem;
+  width: 2px;
+  background: var(--color-trace);
+  content: "";
+  pointer-events: none;
+}
+
+.memberList > li:nth-child(-n + 2)::before {
+  top: 50%;
+}
+
+.memberList > li:nth-last-child(-n + 2)::before {
+  bottom: 50%;
+}
+
+.memberBranch {
+  --trace-stroke: 1px;
+  --trace-node-size: 0.5rem;
+
+  top: 50%;
+  left: 0.25rem;
+  width: 0.9rem;
+  height: 1px;
 }
 
 .member {
   display: grid;
-  grid-template-columns: minmax(7rem, 0.8fr) minmax(0, 2fr);
-  gap: clamp(2rem, 6vw, 5rem);
+  min-height: 8.25rem;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  gap: 1.25rem;
   align-items: center;
-  padding: clamp(2.25rem, 5vw, 4rem) 0;
+  padding: 1.75rem 0;
 }
 
 .initial {
-  color: var(--color-accent);
-  font-size: clamp(6rem, 14vw, 11rem);
-  font-weight: 600;
+  color: var(--color-trace);
+  font-size: 3.5rem;
+  font-weight: 500;
   letter-spacing: -0.1em;
   line-height: 0.78;
 }
@@ -132,7 +234,12 @@
 }
 
 .role {
-  margin: 0 0 1rem;
+  margin: 0 0 0.45rem;
+}
+
+.memberCopy h3 {
+  margin: 0;
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
 }
 
 .memberCopy > p:not(.role) {
@@ -158,83 +265,102 @@
   color: var(--color-text-muted);
 }
 
-@media (min-width: 1024px) {
-  .memberList {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(2rem, 4vw, 4rem);
-  }
-
-  .member {
-    grid-template-columns: 4.75rem minmax(0, 1fr);
-    gap: 1.25rem;
-    padding-block: 2rem;
-  }
-
-  .initial {
-    font-size: 5rem;
-  }
-}
-
-@media (max-width: 899px) {
-  .profile {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .profileCopy {
-    max-width: 46rem;
-    padding-bottom: 0;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  .headerOrnament {
-    --nature-ornament-size: 9rem;
-
-    right: 0;
-  }
-}
-
 @media (max-width: 767px) {
   .page {
+    --about-trace-gutter: 1.5rem;
+
     padding: 3rem 1rem 5rem;
   }
 
   .header {
-    margin-bottom: 2.75rem;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
   }
 
   .header h1 {
     --display-line-offset: 0;
-    --display-page-size: clamp(2.45rem, 12vw, 4rem);
+    --display-page-size: clamp(2.35rem, 10.5vw, 4rem);
   }
 
   .profile {
-    gap: 2.25rem;
     margin-bottom: 4.5rem;
   }
 
-  .team {
+  .profileTrace {
+    --trace-radius: 0;
+    --trace-stroke: 1px;
+    --trace-node-size: 0.4rem;
+
+    top: 0.5rem;
+    width: 0.75rem;
+    height: 1.5rem;
+  }
+
+  .profileCopy,
+  .actions,
+  .memberList {
     grid-template-columns: 1fr;
+  }
+
+  .profileCopy {
+    gap: 1.25rem;
+  }
+
+  .actions {
     gap: 2.5rem;
   }
 
   .member {
-    grid-template-columns: 5.5rem 1fr;
-    gap: 1.5rem;
-    padding-block: 2.5rem;
+    min-height: 7rem;
+    grid-template-columns: 3rem minmax(0, 1fr);
+    gap: 1.25rem;
+    padding-block: 1.5rem;
   }
 
   .initial {
-    font-size: 5.75rem;
+    font-size: 3rem;
   }
 
-  .headerOrnament {
-    display: none;
+  .memberList > li {
+    padding-left: 1.5rem;
+  }
+
+  .memberList > li::before {
+    width: 1px;
+  }
+
+  .memberList > li:nth-child(2)::before {
+    top: 0;
+  }
+
+  .memberList > li:nth-last-child(2)::before {
+    bottom: -1px;
+  }
+
+  .memberBranch {
+    --trace-node-size: 0.4rem;
+
+    width: 0.65rem;
   }
 
   .sectionOrnament {
     --nature-ornament-size: 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .action a svg {
+    transition: none;
+  }
+
+  .action a:is(:hover, :focus-visible) svg {
+    transform: none;
+  }
+}
+
+@media print, (forced-colors: active) {
+  .memberList > li::before {
+    display: none;
   }
 }

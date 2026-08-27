@@ -1,16 +1,15 @@
 .page {
-  --works-map-height: 3.55rem;
+  --works-map-height: 4.8rem;
   width: min(100%, var(--max-width));
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 2.5rem) clamp(5rem, 9vw, 8rem);
-  overflow-x: clip;
 }
 
 .hero {
   display: grid;
   min-height: calc(100dvh - var(--header-height));
   padding: clamp(2.5rem, 6vw, 5.5rem) 0 clamp(4rem, 8vw, 7rem);
-  grid-template-columns: minmax(20rem, 5fr) minmax(31rem, 7fr);
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
   gap: clamp(2.5rem, 5vw, 5.25rem);
   align-items: center;
 }
@@ -137,60 +136,22 @@
 .exhibitionMap {
   position: sticky;
   top: var(--header-height);
-  z-index: 20;
-  height: var(--works-map-height);
+  z-index: calc(var(--z-header) - 1);
   margin-inline: clamp(-0.8rem, -1.5vw, -0.25rem);
   border-block: 1px solid var(--color-border);
-  background: color-mix(in srgb, var(--color-bg) 88%, transparent);
-  backdrop-filter: blur(14px) saturate(120%);
+  background: var(--color-bg);
 }
 
-.exhibitionMapInner {
-  display: flex;
-  height: 100%;
-  padding-inline: clamp(0.8rem, 1.5vw, 1.25rem);
+.exhibitionMap ol {
+  padding: 0.5rem;
+  flex-wrap: nowrap;
   overflow-x: auto;
-  align-items: center;
-  gap: clamp(1.1rem, 2.5vw, 2.5rem);
-  scrollbar-width: none;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
 }
 
-.exhibitionMapInner::-webkit-scrollbar {
-  display: none;
-}
-
-.exhibitionMapInner span {
-  flex: 0 0 auto;
-  color: var(--color-accent);
-  font-size: 0.72rem;
-  font-variant-numeric: tabular-nums;
-  font-weight: 600;
-  letter-spacing: 0.15em;
-}
-
-.exhibitionMapInner a {
-  position: relative;
-  flex: 0 0 auto;
-  color: var(--color-text-muted);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-decoration: none;
-  transition: color 180ms ease;
-}
-
-.exhibitionMapInner a::after {
-  position: absolute;
-  right: 0;
-  bottom: -0.45rem;
-  left: 0;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--color-accent);
-  content: "";
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 180ms var(--ease-out);
+.exhibitionMap li {
+  flex: 1 0 auto;
 }
 
 .materials,
@@ -226,6 +187,60 @@
   --display-marker-height: 0.2rem;
   --display-marker-margin: 0.85rem;
   --display-marker-width: 2.8rem;
+}
+
+.chapterHeading[data-marker="trace"] {
+  position: relative;
+  padding-top: 2.25rem;
+}
+
+.headingTrace {
+  top: 0.4rem;
+  left: 0;
+  width: clamp(3.75rem, 6vw, 6rem);
+  height: 1px;
+  --trace-node-size: 0.6rem;
+}
+
+.traceLead {
+  --lead-trace-size: clamp(7.5rem, 17vw, 15rem);
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--lead-trace-size) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+.traceLead > .chapterHeading {
+  width: auto;
+  margin-right: 0;
+  margin-left: 0;
+  padding-left: 0;
+  grid-column: 2;
+}
+
+.majorTrace {
+  top: 0.6rem;
+  left: 0;
+  width: var(--lead-trace-size);
+  height: calc(var(--lead-trace-size) * 0.84);
+  --trace-node-size: 0.85rem;
+}
+
+.materialsTrace {
+  --trace-radius: 85%;
+}
+
+.documentaryTrace {
+  height: var(--lead-trace-size);
+  transform: rotate(180deg);
+}
+
+.flightTrace {
+  transform: scaleY(-1);
+}
+
+.mobileLeadTrace {
+  display: none;
 }
 
 .materialsHeading h2,
@@ -630,14 +645,6 @@
     box-shadow: 0 1.75rem 5rem rgb(35 74 50 / 0.24);
     transform: translateY(-0.4rem) rotate(0deg);
   }
-
-  .exhibitionMapInner a:hover {
-    color: var(--color-accent-strong);
-  }
-
-  .exhibitionMapInner a:hover::after {
-    transform: scaleX(1);
-  }
 }
 
 @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
@@ -693,10 +700,16 @@
   }
 }
 
+@media (max-width: 1023px) {
+  .traceLead {
+    --lead-trace-size: 7.5rem;
+  }
+}
+
 @media (max-width: 960px) {
   .hero {
     min-height: auto;
-    grid-template-columns: minmax(18rem, 5fr) minmax(24rem, 6fr);
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
   }
 
   .heroDesk {
@@ -726,6 +739,7 @@
 
 @media (max-width: 767px) {
   .page {
+    --works-map-height: 4.5rem;
     padding-inline: 1rem;
   }
 
@@ -775,16 +789,6 @@
     margin-inline: -1rem;
   }
 
-  .exhibitionMapInner {
-    padding-inline: 1rem;
-    scroll-padding-inline: 1rem;
-    scroll-snap-type: inline proximity;
-  }
-
-  .exhibitionMapInner a {
-    scroll-snap-align: start;
-  }
-
   .chapterHeading {
     width: auto;
     margin-right: 0;
@@ -802,6 +806,35 @@
   .chapterHeading p {
     max-width: 33rem;
     margin-top: 1.2rem;
+  }
+
+  .chapterHeading[data-marker="trace"] {
+    padding-top: 1.5rem;
+  }
+
+  .headingTrace {
+    width: 2.75rem;
+    --trace-stroke: 1px;
+    --trace-node-size: 0.45rem;
+  }
+
+  .traceLead {
+    display: block;
+    padding-left: 1.5rem;
+  }
+
+  .majorTrace {
+    display: none;
+  }
+
+  .mobileLeadTrace {
+    display: block;
+    top: 0.35rem;
+    left: 0.15rem;
+    width: 1px;
+    height: 3.5rem;
+    --trace-stroke: 1px;
+    --trace-node-size: 0.5rem;
   }
 
   .materialsDesk {
@@ -1069,17 +1102,8 @@
   }
 }
 
-@media (prefers-reduced-transparency: reduce) {
-  .exhibitionMap {
-    background: var(--color-bg);
-    backdrop-filter: none;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .artworkButton,
-  .exhibitionMapInner a,
-  .exhibitionMapInner a::after {
+  .artworkButton {
     transition: none;
   }
 
@@ -1090,5 +1114,16 @@
 
   .artworkButton:hover {
     transform: rotate(var(--paper-rotation));
+  }
+}
+
+@media print {
+  .exhibitionMap {
+    position: static;
+  }
+
+  .traceLead {
+    display: block;
+    padding-left: 0;
   }
 }

@@ -170,3 +170,27 @@
     transform: none;
   }
 }
+
+@media print {
+  .track {
+    display: block;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+  }
+
+  .track > * {
+    width: 100%;
+    max-width: none;
+    break-inside: avoid;
+    scroll-snap-align: none;
+  }
+
+  .track > * + * {
+    margin-top: 1.5rem;
+  }
+
+  .controls {
+    display: none;
+  }
+}

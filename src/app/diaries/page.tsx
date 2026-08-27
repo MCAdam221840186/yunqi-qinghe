@@ -7,6 +7,7 @@ import {
 } from "@phosphor-icons/react/ssr";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { GrowthTrace } from "@/components/GrowthTrace";
 import GrowthJourneyTrack from "@/components/GrowthJourneyTrack";
 import { NatureOrnament } from "@/components/NatureOrnament";
 import {
@@ -30,6 +31,7 @@ export const metadata = createPageMetadata({
 const journeyStages = [
   {
     stage: 1 as const,
+    evidenceDiarySlug: "student-009-session-01-b",
     eyebrow: "相遇与尝试",
     title: "先把陌生，变成愿意试一试",
     copy: "从魔方、魔术到合唱和运动，第一步不是立刻做得完美，而是在同伴身边开口、动手，再给自己一次机会。",
@@ -37,6 +39,7 @@ const journeyStages = [
   },
   {
     stage: 2 as const,
+    evidenceDiarySlug: "student-036-session-02-a",
     eyebrow: "文化与创作",
     title: "看见更大的世界，也留下自己的线条",
     copy: "大学、民族文化与科学课打开新的窗口。孩子们把好奇装进小册子，也用画面和文字说出各自看见的世界。",
@@ -44,6 +47,7 @@ const journeyStages = [
   },
   {
     stage: 3 as const,
+    evidenceDiarySlug: "student-032-session-03-a",
     eyebrow: "表达与坚持",
     title: "情绪有了名字，坚持也有了回声",
     copy: "书法、电影、音乐、人工智能和风筝让感受变得具体。一次没完成，可以换一种方法，再耐心向前一点。",
@@ -51,6 +55,7 @@ const journeyStages = [
   },
   {
     stage: 4 as const,
+    evidenceDiarySlug: "student-018-session-04-a",
     eyebrow: "收获与告别",
     title: "把被看见的成长，带到明天",
     copy: "奖状不是故事的终点。孩子们在回望中确认自己的变化，也把感谢、不舍和下一次想做的事认真写了下来。",
@@ -72,8 +77,34 @@ function selectHeroCards() {
   });
 }
 
+function selectStageEvidence() {
+  return journeyStages.map((stage) => {
+    const diary = getDiaryBySlug(stage.evidenceDiarySlug);
+    if (!diary || diary.sessionOrder !== stage.stage) {
+      throw new Error(`成长阶段缺少对应原卡 ${stage.evidenceDiarySlug}`);
+    }
+
+    const child = getDiaryAuthor(diary);
+    const highlight = child.story.highlights.find(
+      (item) => item.diarySlug === diary.slug,
+    );
+    if (!highlight?.quote) {
+      throw new Error(`成长阶段原卡缺少已核对原话 ${diary.slug}`);
+    }
+
+    return {
+      ...stage,
+      diary,
+      child,
+      quote: highlight.quote,
+      asset: getGrowthCardAsset(diary.imageId),
+    };
+  });
+}
+
 export default function DiariesPage() {
   const heroCards = selectHeroCards();
+  const stageEvidence = selectStageEvidence();
   const classGroups = getChildrenGroupedByClass();
 
   return (
@@ -130,6 +161,7 @@ export default function DiariesPage() {
                     "成长记录卡",
                   )}
                   sizes="(max-width: 767px) 54vw, (max-width: 900px) 36vw, 19rem"
+                  loading={index === 1 ? undefined : "eager"}
                   preload={index === 1}
                 />
                 <figcaption>
@@ -143,28 +175,70 @@ export default function DiariesPage() {
       </header>
 
       <section className={styles.journey} aria-labelledby="journey-title">
+        <GrowthTrace variant="turn" reveal className={styles.journeyTrace} />
         <div className={styles.sectionIntro}>
           <h2 id="journey-title" className={headingStyles.sectionTitle}>
             四个片段，串起 {contentStats.diaries} 份记录里的变化
           </h2>
         </div>
 
-        <GrowthJourneyTrack ariaLabel="夏令营成长阶段" controlsLabel="切换成长阶段">
-          {journeyStages.map((stage) => (
+        <GrowthJourneyTrack
+          className={styles.journeyTrack}
+          ariaLabel="夏令营成长阶段"
+          controlsLabel="切换成长阶段"
+        >
+          {stageEvidence.map((stage) => (
             <li key={stage.eyebrow} className={styles.stageCard}>
+              <div className={styles.stageNode}>
+                <GrowthTrace variant="branch" className={styles.stageTrace} />
+                <NatureOrnament
+                  variant="growthStage"
+                  stage={stage.stage}
+                  className={styles.stageOrnament}
+                />
+              </div>
               <p>{stage.eyebrow}</p>
               <h3>{stage.title}</h3>
               <div className={styles.stageCopy}>{stage.copy}</div>
-              <ul aria-label="这一阶段的主题">
+              <ul className={styles.stageThemes} aria-label="这一阶段的主题">
                 {stage.themes.map((theme) => (
                   <li key={theme}>{theme}</li>
                 ))}
               </ul>
-              <NatureOrnament
-                variant="growthStage"
-                stage={stage.stage}
-                className={styles.stageOrnament}
-              />
+              <div className={styles.stageEvidence}>
+                <figure>
+                  <Link
+                    href={`/diaries/${stage.diary.slug}/`}
+                    className={styles.evidenceImage}
+                    aria-label={`查看${stage.child.displayName}的《${stage.diary.title}》原卡与转写`}
+                  >
+                    <Image
+                      src={stage.asset.thumbnail}
+                      alt={getGrowthCardImageAlt(
+                        stage.child.displayName,
+                        stage.diary,
+                        "成长阶段代表卡",
+                      )}
+                      sizes="120px"
+                      loading="lazy"
+                    />
+                  </Link>
+                  <figcaption>{stage.diary.dateLabel}</figcaption>
+                </figure>
+                <blockquote>
+                  <p>{stage.quote}</p>
+                  <cite>
+                    {stage.child.displayName}，{stage.child.className}
+                  </cite>
+                </blockquote>
+              </div>
+              <Link
+                href={`/diaries/${stage.diary.slug}/`}
+                className={styles.evidenceLink}
+              >
+                查看原卡与转写
+                <ArrowRightIcon size={18} weight="regular" aria-hidden="true" />
+              </Link>
             </li>
           ))}
         </GrowthJourneyTrack>
@@ -185,6 +259,8 @@ export default function DiariesPage() {
         <div className={styles.classGrid}>
           {classGroups.map((group) => (
             <section key={group.className} className={styles.classGroup}>
+              <GrowthTrace variant="spine" className={styles.classSpine} />
+              <GrowthTrace variant="branch" className={styles.classBranch} />
               <header>
                 <h3>{group.className}</h3>
                 <span>{group.children.length} 人</span>

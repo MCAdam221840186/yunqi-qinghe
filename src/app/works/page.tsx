@@ -8,6 +8,8 @@ import {
 } from "@/components/ArtworkLightbox";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
+import { GrowthTrace } from "@/components/GrowthTrace";
+import { SectionJourneyNav } from "@/components/SectionJourneyNav";
 import WorksHorizontalTrack from "@/components/WorksHorizontalTrack";
 import WorksMotionRoot from "@/components/WorksMotionRoot";
 import {
@@ -47,6 +49,16 @@ const writing = getArtworksByGroup("writing");
 const landscape = getArtworksByGroup("landscape");
 const stories = getArtworksByGroup("stories");
 const flight = getArtworksByGroup("flight");
+
+const exhibitionSections = [
+  { id: "materials", label: "材料" },
+  { id: "quiet", label: "留白" },
+  { id: "color", label: "颜色" },
+  { id: "writing", label: "笔迹" },
+  { id: "landscape", label: "风景" },
+  { id: "stories", label: "封面" },
+  { id: "flight", label: "飞行" },
+] as const;
 
 const documentaryPhotos = exhibitionPhotos.filter(
   (photo) => photo.placement === "documentary",
@@ -152,7 +164,7 @@ interface ChapterHeadingProps {
   readonly className?: string;
   readonly lines: Parameters<typeof DisplayHeading>[0]["lines"];
   readonly children: ReactNode;
-  readonly marker?: "line" | "none";
+  readonly marker?: "line" | "trace" | "none";
 }
 
 function ChapterHeading({
@@ -169,6 +181,9 @@ function ChapterHeading({
       fromY={22}
       fromScale={1}
     >
+      {marker === "trace" ? (
+        <GrowthTrace variant="branch" className={styles.headingTrace} />
+      ) : null}
       <DisplayHeading
         as="h2"
         id={id}
@@ -281,18 +296,11 @@ export default function WorksPage() {
             </div>
           </WorksMotionScene>
 
-          <nav className={styles.exhibitionMap} aria-label="创作展章节">
-            <div className={styles.exhibitionMapInner}>
-              <span aria-hidden="true">01</span>
-              <a href="#materials">材料</a>
-              <a href="#quiet">留白</a>
-              <a href="#color">颜色</a>
-              <a href="#writing">笔迹</a>
-              <a href="#landscape">风景</a>
-              <a href="#stories">封面</a>
-              <a href="#flight">飞行</a>
-            </div>
-          </nav>
+          <SectionJourneyNav
+            className={styles.exhibitionMap}
+            ariaLabel="创作展章节"
+            items={exhibitionSections}
+          />
 
           <WorksMotionScene
             as="section"
@@ -302,14 +310,21 @@ export default function WorksPage() {
             amount={0.08}
             stagger={0.045}
           >
-            <ChapterHeading
-              id="materials-title"
-              className={styles.materialsHeading}
-              marker="line"
-              lines={[{ before: "材料落到纸上" }]}
-            >
-              叶片保留纹路，蜡染借来对称。熟悉的材料，被重新组合成山、花和动物。
-            </ChapterHeading>
+            <div className={styles.traceLead}>
+              <GrowthTrace
+                variant="turn"
+                reveal
+                className={`${styles.majorTrace} ${styles.materialsTrace}`}
+              />
+              <GrowthTrace variant="spine" className={styles.mobileLeadTrace} />
+              <ChapterHeading
+                id="materials-title"
+                className={styles.materialsHeading}
+                lines={[{ before: "材料落到纸上" }]}
+              >
+                叶片保留纹路，蜡染借来对称。熟悉的材料，被重新组合成山、花和动物。
+              </ChapterHeading>
+            </div>
 
             <div className={styles.materialsDesk}>
               {materials.map((artwork, index) => {
@@ -391,6 +406,7 @@ export default function WorksPage() {
             <ChapterHeading
               id="colors-title"
               className={styles.colorsHeading}
+              marker="trace"
               lines={[{ before: "颜色有自己的" }, { accent: "位置" }]}
             >
               每个圆盘都从同一张模板出发，却用颜色和符号留下不同的感受。
@@ -427,16 +443,24 @@ export default function WorksPage() {
             amount={0.08}
             stagger={0.07}
           >
-            <ChapterHeading
-              id="documentary-title"
-              className={styles.documentaryHeading}
-              lines={[
-                { before: "把作品" },
-                { before: "举起来", tone: "primary" },
-              ]}
-            >
-              作品被举起以前，手先在纸面、叶片和墨色之间来回。课堂里的专注，也留在这些画面里。
-            </ChapterHeading>
+            <div className={styles.traceLead}>
+              <GrowthTrace
+                variant="turn"
+                reveal
+                className={`${styles.majorTrace} ${styles.documentaryTrace}`}
+              />
+              <GrowthTrace variant="spine" className={styles.mobileLeadTrace} />
+              <ChapterHeading
+                id="documentary-title"
+                className={styles.documentaryHeading}
+                lines={[
+                  { before: "把作品" },
+                  { before: "举起来", tone: "primary" },
+                ]}
+              >
+                作品被举起以前，手先在纸面、叶片和墨色之间来回。课堂里的专注，也留在这些画面里。
+              </ChapterHeading>
+            </div>
 
             <div className={styles.documentaryMosaic}>
               {documentaryPhotos.map((photo, index) => (
@@ -467,6 +491,7 @@ export default function WorksPage() {
             <ChapterHeading
               id="writing-title"
               className={styles.writingHeading}
+              marker="trace"
               lines={[
                 { before: "同一句话，" },
                 { before: "不同笔迹", tone: "primary" },
@@ -506,6 +531,7 @@ export default function WorksPage() {
             <ChapterHeading
               id="landscape-title"
               className={styles.landscapeHeading}
+              marker="trace"
               lines={[{ before: "字也能长成" }, { accent: "风景" }]}
             >
               一行字向下生长，山、树和墨色也走进纸面。书写不只是在临摹，也在重新安排一幅画。
@@ -543,6 +569,7 @@ export default function WorksPage() {
             <ChapterHeading
               id="stories-title"
               className={styles.storiesHeading}
+              marker="trace"
               lines={[{ before: "故事先从" }, { accent: "封面开始" }]}
             >
               这里展示的是孩子们手工制作的绘本封面。书名、纸张和颜色，先为故事打开一扇门。
@@ -584,13 +611,21 @@ export default function WorksPage() {
             aria-labelledby="flight-title"
             stagger={0.055}
           >
-            <ChapterHeading
-              id="flight-title"
-              className={styles.flightHeading}
-              lines={[{ before: "把想象放进风里" }]}
-            >
-              火箭、猫头鹰、花鸟和飞鹰从同一张课桌起飞，带着各自的颜色。
-            </ChapterHeading>
+            <div className={styles.traceLead}>
+              <GrowthTrace
+                variant="turn"
+                reveal
+                className={`${styles.majorTrace} ${styles.flightTrace}`}
+              />
+              <GrowthTrace variant="spine" className={styles.mobileLeadTrace} />
+              <ChapterHeading
+                id="flight-title"
+                className={styles.flightHeading}
+                lines={[{ before: "把想象放进风里" }]}
+              >
+                火箭、猫头鹰、花鸟和飞鹰从同一张课桌起飞，带着各自的颜色。
+              </ChapterHeading>
+            </div>
 
             <WorksHorizontalTrack
               className={styles.flightTrack}

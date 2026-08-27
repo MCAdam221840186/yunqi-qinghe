@@ -19,6 +19,8 @@
     var(--color-accent-strong) 22%,
     transparent
   );
+  --color-trace: color-mix(in srgb, var(--color-accent-strong) 48%, transparent);
+  --color-trace-soft: color-mix(in srgb, var(--color-accent-strong) 24%, transparent);
   --radius-card: 1rem;
   --radius: var(--radius-card);
   --shadow-soft: 0 1.25rem 3.75rem rgb(35 74 50 / 0.12);
@@ -59,7 +61,7 @@
 }
 
 html {
-  min-width: 20rem;
+  min-width: 320px;
   min-height: 100%;
   background: var(--color-bg);
   scrollbar-gutter: stable;
@@ -150,6 +152,11 @@ p {
 
 main {
   scroll-margin-top: calc(var(--header-height) + 1rem);
+}
+
+h2[id],
+h3[id] {
+  scroll-margin-top: calc(var(--header-height) + 1.5rem);
 }
 
 .markdown-body {

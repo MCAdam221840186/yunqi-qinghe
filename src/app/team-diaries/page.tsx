@@ -3,6 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import DisplayHeading from "@/components/DisplayHeading";
 import displayHeadingStyles from "@/components/DisplayHeading.module.css";
+import { GrowthTrace } from "@/components/GrowthTrace";
+import { SectionJourneyNav } from "@/components/SectionJourneyNav";
 import {
   contentStats,
   getTeamDiaryImages,
@@ -45,7 +47,12 @@ function Chapter({ diary }: { diary: TeamDiaryRecord }) {
           : "chapter";
 
   return (
-    <li className={styles.chapterItem} id={diary.slug}>
+    <li
+      className={styles.chapterItem}
+      id={diary.slug}
+      data-milestone={layout !== "chapter" ? "true" : undefined}
+    >
+      <GrowthTrace variant="spine" className={styles.chapterTrace} />
       <article className={styles.chapter} data-layout={layout}>
         <div className={styles.chapterIndex} aria-hidden="true">
           <span>Day</span>
@@ -53,6 +60,7 @@ function Chapter({ diary }: { diary: TeamDiaryRecord }) {
         </div>
 
         <figure className={styles.chapterVisual}>
+          <GrowthTrace variant="branch" className={styles.photoBranch} />
           <Image
             src={cover.thumbnail}
             alt={cover.alt}
@@ -61,7 +69,7 @@ function Chapter({ diary }: { diary: TeamDiaryRecord }) {
           />
           <figcaption>
             <span>{diary.images.length} 张现场影像</span>
-            <span>{dayFormatter.format(new Date(diary.publishedOn))}</span>
+            <span>发布于 {dayFormatter.format(new Date(diary.publishedOn))}</span>
           </figcaption>
         </figure>
 
@@ -69,7 +77,7 @@ function Chapter({ diary }: { diary: TeamDiaryRecord }) {
           <p className={styles.chapterDate}>
             <span>第 {diary.dayNumber} 日</span>
             <time dateTime={diary.publishedOn}>
-              {dayFormatter.format(new Date(diary.publishedOn))}
+              发布于 {dayFormatter.format(new Date(diary.publishedOn))}
             </time>
           </p>
           <h2>{diary.title}</h2>
@@ -144,50 +152,73 @@ export default function TeamDiariesPage() {
           role="group"
           aria-label="从开营到结营的旅程影像"
         >
+          <GrowthTrace variant="turn" className={styles.heroTrace} />
           <figure className={`${styles.heroFigure} ${styles.heroOpening}`}>
-            <Image
-              src={openingCover.thumbnail}
-              alt={openingCover.alt}
-              sizes="(max-width: 767px) 58vw, (max-width: 1100px) 34vw, 27rem"
-              placeholder="blur"
-              preload
-            />
-            <figcaption>Day 1 · 初见</figcaption>
+            <a
+              href="#day-01"
+              className={styles.heroPhotoLink}
+              aria-label="前往 Day 1，初见"
+            >
+              <Image
+                src={openingCover.thumbnail}
+                alt={openingCover.alt}
+                sizes="(max-width: 767px) 58vw, (max-width: 1100px) 34vw, 27rem"
+                placeholder="blur"
+                preload
+              />
+            </a>
+            <figcaption>
+              <span>Day 1 · 初见</span>
+              <ArrowRightIcon size={14} aria-hidden="true" />
+            </figcaption>
           </figure>
           <figure className={`${styles.heroFigure} ${styles.heroMiddle}`}>
-            <Image
-              src={middleCover.thumbnail}
-              alt={middleCover.alt}
-              sizes="(max-width: 767px) 34vw, (max-width: 1100px) 22vw, 17rem"
-              placeholder="blur"
-            />
-            <figcaption>Day 4 · 相伴</figcaption>
+            <a
+              href="#day-04"
+              className={styles.heroPhotoLink}
+              aria-label="前往 Day 4，相伴"
+            >
+              <Image
+                src={middleCover.thumbnail}
+                alt={middleCover.alt}
+                sizes="(max-width: 767px) 34vw, (max-width: 1100px) 22vw, 17rem"
+                placeholder="blur"
+              />
+            </a>
+            <figcaption>
+              <span>Day 4 · 相伴</span>
+              <ArrowRightIcon size={14} aria-hidden="true" />
+            </figcaption>
           </figure>
           <figure className={`${styles.heroFigure} ${styles.heroClosing}`}>
-            <Image
-              src={closingCover.thumbnail}
-              alt={closingCover.alt}
-              sizes="(max-width: 767px) 40vw, (max-width: 1100px) 25vw, 20rem"
-              placeholder="blur"
-            />
-            <figcaption>Day 8 · 告别</figcaption>
+            <a
+              href="#day-08"
+              className={styles.heroPhotoLink}
+              aria-label="前往 Day 8，告别"
+            >
+              <Image
+                src={closingCover.thumbnail}
+                alt={closingCover.alt}
+                sizes="(max-width: 767px) 40vw, (max-width: 1100px) 25vw, 20rem"
+                placeholder="blur"
+              />
+            </a>
+            <figcaption>
+              <span>Day 8 · 告别</span>
+              <ArrowRightIcon size={14} aria-hidden="true" />
+            </figcaption>
           </figure>
         </div>
       </header>
 
-      <nav className={styles.dayNav} aria-label="Day 章节导航">
-        <span className={styles.dayNavLabel}>沿途章节</span>
-        <ol>
-          {teamDiaries.map((diary) => (
-            <li key={diary.slug}>
-              <a href={`#${diary.slug}`}>
-                <span>Day</span>
-                <strong>{diary.dayNumber}</strong>
-              </a>
-            </li>
-          ))}
-        </ol>
-      </nav>
+      <SectionJourneyNav
+        className={styles.dayNav}
+        ariaLabel="Day 章节导航"
+        items={teamDiaries.map((diary) => ({
+          id: diary.slug,
+          label: `Day ${diary.dayNumber}`,
+        }))}
+      />
 
       <section className={styles.journey} aria-labelledby="journey-title">
         <div className={styles.journeyHeading}>

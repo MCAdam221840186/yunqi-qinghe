@@ -26,6 +26,7 @@
 }
 
 .criteria {
+  position: relative;
   display: grid;
   padding: 1.35rem;
   border: 1px solid var(--color-border);
@@ -39,6 +40,15 @@
     var(--color-accent-soft) 54%,
     var(--color-surface)
   );
+}
+
+.criteriaMarker {
+  --nature-ornament-size: 3.5rem;
+
+  position: absolute;
+  top: -2.4rem;
+  right: 1.35rem;
+  transform: rotate(-8deg);
 }
 
 .criteria h2,
@@ -300,5 +310,17 @@
   .resourceCard:hover,
   .externalLink:hover svg {
     transform: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .criteriaMarker {
+    display: none;
+  }
+}
+
+@media print {
+  .criteriaMarker {
+    display: none;
   }
 }

@@ -26,10 +26,20 @@
 }
 
 .summary {
+  position: relative;
   padding: 1.35rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-card);
   background: color-mix(in srgb, var(--color-sky) 52%, var(--color-surface));
+}
+
+.summaryMarker {
+  --nature-ornament-size: 4rem;
+
+  position: absolute;
+  top: -2.1rem;
+  right: 1.35rem;
+  transform: rotate(4deg);
 }
 
 .summaryHeading {
@@ -171,6 +181,10 @@
 }
 
 @media print {
+  .summaryMarker {
+    display: none;
+  }
+
   .page {
     width: 100%;
     padding: 0;
@@ -184,6 +198,12 @@
   .headerCopy > p:last-child,
   .summary,
   .sourceNote {
+    display: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .summaryMarker {
     display: none;
   }
 }

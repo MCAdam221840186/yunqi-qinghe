@@ -8,7 +8,7 @@
 .hero {
   display: grid;
   min-height: min(46rem, calc(100dvh - var(--header-height)));
-  grid-template-columns: minmax(20rem, 0.88fr) minmax(29rem, 1.12fr);
+  grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
   align-items: center;
   gap: clamp(3rem, 7vw, 7rem);
 }
@@ -79,9 +79,32 @@
   content: "";
 }
 
+.heroTrace {
+  right: 68%;
+  bottom: 8%;
+  width: 24%;
+  height: 24%;
+  --trace-node-size: 0.85rem;
+}
+
 .heroFigure {
   position: absolute;
   margin: 0;
+}
+
+.heroFigure:focus-within {
+  z-index: 4;
+}
+
+.heroPhotoLink {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-card);
+}
+
+.heroPhotoLink:focus-visible {
+  outline-offset: 6px;
 }
 
 .heroFigure img {
@@ -94,11 +117,25 @@
 }
 
 .heroFigure figcaption {
+  display: flex;
   padding-top: 0.55rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem;
   color: var(--color-text-muted);
   font-size: 0.72rem;
   font-weight: 650;
   letter-spacing: 0.04em;
+}
+
+.heroFigure figcaption svg {
+  flex: 0 0 auto;
+  color: var(--color-accent-strong);
+  transition: transform 180ms var(--ease-out);
+}
+
+.heroFigure:has(.heroPhotoLink:focus-visible) figcaption svg {
+  transform: translateX(0.25rem);
 }
 
 .heroOpening {
@@ -129,82 +166,32 @@
   position: sticky;
   top: var(--header-height);
   z-index: calc(var(--z-header) - 1);
-  display: grid;
-  margin: clamp(4rem, 9vw, 8rem) 0 0;
-  padding: 0.75rem 1rem;
+  margin: clamp(3.5rem, 7vw, 6rem) 0 0;
   border-block: 1px solid var(--color-border);
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  gap: 1rem;
-  background: color-mix(in srgb, var(--color-bg) 92%, transparent);
-  backdrop-filter: blur(1rem);
-}
-
-.dayNavLabel {
-  color: var(--color-text-muted);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
+  background: var(--color-bg);
 }
 
 .dayNav ol {
-  display: grid;
-  min-width: 0;
-  margin: 0;
-  padding: 0;
-  grid-template-columns: repeat(8, minmax(3.3rem, 1fr));
-  list-style: none;
+  padding: 0.5rem;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
 }
 
-.dayNav a {
-  display: flex;
-  min-height: 3rem;
-  padding: 0.35rem 0.7rem;
-  border-left: 1px solid var(--color-border);
-  align-items: baseline;
-  justify-content: center;
-  gap: 0.25rem;
-  color: var(--color-text-muted);
-  text-decoration: none;
-  transition:
-    color 160ms ease,
-    background-color 160ms ease;
-}
-
-.dayNav li:last-child a {
-  border-right: 1px solid var(--color-border);
-}
-
-.dayNav a span {
-  font-size: 0.62rem;
-  text-transform: uppercase;
-}
-
-.dayNav a strong {
-  font-size: 1.05rem;
-  font-variant-numeric: tabular-nums;
-}
-
-.dayNav a:hover {
-  color: var(--color-accent-strong);
-  background: var(--color-accent-soft);
+.dayNav li {
+  flex: 1 0 auto;
 }
 
 .journey {
-  padding-top: clamp(5rem, 10vw, 9rem);
+  padding-top: clamp(4rem, 7vw, 6.5rem);
 }
 
 .journeyHeading {
   display: grid;
   max-width: 53rem;
-  margin-bottom: clamp(3.5rem, 8vw, 7rem);
-  grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.55fr);
-  align-items: end;
-  gap: 1.25rem 3rem;
-}
-
-.journeyHeading > p:first-child {
-  grid-column: 1 / -1;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  gap: 1.25rem;
 }
 
 .journeyHeading h2,
@@ -213,6 +200,7 @@
 }
 
 .journeyHeading > p:last-child {
+  max-width: 38rem;
   color: var(--color-text-muted);
   line-height: 1.8;
 }
@@ -224,30 +212,44 @@
 }
 
 .chapterItem {
-  padding-block: clamp(3rem, 7vw, 6rem);
-  border-top: 1px solid var(--color-border);
-  scroll-margin-top: calc(var(--header-height) + 5rem);
+  --chapter-space: clamp(2.75rem, 5.5vw, 4.5rem);
+  --chapter-gap: clamp(1.5rem, 4vw, 4rem);
+  position: relative;
+  padding-block: var(--chapter-space);
+  scroll-margin-top: calc(var(--header-height) + 6.5rem);
 }
 
-.chapterItem:last-child {
-  border-bottom: 1px solid var(--color-border);
+.chapterTrace {
+  top: var(--chapter-space);
+  bottom: calc(-1 * var(--chapter-space));
+  left: 0.6rem;
+  width: 1px;
+  height: auto;
+}
+
+.chapterItem[data-milestone="true"] .chapterTrace {
+  --trace-node-size: 0.95rem;
+}
+
+.chapterItem:last-child .chapterTrace {
+  bottom: var(--chapter-space);
 }
 
 .chapter {
   display: grid;
-  grid-template-columns: 5.5rem minmax(20rem, 1.08fr) minmax(18rem, 0.92fr);
+  grid-template-columns: 6.5rem minmax(0, 1.08fr) minmax(0, 0.92fr);
   grid-template-areas: "index visual copy";
   align-items: center;
-  gap: clamp(1.5rem, 4vw, 4rem);
+  gap: var(--chapter-gap);
 }
 
 .chapter[data-layout="turning"] {
-  grid-template-columns: 5.5rem minmax(19rem, 0.88fr) minmax(22rem, 1.12fr);
+  grid-template-columns: 6.5rem minmax(0, 0.88fr) minmax(0, 1.12fr);
   grid-template-areas: "index copy visual";
 }
 
 .chapter[data-layout="closing"] {
-  grid-template-columns: 5.5rem minmax(20rem, 1.16fr) minmax(19rem, 0.84fr);
+  grid-template-columns: 6.5rem minmax(0, 1.16fr) minmax(0, 0.84fr);
   grid-template-areas: "index visual copy";
 }
 
@@ -258,6 +260,7 @@
   align-content: start;
   justify-items: start;
   gap: 0.1rem;
+  padding-left: 2rem;
   color: var(--color-text-muted);
 }
 
@@ -278,9 +281,18 @@
 }
 
 .chapterVisual {
+  position: relative;
   min-width: 0;
   margin: 0;
   grid-area: visual;
+}
+
+.photoBranch {
+  top: 0.6rem;
+  right: calc(100% + 0.65rem);
+  width: calc(var(--chapter-gap) - 0.65rem);
+  height: 1px;
+  --trace-node-size: 0.5rem;
 }
 
 .chapterVisual img {
@@ -381,21 +393,35 @@
   transform: translateY(-2px);
 }
 
-.chapterLink:hover svg {
+.chapterLink:hover svg,
+.chapterLink:focus-visible svg {
   transform: translateX(0.25rem);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .heroFigure:hover figcaption svg {
+    transform: translateX(0.25rem);
+  }
 }
 
 @media (max-width: 68rem) {
   .hero {
-    grid-template-columns: minmax(18rem, 0.9fr) minmax(24rem, 1.1fr);
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
     gap: 3rem;
   }
 
   .chapter,
   .chapter[data-layout="turning"],
   .chapter[data-layout="closing"] {
-    grid-template-columns: 4.5rem minmax(17rem, 1fr) minmax(17rem, 1fr);
-    gap: 1.75rem;
+    grid-template-columns: 5.75rem minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .chapterItem {
+    --chapter-gap: 1.75rem;
+  }
+
+  .chapterIndex strong {
+    font-size: 2.7rem;
   }
 }
 
@@ -415,25 +441,10 @@
     justify-self: end;
   }
 
-  .dayNav {
-    grid-template-columns: 1fr;
-    gap: 0.35rem;
-  }
-
-  .dayNavLabel {
-    padding-left: 0.35rem;
-  }
-
-  .dayNav ol {
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
-    scrollbar-width: thin;
-  }
-
   .chapter,
   .chapter[data-layout="turning"],
   .chapter[data-layout="closing"] {
-    grid-template-columns: 3.8rem minmax(0, 1fr);
+    grid-template-columns: 5.1rem minmax(0, 1fr);
     grid-template-areas:
       "index visual"
       ". copy";
@@ -441,14 +452,20 @@
   }
 
   .chapterIndex {
-    position: sticky;
-    top: calc(var(--header-height) + 6.5rem);
+    padding-left: 1.75rem;
   }
 
   .chapterVisual img,
   .chapter[data-layout="opening"] .chapterVisual img,
   .chapter[data-layout="closing"] .chapterVisual img {
     height: clamp(22rem, 60vw, 32rem);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .heroTrace {
+    width: 7rem;
+    height: 7rem;
   }
 }
 
@@ -472,8 +489,24 @@
     padding-inline: 1rem;
   }
 
-  .journeyHeading {
-    grid-template-columns: 1fr;
+  .heroTrace,
+  .photoBranch {
+    display: none;
+  }
+
+  .chapterItem {
+    --chapter-space: 2.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .chapterTrace {
+    --trace-stroke: 1px;
+    --trace-node-size: 0.5rem;
+    left: 0.25rem;
+  }
+
+  .chapterItem[data-milestone="true"] .chapterTrace {
+    --trace-node-size: 0.7rem;
   }
 
   .chapter,
@@ -492,6 +525,7 @@
     display: flex;
     align-items: baseline;
     gap: 0.35rem;
+    padding-left: 0;
   }
 
   .chapterIndex strong {
@@ -525,13 +559,23 @@
 @media (prefers-reduced-motion: reduce) {
   .dayNav a,
   .chapterLink,
-  .chapterLink svg {
+  .chapterLink svg,
+  .heroFigure figcaption svg {
     transition: none;
   }
 
   .chapterLink:hover,
-  .chapterLink:hover svg {
+  .chapterLink:hover svg,
+  .chapterLink:focus-visible svg,
+  .heroFigure:hover figcaption svg,
+  .heroFigure:has(.heroPhotoLink:focus-visible) figcaption svg {
     transform: none;
+  }
+}
+
+@media print {
+  .dayNav {
+    position: static;
   }
 }
 

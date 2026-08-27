@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { siteSections } from "@/lib/navigation";
+import { GrowthTrace } from "./GrowthTrace";
 import { NatureOrnament } from "./NatureOrnament";
 import styles from "./SiteFooter.module.css";
 
@@ -15,6 +16,8 @@ export default function SiteFooter() {
         </div>
 
         <nav className={styles.navigation} aria-label="页脚导航">
+          <GrowthTrace variant="turn" className={styles.footerTurn} />
+          <GrowthTrace variant="branch" className={styles.footerRoute} />
           {siteSections.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
