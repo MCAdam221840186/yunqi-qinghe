@@ -34,18 +34,6 @@
 .identity {
   position: sticky;
   top: calc(var(--header-height) + 2rem);
-  isolation: isolate;
-}
-
-.identitySeal {
-  --nature-ornament-size: 3.75rem;
-
-  position: absolute;
-  top: 0.25rem;
-  right: -0.5rem;
-  z-index: -1;
-  opacity: 0.56;
-  transform: rotate(8deg);
 }
 
 .identity h1 {
@@ -494,11 +482,6 @@
 
   .identity {
     position: static;
-  }
-
-  .identitySeal {
-    top: 0;
-    right: 0.5rem;
   }
 
   .summary {

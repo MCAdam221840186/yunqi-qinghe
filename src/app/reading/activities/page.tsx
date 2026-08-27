@@ -6,7 +6,6 @@ import {
 } from "@phosphor-icons/react/ssr";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
-import { NatureOrnament } from "@/components/NatureOrnament";
 import ReadingBreadcrumbs from "@/components/ReadingBreadcrumbs";
 import { formatReadingDate, readingActivities } from "@/lib/reading";
 import {
@@ -67,10 +66,6 @@ export default function ReadingActivitiesPage() {
               仅保留可确认日期、地区与原始来源的内容。每季度复核链接，无法继续访问的报道会暂停展示。
             </p>
           </div>
-          <NatureOrnament
-            variant="sprig"
-            className={styles.windowNoteOrnament}
-          />
         </aside>
       </header>
 

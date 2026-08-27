@@ -5,32 +5,15 @@
 }
 
 .hero {
-  min-height: calc(100dvh - var(--header-height) - 3.75rem);
-}
-
-.heroMotionSurface {
   display: grid;
-  min-height: inherit;
+  min-height: calc(100dvh - var(--header-height) - 3.75rem);
   padding: clamp(2.25rem, 4vw, 4rem) 0 clamp(4rem, 7vw, 6rem);
   grid-template-columns: minmax(0, 6.4fr) minmax(22rem, 4.6fr);
-  overflow: clip;
   align-items: center;
   gap: clamp(3rem, 7vw, 7.5rem);
 }
 
-.heroCanopy {
-  --botanical-size: min(118vw, 94rem);
-  --botanical-layer-opacity: 0.76;
-  --botanical-rotate: 1.5deg;
-
-  top: clamp(-7rem, -6vw, -3.5rem);
-  left: 50%;
-  transform: translateX(-50%);
-}
-
 .heroCopy {
-  position: relative;
-  z-index: 1;
   max-width: 44rem;
 }
 
@@ -98,7 +81,6 @@
 
 .preview {
   position: relative;
-  z-index: 1;
   width: min(100%, 29rem);
   margin: 0;
   justify-self: center;
@@ -299,9 +281,7 @@
 }
 
 .bookPath:hover .pathAction svg,
-.bookPath:focus-visible .pathAction svg,
-.secondaryPath:hover .cornerArrow,
-.secondaryPath:focus-visible .cornerArrow {
+.secondaryPath:hover .cornerArrow {
   transform: translateX(0.3rem);
 }
 
@@ -361,7 +341,6 @@
   position: absolute;
   z-index: 0;
   pointer-events: none;
-  transition: transform 220ms var(--ease-out);
 }
 
 .bookPathOrnament {
@@ -399,38 +378,8 @@
   content: "";
 }
 
-.bookPath:focus-visible .bookPathOrnament {
-  transform: translate3d(0, -5px, 0) rotate(4deg);
-}
-
-.secondaryPath:focus-visible .resourceOrnament {
-  transform: translate3d(-4px, -4px, 0) rotate(-7deg);
-}
-
-.secondaryPath:focus-visible .activityOrnament {
-  transform: translate3d(4px, -4px, 0) rotate(1deg);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .bookPath:hover .bookPathOrnament {
-    transform: translate3d(0, -5px, 0) rotate(4deg);
-  }
-
-  .secondaryPath:hover .resourceOrnament {
-    transform: translate3d(-4px, -4px, 0) rotate(-7deg);
-  }
-
-  .secondaryPath:hover .activityOrnament {
-    transform: translate3d(4px, -4px, 0) rotate(1deg);
-  }
-}
-
 @media (max-width: 880px) {
   .hero {
-    min-height: auto;
-  }
-
-  .heroMotionSurface {
     min-height: auto;
     grid-template-columns: 1fr;
   }
@@ -464,22 +413,8 @@
   }
 
   .hero {
-    min-height: auto;
-  }
-
-  .heroMotionSurface {
     padding: 2rem 0 4rem;
     gap: 3rem;
-  }
-
-  .heroCanopy {
-    --botanical-size: 14rem;
-    --botanical-layer-opacity: 0.58;
-
-    top: 1rem;
-    right: -4.25rem;
-    left: auto;
-    transform: none;
   }
 
   .heroCopy h1 {
@@ -552,10 +487,7 @@
   .bookPath,
   .secondaryPath,
   .pathAction svg,
-  .cornerArrow,
-  .bookPathOrnament,
-  .resourceOrnament,
-  .activityOrnament {
+  .cornerArrow {
     transition: none;
   }
 
@@ -564,24 +496,7 @@
   .bookPath:hover,
   .secondaryPath:hover,
   .bookPath:hover .pathAction svg,
-  .bookPath:focus-visible .pathAction svg,
-  .secondaryPath:hover .cornerArrow,
-  .secondaryPath:focus-visible .cornerArrow {
+  .secondaryPath:hover .cornerArrow {
     transform: none;
-  }
-
-  .bookPath:hover .bookPathOrnament,
-  .bookPath:focus-visible .bookPathOrnament {
-    transform: rotate(4deg);
-  }
-
-  .secondaryPath:hover .resourceOrnament,
-  .secondaryPath:focus-visible .resourceOrnament {
-    transform: rotate(-7deg);
-  }
-
-  .secondaryPath:hover .activityOrnament,
-  .secondaryPath:focus-visible .activityOrnament {
-    transform: rotate(1deg);
   }
 }

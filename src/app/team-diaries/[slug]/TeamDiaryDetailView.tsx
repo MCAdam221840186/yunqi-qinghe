@@ -7,7 +7,6 @@ import Image from "next/image";
 import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { NatureOrnament } from "@/components/NatureOrnament";
 import TeamDiaryGallery from "@/components/TeamDiaryGallery";
 import {
   getAdjacentTeamDiaries,
@@ -99,13 +98,9 @@ export default function TeamDiaryDetailView({
       <article className={styles.article}>
         <header className={styles.header}>
           <div className={styles.dayMarker} aria-label={`旅程第 ${diary.dayNumber} 天`}>
-            <span className={styles.dayLabel}>Day</span>
+            <span>Day</span>
             <strong>{String(diary.dayNumber).padStart(2, "0")}</strong>
             <small>八日旅程</small>
-            <NatureOrnament
-              variant="sprig"
-              className={styles.detailSprig}
-            />
           </div>
 
           <div className={styles.headerCopy}>

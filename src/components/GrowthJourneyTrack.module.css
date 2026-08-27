@@ -29,22 +29,9 @@
 }
 
 .track > * {
-  --growth-stage-ornament-lift: 0;
-  --growth-stage-ornament-opacity: 0.74;
-  --growth-stage-ornament-scale: 1;
-
   min-width: 0;
   scroll-snap-align: start;
   scroll-snap-stop: always;
-}
-
-.root[data-active-index="0"] .track > :nth-child(1),
-.root[data-active-index="1"] .track > :nth-child(2),
-.root[data-active-index="2"] .track > :nth-child(3),
-.root[data-active-index="3"] .track > :nth-child(4) {
-  --growth-stage-ornament-lift: -0.14rem;
-  --growth-stage-ornament-opacity: 1;
-  --growth-stage-ornament-scale: 1.06;
 }
 
 .track::-webkit-scrollbar {

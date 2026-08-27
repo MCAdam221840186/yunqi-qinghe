@@ -6,7 +6,6 @@ import {
   ArtworkTrigger,
   type ArtworkLightboxItem,
 } from "@/components/ArtworkLightbox";
-import { BotanicalCanopy } from "@/components/BotanicalCanopy";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import WorksHorizontalTrack from "@/components/WorksHorizontalTrack";
@@ -208,11 +207,6 @@ export default function WorksPage() {
             amount={0.1}
             stagger={0.08}
           >
-            <BotanicalCanopy
-              variant="arch"
-              density="quiet"
-              className={styles.heroCanopy}
-            />
             <WorksMotionLayer
               className={styles.heroCopy}
               fromX={-28}
@@ -308,19 +302,6 @@ export default function WorksPage() {
             amount={0.08}
             stagger={0.045}
           >
-            <WorksMotionLayer
-              className={styles.materialsShadowLayer}
-              fromY={18}
-              fromScale={1}
-              duration={0.82}
-            >
-              <BotanicalCanopy
-                variant="shadowBand"
-                density="quiet"
-                className={styles.materialsShadowBand}
-              />
-            </WorksMotionLayer>
-
             <ChapterHeading
               id="materials-title"
               className={styles.materialsHeading}

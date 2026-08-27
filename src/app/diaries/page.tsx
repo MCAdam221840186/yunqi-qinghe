@@ -5,8 +5,6 @@ import {
   CardsThreeIcon,
   UsersThreeIcon,
 } from "@phosphor-icons/react/ssr";
-import { BotanicalCanopy } from "@/components/BotanicalCanopy";
-import { BotanicalMotionSurface } from "@/components/BotanicalMotionSurface";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import GrowthJourneyTrack from "@/components/GrowthJourneyTrack";
@@ -80,86 +78,69 @@ export default function DiariesPage() {
 
   return (
     <div className={styles.page}>
-      <BotanicalMotionSurface mode="immersive" className={styles.heroSurface}>
-        <header className={styles.header}>
-          <BotanicalCanopy
-            variant="side"
-            side="end"
-            density="lush"
-            className={styles.heroCanopy}
+      <header className={styles.header}>
+        <div className={styles.headerCopy}>
+          <p className={headingStyles.eyebrow}>成长日志</p>
+          <DisplayHeading
+            as="h1"
+            variant="pageHero"
+            lines={[
+              { before: "每一段成长，" },
+              {
+                before: "都值得被",
+                accent: "认真看见",
+                tone: "primary",
+              },
+            ]}
           />
 
-          <div className={styles.headerCopy}>
-            <p className={headingStyles.eyebrow}>成长日志</p>
-            <DisplayHeading
-              as="h1"
-              variant="pageHero"
-              lines={[
-                { before: "每一段成长，" },
-                {
-                  before: "都值得被",
-                  accent: "认真看见",
-                  tone: "primary",
-                },
-              ]}
-            />
+          <dl className={styles.stats} aria-label="成长日志内容统计">
+            <div>
+              <dt>
+                <UsersThreeIcon size={18} weight="regular" aria-hidden="true" />
+                孩子
+              </dt>
+              <dd>{contentStats.children}</dd>
+            </div>
+            <div>
+              <dt>
+                <CardsThreeIcon size={18} weight="regular" aria-hidden="true" />
+                真实记录
+              </dt>
+              <dd>{contentStats.diaries}</dd>
+            </div>
+          </dl>
+        </div>
 
-            <dl className={styles.stats} aria-label="成长日志内容统计">
-              <div>
-                <dt>
-                  <UsersThreeIcon
-                    size={18}
-                    weight="regular"
-                    aria-hidden="true"
-                  />
-                  孩子
-                </dt>
-                <dd>{contentStats.children}</dd>
-              </div>
-              <div>
-                <dt>
-                  <CardsThreeIcon
-                    size={18}
-                    weight="regular"
-                    aria-hidden="true"
-                  />
-                  真实记录
-                </dt>
-                <dd>{contentStats.diaries}</dd>
-              </div>
-            </dl>
-          </div>
-
-          <div className={styles.cardStack} aria-label="三张真实成长记录卡节选">
-            {heroCards.map((diary, index) => {
-              const child = getDiaryAuthor(diary);
-              const asset = getGrowthCardAsset(diary.imageId);
-              return (
-                <figure
-                  key={diary.slug}
-                  className={styles.heroCard}
-                  data-position={index + 1}
-                >
-                  <Image
-                    src={asset.thumbnail}
-                    alt={getGrowthCardImageAlt(
-                      child.displayName,
-                      diary,
-                      "成长记录卡",
-                    )}
-                    sizes="(max-width: 767px) 54vw, (max-width: 900px) 36vw, 19rem"
-                    preload={index === 1}
-                  />
-                  <figcaption>
-                    <strong>{child.displayName}</strong>
-                    <span>{diary.dateLabel}</span>
-                  </figcaption>
-                </figure>
-              );
-            })}
-          </div>
-        </header>
-      </BotanicalMotionSurface>
+        <div className={styles.cardStack} aria-label="三张真实成长记录卡节选">
+          {heroCards.map((diary, index) => {
+            const child = getDiaryAuthor(diary);
+            const asset = getGrowthCardAsset(diary.imageId);
+            return (
+              <figure
+                key={diary.slug}
+                className={styles.heroCard}
+                data-position={index + 1}
+              >
+                <Image
+                  src={asset.thumbnail}
+                  alt={getGrowthCardImageAlt(
+                    child.displayName,
+                    diary,
+                    "成长记录卡",
+                  )}
+                  sizes="(max-width: 767px) 54vw, (max-width: 900px) 36vw, 19rem"
+                  preload={index === 1}
+                />
+                <figcaption>
+                  <strong>{child.displayName}</strong>
+                  <span>{diary.dateLabel}</span>
+                </figcaption>
+              </figure>
+            );
+          })}
+        </div>
+      </header>
 
       <section className={styles.journey} aria-labelledby="journey-title">
         <div className={styles.sectionIntro}>

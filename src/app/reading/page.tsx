@@ -8,8 +8,6 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import booklistPreview from "@/assets/reading/booklist-page-1.webp";
-import { BotanicalCanopy } from "@/components/BotanicalCanopy";
-import { BotanicalMotionSurface } from "@/components/BotanicalMotionSurface";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { NatureOrnament } from "@/components/NatureOrnament";
@@ -55,63 +53,52 @@ export default function ReadingPage() {
       <ReadingBreadcrumbs />
 
       <section className={styles.hero} aria-labelledby="reading-title">
-        <BotanicalMotionSurface
-          mode="immersive"
-          className={styles.heroMotionSurface}
-        >
-          <BotanicalCanopy
-            variant="arch"
-            density="lush"
-            className={styles.heroCanopy}
+        <div className={styles.heroCopy}>
+          <p className={headingStyles.eyebrow}>阅读共建</p>
+          <DisplayHeading
+            as="h1"
+            id="reading-title"
+            variant="pageHero"
+            lines={[
+              { before: "从一本书出发，" },
+              { before: "让", accent: "阅读", after: "有路可循" },
+            ]}
           />
-
-          <div className={styles.heroCopy}>
-            <p className={headingStyles.eyebrow}>阅读共建</p>
-            <DisplayHeading
-              as="h1"
-              id="reading-title"
-              variant="pageHero"
-              lines={[
-                { before: "从一本书出发，" },
-                { before: "让", accent: "阅读", after: "有路可循" },
-              ]}
-            />
-            <p className={styles.lede}>
-              按年级选书，连接合法阅读资源，看见双柏正在发生的阅读行动。
-            </p>
-            <div className={styles.heroActions}>
-              <Link className={styles.primaryAction} href="/reading/books/">
-                按年级找书
-                <ArrowRight size={18} weight="bold" aria-hidden="true" />
-              </Link>
-              <Link
-                className={styles.secondaryAction}
-                href={pdfDownloadPath}
-                download
-                prefetch={false}
-              >
-                <DownloadSimple size={18} weight="bold" aria-hidden="true" />
-                下载完整书单
-              </Link>
-            </div>
+          <p className={styles.lede}>
+            按年级选书，连接合法阅读资源，看见双柏正在发生的阅读行动。
+          </p>
+          <div className={styles.heroActions}>
+            <Link className={styles.primaryAction} href="/reading/books/">
+              按年级找书
+              <ArrowRight size={18} weight="bold" aria-hidden="true" />
+            </Link>
+            <Link
+              className={styles.secondaryAction}
+              href={pdfDownloadPath}
+              download
+              prefetch={false}
+            >
+              <DownloadSimple size={18} weight="bold" aria-hidden="true" />
+              下载完整书单
+            </Link>
           </div>
+        </div>
 
-          <figure className={styles.preview}>
-            <div className={styles.previewPaper}>
-              <Image
-                src={booklistPreview}
-                alt="云南省双柏县乡村小学分级阅读书单第一页预览"
-                sizes="(max-width: 880px) min(76vw, 32rem), 34vw"
-                placeholder="blur"
-                preload
-              />
-            </div>
-            <figcaption>
-              团队调研成果
-              <span>{readingBooks.length} 条书目</span>
-            </figcaption>
-          </figure>
-        </BotanicalMotionSurface>
+        <figure className={styles.preview}>
+          <div className={styles.previewPaper}>
+            <Image
+              src={booklistPreview}
+              alt="云南省双柏县乡村小学分级阅读书单第一页预览"
+              sizes="(max-width: 880px) min(76vw, 32rem), 34vw"
+              placeholder="blur"
+              preload
+            />
+          </div>
+          <figcaption>
+            团队调研成果
+            <span>{readingBooks.length} 条书目</span>
+          </figcaption>
+        </figure>
       </section>
 
       <section className={styles.paths} aria-labelledby="reading-paths-title">

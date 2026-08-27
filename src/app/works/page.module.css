@@ -7,25 +7,12 @@
 }
 
 .hero {
-  position: relative;
   display: grid;
   min-height: calc(100dvh - var(--header-height));
   padding: clamp(2.5rem, 6vw, 5.5rem) 0 clamp(4rem, 8vw, 7rem);
   grid-template-columns: minmax(20rem, 5fr) minmax(31rem, 7fr);
   gap: clamp(2.5rem, 5vw, 5.25rem);
-  overflow: clip;
   align-items: center;
-  isolation: isolate;
-}
-
-.heroCanopy {
-  --botanical-size: min(116vw, 94rem);
-  --botanical-layer-opacity: 0.7;
-  --botanical-rotate: -2deg;
-
-  top: clamp(-8rem, -7vw, -4rem);
-  left: 50%;
-  transform: translateX(-45%);
 }
 
 .heroCopy {
@@ -49,7 +36,6 @@
 
 .heroDesk {
   position: relative;
-  z-index: 1;
   min-width: 0;
   min-height: clamp(31rem, 49vw, 42rem);
   isolation: isolate;
@@ -217,39 +203,6 @@
 .flight {
   padding-top: clamp(6rem, 12vw, 11rem);
   scroll-margin-top: calc(var(--header-height) + var(--works-map-height) + 1.5rem);
-}
-
-.materials {
-  position: relative;
-  isolation: isolate;
-}
-
-.materialsShadowLayer {
-  position: absolute;
-  top: clamp(1rem, 2.5vw, 2.5rem);
-  right: clamp(-4rem, -3vw, -1rem);
-  left: clamp(-4rem, -3vw, -1rem);
-  z-index: 0;
-  height: clamp(10rem, 18vw, 16rem);
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.materialsShadowBand {
-  --botanical-size: calc(100% + 8rem);
-  --botanical-height: 100%;
-  --botanical-layer-opacity: 0.68;
-  --botanical-rotate: -1.5deg;
-
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-}
-
-.materialsHeading,
-.materialsDesk {
-  position: relative;
-  z-index: 1;
 }
 
 .chapterHeading {
@@ -782,20 +735,6 @@
     gap: 2.25rem;
   }
 
-  .heroCanopy {
-    --botanical-size: 14rem;
-    --botanical-layer-opacity: 0.54;
-
-    top: 0.5rem;
-    right: -4rem;
-    left: auto;
-    transform: none;
-  }
-
-  .materialsShadowLayer {
-    display: none;
-  }
-
   .heroCopy {
     max-width: 34rem;
   }
@@ -814,17 +753,6 @@
     width: min(100%, 36rem);
     min-height: clamp(24rem, 118vw, 37rem);
     justify-self: center;
-  }
-
-  .materialsShadowLayer {
-    top: 0.75rem;
-    right: -1rem;
-    left: -1rem;
-    height: 8rem;
-  }
-
-  .materialsShadowBand {
-    --botanical-size: calc(100% + 3rem);
   }
 
   .heroLeaf {

@@ -11,7 +11,6 @@ import GrowthCardLightbox, {
   GrowthCardTrigger,
   type GrowthCardLightboxItem,
 } from "@/components/GrowthCardLightbox";
-import { NatureOrnament } from "@/components/NatureOrnament";
 import {
   getDiaryBySlug,
   getGrowthCardAsset,
@@ -99,11 +98,6 @@ export default function ChildDiaryListView({
                 <dd>{child.story.highlights.length} 个</dd>
               </div>
             </dl>
-
-            <NatureOrnament
-              variant="leafSeal"
-              className={styles.identitySeal}
-            />
           </header>
 
           <div className={styles.story}>

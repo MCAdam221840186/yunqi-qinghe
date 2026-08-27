@@ -19,21 +19,6 @@
     var(--color-accent-strong) 22%,
     transparent
   );
-  --color-botanical-line: color-mix(
-    in srgb,
-    var(--color-accent-strong) 38%,
-    transparent
-  );
-  --color-botanical-shadow: color-mix(
-    in srgb,
-    var(--color-accent-strong) 14%,
-    transparent
-  );
-  --color-botanical-wash: color-mix(
-    in srgb,
-    var(--color-sky) 48%,
-    transparent
-  );
   --radius-card: 1rem;
   --radius: var(--radius-card);
   --shadow-soft: 0 1.25rem 3.75rem rgb(35 74 50 / 0.12);

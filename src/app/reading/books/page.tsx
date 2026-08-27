@@ -2,7 +2,6 @@ import { DownloadSimple, FilePdf, Printer } from "@phosphor-icons/react/ssr";
 import Link from "next/link";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
-import { NatureOrnament } from "@/components/NatureOrnament";
 import ReadingBreadcrumbs from "@/components/ReadingBreadcrumbs";
 import { readingBooks } from "@/lib/reading";
 import { gradeBandLabels, gradeBands } from "@/lib/reading-types";
@@ -91,10 +90,6 @@ export default function ReadingBooksPage() {
             <Printer size={16} weight="regular" aria-hidden="true" />
             浏览器打印可保留当前筛选结果
           </p>
-          <NatureOrnament
-            variant="bookLeaf"
-            className={styles.summaryOrnament}
-          />
         </aside>
       </header>
 

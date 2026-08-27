@@ -5,8 +5,6 @@ import qingheBlackboardImage from "@/assets/hero-qinghe-blackboard.webp";
 import qiyunBlackboardImage from "@/assets/hero-qiyun-blackboard.webp";
 import openingCeremonyImage from "@/assets/opening-ceremony-group.webp";
 import booklistPreview from "@/assets/reading/booklist-page-1.webp";
-import { BotanicalCanopy } from "@/components/BotanicalCanopy";
-import { BotanicalMotionSurface } from "@/components/BotanicalMotionSurface";
 import DisplayHeading from "@/components/DisplayHeading";
 import headingStyles from "@/components/DisplayHeading.module.css";
 import { NatureOrnament } from "@/components/NatureOrnament";
@@ -125,35 +123,25 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: serializeJsonLd(websiteJsonLd) }}
       />
 
-      <BotanicalMotionSurface
-        mode="immersive"
-        className={styles.openingScene}
+      <section
+        className={styles.openingMoment}
+        aria-labelledby="home-title"
       >
-        <BotanicalCanopy
-          variant="arch"
-          density="lush"
-          className={styles.openingCanopy}
-        />
-        <section
-          className={styles.openingMoment}
-          aria-labelledby="home-title"
-        >
-          <h1 className={styles.openingTitle} id="home-title">
-            云启青禾支教团队开营仪式合照
-          </h1>
-          <div className={styles.openingStage}>
-            <figure className={styles.openingPhoto}>
-              <Image
-                src={openingCeremonyImage}
-                alt="开营仪式上，云启青禾支教团志愿者与孩子们在写有‘启云心童梦’和‘看青禾生长’的黑板前合影"
-                sizes="(max-width: 900px) calc(100vw - 1.25rem), calc(100vw - 3rem)"
-                placeholder="blur"
-                preload
-              />
-            </figure>
-          </div>
-        </section>
-      </BotanicalMotionSurface>
+        <h1 className={styles.openingTitle} id="home-title">
+          云启青禾支教团队开营仪式合照
+        </h1>
+        <div className={styles.openingStage}>
+          <figure className={styles.openingPhoto}>
+            <Image
+              src={openingCeremonyImage}
+              alt="开营仪式上，云启青禾支教团志愿者与孩子们在写有‘启云心童梦’和‘看青禾生长’的黑板前合影"
+              sizes="(max-width: 900px) calc(100vw - 1.25rem), calc(100vw - 3rem)"
+              placeholder="blur"
+              preload
+            />
+          </figure>
+        </div>
+      </section>
 
       <section
         className={styles.hero}
@@ -204,22 +192,15 @@ export default function HomePage() {
         </div>
       </section>
 
-      <BotanicalMotionSurface
-        mode="immersive"
-        className={styles.journeyTransition}
-      >
-        <BotanicalCanopy
-          variant="shadowBand"
-          density="quiet"
-          className={styles.journeyCanopy}
-        />
-      </BotanicalMotionSurface>
-
       <section
         className={styles.teamDiaryJourney}
         aria-labelledby="team-diary-journey-title"
       >
         <div className={styles.journeyIntroduction}>
+          <NatureOrnament
+            variant="sprig"
+            className={styles.journeyOrnament}
+          />
           <h2
             id="team-diary-journey-title"
             className={headingStyles.sectionTitle}
@@ -292,12 +273,10 @@ export default function HomePage() {
       </section>
 
       <section className={styles.latest} aria-labelledby="latest-title">
-        <span className={styles.latestCanopyFrame}>
-          <BotanicalCanopy
-            variant="side"
-            side="end"
-            density="quiet"
-            className={styles.latestCanopy}
+        <span className={styles.latestOrnamentFrame}>
+          <NatureOrnament
+            variant="sprig"
+            className={styles.latestOrnament}
           />
         </span>
         <div className={styles.sectionHeading}>
